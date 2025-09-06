@@ -4,16 +4,16 @@ import Button from "./Button";
 
 export default function WhyUs() {
     return (
-        <section className="bg-white px-[4%] py-20 flex flex-col md:flex-row items-center justify-center w-full gap-16 lg:gap-28  " >
+        <section className="bg-white px-[4%] py-20 flex flex-col md:flex-row items-center justify-center w-full gap-8 lg:gap-17  " >
 
 
 
             <div className=" basis-[1/2]  w-full flex items-center gap-6 h-full  justify-center " >
-                <div className="flex items-center justify-center rounded-xl overflow-hidden h-[300px] w-[250px] "  >
+                <div className="flex items-center justify-center rounded-xl overflow-hidden h-[300px] w-[230px] lg:w-[300px] "  >
                     <Image src={"/basketball.png"} width={500} height={500} alt="image-1" className="object-center object-cover h-full w-full " />
                 </div>
 
-                 <div className="flex items-center justify-center rounded-xl overflow-hidden h-[300px] w-[250px] "  >
+                 <div className="flex items-center justify-center rounded-xl overflow-hidden h-[300px] w-[230px] lg:w-[300px] "  >
                     <Image src={"/basketball.png"} width={500} height={500} alt="image-1" className="object-center object-cover h-full w-full " />
                 </div>
             </div>
