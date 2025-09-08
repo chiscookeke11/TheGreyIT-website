@@ -58,7 +58,7 @@ const TestimonialSlider = () => {
 
 export default function CourseSlider() {
     return (
-        <section className="w-full h-full  flex flex-col items-start justify-center   " >
+        <section className="w-full h-full bg-amber-800  flex flex-col items-start justify-center   " >
             <TestimonialSlider />
 
 

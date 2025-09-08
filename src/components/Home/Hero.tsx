@@ -1,5 +1,6 @@
-import Button from "./Button";
-import Navbar from "./Navbar";
+import Button from "../UI/Button";
+import Navbar from "../UI/Navbar";
+
 
 
 

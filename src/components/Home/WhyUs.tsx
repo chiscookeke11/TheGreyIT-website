@@ -1,5 +1,5 @@
 import Image from "next/image";
-import Button from "./Button";
+import Button from "../UI/Button";
 
 
 export default function WhyUs() {
@@ -13,7 +13,7 @@ export default function WhyUs() {
                     <Image src={"/basketball.png"} width={500} height={500} alt="image-1" className="object-center object-cover h-full w-full " />
                 </div>
 
-                 <div className="flex items-center justify-center rounded-xl overflow-hidden h-[300px] w-[230px] lg:w-[300px] "  >
+                 <div className="flex items-center justify-center rounded-xl overflow-hidden h-[300px] w-[230px] lg:w-[300px] lg:mt-28 "  >
                     <Image src={"/basketball.png"} width={500} height={500} alt="image-1" className="object-center object-cover h-full w-full " />
                 </div>
             </div>

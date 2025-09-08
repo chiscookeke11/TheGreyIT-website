@@ -1,8 +1,9 @@
-import Hero from "@/components/Hero";
-import OurLabs from "@/components/OurLabs";
-import Projects from "@/components/GetSkilled";
-import WhyUs from "@/components/WhyUs";
-import GetSkilled from "@/components/GetSkilled";
+import GetSkilled from "@/components/Home/GetSkilled";
+import Hero from "@/components/Home/Hero";
+import OurLabs from "@/components/Home/OurLabs";
+import ResearchSection from "@/components/Home/ResearchSection";
+import WhyUs from "@/components/Home/WhyUs";
+
 
 
 
@@ -14,6 +15,7 @@ export default function Home() {
       <WhyUs />
       <OurLabs />
       <GetSkilled />
+      <ResearchSection/>
     </>
   );
 }
