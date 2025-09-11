@@ -4,7 +4,7 @@ import ResearchCard from "../UI/ResearchCard";
 
 export default function ResearchSection() {
     return (
-        <section className=" w-full bg-white px-[4%] py-20 flex items-center justify-center flex-col " >
+        <section className=" w-full bg-white px-[4%] py-20 flex items-center justify-center flex-col font-syne " >
         <h5 className="text-black text-2xl lg:text-3xl font-extrabold font-poppins" >Research Section </h5>
 
 

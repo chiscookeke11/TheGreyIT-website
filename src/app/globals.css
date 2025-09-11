@@ -11,7 +11,7 @@
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
   --font-poppins: var(--font-poppins);
-  --font-syne: var(--font-syne)
+  --font-syne: var(--font-syne);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -20,11 +20,21 @@
     --foreground: #ededed;
   }
 }
-*{
+* {
   scroll-behavior: smooth;
 }
 
 body {
   background: var(--foreground);
   color: var(--background);
+  transition-property: opacity, background-color, transform, filter;
+  transition-timing-function: ease-in-out;
+  transition-duration: 300ms;
+}
+
+.page-transition {
+  opacity: 0;
+  background-color: white;
+  transform: translateY(40px);
+  filter: blur(12px);
 }

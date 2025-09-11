@@ -4,11 +4,11 @@
 export const navLinksData = [
     {
         label: "Home",
-        url: "#"
+        url: "/"
     },
         {
         label: "About Us",
-        url: "#"
+        url: "/about-us"
     },
         {
         label: "Our Services",
