@@ -1,3 +1,4 @@
+import ResearchCard from "../UI/ResearchCard";
 
 
 
@@ -9,7 +10,7 @@ export default function ResearchSection() {
 
         <div className="w-full flex items-center justify-center gap-5" >
 
-            <ResearchSection/>
+            <ResearchCard/>
 
         </div>
         </section>

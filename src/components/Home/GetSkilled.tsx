@@ -6,7 +6,7 @@ import CourseSlider from "../UI/CourseSlider";
 
 export default function GetSkilled() {
     return (
-        <div className=" bg-white lg:pl-[5%] px-2 py-20 flex flex-col lg:flex-row items-center justify-between w-full gap-10 h-screen md:h-[70vh] " >
+        <div className=" bg-[#f2f5fc] lg:pl-[5%] px-2 py-20 flex flex-col lg:flex-row items-center justify-between w-full gap-10 h-screen md:h-[95vh] " >
 
             <div className="flex flex-col items-start gap-3 w-full  max-w-xl px-3 mr-auto lg:mr-0  " >
                 <h5 className="text-black text-2xl lg:text-3xl font-extrabold font-poppins" >Get Skilled </h5>
