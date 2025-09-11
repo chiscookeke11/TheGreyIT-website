@@ -5,7 +5,7 @@ import { navLinksData } from "@/data/navlinks";
 import { Menu, X } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 
 
@@ -14,9 +14,20 @@ export default function Navbar() {
     const [activeNav, setActiveNav] = useState(0)
 
 
+    useEffect(() => {
+        const originalStyle = document.body.style.overflowY;
+
+        document.body.style.overflowY = showMenu ? "hidden" : "auto"
+
+        return () => {
+            document.body.style.overflowY = originalStyle;
+        };
+    }, [showMenu])
+
+
 
     return (
-        <nav className="absolute z-10 top-0 left-0 w-full  flex items-center justify-between py-[4%] px-[6%] " >
+        <nav className="absolute z-50 top-0 left-0 w-full  flex items-center justify-between py-[4%] pt-[5%] px-[6%] " >
 
             <Link href={"/"}>
                 <Image src={"/logos/thegreyitlogo.png"} width={500} height={500} alt="TheGreyIT-logo" className="object-center w-[100px] " />
@@ -28,7 +39,9 @@ export default function Navbar() {
             {/* desktop menu */}
             <ul className=" w-fit hidden lg:flex items-center gap-5 " >
                 {navLinksData.map((navlink, index) => (
-                    <li onClick={() => setActiveNav(index)} key={index} className={`text-[13px] font-poppins text-white relative before:absolute before:bg-white before:bottom-[-5px] before:left-[50%] before:translate-x-[-50%]  before:w-0 before:h-[3px] hover:before:w-full before:transition-all before:duration-300 before:ease-in-out ${activeNav === index ? "before:w-full" : "before:w-0"} `} ><Link href={navlink.url} > {navlink.label}</Link> </li>
+                    <li onClick={() => {
+                        setActiveNav(index)
+                    }} key={index} className={`text-[13px] font-poppins text-white relative before:absolute before:bg-white before:bottom-[-5px] before:left-[50%] before:translate-x-[-50%]  before:w-0 before:h-[3px] hover:before:w-full before:transition-all before:duration-300 before:ease-in-out ${activeNav === index ? "before:w-full" : "before:w-0"} `} ><Link href={navlink.url} > {navlink.label}</Link> </li>
                 ))}
             </ul>
 
@@ -47,7 +60,7 @@ export default function Navbar() {
 
                 <ul className={`w-fit flex flex-col items-start gap-8 pl-5  `} >
                     {navLinksData.map((navlink, index) => (
-                        <li key={index} className=" text-[13px] font-poppins text-white " ><Link href={navlink.url} > {navlink.label}</Link> </li>
+                        <li key={index} onClick={() => setShowMenu(false)} className=" text-[13px] font-poppins text-white " ><Link href={navlink.url} > {navlink.label}</Link> </li>
                     ))}
                 </ul>
 
