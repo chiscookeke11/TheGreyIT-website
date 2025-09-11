@@ -3,8 +3,10 @@
 
 export default function ResearchCard() {
     return (
-        <div>
-            Research card
+        <div className=" w-full max-w-sm md:max-w-[400px] relative flex flex-col items-start h-[400px] bg-green-600 rounded-md overflow-hidden  " >
+            <div className="h-full basis-1/2 bg-red-600 w-full " > Research card</div>
+            <div className="h-full basis-1/2 bg-red-300 w-full " > Research text</div>
+
         </div>
     )
 }
