@@ -12,11 +12,11 @@ export const navLinksData = [
     },
         {
         label: "Our Services",
-        url: "#"
+        url: "/our-services"
     },
         {
         label: "Courses",
-        url: "#"
+        url: "/courses"
     },
         {
         label: "Partner With Us",
