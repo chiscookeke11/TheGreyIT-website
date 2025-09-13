@@ -2,7 +2,7 @@
 
 
 export default function Page() {
-const testVar = "red"
+
 
 
     return (
