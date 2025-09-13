@@ -31,7 +31,7 @@ export default function Navbar() {
         <nav className="absolute text-white z-50 top-0 left-0 w-full  flex items-center justify-between py-[4%] pt-[5%] md:pt-[3%] px-[6%] " >
 
             <Link href={"/"}>
-                <Image src={"/logos/thegreyitlogo.png"} width={500} height={500} alt="TheGreyIT-logo" className="object-center w-[100px] " />
+                <Image src={"/logos/thegreyitlogo.png"} width={180} height={180} alt="TheGreyIT-logo" className="object-center w-[100px] " />
             </Link>
 
 
