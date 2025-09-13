@@ -40,7 +40,7 @@ export default function ResearchSection() {
 
                         {
                             BlogData.map((blog, index) => (
-                                <ResearchCard blog={blog} />
+                                <ResearchCard blog={blog} key={index} />
                             ))
                         }
 

@@ -1,4 +1,5 @@
-import { CourseDataTypes } from "@/types/CourseDataType"
+import { CourseDataTypes } from "@/types/types"
+
 
 
 
