@@ -1,4 +1,5 @@
 import { OurLabsData } from "@/data/OurlabsData"
+import Image from "next/image";
 
 
 interface CardProps {
@@ -10,11 +11,11 @@ interface CardProps {
 
 const Card = ({ bg, title, content }: CardProps) => {
     return (
-        <div className=" w-full max-w-md min-w-52 h-[400px] md:h-[500px] rounded-xl flex items-end justify-center bg-amber-600 relative  "
-            style={{ backgroundImage: `url(${bg})`, backgroundSize: "cover", backgroundPosition: "center" }}
+        <div className=" w-full max-w-md min-w-52 h-[400px] md:h-[500px] rounded-xl flex items-end justify-center bg-gray-300 relative group overflow-hidden "
         >
-            <div className="absolute inset-0 bg-black/15"></div>
-            <div className=" mb-16 text-center space-y-2 text-white z-10 px-5 lg:px-10 " >
+            <Image src={bg} alt={`${title}-image`} width={300} height={300} className="absolute top-0 left-0 h-full w-full object-cover object-center transform group-hover:scale-125 duration-200 ease-in-out  " />
+            <div className="absolute inset-0 bg-black/25"></div>
+            <div className=" mb-16 text-center space-y-2 text-white z-10 px-5 " >
                 <h3 className="text-xl lg:text-2xl font-extrabold font-poppins" > {title} </h3>
                 <p className=" text-base lg:text-lg leading-[100%]  font-syne " >{content}</p>
             </div>

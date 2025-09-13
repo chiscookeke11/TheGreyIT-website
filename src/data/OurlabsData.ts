@@ -5,7 +5,7 @@ export const OurLabsData = [
     {
         title: "SOFTWARE LAB",
         content: "Code, test, and deploy web applications using modern frameworks, tools & github workflows.",
-        image: "/basketball.png",
+        image: "/OurLabs/software-lab.jpeg",
     },
     {
         title: "HARDWARE LAB",

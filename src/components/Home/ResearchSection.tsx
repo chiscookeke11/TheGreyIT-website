@@ -1,20 +1,53 @@
+"use client"
+
+
+import { useRef } from "react";
 import ResearchCard from "../UI/ResearchCard";
+import { useScroll, useTransform, motion } from "framer-motion";
+
 
 
 
 export default function ResearchSection() {
+
+    const targetRef = useRef(null)
+    const { scrollYProgress } = useScroll({
+        target: targetRef
+    })
+
+    const x = useTransform(scrollYProgress, [0, 1], ["10%", "-90%"])
+
+
+
+
     return (
-        <section className=" w-full bg-white px-[4%] py-20 flex items-center justify-center flex-col gap-10 font-syne " >
-        <h5 className="text-black text-2xl lg:text-3xl font-extrabold font-poppins" >Research Section </h5>
+
+        <section className="w-full h-fit flex items-center justify-center gap-10 flex-col py-20 bg-white " >
 
 
-        <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 place-items-center justify-items-center  gap-10 " >
+            <h5 className="text-black text-2xl lg:text-3xl font-extrabold font-poppins" >Research Section </h5>
 
-            <ResearchCard/>
-            <ResearchCard/>
-            <ResearchCard/>
 
-        </div>
+
+            <div ref={targetRef} className="relative w-full h-[300vh] " >
+
+
+
+                <div className="sticky h-[70vh]   top-[10%] flex items-center overflow-hidden " >
+                    <motion.div className="flex gap-4   " style={{ x }} >
+
+                        <ResearchCard />
+                        <ResearchCard />
+                        <ResearchCard />
+
+                    </motion.div>
+                </div>
+            </div>
         </section>
+
+
+
+
+
     )
 }

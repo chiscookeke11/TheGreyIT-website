@@ -13,7 +13,7 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 
 export default function Button({ children, className, ariaLabel,  variant = "outline", ...props }: ButtonProps) {
 
-    const baseStyles = " px-6 py-3  flex items-center justify-center font-medium  focus:outline-none cursor-pointer text-sm md:text-base font-semibold font-poppins "
+    const baseStyles = " px-6 py-3  flex items-center justify-center font-medium  focus:outline-none cursor-pointer text-base md:text-lg font-semibold font-poppins "
 
     const variantStyles = variant === "outline" ? " rounded-[1000px] border-[1px] border-white bg-transparent hover:bg-white hover:text-[#000] text-white transition-all duration-300 ease-in-out " : " border-[1px] border-gray-700 text-gray-700  rounded-sm hover:bg-gray-700 hover:text-white transition-all duration-300 ease-in-out  "
 
