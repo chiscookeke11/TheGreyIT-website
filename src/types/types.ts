@@ -6,3 +6,9 @@ export interface CourseDataTypes {
     description: string,
     image: string,
 }
+
+
+export interface BlogDataType{
+    label: string,
+    id: string
+}

@@ -24,7 +24,7 @@ export const navLinksData = [
     },
       {
         label: "Research Blog",
-        url: "#"
+        url: "/research-blog"
     },
         {
         label: "Community-Service",

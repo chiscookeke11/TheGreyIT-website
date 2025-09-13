@@ -4,6 +4,7 @@
 import { useRef } from "react";
 import ResearchCard from "../UI/ResearchCard";
 import { useScroll, useTransform, motion } from "framer-motion";
+import { BlogData } from "@/data/BlogData";
 
 
 
@@ -36,9 +37,14 @@ export default function ResearchSection() {
                 <div className="sticky h-[70vh]   top-[10%] flex items-center overflow-hidden " >
                     <motion.div className="flex gap-4   " style={{ x }} >
 
-                        <ResearchCard />
-                        <ResearchCard />
-                        <ResearchCard />
+
+                        {
+                            BlogData.map((blog, index) => (
+                                <ResearchCard blog={blog} />
+                            ))
+                        }
+
+
 
                     </motion.div>
                 </div>
