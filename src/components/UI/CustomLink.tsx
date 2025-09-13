@@ -28,11 +28,11 @@ export default function CustomLink({ children, href, ...props }: CustomLinkProps
 
         body?.classList.add("page-transition")
 
-        await sleep(300)
+        await sleep(500)
 
         router.push(href)
 
-        await sleep(300)
+        await sleep(500)
 
         body?.classList.remove("page-transition")
 
