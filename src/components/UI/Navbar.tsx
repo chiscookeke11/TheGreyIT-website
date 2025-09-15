@@ -5,14 +5,19 @@ import { navLinksData } from "@/data/navlinks";
 import { Menu, X } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import React, { SetStateAction, useEffect, useState } from "react";
 import CustomLink from "./CustomLink";
+import { useAppContext } from "@/context/AppContext";
+
+
+
 
 
 
 export default function Navbar() {
     const [showMenu, setShowMenu] = useState(false)
-    const [activeNav, setActiveNav] = useState(0)
+    const { activeNav, setActiveNav } = useAppContext()
+
 
 
     useEffect(() => {
@@ -30,7 +35,7 @@ export default function Navbar() {
     return (
         <nav className="absolute text-white z-50 top-0 left-0 w-full  flex items-center justify-between py-[4%] pt-[5%] md:pt-[3%] px-[6%] " >
 
-            <Link href={"/"}>
+            <Link href={"/"} onClick={() => setActiveNav(0)}>
                 <Image src={"/logos/thegreyitlogo.png"} width={180} height={180} alt="TheGreyIT-logo" className="object-center w-[100px] " />
             </Link>
 

@@ -6,16 +6,16 @@ import CourseSlider from "../UI/CourseSlider";
 
 export default function GetSkilled() {
     return (
-        <div className=" bg-[#f2f5fc] lg:pl-[5%] px-2 py-20 flex flex-col lg:flex-row items-center justify-between w-full  gap-10 h-screen md:h-[95vh] " >
+        <div className=" bg-[#f2f5fc] lg:pl-[2%] px-2 py-20 flex flex-col lg:flex-row items-center justify-between w-full  gap-7 h-screen md:h-[95vh] " >
 
-            <div className="flex flex-col items-start gap-5 w-full  max-w-lg px-3 mr-auto lg:mr-0  " >
+            <div className="flex flex-col items-start gap-5 w-full  max-w-sm px-3 mr-auto lg:mr-0  " >
                 <h5 className="text-black text-2xl lg:text-3xl font-extrabold font-poppins" >Get Skilled </h5>
-                <h2 className=" font-bold text-3xl lg:text-[40px] leading-[100%] text-[#000]  font-syne " >Turn ambition into ability with hands-on, project-based learning.</h2>
+                <h2 className=" font-bold text-3xl  leading-[100%] text-[#000]  font-syne " >Turn ambition into ability with hands-on, project-based learning.</h2>
                 <p className="flex flex-col gap-1 list-none font-poppins " >At TheGreyIT, you don’t just learn,  </p>
                 <ul className="flex flex-col gap-1 list-none font-poppins " >
-                    <li className="flex items-center gap-2 font-normal text-base lg:text-lg "><CircleCheck size={20} /> you build</li>
-                    <li className="flex items-center gap-2 font-normal text-base lg:text-lg "><CircleCheck size={20}/> practice</li>
-                    <li className="flex items-center gap-2 font-normal text-base lg:text-lg "><CircleCheck size={20}/> and advance with skills that open real opportunities.</li>
+                    <li className="flex items-center gap-2 font-normal text-base  "><CircleCheck size={20} /> you build</li>
+                    <li className="flex items-center gap-2 font-normal text-base  "><CircleCheck size={20}/> practice</li>
+                    <li className="flex items-center gap-2 font-normal text-base "><CircleCheck size={20}/> and advance with skills that open real opportunities.</li>
                 </ul>
             </div>
 
