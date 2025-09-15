@@ -18,7 +18,7 @@ export default function ResearchCard({ blog }: ResearchCardProps) {
 
   return (
     <CustomLink href={`/research-blog/${blog.id}`} >
-      <div onClick={() => setActiveNav(5)} className=" w-full min-w-xs flex flex-col items-start h-[400px] bg-white rounded-md overflow-hidden relative border" >
+      <div onClick={() => setActiveNav(5)} className=" w-full min-w-xs flex flex-col items-start h-[400px] bg-white rounded-md overflow-hidden relative shadow-lg~ " >
         <div className="  w-full h-[48%] " >
           <Image src={"/basketball.png"} alt={`${blog.title}-image `} width={500} height={500} className="h-full w-full object-cover object-center " />
         </div>

@@ -23,7 +23,7 @@ export default function ResearchSection() {
 
     return (
 
-        <section className="w-full h-fit flex items-center justify-center gap-10 flex-col py-20 bg-white font-poppins " >
+        <section className="w-full h-fit flex items-center justify-center gap-10 flex-col py-20 bg-[#f2f5fc] font-poppins " >
 
 
             <h5 className="text-black text-2xl lg:text-3xl font-extrabold font-poppins" >Research Section </h5>
