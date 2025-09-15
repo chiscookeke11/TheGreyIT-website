@@ -1,3 +1,4 @@
+import Footer from "@/components/Home/Footer";
 import GetSkilled from "@/components/Home/GetSkilled";
 import Hero from "@/components/Home/Hero";
 import OurLabs from "@/components/Home/OurLabs";
@@ -16,6 +17,7 @@ export default function Home() {
       <OurLabs />
       <GetSkilled />
       <ResearchSection/>
+      <Footer/>
     </>
   );
 }

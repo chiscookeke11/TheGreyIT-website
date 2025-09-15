@@ -23,7 +23,7 @@ export default function ResearchSection() {
 
     return (
 
-        <section className="w-full h-fit flex items-center justify-center gap-10 flex-col py-20 bg-white " >
+        <section className="w-full h-fit flex items-center justify-center gap-10 flex-col py-20 bg-white font-poppins " >
 
 
             <h5 className="text-black text-2xl lg:text-3xl font-extrabold font-poppins" >Research Section </h5>
@@ -34,7 +34,7 @@ export default function ResearchSection() {
 
 
 
-                <div className="sticky h-[70vh]   top-[10%] flex items-center overflow-hidden " >
+                <div className="sticky h-[80vh]   top-[10%] flex items-center overflow-hidden " >
                     <motion.div className="flex gap-4   " style={{ x }} >
 
 

@@ -42,7 +42,7 @@ export default function Page() {
     return (
         <div className="bg-black w-full flex items-center justify-center h-screen text-white" >
             dynamic blog page
-            {currentBlog.label}
+            {currentBlog.title}
         </div>
     )
 }
