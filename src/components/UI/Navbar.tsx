@@ -8,6 +8,7 @@ import Link from "next/link";
 import React, { SetStateAction, useEffect, useState } from "react";
 import CustomLink from "./CustomLink";
 import { useAppContext } from "@/context/AppContext";
+import { usePathname } from "next/navigation";
 
 
 
@@ -17,6 +18,9 @@ import { useAppContext } from "@/context/AppContext";
 export default function Navbar() {
     const [showMenu, setShowMenu] = useState(false)
     const { activeNav, setActiveNav } = useAppContext()
+    const pathName = usePathname()
+
+    console.log(pathName)
 
 
 
@@ -36,7 +40,11 @@ export default function Navbar() {
         <nav className="absolute text-white z-50 top-0 left-0 w-full  flex items-center justify-between py-[4%] pt-[5%] md:pt-[3%] px-[6%] " >
 
             <Link href={"/"} onClick={() => setActiveNav(0)}>
-                <Image src={"/logos/thegreyitlogo.png"} width={180} height={180} alt="TheGreyIT-logo" className="object-center w-[100px] " />
+              {pathName === "/" ?
+              (  <Image src={"/logos/thegreyitlogo.png"} width={180} height={180} alt="TheGreyIT-logo" className="object-center w-[100px] " />)
+              :
+              (  <Image src={"/logos/THEGREYAElogoBlack.png"} width={180} height={180} alt="TheGreyIT-logo" className="object-center w-[100px] " />)
+              }
             </Link>
 
 
@@ -47,7 +55,7 @@ export default function Navbar() {
                 {navLinksData.map((navlink, index) => (
                     <li onClick={() => {
                         setActiveNav(index)
-                    }} key={index} className={`text-[13px] font-poppins text-white relative before:absolute before:bg-white before:bottom-[-5px] before:left-[50%] before:translate-x-[-50%]  before:w-0 before:h-[3px] hover:before:w-full before:transition-all before:duration-300 before:ease-in-out ${activeNav === index ? "before:w-full" : "before:w-0"} `} ><CustomLink href={navlink.url} > {navlink.label}</CustomLink> </li>
+                    }} key={index} className={`text-[13px] font-poppins ${pathName === "/" ? "text-white before:bg-white" : "text-[#171717] before:bg-[#171717] "} relative before:absolute  before:bottom-[-5px] before:left-[50%] before:translate-x-[-50%]  before:w-0 before:h-[3px] hover:before:w-full before:transition-all before:duration-300 before:ease-in-out ${activeNav === index ? "before:w-full" : "before:w-0"} `} ><CustomLink href={navlink.url} > {navlink.label}</CustomLink> </li>
                 ))}
             </ul>
 
