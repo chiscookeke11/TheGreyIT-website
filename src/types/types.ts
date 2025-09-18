@@ -13,3 +13,14 @@ export interface BlogDataType{
     title: string,
     id: string
 }
+
+
+
+export interface ResearchBlogType  {
+  id: number;
+  image: string;
+  category: string;
+  title: string;
+  author: string;
+  date: string;
+};

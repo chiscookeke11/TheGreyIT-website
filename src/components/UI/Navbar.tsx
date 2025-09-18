@@ -60,7 +60,7 @@ export default function Navbar() {
             </ul>
 
 
-            <button onClick={() => setShowMenu(true)} className=" flex items-center justify-center lg:hidden cursor-pointer border-none outline-none" >
+            <button onClick={() => setShowMenu(true)} className={` flex items-center justify-center lg:hidden cursor-pointer border-none outline-none  ${pathName === "/" ? "text-white " : "text-[#171717]  "}  `} >
                 <Menu size={27} />
             </button>
 
