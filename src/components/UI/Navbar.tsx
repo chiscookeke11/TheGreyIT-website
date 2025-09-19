@@ -74,7 +74,7 @@ export default function Navbar() {
 
                 <ul className={`w-fit flex flex-col items-start gap-8 pl-5  `} >
                     {navLinksData.map((navlink, index) => (
-                        <li key={index} onClick={() => setShowMenu(false)} className=" text-[13px] font-poppins text-white " ><CustomLink href={navlink.url} > {navlink.label}</CustomLink> </li>
+                        <li key={index} onClick={() => setShowMenu(false)} className=" text-lg font-poppins text-white " ><CustomLink href={navlink.url} > {navlink.label}</CustomLink> </li>
                     ))}
                 </ul>
 
