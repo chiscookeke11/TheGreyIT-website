@@ -60,7 +60,7 @@ export default function ResearchSection() {
                 <div className="w-full overflow-x-scroll flex items-center" >
                     <div className=" w-fit flex items-center justify-center gap-10 px-6 py-3 " >
                         {
-                            BlogData.map((blog, index) => (
+                            BlogData.slice(0, 3).map((blog, index) => (
                                 <ResearchCard blog={blog} key={index} />
                             ))
                         }
