@@ -4,7 +4,7 @@ import Button from "../UI/Button";
 
 export default function WhyUs() {
     return (
-        <section className="bg-white px-[4%] py-20 flex flex-col md:flex-row items-center justify-center w-full gap-8 lg:gap-17  " >
+        <section className="bg-white px-[4%] py-14 flex flex-col md:flex-row items-center justify-center w-full gap-8 lg:gap-17  " >
 
 
 
