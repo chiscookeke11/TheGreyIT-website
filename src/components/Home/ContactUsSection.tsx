@@ -8,7 +8,7 @@ export default function ContactUsSection() {
         <section className=" flex items-center justify-center flex-col gap-10 py-20 px-[2%] md:px-[4%]  font-poppins bg-white" >
 
 
-            <div className=" w-full bg-[#f2f5fc] md:h-[83vh] p-4 flex flex-col md:flex-row items-stretch justify-center rounded-2xl gap-10 " >
+            <div className=" w-full bg-[#f2f5fc] md:h-[85vh] p-4 md:py-16 flex flex-col md:flex-row items-stretch justify-center rounded-2xl gap-10 " >
                 <ContactCard />
                 <ContactForm/>
             </div>
