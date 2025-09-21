@@ -34,17 +34,26 @@ export default function Navbar() {
         };
     }, [showMenu])
 
+    useEffect(() => {
+        const currentIndex = navLinksData.findIndex(
+            (navlink) => navlink.url === pathName
+        );
+        if (currentIndex !== -1) {
+            setActiveNav(currentIndex)
+        }
+    }, [pathName, setActiveNav])
 
+                                                                                                   
 
     return (
         <nav className="absolute text-white z-50 top-0 left-0 w-full  flex items-center justify-between py-[4%] pt-[5%] md:pt-[3%] px-[6%] " >
 
             <Link href={"/"} onClick={() => setActiveNav(0)}>
-              {pathName === "/" ?
-              (  <Image src={"/logos/thegreyitlogo.png"} width={180} height={180} alt="TheGreyIT-logo" className="object-center w-[100px] " />)
-              :
-              (  <Image src={"/logos/THEGREYAElogoBlack.png"} width={180} height={180} alt="TheGreyIT-logo" className="object-center w-[100px] " />)
-              }
+                {pathName === "/" ?
+                    (<Image src={"/logos/thegreyitlogo.png"} width={180} height={180} alt="TheGreyIT-logo" className="object-center w-[100px] " />)
+                    :
+                    (<Image src={"/logos/THEGREYAElogoBlack.png"} width={180} height={180} alt="TheGreyIT-logo" className="object-center w-[100px] " />)
+                }
             </Link>
 
 

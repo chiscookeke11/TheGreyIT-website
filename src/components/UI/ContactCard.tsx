@@ -5,13 +5,11 @@ import Link from "next/link";
 
 export default function ContactCard() {
     return (
-        <div className=" w-full max-w-xl bg-gray-700 flex flex-col items-start justify-between gap-12 py-5 px-4 md:px-8 min-h-[400px] rounded-xl rounded-br-none shadow-2xl " >
+        <div className=" w-full max-w-xl bg-gray-700 flex flex-col items-start justify-between gap-12 py-5 px-4 md:px-8 min-h-[400px] rounded-xl rounded-br-none shadow-2xl overflow-hidden " >
             <div className="space-y-2" >
                 <h4 className=" text-2xl lg:text-3xl font-extrabold font-syne text-white ">Contact Us</h4>
                 <p className="font-normal text-base text-white w-[90%] " >Any question or remarks? Just write us a message!</p>
             </div>
-
-
 
 
             <ul className="w-full flex max-w-sm flex-col items-start gap-7 md:gap-9 text-white" >

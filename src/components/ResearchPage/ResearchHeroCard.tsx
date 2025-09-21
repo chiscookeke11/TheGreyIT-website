@@ -13,7 +13,7 @@ export const HeroCard = ({data}: HeroCardProps) => {
 
 
     return (
-        <div className=" w-full h-[90%] bg-gray-300 max-w-md relative text-white font-poppins " >
+        <div className=" w-full h-[90%] min-h-[300px] bg-gray-300 max-w-md relative text-white font-poppins " >
             <Image src={"/basketball.png"} alt="image" fill className="object-cover object-center" />
             <div className=" absolute inset-0 bg-black/15 " />
 
