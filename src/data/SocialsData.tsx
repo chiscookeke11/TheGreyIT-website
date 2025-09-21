@@ -1,16 +1,16 @@
-import { Facebook, Linkedin, X,  } from "lucide-react";
+import { Facebook, Linkedin, Twitter} from "lucide-react";
 
 
 export const socialsData = [
     {
         name: "LinkedIn",
-        url: "#",
+        url: "https://www.linkedin.com/company/thegreyit/",
         icon: <Linkedin size={20}/>
     },
     {
         name: "X (Twitter)",
         url: "#",
-        icon: <X size={20} />
+        icon: <Twitter size={20} />
     },
     {
         name: "Facebook",

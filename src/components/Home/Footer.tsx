@@ -5,6 +5,7 @@ import { navLinksData } from "@/data/navlinks";
 import Image from "next/image";
 import CustomLink from "../UI/CustomLink";
 import { socialsData } from "@/data/SocialsData";
+import Link from "next/link";
 
 
 
@@ -39,9 +40,9 @@ export default function Footer() {
 
                 <div className=" w-full p-1 flex flex-col items-start gap-4" >
                     <h4 className="text-xl ">Socials</h4>
-                    <ul className={`w-fit flex items-start gap-4  `} >
+                    <ul className={`w-fit flex items-start gap-7  `} >
                         {socialsData.map((socialLink, index) => (
-                            <li key={index} className=" text-sm  text-gray-400 hover:text-gray-200 transition-all duration-250 transform hover:scale-125 " ><CustomLink href={socialLink.url} > {socialLink.icon}</CustomLink> </li>
+                            <li key={index} className=" text-sm  text-gray-400 hover:text-gray-200 transition-all duration-250 transform hover:scale-125 " ><Link href={socialLink.url} > {socialLink.icon}</Link> </li>
                         ))}
                     </ul>
                 </div>
@@ -55,7 +56,7 @@ export default function Footer() {
             <hr className="bg-white/10 w-full h-0.5 border-none " />
 
 
-            <small className="text-xs text-gray-400 font-medium " >© 2020 Lift Media. All rights reserved.</small>
+            <small className="text-xs text-gray-400 font-medium " >© 2025 Lift Media. All rights reserved.</small>
 
         </footer>
     )
