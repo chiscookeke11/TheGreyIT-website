@@ -1,6 +1,5 @@
 import { ResearchBlogType } from "@/types/types";
 
-
 export const researchBlogData: ResearchBlogType[] = [
   {
     id: 1,
@@ -8,7 +7,7 @@ export const researchBlogData: ResearchBlogType[] = [
     category: "TRAVEL",
     title: "Research on CyberSecurity",
     author: "Nedu",
-    date: "3 days ago",
+    createdAt: new Date(new Date().setDate(new Date().getDate() - 3)),
   },
   {
     id: 2,
@@ -16,7 +15,7 @@ export const researchBlogData: ResearchBlogType[] = [
     category: "ADVENTURE",
     title: "Exploring the Swiss Alps",
     author: "Chisom",
-    date: "1 week ago",
+    createdAt: new Date(new Date().setDate(new Date().getDate() - 7)),
   },
   {
     id: 3,
@@ -24,7 +23,7 @@ export const researchBlogData: ResearchBlogType[] = [
     category: "TECH",
     title: "Future of AI in Education",
     author: "Emmanuel",
-    date: "2 days ago",
+    createdAt: new Date(new Date().setDate(new Date().getDate() - 2)),
   },
   {
     id: 4,
@@ -32,7 +31,7 @@ export const researchBlogData: ResearchBlogType[] = [
     category: "LIFESTYLE",
     title: "Living in a Smart City",
     author: "Ada",
-    date: "5 days ago",
+    createdAt: new Date(new Date().setDate(new Date().getDate() - 5)),
   },
   {
     id: 5,
@@ -40,6 +39,6 @@ export const researchBlogData: ResearchBlogType[] = [
     category: "NATURE",
     title: "The Healing Power of the Ocean",
     author: "Ugo",
-    date: "4 hours ago",
+    createdAt: new Date(new Date().setHours(new Date().getHours() - 4)),
   },
 ];

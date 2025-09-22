@@ -23,7 +23,8 @@ export const HeroCard = ({data}: HeroCardProps) => {
                 <span className="block bg-red-500  px-3 py-1 text-xs mb-1 " >{data.category} </span>
 
                 <h1 className="font-syne font-semibold text-xl " >{data.title} </h1>
-                <div className="flex items-center gap-1 text-xs font-normal " ><p>By {data.author}</p> <span className="bg-gray-300 block h-5 w-[1px] mx-2 " /> <p>{data.date} </p></div>
+                <div className="flex items-center gap-1 text-xs font-normal " ><p>By {data.author}</p> <span className="bg-gray-300 block h-5 w-[1px] mx-2 " />
+                <p>{new Date(data.createdAt).toLocaleDateString()} </p></div>
             </div>
         </div>
     )
