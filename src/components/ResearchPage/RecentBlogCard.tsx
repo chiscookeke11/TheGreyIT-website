@@ -10,7 +10,7 @@ interface RecentBlogCardProps {
 
 export default function RecentBlogCard({ data }: RecentBlogCardProps) {
     return (
-        <div className="w-full h-full min-h-[300px] flex flex-col items-center justify-between font-poppins " >
+        <div className="w-full h-full max-w-xs  md:max-w-none min-h-[300px] flex flex-col items-center justify-between font-poppins " >
 
 
             <div className=" w-full bg-amber-400 h-full " >

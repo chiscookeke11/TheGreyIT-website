@@ -56,7 +56,7 @@ export default function Footer() {
             <hr className="bg-white/10 w-full h-0.5 border-none " />
 
 
-            <small className="text-xs text-gray-400 font-medium " >© 2025 Lift Media. All rights reserved.</small>
+            <small className="text-xs text-gray-400 font-medium " >© 2025 TheGrey IT. All rights reserved.</small>
 
         </footer>
     )
