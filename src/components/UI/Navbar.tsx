@@ -5,7 +5,7 @@ import { navLinksData } from "@/data/navlinks";
 import { Menu, X } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import React, { SetStateAction, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import CustomLink from "./CustomLink";
 import { useAppContext } from "@/context/AppContext";
 import { usePathname } from "next/navigation";
@@ -43,7 +43,7 @@ export default function Navbar() {
         }
     }, [pathName, setActiveNav])
 
-                                                                                                   
+
 
     return (
         <nav className="absolute text-white z-50 top-0 left-0 w-full  flex items-center justify-between py-[4%] pt-[5%] md:pt-[3%] px-[6%] " >
@@ -64,7 +64,14 @@ export default function Navbar() {
                 {navLinksData.map((navlink, index) => (
                     <li onClick={() => {
                         setActiveNav(index)
-                    }} key={index} className={`text-[13px] font-poppins ${pathName === "/" ? "text-white before:bg-white" : "text-[#171717] before:bg-[#171717] "} relative before:absolute  before:bottom-[-5px] before:left-[50%] before:translate-x-[-50%]  before:w-0 before:h-[3px] hover:before:w-full before:transition-all before:duration-300 before:ease-in-out ${activeNav === index ? "before:w-full" : "before:w-0"} `} ><CustomLink href={navlink.url} > {navlink.label}</CustomLink> </li>
+                    }} key={index} className={`text-[13px] font-poppins ${pathName === "/" ? "text-white before:bg-white" : "text-[#171717] before:bg-[#171717] "} relative before:absolute  before:bottom-[-5px] before:left-[50%] before:translate-x-[-50%]  before:w-0 before:h-[3px] hover:before:w-full before:transition-all before:duration-300 before:ease-in-out ${activeNav === index ? "before:w-full" : "before:w-0"} `} >
+                        {navlink.label === "Contact Us" ? (
+                            <Link href={navlink.url}>{navlink.label}</Link>
+                        ) : (
+                            <CustomLink href={navlink.url}>{navlink.label}</CustomLink>
+                        )}
+
+                    </li>
                 ))}
             </ul>
 

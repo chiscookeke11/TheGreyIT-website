@@ -20,7 +20,6 @@ export default function RecentBlogs() {
 
     return (
         <section className="w-full flex items-center justify-center flex-col gap-10 md:gap-16 px-[4%]  py-20 " >
-            <h5 className="text-black text-2xl lg:text-3xl font-extrabold font-poppins" >Recent Blogs </h5>
             <div className="ml-auto" >Sleector</div>
             {
                 !recentBlogsData ? (<Spinner/>) :

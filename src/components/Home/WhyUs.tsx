@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Button from "../UI/Button";
+import Link from "next/link";
 
 
 export default function WhyUs() {
@@ -13,7 +14,7 @@ export default function WhyUs() {
                     <Image src={"/basketball.png"} width={500} height={500} alt="image-1" className="object-center object-cover h-full w-full " />
                 </div>
 
-                 <div className="flex items-center justify-center rounded-xl overflow-hidden h-[300px] w-[230px] lg:w-[300px] lg:mt-28 "  >
+                <div className="flex items-center justify-center rounded-xl overflow-hidden h-[300px] w-[230px] lg:w-[300px] lg:mt-28 "  >
                     <Image src={"/basketball.png"} width={500} height={500} alt="image-1" className="object-center object-cover h-full w-full " />
                 </div>
             </div>
@@ -32,7 +33,7 @@ export default function WhyUs() {
 
 
                 <div className="flex gap-4" >
-                    <Button variant="default" className="font-syne " >Courses</Button>
+                    <Link href={"/courses"} >        <Button variant="default" className="font-syne " >Courses</Button></Link>
                     <Button variant="default" className="font-syne " >Community</Button>
                 </div>
             </div>

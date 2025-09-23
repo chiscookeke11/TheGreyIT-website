@@ -1,4 +1,7 @@
+"use client"
+
 import Button from "../UI/Button";
+import CustomLink from "../UI/CustomLink";
 
 
 
@@ -19,7 +22,9 @@ export default function Hero() {
                 <p className="font-medium text-sm max-w-[210px] md:max-w-xs " >From knowledge to skill, from classroom to career.
                     Africa’s future, built hands-on.</p>
 
-                <Button variant="outline" >Explore Courses</Button>
+                <CustomLink href="/courses" >
+                    <Button variant="outline" >Explore Courses</Button>
+                </CustomLink>
             </div>
         </section>
     )
