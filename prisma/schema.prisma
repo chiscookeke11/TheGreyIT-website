@@ -5,7 +5,7 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url = env("DATABASE_URL")
+  url = "postgresql://postgres.jwpzykqwtgmavjonntpd:r7VNPN1qF5oAojkc@aws-1-eu-north-1.pooler.supabase.com:5432/postgres"
 }
 
 
@@ -17,4 +17,14 @@ author String
 content String
 image String
 createdAt DateTime @default(now())
+}
+
+model course{
+  id Int @id @default(autoincrement())
+  title String
+  description String
+  duration String
+  price Int
+  imageUrl String
+  rating Int
 }

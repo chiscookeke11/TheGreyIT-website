@@ -2,21 +2,24 @@
 
 
 export interface CourseDataTypes {
-    courseTitle: string,
-    description: string,
-    image: string,
-    bgColor: string,
+  title: string,
+  description: string,
+  imageUrl: string,
+  bgColor: string,
+  duration: string,
+  price: number,
+  rating: number,
 }
 
 
-export interface BlogDataType{
-    title: string,
-    id: string
+export interface BlogDataType {
+  title: string,
+  id: string
 }
 
 
 
-export interface ResearchBlogType  {
+export interface ResearchBlogType {
   id: number;
   image: string;
   category: string;
@@ -24,3 +27,6 @@ export interface ResearchBlogType  {
   author: string;
   createdAt: Date;
 };
+
+
+

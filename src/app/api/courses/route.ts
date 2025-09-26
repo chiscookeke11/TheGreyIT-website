@@ -1,0 +1,14 @@
+import { PrismaClient } from "@prisma/client"
+
+const prisma = new PrismaClient()
+
+
+export async function GET() {
+  try {
+    const courses = await prisma.course.findMany()
+    return Response.json(courses)
+  } catch (error) {
+    console.error("Error fetching courses:", error)
+    return new Response(JSON.stringify({ error: "Failed to fetch courses" }), { status: 500 })
+  }
+}
