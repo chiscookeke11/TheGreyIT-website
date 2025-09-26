@@ -5,7 +5,7 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url = "postgresql://postgres.jwpzykqwtgmavjonntpd:r7VNPN1qF5oAojkc@aws-1-eu-north-1.pooler.supabase.com:5432/postgres"
+  url = env("DATABASE_URL")
 }
 
 

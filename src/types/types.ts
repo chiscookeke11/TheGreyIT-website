@@ -9,6 +9,7 @@ export interface CourseDataTypes {
   duration: string,
   price: number,
   rating: number,
+  id?: string
 }
 
 
