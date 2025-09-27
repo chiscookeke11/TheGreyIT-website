@@ -1,6 +1,5 @@
 "use client"
 
-import { researchBlogData } from "@/data/ResearchBlogData";
 import { HeroCard } from "./ResearchHeroCard";
 import { ResearchBlogType } from "@/types/types";
 import { useEffect, useState } from "react";

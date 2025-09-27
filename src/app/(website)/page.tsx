@@ -1,5 +1,4 @@
 import ContactUsSection from "@/components/Home/ContactUsSection";
-import Footer from "@/components/Home/Footer";
 import GetSkilled from "@/components/Home/GetSkilled";
 import Hero from "@/components/Home/Hero";
 import OurLabs from "@/components/Home/OurLabs";

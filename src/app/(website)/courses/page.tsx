@@ -91,7 +91,7 @@ export default function Page() {
                     (
 
                         <div className="w-full bg-[#f2f5fc] grid grid-cols-1 place-items-start gap-8 px-7 py-12 h-full rounded-sm " >
-                            {coursesData.map((course, index) => (
+                            {coursesData.map((course) => (
                                 <CourseCard key={course.id} data={course} />
                             ))}
 
