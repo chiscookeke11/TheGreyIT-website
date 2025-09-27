@@ -2,29 +2,27 @@ generator client {
   provider = "prisma-client-js"
 }
 
-
 datasource db {
   provider = "postgresql"
-  url = env("DATABASE_URL")
+  url      = env("DATABASE_URL")
 }
 
-
-model blog{
-id Int @id @default(autoincrement())
-title String
-category String
-author String
-content String
-image String
-createdAt DateTime @default(now())
+model Blog {
+  id        Int      @id @default(autoincrement())
+  title     String
+  category  String
+  author    String
+  content   String
+  image     String
+  createdAt DateTime @default(now())
 }
 
-model Course{
-  id Int @id @default(autoincrement())
-  title String
+model Course {
+  id          Int    @id @default(autoincrement())
+  title       String
   description String
-  duration String
-  price Int
-  imageUrl String
-  rating Int
+  duration    String
+  price       Int
+  imageUrl    String
+  rating      Int
 }
