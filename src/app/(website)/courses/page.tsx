@@ -18,7 +18,7 @@ const CourseCard = ({ data }: CourseCardProps) => {
 
 
     return (
-        <div className="w-full h-full max-w-3xl flex-col md:flex-row bg-white rounded-xl flex items-center gap-5 overflow-hidden font-poppins shadow-md " >
+        <div className="w-full h-full max-w-3xl flex-col lg:flex-row bg-white rounded-xl flex items-center gap-2 lg:gap-5 overflow-hidden font-poppins shadow-md " >
 
             {/* course image */}
             <div className="basis-2/5 h-full hidden md:flex items-center justify-center relative" >
@@ -37,13 +37,11 @@ const CourseCard = ({ data }: CourseCardProps) => {
                 <ul className="w-full flex items-center flex-wrap justify-between gap-3 text-sm font-normal mb-6 mt-3" >
                     <li className="flex items-center gap-1" ><Timer size={20} color="gray" /> {data.duration} </li>
                     <li> {data.rating} </li>
-                    <li>Prop !</li>
-                    <li>Prop !</li>
-                    <li>Prop !</li>
+
 
                 </ul>
 
-                <div className="w-full flex  items-center justify-between my-2 mt-6 py-2 pt-7 border-t-[2px] border-gray-300 " >
+                <div className="w-full flex  items-center  justify-between my-2 mt-6 py-2 pt-7 border-t-[2px] border-gray-300 gap-2 " >
                     <p className="text-lg font-bold text-gray-700  ">NGN {data.price.toLocaleString()} </p>
 
                     <Button variant="default" className="!bg-gray-700 !text-white !text-sm " >View more</Button>
@@ -93,7 +91,7 @@ export default function Page() {
                     :
                     (
 
-                        <div className="w-full bg-[#f2f5fc] grid grid-cols-1 place-items-start gap-8 px-7 py-12 h-full rounded-sm " >
+                        <div className="w-full bg-[#f2f5fc] grid grid-cols-1 md:grid-cols-2 place-items-center justify-items-center gap-8 lg:gap-16 px-7 py-12 h-full rounded-sm " >
                             {coursesData.map((course) => (
                                 <CourseCard key={course.id} data={course} />
                             ))}

@@ -14,7 +14,7 @@ export default function RecentBlogCard({ data }: RecentBlogCardProps) {
 
 
             <div className=" w-full bg-amber-400 h-full " >
-                <Image src={"/basketball.png"} alt="image" height={500} width={500} className="object-cover object-center h-full w-full " />
+                <Image src={data.image} alt="image" height={500} width={500} className="object-cover object-center h-full w-full " />
             </div>
 
 
