@@ -14,8 +14,8 @@ export const HeroCard = ({data}: HeroCardProps) => {
 
     return (
         <div className=" w-full h-[90%] min-h-[300px] bg-gray-300 max-w-md relative text-white font-poppins " >
-            <Image src={"/basketball.png"} alt="image" fill className="object-cover object-center" />
-            <div className=" absolute inset-0 bg-black/15 " />
+            <Image src={data.image} alt="image" fill className="object-cover object-center" />
+            <div className=" absolute inset-0 bg-black/20 " />
 
 
             <div className=" w-full flex flex-col items-center gap-1  absolute bottom-4 left-[50%] translate-x-[-50%]  py-1 text-center  " >

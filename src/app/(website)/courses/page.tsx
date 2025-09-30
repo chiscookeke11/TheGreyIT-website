@@ -18,23 +18,23 @@ const CourseCard = ({ data }: CourseCardProps) => {
 
 
     return (
-        <div className="w-full h-full max-w-3xl bg-white rounded-xl flex items-center gap-5 overflow-hidden font-poppins shadow-md " >
+        <div className="w-full h-full max-w-3xl flex-col md:flex-row bg-white rounded-xl flex items-center gap-5 overflow-hidden font-poppins shadow-md " >
 
             {/* course image */}
-            <div className="basis-2/5 h-full flex items-center justify-center relative" >
+            <div className="basis-2/5 h-full hidden md:flex items-center justify-center relative" >
                 <Image src={"/basketball.png"} alt="image" fill className="object-cover object-center" />
             </div>
 
 
             {/* couse text */}
 
-            <div className="basis-3/5 flex items-start flex-col gap-1 py-4 pr-7  " >
+            <div className="basis-3/5 flex items-start flex-col gap-1 py-4 pr-7 pl-4  " >
                 <div>
                     <h5 className=" font-syne font-semibold text-xl  " >{data.title} </h5>
                     <p className="font-normal text-base text-gray-600 " >{data.description} </p>
                 </div>
 
-                <ul className="w-full flex items-center justify-between gap-3 text-sm font-normal mb-6 mt-3" >
+                <ul className="w-full flex items-center flex-wrap justify-between gap-3 text-sm font-normal mb-6 mt-3" >
                     <li className="flex items-center gap-1" ><Timer size={20} color="gray" /> {data.duration} </li>
                     <li> {data.rating} </li>
                     <li>Prop !</li>
@@ -43,7 +43,7 @@ const CourseCard = ({ data }: CourseCardProps) => {
 
                 </ul>
 
-                <div className="w-full flex items-center justify-between my-2 mt-6 py-2 pt-7 border-t-[2px] border-gray-300 " >
+                <div className="w-full flex  items-center justify-between my-2 mt-6 py-2 pt-7 border-t-[2px] border-gray-300 " >
                     <p className="text-lg font-bold text-gray-700  ">NGN {data.price.toLocaleString()} </p>
 
                     <Button variant="default" className="!bg-gray-700 !text-white !text-sm " >View more</Button>
