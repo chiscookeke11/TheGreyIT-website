@@ -3,11 +3,12 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
 }
 
-model Blog {
+model blog {
   id        Int      @id @default(autoincrement())
   title     String
   category  String
@@ -17,7 +18,7 @@ model Blog {
   createdAt DateTime @default(now())
 }
 
-model Course {
+model course {
   id          Int    @id @default(autoincrement())
   title       String
   description String

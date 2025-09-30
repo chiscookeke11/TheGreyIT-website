@@ -63,7 +63,10 @@ export default function Page() {
     useEffect(() => {
         fetch("/api/courses")
             .then((res) => res.json())
-            .then((data) => setCoursesData(data))
+            .then((data) => {
+                setCoursesData(data)
+                console.log(data)
+            })
             .catch((err) => console.error("Fetch error:", err))
     }, [])
 
