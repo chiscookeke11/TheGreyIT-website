@@ -29,7 +29,7 @@ export default function ResearchHero() {
             <div className="w-full   md:h-[50vh] lg:h-[80vh] flex flex-col md:flex-row items-center justify-center gap-10  md:gap-5 lg:gap-10 " >
                 {
                     !trendingBlog ? (<Spinner/>) :
-                        trendingBlog.length < 0 ? "No blogs found" :
+                        trendingBlog.length < 1 ? "No blogs found" :
                             (
                                 trendingBlog.slice(0, 3).map((blog, index) => (
                                     <HeroCard data={blog} key={index} />

@@ -59,13 +59,41 @@ export default function Page() {
 
 
     useEffect(() => {
-        fetch("/api/courses")
-            .then((res) => res.json())
-            .then((data) => {
+        const CACHE_KEY = "coursesData"
+        const CACHE_DURATION = 1000 * 60 * 5
+
+        const cachedCourses = localStorage.getItem(CACHE_KEY)
+
+        if (cachedCourses) {
+            const parsed = JSON.parse(cachedCourses)
+
+
+            // checking expiry (5 Minutes)
+            if (Date.now() - parsed.timestamp < CACHE_DURATION) {
+                setCoursesData(parsed.data)
+                return; // use cached, no need to fetch
+            }
+            else {
+                localStorage.removeItem(CACHE_KEY)
+            }
+        }
+
+
+        // if no cachedCourses or not expired then we fetch fresh data
+        const fetchCourses = async () => {
+            try {
+
+                const res = await fetch("/api/courses")
+                const data = await res.json()
                 setCoursesData(data)
-                console.log(data)
-            })
-            .catch((err) => console.error("Fetch error:", err))
+                localStorage.setItem(CACHE_KEY, JSON.stringify({ data, timestamp: Date.now() }))
+            }
+            catch (error) {
+                console.error(error)
+            }
+        }
+
+        fetchCourses()
     }, [])
 
 
