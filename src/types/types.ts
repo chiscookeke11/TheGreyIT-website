@@ -27,6 +27,7 @@ export interface ResearchBlogType {
   title: string;
   author: string;
   createdAt: Date;
+  content: string
 };
 
 

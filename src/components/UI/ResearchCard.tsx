@@ -1,15 +1,16 @@
-import { BlogDataType } from "@/types/types"
+import {  ResearchBlogType } from "@/types/types"
 import CustomLink from "./CustomLink"
 import { useAppContext } from "@/context/AppContext"
 import Image from "next/image"
 import Button from "./Button"
+import { data } from "framer-motion/client"
 
 
 
 
 
 interface ResearchCardProps {
-  blog: BlogDataType
+  blog: ResearchBlogType
 }
 
 export default function ResearchCard({ blog }: ResearchCardProps) {
@@ -20,14 +21,14 @@ export default function ResearchCard({ blog }: ResearchCardProps) {
     <>
       <div onClick={() => setActiveNav(5)} className=" w-full min-w-xs flex flex-col items-start h-full  bg-white rounded-md overflow-hidden relative shadow-lg~ " >
         <div className="  w-full h-[48%] " >
-          <Image src={"/basketball.png"} alt={`${blog.title}-image `} width={500} height={500} className="h-full w-full object-cover object-center " />
+          <Image src={blog.image} alt={`${blog.title}-image `} width={500} height={500} className="h-full w-full object-cover object-center " />
         </div>
         <div className="h-full w-full py-4 px-3 flex flex-col items-start gap-2  " >
-          <h3 className="text-sm" >By: Admin <span className="ml-4 text-gray-500 " >January, 2022</span></h3>
+          <h3 className="text-sm" >By: {blog.author} <span className="ml-4 text-gray-500 " >January, 2022</span></h3>
 
-          <h1 className="text-xl font-semibold " >We are the best IT solution company</h1>
+          <h1 className="text-xl font-semibold " >{blog.title} </h1>
 
-          <p className="text-base font-medium " >World best organization for 19 years and running</p>
+          <p className="text-base font-medium " >{blog.content.trim().slice(0, 95)}... </p>
           <CustomLink href={`/research-blog/${blog.id}`} >
             <Button variant="default" className="!text-sm !px-4 !py-3 mt-2"  >
               Read more

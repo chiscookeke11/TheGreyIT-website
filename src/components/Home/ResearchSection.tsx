@@ -1,15 +1,16 @@
 "use client"
 
 
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import ResearchCard from "../UI/ResearchCard";
 import { useScroll, useTransform, motion } from "framer-motion";
-import { BlogData } from "@/data/BlogData";
+import { ResearchBlogType } from "@/types/types";
 
 
 
 
 export default function ResearchSection() {
+      const [recentBlogsData, setRecentBlogsData] = useState<null | ResearchBlogType[]>(null)
 
     const targetRef = useRef(null)
     const { scrollYProgress } = useScroll({
@@ -17,6 +18,12 @@ export default function ResearchSection() {
     })
 
     const x = useTransform(scrollYProgress, [0, 1], ["10%", "-90%"])
+
+       useEffect(() => {
+            fetch("/api/blogs")
+                .then((res) => res.json())
+                .then((data) => setRecentBlogsData(data))
+        }, [])
 
 
 
@@ -40,7 +47,7 @@ export default function ResearchSection() {
 
 
                             {
-                                BlogData.map((blog, index) => (
+                                recentBlogsData?.map((blog, index) => (
                                     <ResearchCard blog={blog} key={index} />
                                 ))
                             }
@@ -60,7 +67,7 @@ export default function ResearchSection() {
                 <div className="w-full overflow-x-scroll flex items-center" >
                     <div className=" w-fit flex items-center justify-center gap-10 px-6 py-3 " >
                         {
-                            BlogData.slice(0, 3).map((blog, index) => (
+                            recentBlogsData?.slice(0, 3).map((blog, index) => (
                                 <ResearchCard blog={blog} key={index} />
                             ))
                         }
