@@ -49,7 +49,7 @@ export default function Navbar() {
         <nav className="absolute text-white z-50 top-0 left-0 w-full  flex items-center justify-between py-[4%] pt-[5%] md:pt-[3%] px-[6%] " >
 
             <Link href={"/"} onClick={() => setActiveNav(0)}>
-                {pathName === "/" ?
+                {pathName === "/" || pathName === "/courses" ?
                     (<Image src={"/logos/thegreyitlogo.png"} width={180} height={180} alt="TheGreyIT-logo" className="object-center w-[100px] " />)
                     :
                     (<Image src={"/logos/THEGREYAElogoBlack.png"} width={180} height={180} alt="TheGreyIT-logo" className="object-center w-[100px] " />)
@@ -64,7 +64,7 @@ export default function Navbar() {
                 {navLinksData.map((navlink, index) => (
                     <li onClick={() => {
                         setActiveNav(index)
-                    }} key={index} className={`text-[13px] font-poppins ${pathName === "/" ? "text-white before:bg-white" : "text-[#171717] before:bg-[#171717] "} relative before:absolute  before:bottom-[-5px] before:left-[50%] before:translate-x-[-50%]  before:w-0 before:h-[3px] hover:before:w-full before:transition-all before:duration-300 before:ease-in-out ${activeNav === index ? "before:w-full" : "before:w-0"} `} >
+                    }} key={index} className={`text-[13px] font-poppins ${pathName === "/" || pathName === "/courses" ? "text-white before:bg-white" : "text-[#171717] before:bg-[#171717] "} relative before:absolute  before:bottom-[-5px] before:left-[50%] before:translate-x-[-50%]  before:w-0 before:h-[3px] hover:before:w-full before:transition-all before:duration-300 before:ease-in-out ${activeNav === index ? "before:w-full" : "before:w-0"} `} >
                         {navlink.label === "Contact Us" ? (
                             <Link href={navlink.url}>{navlink.label}</Link>
                         ) : (
@@ -76,7 +76,7 @@ export default function Navbar() {
             </ul>
 
 
-            <button onClick={() => setShowMenu(true)} className={` flex items-center justify-center lg:hidden cursor-pointer border-none outline-none  ${pathName === "/" ? "text-white " : "text-[#171717]  "}  `} >
+            <button onClick={() => setShowMenu(true)} className={` flex items-center justify-center lg:hidden cursor-pointer border-none outline-none  ${pathName === "/" || pathName === "/courses"  ? "text-white " : "text-[#171717]  "}  `} >
                 <Menu size={27} />
             </button>
 

@@ -3,7 +3,7 @@ import CustomLink from "./CustomLink"
 import { useAppContext } from "@/context/AppContext"
 import Image from "next/image"
 import Button from "./Button"
-import { data } from "framer-motion/client"
+
 
 
 
