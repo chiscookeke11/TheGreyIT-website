@@ -1,6 +1,6 @@
 import { CourseDataTypes } from "@/types/types";
 
-export const CourseData: CourseDataTypes[] = [
+export const CourseOverview: CourseDataTypes[] = [
   {
     title: "Web & Mobile Development",
     description: "From beginner to full-stack.",

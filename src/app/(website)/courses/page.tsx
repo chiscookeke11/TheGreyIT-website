@@ -2,10 +2,12 @@
 
 import Button from "@/components/UI/Button"
 import Spinner from "@/components/UI/Spinner"
+import { CourseOverview } from "@/data/CourseData"
 import { CourseDataTypes } from "@/types/types"
 import { Timer } from "lucide-react"
 import Image from "next/image"
 import { useEffect, useState } from "react"
+import Marquee from "react-fast-marquee";
 
 
 
@@ -13,10 +15,20 @@ interface CourseCardProps {
     data: CourseDataTypes
 }
 
+
+const highlights = [
+    "Master In-Demand Tech Skills",
+    "Build Real-World Projects",
+    "Learn With Expert Mentors",
+    "Online & In-Person Cohorts",
+    "Join a Vibrant Tech Community",
+    "Get a Strong Portfolio",
+    "Launch Your Career in Tech"
+]
+
+
+// Course card component
 const CourseCard = ({ data }: CourseCardProps) => {
-
-
-
     return (
         <div className="w-full h-full max-w-3xl flex-col lg:flex-row bg-white rounded-xl flex items-center gap-2 lg:gap-5 overflow-hidden font-poppins shadow-md " >
 
@@ -104,7 +116,7 @@ export default function Page() {
         <div className="h-full w-full text-black bg-white " >
 
 
-{/* Courses page hero section  */}
+            {/* Courses page hero section  */}
             <div className="w-full h-screen flex items-center justify-center relative bg-no-repeat bg-cover bg-center text-white font-poppins  " style={{ backgroundImage: 'url("/courses-page/hero-img-2.webp")' }}  >
                 <div className="w-full h-full absolute inset-0 bg-gradient-to-b from-[rgba(4,9,30,0.5)] to-[rgba(4,9,30,0.5)] z-10 " />
 
@@ -123,35 +135,71 @@ export default function Page() {
 
             </div>
 
+            {/* The Scrolling text */}
+            <div className=" w-full py-4 flex items-center justify-center text-white bg-gray-700 font-poppins " >
+                <Marquee>
+                    <ul className="w-full  flex items-center justify-between gap-10 text-sm md:text-base font-medium " >
+                        {highlights.map((info, i) => (
+                            <li key={i} > {info} </li>
+                        ))}
+                    </ul>
+                </Marquee>
+
+            </div>
 
 
-            <h2 className="font-bold text-2xl lg:text-[36px] leading-[100%] text-[#000] max-w-md font-syne mb-5  ">All Courses</h2>
 
-            {!coursesData ?
-                (
-                    <div className=" w-full h-screen flex items-center justify-center bg-[#f2f5fc] " >
-                        <Spinner />
 
-                    </div>)
-                : coursesData.length < 1 ? (
-                    <div className=" w-full h-screen flex items-center justify-center bg-[#f2f5fc] " >
-                        <p className="font-normal text-lg text-gray-700 " >No courses found!</p>
 
+            {/* Course description section  */}
+            <section className=" w-full h-fit py-28 px-[4%]  grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 place-items-center justify-items-center gap-10 font-poppins " >
+
+                {CourseOverview.map((track, index) => (
+                    <div key={index} className=" w-full bg-[#f2f5fc] h-full py-6 px-5 flex flex-col items-start gap-4 rounded-lg shadow-sm " >
+                        <span className=" h-10 w-10 md:h-14 md:w-14 flex items-center justify-center bg-gray-700 text-white rounded-sm font-medium text-lg md:text-xl text-left shadow-xl " >{index + 1} </span>
+                        <h3 className=" font-syne font-bold text-xl md:text-2xl " > {track.title} </h3>
+                        <p className=" font-normal text-lg md:text-xl  md:mt-3 " >{track.description} </p>
                     </div>
-                )
-                    :
+                ))}
+
+
+            </section>
+
+
+
+
+
+
+
+            <section className=" w-full flex flex-col items-center gap-10 bg-[#f2f5fc] py-20 " >
+                <h2 className="font-bold text-2xl lg:text-[36px] leading-[100%] text-[#000] max-w-md font-syne mb-5  ">All Courses</h2>
+
+                {!coursesData ?
                     (
+                        <div className=" w-full h-screen flex items-center justify-center  " >
+                            <Spinner />
 
-                        <div className="w-full bg-[#f2f5fc] grid grid-cols-1 md:grid-cols-2 place-items-center justify-items-center gap-8 lg:gap-16 px-7 py-12 h-full rounded-sm " >
-                            {coursesData.map((course) => (
-                                <CourseCard key={course.id} data={course} />
-                            ))}
-
-
+                        </div>)
+                    : coursesData.length < 1 ? (
+                        <div className=" w-full h-screen flex items-center justify-center bg-[#f2f5fc] " >
+                            <p className="font-normal text-lg text-gray-700 " >No courses found!</p>
 
                         </div>
                     )
-            }
+                        :
+                        (
+
+                            <div className="w-full bg-[#f2f5fc] grid grid-cols-1 md:grid-cols-2 place-items-center justify-items-center gap-8 lg:gap-16 px-7 py-10 h-full rounded-sm " >
+                                {coursesData.map((course) => (
+                                    <CourseCard key={course.id} data={course} />
+                                ))}
+
+
+
+                            </div>
+                        )
+                }
+            </section>
 
         </div>
     )

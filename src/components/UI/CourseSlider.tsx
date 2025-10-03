@@ -8,8 +8,8 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import { Autoplay } from 'swiper/modules';
-import { CourseData } from "@/data/CourseData";
 import CourseCard from './CourseCard';
+import { CourseOverview } from '@/data/CourseData';
 
 
 
@@ -40,7 +40,7 @@ const TestimonialSlider = () => {
                 modules={[Autoplay]}
                 className="w-full h-full"
             >
-                {CourseData.map((data, index) => (
+                {CourseOverview.map((data, index) => (
                     <SwiperSlide key={index}>
                         <CourseCard data={data} />
                     </SwiperSlide>

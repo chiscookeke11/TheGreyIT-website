@@ -16,14 +16,14 @@ const geistMono = Geist_Mono({
 
 const poppins = Poppins({
   variable: "--font-poppins",
-  weight: "600",
+  weight: ["600", "700", "400"],
   subsets: ["latin"]
 })
 
 
 const syne = Syne({
   variable: "--font-syne",
-  weight: "600",
+ weight: ["600", "700", "400"],
 })
 
 
