@@ -30,38 +30,37 @@ const highlights = [
 // Course card component
 const CourseCard = ({ data }: CourseCardProps) => {
     return (
-        <div className="w-full h-full max-w-3xl flex-col lg:flex-row bg-white rounded-xl flex items-center gap-2 lg:gap-5 overflow-hidden font-poppins shadow-md " >
+        <div key={data.id} className="w-full h-fit py-10 flex flex-col md:flex-row items-center justify-between gap-10 px-5 max-w-8xl font-poppins  " >
 
-            {/* course image */}
-            <div className="basis-2/5 h-full hidden md:flex items-center justify-center relative" >
-                <Image src={"/basketball.png"} alt="image" fill className="object-cover object-center" />
-            </div>
+            <div className="flex flex-col items-start gap-2 w-full max-w-md lg:max-w-xl " >
+                <h5 className=" font-syne font-bold text-2xl lg:text-3xl  " > {data.title} </h5>
 
-
-            {/* couse text */}
-
-            <div className="basis-3/5 flex items-start flex-col gap-1 py-4 pr-7 pl-4  " >
-                <div>
-                    <h5 className=" font-syne font-semibold text-xl  " >{data.title} </h5>
-                    <p className="font-normal text-base text-gray-600 " >{data.description} </p>
-                </div>
-
-                <ul className="w-full flex items-center flex-wrap justify-between gap-3 text-sm font-normal mb-6 mt-3" >
-                    <li className="flex items-center gap-1" ><Timer size={20} color="gray" /> {data.duration} </li>
+                    <ul className="w-full flex flex-col items-start flex-wrap justify-between gap-3 text-base font-semibold mb-6 mt-3" >
+                    <li className="flex items-center gap-1" ><span className="flex items-center gap-3 " ><Timer size={18} color="gray" /> Duration:</span>  {data.duration} </li>
+                    <li>Fee: ${data.price} </li>
                     <li> {data.rating} </li>
 
 
                 </ul>
 
-                <div className="w-full flex  items-center  justify-between my-2 mt-6 py-2 pt-7 border-t-[2px] border-gray-300 gap-2 " >
-                    <p className="text-lg font-bold text-gray-700  ">NGN {data.price.toLocaleString()} </p>
 
-                    <Button variant="default" className="!bg-gray-700 !text-white !text-sm " >View more</Button>
+                <Button variant="default" className=" w-full !rounded-[100px] text-sm lg:text-base " >Register</Button>
+                <Button variant="default" className="w-full !rounded-[100px] !bg-gray-700 !text-white !text-sm !lg:text-base " >View Curriculum</Button>
+            </div>
 
+
+
+            {/* right side  */}
+            <div className=" w-full max-w-xs lg:max-w-[445px] h-[350px] lg:h-[577px] bg-gray-700 relative rounded-md  " >
+
+
+                <div className=" absolute top-[-15px] left-[-15px] flex items-start justify-center py-4 bg-white w-full h-full rounded-md " >
+                    <Image src={"/basketball.png"} height={500} width={500} alt={`${data.title}-image`} className=" w-11/12 h-11/12 lg:h-9/12 object-cover object-center rounded-sm " />
                 </div>
             </div>
 
         </div>
+
     )
 }
 
@@ -152,13 +151,13 @@ export default function Page() {
 
 
             {/* Course description section  */}
-            <section className=" w-full h-fit py-28 px-[4%]  grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 place-items-center justify-items-center gap-10 font-poppins " >
+            <section className=" w-full h-fit py-14 md:py-28 px-[4%]  grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 place-items-center justify-items-center gap-10 font-poppins " >
 
                 {CourseOverview.map((track, index) => (
                     <div key={index} className=" w-full bg-[#f2f5fc] h-full py-6 px-5 flex flex-col items-start gap-4 rounded-lg shadow-sm " >
                         <span className=" h-10 w-10 md:h-14 md:w-14 flex items-center justify-center bg-gray-700 text-white rounded-sm font-medium text-lg md:text-xl text-left shadow-xl " >{index + 1} </span>
-                        <h3 className=" font-syne font-bold text-xl md:text-2xl " > {track.title} </h3>
-                        <p className=" font-normal text-lg md:text-xl  md:mt-3 " >{track.description} </p>
+                        <h3 className=" font-syne font-bold text-xl  " > {track.title} </h3>
+                        <p className=" font-normal text-base   md:mt-1 " >{track.description} </p>
                     </div>
                 ))}
 
@@ -172,7 +171,7 @@ export default function Page() {
 
 
             <section className=" w-full flex flex-col items-center gap-10 bg-[#f2f5fc] py-20 " >
-                <h2 className="font-bold text-2xl lg:text-[36px] leading-[100%] text-[#000] max-w-md font-syne mb-5  ">All Courses</h2>
+                <h2 className="font-bold text-2xl lg:text-[36px] leading-[100%] text-[#000] max-w-md font-syne mb-5  ">Course Tracks</h2>
 
                 {!coursesData ?
                     (
@@ -189,9 +188,10 @@ export default function Page() {
                         :
                         (
 
-                            <div className="w-full bg-[#f2f5fc] grid grid-cols-1 md:grid-cols-2 place-items-center justify-items-center gap-8 lg:gap-16 px-7 py-10 h-full rounded-sm " >
+                            <div className="w-full bg-[#f2f5fc] grid grid-cols-1  place-items-center justify-items-center gap-8 lg:gap-16 px-[4%] py-10 h-full rounded-sm " >
                                 {coursesData.map((course) => (
                                     <CourseCard key={course.id} data={course} />
+
                                 ))}
 
 

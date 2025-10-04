@@ -64,7 +64,7 @@ export default function Navbar() {
                 {navLinksData.map((navlink, index) => (
                     <li onClick={() => {
                         setActiveNav(index)
-                    }} key={index} className={`text-[13px] font-poppins ${pathName === "/" || pathName === "/courses" ? "text-white before:bg-white" : "text-[#171717] before:bg-[#171717] "} relative before:absolute  before:bottom-[-5px] before:left-[50%] before:translate-x-[-50%]  before:w-0 before:h-[3px] hover:before:w-full before:transition-all before:duration-300 before:ease-in-out ${activeNav === index ? "before:w-full" : "before:w-0"} `} >
+                    }} key={index} className={`text-sm font-semibold font-poppins ${pathName === "/" || pathName === "/courses" ? "text-white before:bg-white" : "text-[#171717] before:bg-[#171717] "} relative before:absolute  before:bottom-[-5px] before:left-[50%] before:translate-x-[-50%]  before:w-0 before:h-[3px] hover:before:w-full before:transition-all before:duration-300 before:ease-in-out ${activeNav === index ? "before:w-full" : "before:w-0"} `} >
                         {navlink.label === "Contact Us" ? (
                             <Link href={navlink.url}>{navlink.label}</Link>
                         ) : (
