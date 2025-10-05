@@ -30,7 +30,7 @@ export const POST = async (req: Request) => {
 
         if (!title || !content || !author || !category || !image) {
             return NextResponse.json(
-                { error: "Missing required fields" },
+                { error: "Missing required fields", title, content, author, category, image },
                 { status: 400 }
             )
         }

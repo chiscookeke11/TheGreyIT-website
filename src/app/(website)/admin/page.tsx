@@ -18,6 +18,7 @@ export default function Page() {
     })
     const [file, setFile] = useState<File | null>(null)
     const [url, setUrl] = useState("")
+    const [loading, setLoading] = useState(false)
 
     // function to handle change in input
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -71,19 +72,39 @@ export default function Page() {
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
 
-        const response = await fetch("/api/blogs", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(formValues),
-        })
 
-        if (!response.ok) {
-            const error = await response.json()
-            alert(error.error)
-        } else {
-            const data = await response.json()
-            console.log("Blog added:", data)
-            alert("Blog created successfully!")
+        setLoading(true)
+
+        try {
+            await uploadImage()
+
+
+            setFormValues((prev) => ({
+                ...prev,
+                image: url
+            }));
+
+
+            const response = await fetch("/api/blogs", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(formValues),
+            })
+
+            if (!response.ok) {
+                const error = await response.json()
+                alert(error.error)
+            } else {
+                const data = await response.json()
+                console.log("Blog added:", data)
+                alert("Blog created successfully!")
+            }
+        } catch (error) {
+            console.error("Upload error", error)
+
+        }
+        finally {
+            setLoading(false)
         }
 
 
@@ -107,10 +128,6 @@ export default function Page() {
                         <input value={formValues.category} type="text" id="category" name="category" onChange={handleInputChange} className="w-full py-2 px-5 border border-white outline-none focus:outline-none text-base rounded-sm " />
                     </label>
 
-                    <label htmlFor="category" className=" w-full flex flex-col items-start gap-1  " >
-                        <span>Category</span>
-                        <input value={formValues.category} type="text" id="category" name="category" onChange={handleInputChange} className="w-full py-2 px-5 border border-white outline-none focus:outline-none text-base rounded-sm " />
-                    </label>
 
                     <label htmlFor="author" className=" w-full flex flex-col items-start gap-1  " >
                         <span>Author</span>
@@ -146,7 +163,7 @@ export default function Page() {
 
                 </div>
 
-                <Button variant="outline" >Submit</Button>
+                <Button variant="outline" disabled={loading} > {loading? "Loading..." : "Submit"} </Button>
             </form>
         </div>
     )
