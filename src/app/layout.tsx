@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono, Poppins, Syne } from "next/font/google";
 import "./globals.css";
 import { AppProvider } from "@/context/AppContext";
+import { Toaster } from "react-hot-toast";
 
 
 const geistSans = Geist({
@@ -23,7 +24,7 @@ const poppins = Poppins({
 
 const syne = Syne({
   variable: "--font-syne",
- weight: ["600", "700", "400"],
+  weight: ["600", "700", "400"],
 })
 
 
@@ -45,6 +46,7 @@ export default function RootLayout({
       >
         <AppProvider>
           {children}
+          <Toaster position="top-right" reverseOrder={false} />
         </AppProvider>
       </body>
     </html>

@@ -26,7 +26,7 @@ export const GET = async () => {
 export const POST = async (req: Request) => {
     try {
         const body = await req.json()
-        const { title, content, author, category, image } = body
+        const { title, content, author, category, image} = body
 
         if (!title || !content || !author || !category || !image) {
             return NextResponse.json(
@@ -48,9 +48,9 @@ export const POST = async (req: Request) => {
         return NextResponse.json(newBlog, { status: 201 })
     }
     catch (err) {
-        console.error("Error creatinbg blog", err)
+        console.error("Error creating blog", err)
         return NextResponse.json(
-            { error: "Failed to create blog!" },
+            { error: "Failed to create blog!"},
             { status: 500 }
         )
     }

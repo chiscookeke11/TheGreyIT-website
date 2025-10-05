@@ -4,6 +4,8 @@ import TiptapEditor from "@/components/admin/TipTapEditor";
 import Button from "@/components/UI/Button";
 import React, { useState } from "react";
 import { supabase } from "@/lib/supabaseClient"
+import toast from "react-hot-toast";
+``
 
 
 
@@ -12,16 +14,17 @@ export default function Page() {
         title: "",
         content: "",
         author: "",
-        image: "fhdhdjhfjhdfjh",
+        image: "",
         category: "",
         createdAt: ""
     })
     const [file, setFile] = useState<File | null>(null)
-    const [url, setUrl] = useState("")
     const [loading, setLoading] = useState(false)
 
     // function to handle change in input
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+
+
         const { value, name } = e.target;
 
         setFormValues((prev) => ({
@@ -49,22 +52,24 @@ export default function Page() {
 
         const filename = `${Date.now()}-${file.name}`
 
-        const { data, error } = await supabase.storage
+        const { error } = await supabase.storage
             .from("TheGreyITBucket")
             .upload(filename, file)
 
 
         if (error) {
             console.error("Upload error", error.message)
-            alert("Upload failed")
+            toast.error("Upload failed")
             return
         }
 
         const { data: publicUrl } = supabase.storage
-            .from("images")
+            .from("TheGreyITBucket")
             .getPublicUrl(filename)
 
-        setUrl(publicUrl.publicUrl)
+
+
+        return publicUrl.publicUrl
     }
 
 
@@ -76,28 +81,36 @@ export default function Page() {
         setLoading(true)
 
         try {
-            await uploadImage()
+            const imageUrl = await uploadImage()
 
-
-            setFormValues((prev) => ({
-                ...prev,
-                image: url
-            }));
 
 
             const response = await fetch("/api/blogs", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(formValues),
+                body: JSON.stringify({
+                    ...formValues,
+                    image: imageUrl
+                }),
             })
 
             if (!response.ok) {
                 const error = await response.json()
-                alert(error.error)
+                toast.error(error.error)
             } else {
                 const data = await response.json()
                 console.log("Blog added:", data)
-                alert("Blog created successfully!")
+                toast.success("Blog created successfully!")
+
+
+                setFormValues({
+                    author: "",
+                    category: "",
+                    content: "",
+                    createdAt: "",
+                    image: "",
+                    title: ""
+                })
             }
         } catch (error) {
             console.error("Upload error", error)
@@ -136,6 +149,7 @@ export default function Page() {
 
 
 
+
                     <div className="w-full flex flex-col gap-1">
                         <span className="text-lg font-semibold text-white">Content </span>
                         <TiptapEditor content={formValues.content} onChange={handleTipTapChange} />
@@ -163,7 +177,7 @@ export default function Page() {
 
                 </div>
 
-                <Button variant="outline" disabled={loading} > {loading? "Loading..." : "Submit"} </Button>
+                <Button variant="outline" disabled={loading} > {loading ? "Loading..." : "Submit"} </Button>
             </form>
         </div>
     )
