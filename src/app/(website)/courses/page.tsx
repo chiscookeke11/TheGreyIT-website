@@ -30,7 +30,7 @@ const highlights = [
 // Course card component
 const CourseCard = ({ data }: CourseCardProps) => {
     return (
-        <div key={data.id} className="w-full h-fit py-10 flex flex-col md:flex-row items-center justify-between gap-10 px-5 max-w-8xl font-poppins  " >
+        <div key={data.id} className="w-full h-fit py-10 flex flex-col md:flex-row items-center justify-between gap-10 px-5 max-w-7xl font-poppins  " >
 
             <div className="flex flex-col items-start gap-2 w-full max-w-md lg:max-w-xl " >
                 <h5 className=" font-syne font-bold text-2xl lg:text-3xl  " > {data.title} </h5>
@@ -51,7 +51,7 @@ const CourseCard = ({ data }: CourseCardProps) => {
 
 
             {/* right side  */}
-            <div className=" w-full max-w-xs lg:max-w-[445px] h-[350px] lg:h-[577px] bg-gray-700 relative rounded-md  " >
+            <div className=" w-full max-w-xs lg:max-w-[400px] h-[350px] lg:h-[477px] bg-gray-700 relative rounded-md  " >
 
 
                 <div className=" absolute top-[-15px] left-[-15px] flex items-start justify-center py-4 bg-white w-full h-full rounded-md " >
@@ -136,7 +136,7 @@ export default function Page() {
 
             {/* The Scrolling text */}
             <div className=" w-full py-4 flex items-center justify-center text-white bg-gray-700 font-poppins " >
-                <Marquee>
+                <Marquee speed={50} >
                     <ul className="w-full  flex items-center justify-between gap-10 text-sm md:text-base font-medium " >
                         {highlights.map((info, i) => (
                             <li key={i} > {info} </li>
