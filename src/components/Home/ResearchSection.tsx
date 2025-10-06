@@ -5,12 +5,13 @@ import { useEffect, useRef, useState } from "react";
 import ResearchCard from "../UI/ResearchCard";
 import { useScroll, useTransform, motion } from "framer-motion";
 import { ResearchBlogType } from "@/types/types";
+import Spinner from "../UI/Spinner";
 
 
 
 
 export default function ResearchSection() {
-      const [recentBlogsData, setRecentBlogsData] = useState<null | ResearchBlogType[]>(null)
+    const [recentBlogsData, setRecentBlogsData] = useState<null | ResearchBlogType[]>(null)
 
     const targetRef = useRef(null)
     const { scrollYProgress } = useScroll({
@@ -19,11 +20,11 @@ export default function ResearchSection() {
 
     const x = useTransform(scrollYProgress, [0, 1], ["10%", "-90%"])
 
-       useEffect(() => {
-            fetch("/api/blogs")
-                .then((res) => res.json())
-                .then((data) => setRecentBlogsData(data))
-        }, [])
+    useEffect(() => {
+        fetch("/api/blogs")
+            .then((res) => res.json())
+            .then((data) => setRecentBlogsData(data))
+    }, [])
 
 
 
@@ -43,18 +44,21 @@ export default function ResearchSection() {
 
 
                     <div className="sticky h-[80vh]   top-[10%] flex items-center overflow-hidden " >
-                        <motion.div className="flex gap-4   " style={{ x }} >
+                        {!recentBlogsData ? <div className="w-full flex items-center justify-center" > <Spinner /> </div>
+                            : recentBlogsData.length < 1 ? <div className=" w-full flex items-center justify-center " > <p className="text-gray-700 text-xl font-semibold " >No blogs found</p> </div>
+                                : <motion.div className="flex gap-4   " style={{ x }} >
 
 
-                            {
-                                recentBlogsData?.map((blog, index) => (
-                                    <ResearchCard blog={blog} key={index} />
-                                ))
-                            }
+                                    {
+                                        recentBlogsData?.map((blog, index) => (
+                                            <ResearchCard blog={blog} key={index} />
+                                        ))
+                                    }
 
 
 
-                        </motion.div>
+                                </motion.div>
+                        }
                     </div>
                 </div>
             </section>
@@ -67,9 +71,13 @@ export default function ResearchSection() {
                 <div className="w-full overflow-x-scroll flex items-center" >
                     <div className=" w-fit flex items-center justify-center gap-10 px-6 py-3 " >
                         {
-                            recentBlogsData?.slice(0, 3).map((blog, index) => (
-                                <ResearchCard blog={blog} key={index} />
-                            ))
+                            !recentBlogsData ? <Spinner />
+                                :
+                                recentBlogsData.length < 1 ? "No blogs found"
+                                    :
+                                    recentBlogsData?.slice(0, 3).map((blog, index) => (
+                                        <ResearchCard blog={blog} key={index} />
+                                    ))
                         }
                     </div>
                 </div>

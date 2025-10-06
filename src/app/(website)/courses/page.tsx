@@ -1,18 +1,21 @@
 "use client"
 
+import CurriculumModal from "@/components/courses-page/CurriculumModal"
 import Button from "@/components/UI/Button"
 import Spinner from "@/components/UI/Spinner"
 import { CourseOverview } from "@/data/CourseData"
 import { CourseDataTypes } from "@/types/types"
 import { Timer } from "lucide-react"
 import Image from "next/image"
-import { useEffect, useState } from "react"
+import React, { SetStateAction, useEffect, useState } from "react"
 import Marquee from "react-fast-marquee";
 
 
 
 interface CourseCardProps {
     data: CourseDataTypes
+    setShowModal: React.Dispatch<SetStateAction<boolean>>
+    setSelectedCourse: React.Dispatch<SetStateAction<string | undefined>>
 }
 
 
@@ -28,14 +31,14 @@ const highlights = [
 
 
 // Course card component
-const CourseCard = ({ data }: CourseCardProps) => {
+const CourseCard = ({ data, setShowModal, setSelectedCourse }: CourseCardProps) => {
     return (
         <div key={data.id} className="w-full h-fit py-10 flex flex-col md:flex-row items-center justify-between gap-10 px-5 max-w-7xl font-poppins  " >
 
             <div className="flex flex-col items-start gap-2 w-full max-w-md lg:max-w-xl " >
                 <h5 className=" font-syne font-bold text-2xl lg:text-3xl  " > {data.title} </h5>
 
-                    <ul className="w-full flex flex-col items-start flex-wrap justify-between gap-3 text-base font-semibold mb-6 mt-3" >
+                <ul className="w-full flex flex-col items-start flex-wrap justify-between gap-3 text-base font-semibold mb-6 mt-3" >
                     <li className="flex items-center gap-1" ><span className="flex items-center gap-3 " ><Timer size={18} color="gray" /> Duration:</span>  {data.duration} </li>
                     <li>Fee: ${data.price} </li>
                     <li> {data.rating} </li>
@@ -45,7 +48,10 @@ const CourseCard = ({ data }: CourseCardProps) => {
 
 
                 <Button variant="default" className=" w-full !rounded-[100px] text-sm lg:text-base " >Register</Button>
-                <Button variant="default" className="w-full !rounded-[100px] !bg-gray-700 !text-white !text-sm !lg:text-base " >View Curriculum</Button>
+                <Button variant="default" onClick={() => {
+                    setShowModal(true)
+                    setSelectedCourse(data.id)
+                }} className="w-full !rounded-[100px] !bg-gray-700 !text-white !text-sm !lg:text-base " >View Curriculum</Button>
             </div>
 
 
@@ -67,6 +73,10 @@ const CourseCard = ({ data }: CourseCardProps) => {
 
 export default function Page() {
     const [coursesData, setCoursesData] = useState<CourseDataTypes[] | null>(null)
+    const [showModal, setShowModal] = useState(false)
+    const [selectedCourse, setSelectedCourse] = useState<string | undefined>("")
+
+    console.log("The selected course ID", selectedCourse)
 
 
     useEffect(() => {
@@ -112,7 +122,7 @@ export default function Page() {
 
 
     return (
-        <div className="h-full w-full text-black bg-white " >
+        <div className="h-full w-full text-black bg-white relative " >
 
 
             {/* Courses page hero section  */}
@@ -171,7 +181,7 @@ export default function Page() {
 
 
             <section className=" w-full flex flex-col items-center gap-10 bg-[#f2f5fc] py-20 " >
-                <h2 className="font-bold text-2xl lg:text-[36px] leading-[100%] text-[#000] max-w-md font-syne mb-5  ">Course Tracks</h2>
+                <h2 className="font-bold text-2xl lg:text-[36px] leading-[100%] text-[#000] max-w-md font-syne mb-3  ">Course Tracks</h2>
 
                 {!coursesData ?
                     (
@@ -180,17 +190,17 @@ export default function Page() {
 
                         </div>)
                     : coursesData.length < 1 ? (
-                        <div className=" w-full h-screen flex items-center justify-center bg-[#f2f5fc] " >
-                            <p className="font-normal text-lg text-gray-700 " >No courses found!</p>
+                        <div className="w-full h-screen flex items-center justify-center bg-[#f2f5fc] " >
+                            <p className="font-medium text-lg text-gray-700 " >No courses found!</p>
 
                         </div>
                     )
                         :
                         (
 
-                            <div className="w-full bg-[#f2f5fc] grid grid-cols-1  place-items-center justify-items-center gap-8 lg:gap-16 px-[4%] py-10 h-full rounded-sm " >
+                            <div className="w-full bg-[#f2f5fc] grid grid-cols-1  place-items-center justify-items-center gap-8 lg:gap-16 px-[4%] py-5 h-full rounded-sm " >
                                 {coursesData.map((course) => (
-                                    <CourseCard key={course.id} data={course} />
+                                    <CourseCard key={course.id} data={course} setShowModal={setShowModal} setSelectedCourse={setSelectedCourse} />
 
                                 ))}
 
@@ -200,7 +210,7 @@ export default function Page() {
                         )
                 }
             </section>
-
+            {showModal && <CurriculumModal setShowModal={setShowModal} selectedCourse={selectedCourse} />}
         </div>
     )
 }
