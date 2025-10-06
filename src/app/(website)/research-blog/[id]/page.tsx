@@ -1,7 +1,8 @@
 "use client"
 
-import { BlogData } from "@/data/BlogData"
-import { BlogDataType } from "@/types/types"
+import Spinner from "@/components/UI/Spinner"
+import { ResearchBlogType } from "@/types/types"
+import Image from "next/image"
 import { useParams } from "next/navigation"
 import { useEffect, useState } from "react"
 
@@ -10,39 +11,69 @@ import { useEffect, useState } from "react"
 export default function Page() {
 
     const { id } = useParams()
-    const blogs = BlogData
-    const [currentBlog, setCurrentBlog] = useState<BlogDataType | null>(null)
+    const [currentBlog, setCurrentBlog] = useState<ResearchBlogType | null>(null)
+
+
+
+
 
     useEffect(() => {
-        if (blogs && id && blogs.length > 0) {
-            const blog = blogs.find((b) => b.id === id)
-            setCurrentBlog(blog || null)
+        if (!id) return;
+
+
+        const fetchBlog = async () => {
+            try {
+                const res = await fetch(`/api/blogs/${id}`);
+                if (!res.ok) throw new Error("Failed to fetch blog")
+
+                const data = await res.json();
+                setCurrentBlog(data)
+
+            } catch (error) {
+                console.error(error)
+            }
         }
-    }, [id, blogs])
+        fetchBlog()
+    })
 
-
-    if (!currentBlog) {
-        return (
-            <div className="text-white" >
-              loading
-            </div>
-        )
-    }
-
-    else if (blogs.length < 0) {
-        return (
-            <div>
-                blog not foun
-            </div>
-        )
-    }
 
 
 
     return (
-        <div className="bg-black w-full flex items-center justify-center h-screen text-white" >
-            dynamic blog page
-            {currentBlog.title}
+        <div className="bg-white w-full h-fit text-black" >
+
+            {!currentBlog ? <div className="w-full h-screen flex items-center justify-center" > <Spinner /> </div>
+                :
+                (
+                    <>
+                        <section className="w-full h-screen relative  " style={{ backgroundImage: `url(${currentBlog.image})`, backgroundSize: "cover", backgroundPosition: "center", backgroundRepeat: "no-repeat" }} >
+                            <div className="w-full h-full absolute inset-0 bg-gradient-to-b from-[rgba(4,9,30,0.5)] to-[rgba(4,9,30,0.5)] z-10 " />
+
+
+                            <div className="absolute bottom-3 left-0  py-10 text-white z-10 px-[3%] w-full flex  items-center justify-between gap-7  " >
+                                <div className="w-full basis-2/4 max-w-6xl flex flex-col items-start gap-4 " >
+                                    <span className=" px-4 py-2 rounded-[100px] bg-white/30 backdrop-blur-2xl " > {currentBlog.category} </span>
+                                    <h1 className=" font-syne text-3xl font-bold " >{currentBlog.title} </h1>
+                                    <p className="text-base font-medium font-poppins" > Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur dignissim, arcu nec ultrices fringilla, eros magna sagittis nibh, non dignissim magna nisi ut erat. Integer id lorem nec lacus tempor commodo. </p>
+
+                                </div>
+
+
+                                <div className="basis-1/4  flex flex-col items-end font-poppins gap-3 " >
+                                    <h4>By {currentBlog.author} </h4>
+                                    <h5>Published on: {new Date(currentBlog.createdAt).toLocaleDateString()} </h5>
+                                </div>
+                            </div>
+                        </section>
+
+
+                        <div className="w-full py-16 px-[3%] text-justify font-poppins font-medium text-lg bg-[#f2f5fc]  " dangerouslySetInnerHTML={{ __html: currentBlog.content }} />
+
+
+
+                    </>
+                )
+            }
         </div>
     )
 }

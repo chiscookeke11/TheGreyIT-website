@@ -4,8 +4,6 @@
 import { CourseDataTypes } from "@/types/types";
 import { X } from "lucide-react";
 import { SetStateAction, useEffect, useState } from "react";
-import Spinner from "../UI/Spinner";
-
 
 
 interface CurriculumModalProps {

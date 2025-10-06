@@ -13,10 +13,6 @@ export interface CourseDataTypes {
 }
 
 
-export interface BlogDataType {
-  title: string,
-  id: string
-}
 
 
 

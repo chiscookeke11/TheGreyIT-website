@@ -19,7 +19,7 @@ export default function ResearchCard({ blog }: ResearchCardProps) {
 
   return (
     <>
-      <div onClick={() => setActiveNav(5)} className=" w-full min-w-xs flex flex-col items-start h-full  bg-white rounded-md overflow-hidden relative shadow-lg~ " >
+      <div onClick={() => setActiveNav(5)} className=" w-full min-w-xs flex flex-col items-start h-full  bg-white rounded-md overflow-hidden relative shadow-lg " >
         <div className="  w-full h-[48%] " >
           <Image src={blog.image} alt={`${blog.title}-image `} width={500} height={500} className="h-full w-full object-cover object-center " />
         </div>
@@ -28,7 +28,7 @@ export default function ResearchCard({ blog }: ResearchCardProps) {
 
           <h1 className="text-xl font-semibold " >{blog.title} </h1>
 
-          <p className="text-base font-medium " >{blog.content.trim().slice(0, 95)}... </p>
+          <p className="text-base font-medium " >{blog.content.trim().slice(0, 77)}... </p>
           <CustomLink href={`/research-blog/${blog.id}`} >
             <Button variant="default" className="!text-sm !px-4 !py-3 mt-2"  >
               Read more
