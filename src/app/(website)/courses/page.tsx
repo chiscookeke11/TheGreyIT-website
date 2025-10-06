@@ -42,8 +42,6 @@ const CourseCard = ({ data, setShowModal, setSelectedCourse }: CourseCardProps) 
                     <li className="flex items-center gap-1" ><span className="flex items-center gap-3 " ><Timer size={18} color="gray" /> Duration:</span>  {data.duration} </li>
                     <li>Fee: ${data.price} </li>
                     <li> {data.rating} </li>
-
-
                 </ul>
 
 
@@ -76,9 +74,13 @@ export default function Page() {
     const [showModal, setShowModal] = useState(false)
     const [selectedCourse, setSelectedCourse] = useState<string | undefined>("")
 
-    console.log("The selected course ID", selectedCourse)
 
 
+    useEffect(() => {
+        document.body.style.overflowY = showModal ? "hidden" : "auto"
+    }, [showModal])
+
+    // manually handling caching and data fetching
     useEffect(() => {
         const CACHE_KEY = "coursesData"
         const CACHE_DURATION = 1000 * 60 * 5
