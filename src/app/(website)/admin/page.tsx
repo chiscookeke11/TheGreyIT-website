@@ -111,6 +111,7 @@ export default function Page() {
                     image: "",
                     title: ""
                 })
+                setFile(null)
             }
         } catch (error) {
             console.error("Upload error", error)

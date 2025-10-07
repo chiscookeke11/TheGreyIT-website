@@ -13,9 +13,12 @@ export default function AllBlogs() {
     const ref = useRef(null)
     const isInView = useInView(ref)
     const [blogs, setBlogs] = useState<null | ResearchBlogType[]>(null)
+    const [sliceAmount, setSliceAmount] = useState(8)
 
     useEffect(() => {
-        console.log("Is in view ->", isInView)
+        if (isInView === true) {
+            setSliceAmount((prev) => prev + 8)
+        }
     }, [isInView])
 
     useEffect(() => {
@@ -29,16 +32,18 @@ export default function AllBlogs() {
 
 
 
+
+
     return (
         <section className="bg-[#f2f5fc] w-full  py-20 px-[4%] text-black flex flex-col items-center justify-center gap-16 relative " >
             <h5 className="text-black text-2xl lg:text-3xl font-extrabold font-poppins" >All  Blogs </h5>
 
-            {!blogs ? (<Spinner/>) :
+            {!blogs ? (<Spinner />) :
                 blogs.length < 1 ? "No blogs available" :
                     (
                         <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 min-h-[65vh] gap-14 px-[4%] place-items-center justify-items-center " >
                             {
-                                blogs?.slice(0, 4).map((blog, index) => (
+                                blogs?.slice(0, sliceAmount).map((blog, index) => (
                                     <RecentBlogCard key={index} data={blog} />
                                 ))
                             }
@@ -47,7 +52,7 @@ export default function AllBlogs() {
             }
 
 
-            <div ref={ref} className="w-10 h-10 bg-red-600 absolute right-0 bottom-0" />
+            <div ref={ref} className="w-10 h-10 hidden absolute right-0 bottom-0" />
         </section>
     )
 }
