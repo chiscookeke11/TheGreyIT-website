@@ -1,3 +1,5 @@
+import Button from "@/components/UI/Button";
+import Image from "next/image";
 
 
 
@@ -7,10 +9,12 @@ export default function Page() {
         <>
             <section className="max-w-6xl mx-auto  mt-32 grid md:grid-cols-2 gap-6 items-center px-4 font-poppins">
                 {/* <!-- Team Image --> */}
-                <img
+                <Image
                     src="/community-page/team.jpg"
                     alt="Team working together"
                     className="rounded-lg shadow-lg w-full object-cover h-[350px] md:h-[420px]"
+                    height={500}
+                    width={500}
                 />
 
                 {/* <!-- Text Content --> */}
@@ -48,20 +52,20 @@ export default function Page() {
                     >
                         Featured Project
                     </h3>
-                    <img
+                    <Image
                         src="/community-page/hands.jpg"
                         alt="Project"
                         className="rounded-lg shadow-md mb-3 w-full h-[200px] object-cover"
+                        height={500}
+                        width={500}
                     />
                     <p className="leading-relaxed text-gray-700">
                         Our team is dedicated to providing education and shelter for
                         underprivileged children. Together, we make lasting change.
                     </p>
-                    <button
-                        className="mt-4 bg-gray-700 text-white px-5 py-2 rounded-full hover:bg-[#b84c29] transition"
-                    >
+                    <Button variant="default" className="mt-4 bg-gray-700 text-white px-5 py-2 !rounded-full"  >
                         More
-                    </button>
+                    </Button>
                 </div>
 
                 {/* <!-- News & Events --> */}
@@ -82,7 +86,7 @@ export default function Page() {
                         </li>
                         <li>
                             <span className="text-primary font-semibold">September 05, 2025</span><br />
-                            Volunteers' training program begins.
+                            Volunteers&apos; training program begins.
                         </li>
                     </ul>
                 </div>

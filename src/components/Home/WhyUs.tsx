@@ -33,8 +33,8 @@ export default function WhyUs() {
 
 
                 <div className="flex gap-4" >
-                    <Link href={"/courses"} >        <Button variant="default" className="font-syne " >Courses</Button></Link>
-                    <Button variant="default" className="font-syne " >Community</Button>
+                    <Link href={"/courses"} >   <Button variant="default" className="font-syne " >Courses</Button></Link>
+                    <Link href={"/community"} >   <Button variant="default" className="font-syne " >Community</Button></Link>
                 </div>
             </div>
 
