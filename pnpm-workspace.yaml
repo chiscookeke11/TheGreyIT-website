@@ -5,3 +5,8 @@ ignoredBuiltDependencies:
   - prisma
   - sharp
   - unrs-resolver
+
+onlyBuiltDependencies:
+  - cpu-features
+  - protobufjs
+  - ssh2
