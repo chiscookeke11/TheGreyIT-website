@@ -14,15 +14,17 @@ export const HeroCard = ({data}: HeroCardProps) => {
 
 
     return (
-        <Link href={`/research-blog/${data.id}`} className=" w-full h-[90%] min-h-[300px] bg-gray-300 max-w-md relative text-white font-poppins " >
-            <Image src={data.image} alt="image" fill className="object-cover object-center" />
-            <div className=" absolute inset-0 bg-black/20 " />
+        <Link href={`/research-blog/${data.id}`} className=" w-full h-full min-h-[300px]  text-gray-700 font-poppins flex flex-col items-start gap-6 overflow-hidden " >
+       <div className=" relative flex-1 w-full " >
+             <Image src={data.image} alt={`${data.title}-image`} fill className="object-cover object-center " />
+            <div className=" absolute inset-0 bg-black/10 " />
+       </div>
 
 
-            <div className=" w-full flex flex-col items-center gap-1  absolute bottom-4 left-[50%] translate-x-[-50%]  py-1 text-center  " >
+            <div className=" w-full flex flex-col items-start gap-1 h-fit py-1 text-center   " >
 
-                <h1 className="font-syne font-semibold text-xl " >{data.title} </h1>
-                <div className="flex items-center gap-1 text-xs font-normal " ><p>By {data.author}</p> <span className="bg-gray-300 block h-5 w-[1px] mx-2 " />
+                <h1 className="font-syne font-bold text-2xl  " >{data.title} </h1>
+                <div className="flex items-center gap-2 text-base font-normal " ><p>By {data.author}</p> <span className="bg-gray-300 block h-5 w-[1px] mx-2 " />
                 <p>{new Date(data.createdAt).toLocaleDateString()} </p></div>
             </div>
         </Link>

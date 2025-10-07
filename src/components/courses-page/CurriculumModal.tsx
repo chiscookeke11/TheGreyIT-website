@@ -38,7 +38,7 @@ export default function CurriculumModal({ setShowModal, selectedCourse }: Curric
 
 
 
-            <div className="w-full max-w-2xl h-full bg-[#f2f5fc] overflow-y-auto rounded-lg flex items-start flex-col gap-7 px-5 py-10  " >
+            <div className="w-full max-w-2xl h-fit max-h-full bg-[#f2f5fc] overflow-y-auto rounded-lg flex items-start flex-col gap-7 px-5 py-10  " >
                 <button onClick={() => setShowModal(false)} className="cursor-pointer ml-auto  " ><X /> </button>
 
 

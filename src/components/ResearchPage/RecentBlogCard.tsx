@@ -14,7 +14,7 @@ export default function RecentBlogCard({ data }: RecentBlogCardProps) {
         <Link href={`/research-blog/${data.id}`} className="w-full h-full max-w-xs  md:max-w-none min-h-[300px] flex flex-col items-center justify-between font-poppins " >
 
 
-            <div className=" w-full bg-amber-400 h-full " >
+            <div className=" w-full bg-gray-300 h-full " >
                 <Image src={data.image} alt="image" height={500} width={500} className="object-cover object-center h-full w-full " />
             </div>
 
