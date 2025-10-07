@@ -7,6 +7,7 @@ import { CourseOverview } from "@/data/CourseData"
 import { CourseDataTypes } from "@/types/types"
 import { Timer } from "lucide-react"
 import Image from "next/image"
+import Link from "next/link"
 import React, { SetStateAction, useEffect, useState } from "react"
 import Marquee from "react-fast-marquee";
 
@@ -141,7 +142,7 @@ export default function Page() {
                     </div>
 
 
-                    <Button>Register Now</Button>
+                    <Link href={"/courses#courseTracks"} > <Button>Register Now</Button></Link>
                 </div>
 
             </div>
@@ -182,7 +183,7 @@ export default function Page() {
 
 
 
-            <section className=" w-full flex flex-col items-center gap-10 bg-[#f2f5fc] py-20 " >
+            <section className=" w-full flex flex-col items-center gap-10 bg-[#f2f5fc] py-20 " id="courseTracks" >
                 <h2 className="font-bold text-2xl lg:text-[36px] leading-[100%] text-[#000] max-w-md font-syne mb-3  ">Course Tracks</h2>
 
                 {!coursesData ?

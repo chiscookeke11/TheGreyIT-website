@@ -28,7 +28,7 @@ export const navLinksData = [
     },
         {
         label: "Community-Service",
-        url: "#"
+        url: "community"
     },
         {
         label: "Contact Us",
