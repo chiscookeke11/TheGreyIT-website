@@ -19,9 +19,10 @@ export default function RecentBlogCard({ data }: RecentBlogCardProps) {
             </div>
 
 
-            <div className=" w-full flex flex-col items-center gap-1   py-2 text-center  " >
+            <div className=" w-full flex flex-col items-center gap-3   py-2 text-justify  " >
 
                 <h1 className="font-syne font-semibold text-xl " >{data.title} </h1>
+                <p className="flex items-center gap-1 text-sm font-normal ">{data.content.trim().slice(0, 60)}... </p>
                 <div className="flex items-center gap-1 text-xs font-normal " ><p>By {data.author}</p> <span className="bg-gray-300 block h-5 w-[1px] mx-2 " /> <p>{new Date(data.createdAt).toLocaleDateString()} </p></div>
             </div>
         </Link>

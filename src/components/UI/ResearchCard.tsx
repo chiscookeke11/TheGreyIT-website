@@ -35,11 +35,6 @@ export default function ResearchCard({ blog }: ResearchCardProps) {
             </Button>
           </CustomLink>
         </div>
-
-
-        <div className="absolute top-0 py-1 px-4 left-[10%] rounded-b-sm bg-gray-600 text-sm font-semibold text-white " >
-          Business
-        </div>
       </div>
     </>
 
