@@ -1,3 +1,4 @@
+import ErrorBoundary from "@/components/ErrorBoundary";
 import ContactUsSection from "@/components/Home/ContactUsSection";
 import GetSkilled from "@/components/Home/GetSkilled";
 import Hero from "@/components/Home/Hero";
@@ -16,8 +17,10 @@ export default function Home() {
       <WhyUs />
       <OurLabs />
       <GetSkilled />
-      <ResearchSection/>
-      <ContactUsSection/>
+      <ErrorBoundary>
+        <ResearchSection />
+      </ErrorBoundary>
+      <ContactUsSection />
     </>
   );
 }

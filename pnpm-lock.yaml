@@ -23,6 +23,9 @@ importers:
       dockerode:
         specifier: ^4.0.9
         version: 4.0.9
+      emailjs-com:
+        specifier: ^3.2.0
+        version: 3.2.0
       framer-motion:
         specifier: ^12.23.16
         version: 12.23.22(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
@@ -1217,6 +1220,11 @@ packages:
 
   effect@3.16.12:
     resolution: {integrity: sha512-N39iBk0K71F9nb442TLbTkjl24FLUzuvx2i1I2RsEAQsdAdUTuUoW0vlfUXgkMTUOnYqKnWcFfqw4hK4Pw27hg==}
+
+  emailjs-com@3.2.0:
+    resolution: {integrity: sha512-Prbz3E1usiAwGjMNYRv6EsJ5c373cX7/AGnZQwOfrpNJrygQJ15+E9OOq4pU8yC977Z5xMetRfc3WmDX6RcjAA==}
+    engines: {node: '>=12.0.0'}
+    deprecated: The SDK name changed to @emailjs/browser
 
   emoji-regex@8.0.0:
     resolution: {integrity: sha512-MSjYzcWNOA0ewAHpz0MxpYFvwg6yjy1NG3xteoqz644VCo/RPgnr1/GGt+ic3iJTzQ8Eu3TdM14SawnVUmGE6A==}
@@ -3711,6 +3719,8 @@ snapshots:
     dependencies:
       '@standard-schema/spec': 1.0.0
       fast-check: 3.23.2
+
+  emailjs-com@3.2.0: {}
 
   emoji-regex@8.0.0: {}
 
