@@ -43,18 +43,15 @@ export default function ResearchSection() {
 
 
 
-                    <div className="sticky h-[80vh]   top-[10%] flex items-center overflow-hidden " >
+                    <div className="sticky h-[67vh]   top-[10%] flex items-center overflow-hidden " >
                         {!recentBlogsData ? <div className="w-full flex items-center justify-center" > <Spinner /> </div>
                             : recentBlogsData.length < 1 ? <div className=" w-full flex items-center justify-center " > <p className="text-gray-700 text-xl font-semibold " >No blogs found</p> </div>
-                                : <motion.div className="flex gap-4   " style={{ x }} >
-
-
+                                : <motion.div className="flex gap-4 h-full   " style={{ x }} >
                                     {
-                                        recentBlogsData?.map((blog, index) => (
+                                        recentBlogsData?.slice(0, 5).map((blog, index) => (
                                             <ResearchCard blog={blog} key={index} />
                                         ))
                                     }
-
 
 
                                 </motion.div>

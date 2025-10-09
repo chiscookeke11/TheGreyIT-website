@@ -7,7 +7,7 @@ import { NextResponse } from "next/server"
 export const GET = async () => {
     try {
         const recentBlogs = await prisma.blog.findMany({
-            orderBy: { createdAt: "desc" },
+            orderBy: { publicationDate: "desc" },
             take: 4
         })
         return NextResponse.json(recentBlogs, { status: 200 })

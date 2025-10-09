@@ -55,7 +55,7 @@ export default function ResearchHero() {
                                     delay: 2500,
                                     disableOnInteraction: false,
                                 }}
-                                
+
                                 loop={true}
                                 modules={[Autoplay]}
                                 className="w-full h-[80vh] "
