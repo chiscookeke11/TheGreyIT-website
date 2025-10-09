@@ -6,7 +6,7 @@ import React, { useState } from "react";
 import { supabase } from "@/lib/supabaseClient"
 import toast from "react-hot-toast";
 
-re
+
 
 
 export default function Page() {
