@@ -5,10 +5,10 @@ const About = () => {
   return (
     <section className="font-poppins">
       {/* --- Hero Section (from about 3) py-20 previously --- */}
-      <div className="bg-[#f2f5fc] pt-32 pb-22">
+      <div className="bg-[#f2f5fc] pt-32 pb-22 h-[80vh] ">
         <div className="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-10 items-center">
           <div>
-            <h2 className="text-4xl font-bold text-gray-700 mb-4">About Us</h2>
+            <h2 className="text-6xl font-bold text-gray-700 mb-4">About Us</h2>
             <p className="text-gray-400 mb-6 leading-relaxed">
               We’re a company driven by purpose, creativity, and a desire to help
               businesses grow better. Our people, culture, and technology are built
