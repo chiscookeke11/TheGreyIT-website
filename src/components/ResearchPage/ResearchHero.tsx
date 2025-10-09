@@ -58,7 +58,7 @@ export default function ResearchHero() {
 
                                 loop={true}
                                 modules={[Autoplay]}
-                                className="w-full h-[80vh] "
+                                className="w-full h-[80vh]  "
                             >
                                 {trendingBlog?.map((data, index) => (
                                     <SwiperSlide key={index}>

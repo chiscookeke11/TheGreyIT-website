@@ -137,7 +137,6 @@ export default function Page() {
 
                 setFormValues({
                     author: "",
-                    // category: "",
                     content: "",
                     image: "",
                     title: "",
@@ -161,7 +160,7 @@ export default function Page() {
 
 
     return (
-        <div className=" w-full min-h-screen flex items-center justify-center py-36 " >
+        <div className=" w-full min-h-screen flex items-center justify-center py-36 px-[3%] " >
             <form onSubmit={handleSubmit} className="w-full max-w-lg flex flex-col gap-10 items-center px-5 py-8 bg-gray-700 h-fit rounded-md text-white font-poppins  " >
                 <h1>Add Research Blog</h1>
 
@@ -171,13 +170,6 @@ export default function Page() {
                         <span>Title</span>
                         <input value={formValues.title} type="text" id="title" name="title" onChange={handleInputChange} className="w-full py-2 px-5 border border-white outline-none focus:outline-none text-base rounded-sm " />
                     </label>
-
-                    {/* <label htmlFor="category" className=" w-full flex flex-col items-start gap-1  " >
-                        <span>Category</span>
-                        <input value={formValues.category} type="text" id="category" name="category" onChange={handleInputChange} className="w-full py-2 px-5 border border-white outline-none focus:outline-none text-base rounded-sm " />
-                    </label> */}
-
-
 
                     <label htmlFor="author" className=" w-full flex flex-col items-start gap-1  " >
                         <span>Author</span>
