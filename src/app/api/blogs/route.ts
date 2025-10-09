@@ -9,7 +9,7 @@ import { NextResponse } from "next/server"
 export const GET = async () => {
     try {
         const blogs = await prisma.blog.findMany({
-            orderBy: { createdAt: "desc" }
+            orderBy: { publicationDate: "desc" }
         })
         return Response.json(blogs)
     }
@@ -26,11 +26,11 @@ export const GET = async () => {
 export const POST = async (req: Request) => {
     try {
         const body = await req.json()
-        const { title, content, author, category, image } = body
+        const { title, content, author, image, publicationDate } = body
 
-        if (!title || !content || !author || !category || !image) {
+        if (!title || !content || !author || !image || !publicationDate) {
             return NextResponse.json(
-                { error: "Missing required fields", title, content, author, category, image },
+                { error: "Missing required fields", title, content, author, image, publicationDate },
                 { status: 400 }
             )
         }
@@ -40,8 +40,8 @@ export const POST = async (req: Request) => {
                 title,
                 content,
                 author,
-                category,
                 image,
+                publicationDate,
             }
         })
 

@@ -15,8 +15,6 @@ export default function Page() {
         content: "",
         author: "",
         image: "",
-        category: "",
-        createdAt: "",
         publicationDate: ""
     })
     const [file, setFile] = useState<File | null>(null)
@@ -101,30 +99,31 @@ export default function Page() {
         setLoading(true)
 
 
-        if (!formValues.title || !formValues.publicationDate || formValues.category || !formValues.content || !formValues.author) {
+        if (!formValues.title || !formValues.publicationDate || !formValues.content || !formValues.author) {
             toast.error("Please fill in the required fields")
+            return;
         }
 
 
         const formattedDate = formatDate(formValues.publicationDate)
+              const imageUrl = await uploadImage()
 
-        setFormValues((prev) => ({
-            ...prev,
-            publicationDate: formattedDate
-        }))
+              const payload = {
+                ...formValues,
+                publicationDate: formattedDate,
+                image: imageUrl || ""
+              }
 
-        console.log("the fromatted date", formValues.publicationDate)
+
+
 
         try {
-            const imageUrl = await uploadImage()
+
 
             const response = await fetch("/api/blogs", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({
-                    ...formValues,
-                    image: imageUrl
-                }),
+                body: JSON.stringify(payload),
             })
 
             if (!response.ok) {
@@ -138,9 +137,8 @@ export default function Page() {
 
                 setFormValues({
                     author: "",
-                    category: "",
+                    // category: "",
                     content: "",
-                    createdAt: "",
                     image: "",
                     title: "",
                     publicationDate: ""
@@ -174,10 +172,10 @@ export default function Page() {
                         <input value={formValues.title} type="text" id="title" name="title" onChange={handleInputChange} className="w-full py-2 px-5 border border-white outline-none focus:outline-none text-base rounded-sm " />
                     </label>
 
-                    <label htmlFor="category" className=" w-full flex flex-col items-start gap-1  " >
+                    {/* <label htmlFor="category" className=" w-full flex flex-col items-start gap-1  " >
                         <span>Category</span>
                         <input value={formValues.category} type="text" id="category" name="category" onChange={handleInputChange} className="w-full py-2 px-5 border border-white outline-none focus:outline-none text-base rounded-sm " />
-                    </label>
+                    </label> */}
 
 
 
