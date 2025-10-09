@@ -2,7 +2,6 @@
 
 import Spinner from "@/components/UI/Spinner"
 import { ResearchBlogType } from "@/types/types"
-import Image from "next/image"
 import { useParams } from "next/navigation"
 import { useEffect, useState } from "react"
 
@@ -34,7 +33,7 @@ export default function Page() {
             }
         }
         fetchBlog()
-    })
+    }, [id])
 
 
 
@@ -50,16 +49,15 @@ export default function Page() {
                             <div className="w-full h-full absolute inset-0 bg-gradient-to-b from-[rgba(4,9,30,0.5)] to-[rgba(4,9,30,0.5)] z-10 " />
 
 
-                            <div className="absolute bottom-3 left-0  py-10 text-white z-10 px-[3%] w-full flex  items-center justify-between gap-7  " >
+                            <div className="absolute bottom-3 left-0  py-10 text-white z-10 px-[3%] w-full flex flex-col md:flex-row items-start md:items-center md:justify-between gap-7  " >
                                 <div className="w-full basis-2/4 max-w-6xl flex flex-col items-start gap-4 " >
-                                    <span className=" px-4 py-2 rounded-[100px] bg-white/30 backdrop-blur-2xl " > {currentBlog.category} </span>
                                     <h1 className=" font-syne text-3xl font-bold " >{currentBlog.title} </h1>
                                     <p className="text-base font-medium font-poppins" > Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur dignissim, arcu nec ultrices fringilla, eros magna sagittis nibh, non dignissim magna nisi ut erat. Integer id lorem nec lacus tempor commodo. </p>
 
                                 </div>
 
 
-                                <div className="basis-1/4  flex flex-col items-end font-poppins gap-3 " >
+                                <div className="basis-1/4  flex flex-col items-start md:items-end font-poppins gap-3 " >
                                     <h4>By {currentBlog.author} </h4>
                                     <h5>Published on: {new Date(currentBlog.createdAt).toLocaleDateString()} </h5>
                                 </div>

@@ -32,6 +32,6 @@ export const navLinksData = [
     },
         {
         label: "Contact Us",
-        url: "/#contactUs"
+        url: "/contact-us"
     },
 ]

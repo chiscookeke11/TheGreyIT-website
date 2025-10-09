@@ -23,8 +23,8 @@ export const HeroCard = ({data}: HeroCardProps) => {
 
             <div className=" w-full flex flex-col items-start gap-1 h-fit py-1 text-left   " >
 
-                <h1 className="font-syne font-bold text-2xl  " >{data.title} </h1>
-                <div className="flex items-center gap-2 text-base font-normal " ><p>By {data.author}</p> <span className="bg-gray-300 block h-5 w-[1px] mx-2 " />
+                <h1 className="font-syne font-bold text-xl md:text-2xl  " >{data.title} </h1>
+                <div className="flex items-center gap-2 text-sm md:text-base font-normal " ><p>By {data.author}</p> <span className="bg-gray-300 block h-5 w-[1px] mx-2 " />
                 <p>{new Date(data.createdAt).toLocaleDateString()} </p></div>
             </div>
         </Link>

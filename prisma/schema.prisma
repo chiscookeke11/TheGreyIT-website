@@ -6,25 +6,29 @@ datasource db {
   provider  = "postgresql"
   url       = env("DATABASE_URL")
   directUrl = env("DIRECT_URL")
+  schemas   = ["public", "auth"]
 }
 
-model blog {
-  id        Int      @id @default(autoincrement())
-  title     String
-  category  String
-  author    String
-  content   String
-  image     String
-  createdAt DateTime @default(now())
-  publicationDate DateTime
+model Blog {
+  id               Int      @id @default(autoincrement())
+  title            String
+  category         String
+  author           String
+  content          String
+  image            String
+  createdAt        DateTime @default(now())
+
+  @@schema("public")
 }
 
-model course {
-  id          Int    @id @default(autoincrement())
+model Course {
+  id          Int     @id @default(autoincrement())
   title       String
   description String
   duration    String
   price       Int
   imageUrl    String
   rating      Int
+
+  @@schema("public")
 }
