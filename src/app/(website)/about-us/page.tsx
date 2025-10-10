@@ -1,5 +1,6 @@
 import React from "react";
 import Image from "next/image"; // if not using Next.js, replace <Image> with <img>
+import Button from "@/components/UI/Button";
 
 const About = () => {
   return (
