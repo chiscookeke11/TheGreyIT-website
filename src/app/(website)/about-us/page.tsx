@@ -20,10 +20,12 @@ const About = () => {
           </div>
 
           <div className="flex justify-center">
-            <img
-              src="/images/about-hero.jpg"
+             <Image
+              src="/community-page/team.jpg"
               alt="Team collaboration"
-              className="rounded-2xl shadow-md w-full md:w-4/5 object-cover"
+              className="rounded-2xl w-full md:w-4/5 object-cover"
+              width={500}
+              height={400}
             />
           </div>
         </div>
@@ -51,10 +53,12 @@ const About = () => {
           </div>
 
           <div className="flex justify-center">
-            <img
-              src="/images/about-mailchimp.jpg"
-              alt="Mailchimp team"
-              className="rounded-2xl shadow-lg w-full md:w-4/5 object-cover"
+            <Image
+              src="/community-page/team.jpg"
+              alt="Team collaboration"
+              className="rounded-2xl w-full md:w-4/5 object-cover"
+              width={500}
+              height={400}
             />
           </div>
         </div>
