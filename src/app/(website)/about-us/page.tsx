@@ -1,5 +1,5 @@
 import React from "react";
-import Image from "next/image"; // if not using Next.js, replace <Image> with <img>
+import Image from "next/image";
 
 const About = () => {
   return (
