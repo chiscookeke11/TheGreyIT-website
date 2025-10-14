@@ -100,6 +100,7 @@ export default function ContactForm({ showForm, setShowForm, subject }: ContactF
                         phoneNumber: "",
                         title: "",
                     })
+                    setShowForm?.(false)
                 },
                 (error) => {
                     toast.error(error.text)

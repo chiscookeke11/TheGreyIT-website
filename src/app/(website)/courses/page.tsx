@@ -129,7 +129,7 @@ export default function Page() {
 
 
             {/* Courses page hero section  */}
-            <div className="w-full h-[80vh] flex items-center justify-center relative bg-no-repeat bg-cover bg-center text-white font-poppins  " style={{ backgroundImage: 'url("/courses-page/hero-img-2.webp")' }}  >
+            <div className="w-full h-[93vh] flex items-center justify-center relative bg-no-repeat bg-cover bg-center text-white font-poppins  " style={{ backgroundImage: 'url("/courses-page/hero-img-2.webp")' }}  >
                 <div className="w-full h-full absolute inset-0 bg-gradient-to-b from-[rgba(4,9,30,0.5)] to-[rgba(4,9,30,0.5)] z-10 " />
 
 
@@ -184,7 +184,7 @@ export default function Page() {
 
 
             <section className=" w-full flex flex-col items-center gap-10 bg-[#f2f5fc] py-20 " id="courseTracks" >
-                <h2 className="font-bold text-2xl lg:text-[36px] leading-[100%] text-[#000] max-w-md font-syne mb-3  ">Course Tracks</h2>
+                <h2 className="font-bold text-2xl lg:text-[36px] leading-[100%] text-[#000] max-w-md font-poppins mb-3  ">Course Tracks</h2>
 
                 {!coursesData ?
                     (

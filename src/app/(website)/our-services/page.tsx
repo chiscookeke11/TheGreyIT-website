@@ -24,7 +24,7 @@ export default function Page() {
 
 
             {/* The hero section  */}
-            <section className="w-full  h-[80vh] relative bg-center bg-cover bg-no-repeat flex items-center justify-center  " style={{ backgroundImage: 'url("/services-page/services.webp")' }}>
+            <section className="w-full  h-screen relative bg-center bg-cover bg-no-repeat flex items-center justify-center  " style={{ backgroundImage: 'url("/services-page/services.webp")' }}>
                 <div className="w-full h-full absolute inset-0 bg-gradient-to-b from-[rgba(4,9,30,0.5)] to-[rgba(4,9,30,0.5)] z-10 " />
                 <div className="flex items-center justify-center z-20 font-poppins flex-col gap-3 text-white px-[4%] " >
                     <h1 className="text-2xl md:text-4xl font-bold">Our Services</h1>
@@ -38,7 +38,7 @@ export default function Page() {
 
             {/* The Services section  */}
             <section className="w-full h-fit flex flex-col gap-24 lg:gap-32 items-center justify-center py-20 lg:py-28 px-[6%] bg-white " >
-                <h2 className="font-bold text-2xl lg:text-4xl leading-[100%] text-[#000]  font-syne   "> Our Expertise </h2>
+                <h2 className="font-bold text-2xl lg:text-4xl leading-[100%] text-[#000]  font-poppins   "> Our Expertise </h2>
 
 
 
