@@ -10,7 +10,7 @@ export default function ContactUsSection() {
 
             <div className=" w-full max-w-7xl bg-[#f2f5fc] md:h-[90vh] p-4 md:py-16 flex flex-col md:flex-row items-stretch justify-center rounded-2xl gap-10 " >
                 <ContactCard />
-                <ContactForm/>
+                <ContactForm  />
             </div>
 
 

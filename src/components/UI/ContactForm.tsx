@@ -1,14 +1,22 @@
 "use client"
 
-import { useRef, useState } from "react";
+import React, { SetStateAction, useEffect, useRef, useState } from "react";
 import Button from "./Button";
 import toast from "react-hot-toast";
 import emailjs from "emailjs-com";
+import { XIcon } from "lucide-react";
 
 
 
+interface ContactFormProps {
+    showForm?: boolean
+    setShowForm?: React.Dispatch<SetStateAction<boolean>>
+    subject?: string
+}
 
-export default function ContactForm() {
+
+
+export default function ContactForm({ showForm, setShowForm, subject }: ContactFormProps) {
     const formRef = useRef<HTMLFormElement | null>(null)
     const [loading, setLoading] = useState(false)
     const [formValues, setFormValues] = useState({
@@ -16,9 +24,16 @@ export default function ContactForm() {
         lastName: "",
         email: "",
         phoneNumber: "",
+        title: subject || "",
         message: ""
     })
 
+
+    useEffect(() => {
+        if (subject) {
+            setFormValues((prev) => ({ ...prev, title: subject }))
+        }
+    }, [])
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target
@@ -42,7 +57,7 @@ export default function ContactForm() {
 
 
     const handleTextareaChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-        const { name, value } = e.target
+        const { value } = e.target
         setFormValues((prev) => ({
             ...prev,
             message: value
@@ -82,7 +97,8 @@ export default function ContactForm() {
                         lastName: "",
                         email: "",
                         message: "",
-                        phoneNumber: ""
+                        phoneNumber: "",
+                        title: "",
                     })
                 },
                 (error) => {
@@ -98,6 +114,7 @@ export default function ContactForm() {
 
     return (
         <form ref={formRef} onSubmit={handleSubmit} className="w-full max-w-4xl bg-[#f2f5fc] py-6 px-4 flex flex-col items-start gap-10 ">
+            {showForm && (<button onClick={() => setShowForm?.(false)} className=" ml-auto cursor-pointer " type="button"  > <XIcon size={35} /> </button>)}
 
 
             <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-10   " >
@@ -129,6 +146,11 @@ export default function ContactForm() {
                 </label>
             </div>
 
+
+            <label htmlFor="title" className=" w-full flex flex-col gap-1 items-start font-medium text-sm text-[#8D8D8D]  " >
+                <span>Subject</span>
+                <input name="title" id="title" onChange={handleChange} value={formValues.title} type="text" className=" w-full py-2 px-3 border-b-2 border-b-gray-600 text-base font-medium text-black focus:outline-none" />
+            </label>
 
             <label htmlFor="phoneNumber" className=" flex flex-col gap-1 items-start font-medium text-sm text-black w-full">
                 <span>Wrte your message</span>

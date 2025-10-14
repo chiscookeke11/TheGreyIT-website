@@ -68,7 +68,7 @@ export default function ResearchSection() {
                 <div className="w-full overflow-x-auto flex items-center" >
                     <div className=" w-fit flex items-center justify-center gap-10 px-6 py-3 " >
                         {
-                            !recentBlogsData ? <Spinner />
+                            !recentBlogsData ? <div className="w-full flex items-center justify-center py-32" ><Spinner /></div>
                                 :
                                 recentBlogsData.length < 1 ? "No blogs found"
                                     :

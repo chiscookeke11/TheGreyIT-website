@@ -129,7 +129,7 @@ export default function Page() {
 
 
             {/* Courses page hero section  */}
-            <div className="w-full h-screen flex items-center justify-center relative bg-no-repeat bg-cover bg-center text-white font-poppins  " style={{ backgroundImage: 'url("/courses-page/hero-img-2.webp")' }}  >
+            <div className="w-full h-[80vh] flex items-center justify-center relative bg-no-repeat bg-cover bg-center text-white font-poppins  " style={{ backgroundImage: 'url("/courses-page/hero-img-2.webp")' }}  >
                 <div className="w-full h-full absolute inset-0 bg-gradient-to-b from-[rgba(4,9,30,0.5)] to-[rgba(4,9,30,0.5)] z-10 " />
 
 
@@ -138,7 +138,7 @@ export default function Page() {
                 <div className=" w-full h-full absolute inset-0 flex items-center justify-center flex-col gap-5 z-20 text-center p-4 " >
                     <div className="w-full max-w-5xl text-center space-y-6 " >
                         <h1 className="text-2xl md:text-4xl font-bold" >Master in-demand tech skills in 9 months with hands-on training and expert mentorship.</h1>
-                        <p>Gain real-world experience, mentorship, and become a master of your craft.</p>
+                        <p className="text-lg text-center font-medium text-white " >Gain real-world experience, mentorship, and become a master of your craft.</p>
                     </div>
 
 
