@@ -17,7 +17,7 @@ export default function Page() {
 
 
 
-            <section className="w-full h-fit flex flex-col gap-32 items-center justify-center py-20 lg:py-28 px-[4%] bg-white " >
+            <section className="w-full h-fit flex flex-col gap-24 lg:gap-32 items-center justify-center py-20 lg:py-28 px-[6%] bg-white " >
                 <h2 className="font-bold text-2xl lg:text-[36px] leading-[100%] text-[#000]  font-syne   "> A wide range of services </h2>
 
 
@@ -27,18 +27,18 @@ export default function Page() {
 
                     {
                         ServicesData.map((data, index) => (
-                            <div key={index} className="w-full h-full flex flex-col gap-4 items-center justify-center relative px-5 py-12 pt-36 bg-[#f2f5fc] shadow-xl rounded-lg text-center " >
+                            <div key={index} className="w-full h-full flex flex-col gap-4 items-center justify-center relative px-5 py-7 lg:py-12 pt-24 lg:pt-36 bg-[#f2f5fc] shadow-xl rounded-lg text-center " >
 
-                                <div className=" absolute bg-white top-[-40px] left-[50%] translate-x-[-50%] py-10 px-7 flex items-center justify-center rounded-lg shadow-xl " >
+                                <div className=" absolute bg-white top-[-50px] left-[50%] translate-x-[-50%] p-10 flex items-center justify-center rounded-lg shadow-xl " >
                                     {data.icon}
                                 </div>
 
 
-                                <h5 className=" font-syne font-bold text-xl lg:text-2xl text-black  " > {data.title} </h5>
-                                <p className="text-lg font-semibold  text-gray-500 " > {data.content}  </p>
+                                <h5 className=" font-syne font-bold text-xl lg:text-2xl text-gray-700  " > {data.title} </h5>
+                                <p className="text-lg font-semibold  text-gray-500 font-poppins " > {data.content}  </p>
 
 
-                                <button className="h-20 w-20 rounded-full bg-white flex items-center justify-center cursor-pointer transform rotate-45 hover:rotate-0 transition-all duration-300 ease-in-out mt-7 " ><ArrowRight size={35} /></button>
+                                <button className="h-20 w-20 rounded-full bg-white flex items-center justify-center cursor-pointer transform rotate-45 hover:rotate-0 transition-all duration-300 ease-in-out mt-4 lg:mt-7 " ><ArrowRight size={35} /></button>
 
                             </div>
                         ))
