@@ -6,7 +6,7 @@ import OurImpact from "@/components/about-us/OurImpact";
 
 const About = () => {
   return (
-    <div className="font-poppins flex flex-col  pt-20 md:pt-32  gap-16 bg-white ">
+    <div className="font-poppins flex flex-col  pt-20 lg:pt-32  gap-16 bg-white ">
 
 
       <div className="bg-[#f2f5fc] w-full flex flex-col md:flex-row items-center justify-between gap-16  px-[3%] py-20">
@@ -52,13 +52,13 @@ const About = () => {
           <h3 className=" text-xl md:text-3xl  font-syne font-semibold text-gray-700">
             Our Vision
           </h3>
-          <p className="text-gray-500 text-justify text-base md:text-lg ">
+          <p className="text-gray-500  text-base md:text-lg ">
             Mailchimp is an email and marketing automations platform for growing
             businesses. We empower millions of customers around the world to
             start and grow their businesses with world-class marketing technology,
             award-winning customer support, and inspiring content.
           </p>
-          <p className="text-gray-500 text-justify text-base md:text-lg">
+          <p className="text-gray-500  text-base md:text-lg">
             Mailchimp puts data-backed recommendations at the heart of your
             marketing, so you can find and engage customers across email, social
             media, landing pages, and advertising—automatically and with the power

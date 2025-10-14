@@ -14,7 +14,7 @@ export default function OurImpact() {
             <section className=" w-full mt-10 h-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-16 place-items-center justify-items-center p-1  " >
 
                 {OurImpactData.map((data, i) => (
-                    <div key={i} className="w-full h-full flex flex-col items-start gap-4 py-6 px-7 bg-white rounded-xl shadow-lg " >
+                    <div key={i} className="w-full h-full flex flex-col items-start gap-6 py-6 px-7 bg-white rounded-xl shadow-lg cursor-pointer " >
                         <span>{data.icon}</span>
 
 
