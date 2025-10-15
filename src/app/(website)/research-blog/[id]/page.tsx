@@ -52,8 +52,6 @@ export default function Page() {
                             <div className="absolute bottom-3 left-0  py-10 text-white z-10 px-[3%] w-full flex flex-col md:flex-row items-start md:items-center md:justify-between gap-7  " >
                                 <div className="w-full basis-2/4 max-w-6xl flex flex-col items-start gap-4 " >
                                     <h1 className=" font-syne text-3xl font-bold " >{currentBlog.title} </h1>
-                                    <p className="text-base font-medium font-poppins" > Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur dignissim, arcu nec ultrices fringilla, eros magna sagittis nibh, non dignissim magna nisi ut erat. Integer id lorem nec lacus tempor commodo. </p>
-
                                 </div>
 
 

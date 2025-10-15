@@ -28,8 +28,8 @@ export default function ResearchHero() {
     }, [])
 
     return (
-        <section className="w-full flex items-center justify-center flex-col gap-10   mx-auto mt-10 md:gap-5  px-[4%] py-10 bg-[#f2f5fc] " >
-            <h1 className="font-bold text-3xl lg:text-[45px] leading-[100%] text-[#000] max-w-md font-syne" >Trending</h1>
+        <section className="w-full flex items-center justify-center flex-col gap-10   mx-auto mt-7 md:mt-5 md:gap-5  px-[4%] py-10 bg-[#f2f5fc] " >
+            <h1 className="font-bold text-3xl lg:text-[40px] leading-[100%] text-[#000] max-w-md font-syne" >Trending</h1>
             <div className="w-full h-fit flex items-center justify-center py-2" >
 
                 {!trendingBlog ? ( <div><Spinner /></div> )
