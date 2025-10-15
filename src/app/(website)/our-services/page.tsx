@@ -15,7 +15,7 @@ export default function Page() {
 
     useEffect(() => {
         document.body.style.overflowY = showForm ? "hidden" : "auto"
-    }, [])
+    }, [showForm])
 
 
 

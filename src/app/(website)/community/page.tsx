@@ -8,7 +8,7 @@ export default function Page() {
   return (
     <>
       {/* max-w-6xl previously */}
-      <section className="max-w-8xl mx-auto mt-32 grid md:grid-cols-2 gap-6 items-center px-[4%] font-poppins">
+      <section className="max-w-8xl mx-auto mt-32 flex flex-col md:flex-row gap-12 md:gap-9 items-center px-[4%] font-poppins">
         {/* <!-- Team Image --> */}
         <Image
           src="/community-page/team.jpg"
@@ -20,11 +20,11 @@ export default function Page() {
 
         {/* <!-- Text Content --> */}
         <div className="flex flex-col justify-center text-center md:text-left space-y-5">
-          <h2 className="text-5xl text-gray-700 font-semibold ">
+          <h2 className=" text-4xl md:text-5xl text-gray-700 font-semibold ">
             PEACE
           </h2>
 
-          <p className="text-gray-700 text-lg leading-relaxed">
+          <p className="text-gray-700 text-base text-justify md:text-start md:text-lg ">
             True peace is not just the absence of conflict, it is the presence of
             fairness, opportunity, and compassion. We work to bring people together,
             empowering communities through education, healthcare, and sustainable
@@ -34,7 +34,7 @@ export default function Page() {
           </p>
 
           <button
-            className="self-center md:self-start md:mb-14 bg-gray-700 text-white font-semibold px-6 py-3 rounded-md hover:bg-gray-800 transition duration-300 cursor-pointer"
+            className="self-center md:self-start mt-6 bg-gray-700 text-white font-semibold px-6 py-3 rounded-md hover:bg-gray-800 transition duration-300 cursor-pointer"
           >
             Be a Volunteer
           </button>
@@ -48,9 +48,9 @@ export default function Page() {
         className="max-w-8xl lg:gap-16 mx-auto grid md:grid-cols-3 gap-10 my-20 px-[4%] place-items-center justify-items-center text-sm font-poppins "
       >
         {/* <!-- Featured Project --> */}
-        <div className="w-full" >
+        <div className="w-full flex flex-col gap-4" >
           <h3
-            className="text-xl font-syne font-semibold mb-2 border-b-2 border-primary inline-block text-dark"
+            className="text-xl font-syne w-fit font-semibold mb-2 border-b-2 border-primary inline-block text-dark"
           >
             Featured Project
           </h3>
@@ -67,13 +67,13 @@ export default function Page() {
                 width={500}
               />
               <div className="w-full">
-                <p className="leading-relaxed text-gray-700">
+                <p className="text-base text-gray-700">
                   Our team provides education and shelter for underprivileged children,
                   giving them hope and opportunities for a better future.
                 </p>
                 <Button
                   variant="default"
-                  className="mt-4 bg-gray-700 text-white px-5 py-2 !rounded-full"
+                  className="mt-4 bg-gray-700 text-white px-7 py-2 !rounded-full"
                 >
                   More
                 </Button>

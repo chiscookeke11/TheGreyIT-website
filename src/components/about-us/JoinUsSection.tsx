@@ -1,3 +1,4 @@
+import Link from "next/link";
 import Button from "../UI/Button";
 
 
@@ -16,12 +17,16 @@ export default function JoinUs() {
                 >
                   OUR SERVICES
                 </Button>
+
+
+              <Link href={"/contact-us"} >
                 <Button
                     variant="default"
                     className=" text-gray-700 px-7 py-2 !rounded-full !text-base "
                 >
                       CONTACT US
                 </Button>
+              </Link>
             </div>
         </section>
     )

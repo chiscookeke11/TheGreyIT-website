@@ -52,13 +52,13 @@ const About = () => {
           <h3 className=" text-xl md:text-3xl  font-syne font-semibold text-gray-700">
             Our Vision
           </h3>
-          <p className="text-gray-500  text-base md:text-lg ">
+          <p className="text-gray-500 text-start  text-base md:text-lg ">
             Mailchimp is an email and marketing automations platform for growing
             businesses. We empower millions of customers around the world to
             start and grow their businesses with world-class marketing technology,
             award-winning customer support, and inspiring content.
           </p>
-          <p className="text-gray-500  text-base md:text-lg">
+          <p className="text-gray-500 text-start text-base md:text-lg">
             Mailchimp puts data-backed recommendations at the heart of your
             marketing, so you can find and engage customers across email, social
             media, landing pages, and advertising—automatically and with the power

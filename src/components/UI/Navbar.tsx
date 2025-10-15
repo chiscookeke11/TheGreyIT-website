@@ -103,7 +103,7 @@ export default function Navbar() {
 
 
             {/* mobile menu */}
-            <div ref={mobileNavRef} className={`fixed top-0 right-0 h-screen bg-[#333333] w-[50%] min-w-xs z-20 flex items-start flex-col gap-7 py-6 px-5 transform transition-transform duration-150 ease-in-out ${showMenu ? "translate-x-0" : "translate-x-[500%] "} `} >
+            <div ref={mobileNavRef} className={`fixed top-0 right-0 h-screen bg-gray-700 w-[50%] min-w-xs z-20 flex items-start flex-col gap-7 py-6 px-5 transform transition-transform duration-150 ease-in-out ${showMenu ? "translate-x-0" : "translate-x-[500%] "} `} >
                 <button onClick={() => setShowMenu(false)} className=" ml-auto border-none outline-none cursor-pointer flex items-center justify-center " ><X /></button>
 
 
