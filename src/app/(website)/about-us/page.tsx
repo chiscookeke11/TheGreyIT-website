@@ -6,7 +6,7 @@ import OurImpact from "@/components/about-us/OurImpact";
 
 const About = () => {
   return (
-    <div className="font-poppins flex flex-col  pt-20 lg:pt-32  gap-16 bg-white ">
+    <div className="font-poppins flex flex-col  pt-20 lg:pt-32  gap-10 bg-white ">
 
 
       <div className="bg-[#f2f5fc] w-full flex flex-col md:flex-row items-center justify-between gap-16  px-[3%] py-20">
@@ -35,7 +35,7 @@ const About = () => {
 
 
 
-      <div className=" w-full flex flex-col-reverse md:flex-row  justify-evenly gap-16 items-center px-[3%] py-16">
+      <div className=" w-full flex flex-col-reverse md:flex-row  justify-evenly gap-16 items-center px-[3%] pt-16 pb-8">
 
 
         <div className="flex justify-center basis-1/2 max-w-lg   ">

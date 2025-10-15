@@ -8,12 +8,12 @@ export default function Page() {
   return (
     <>
       {/* max-w-6xl previously */}
-      <section className="max-w-8xl mx-auto mt-32 flex flex-col md:flex-row gap-12 md:gap-9 items-center px-[4%] font-poppins">
+      <section className="max-w-8xl mx-auto my-32 flex flex-col lg:flex-row gap-12 md:gap-9 items-center px-[4%] font-poppins">
         {/* <!-- Team Image --> */}
         <Image
           src="/community-page/team.jpg"
           alt="Team working together"
-          className="rounded-lg shadow-lg w-full object-cover h-[350px] md:h-[420px]"
+          className="rounded-lg w-full object-cover h-[350px] md:h-[420px]"
           height={500}
           width={500}
         />
@@ -43,44 +43,84 @@ export default function Page() {
 
 
       {/* <!-- Info Section --> */}
-      {/* do this md:grid-cols-grid-cols-[2fr_1fr_1fr] for unique effect */}
       <section
-        className="max-w-8xl lg:gap-16 mx-auto grid md:grid-cols-3 gap-10 my-20 px-[4%] place-items-center justify-items-center text-sm font-poppins "
+        className=" lg:gap-16 mx-auto flex items-start justify-center flex-col lg:flex-row gap-10 my-10 px-[4%] place-items-center justify-items-center text-sm font-poppins "
       >
         {/* <!-- Featured Project --> */}
-        <div className="w-full flex flex-col gap-4" >
-          <h3
-            className="text-xl font-syne w-fit font-semibold mb-2 border-b-2 border-primary inline-block text-dark"
-          >
-            Featured Project
-          </h3>
+        <div className="w-full flex flex-col gap-12 flex-1" >
 
-          {/* Project List (stacked vertically) */}
-          <div className="space-y-10 w-full">
-            {/* Project 1 */}
-            <div className="md:-mx-6 flex flex-col md:flex-row items-start md:items-center gap-10">
-              <Image
-                src="/community-page/hands.jpg"
-                alt="Project"
-                className="rounded-lg shadow-md w-full md:w-[60%] h-[240px] object-cover"
-                height={500}
-                width={500}
-              />
-              <div className="w-full">
-                <p className="text-base text-gray-700">
-                  Our team provides education and shelter for underprivileged children,
-                  giving them hope and opportunities for a better future.
-                </p>
-                <Button
-                  variant="default"
-                  className="mt-4 bg-gray-700 text-white px-7 py-2 !rounded-full"
-                >
-                  More
-                </Button>
+          <div className="w-full flex flex-col gap-4" >
+            <h3
+              className="text-xl font-syne w-fit font-semibold mb-2 border-b-2 border-primary inline-block text-dark"
+            >
+              Featured Project
+            </h3>
+
+            {/* Project List (stacked vertically) */}
+            <div className="space-y-10 w-full  ">
+              {/* Project 1 */}
+              <div className="md:-mx-6 flex flex-col md:flex-row items-start md:items-center gap-10">
+                <Image
+                  src="/community-page/hands.jpg"
+                  alt="Project"
+                  className="rounded-md shadow-md w-full md:w-[60%] h-[240px] object-cover"
+                  height={500}
+                  width={500}
+                />
+                <div className="w-full">
+                  <p className="text-base text-gray-700">
+                    Our team provides education and shelter for underprivileged children,
+                    giving them hope and opportunities for a better future.
+                  </p>
+                  <Button
+                    variant="default"
+                    className="mt-4 bg-gray-700 text-white px-7 py-1 !rounded-full !text-sm "
+                  >
+                    More
+                  </Button>
+                </div>
               </div>
             </div>
           </div>
+
+
+          <div className="w-full flex flex-col gap-4 flex-1" >
+            <h3
+              className="text-xl font-syne w-fit font-semibold mb-2 border-b-2 border-primary inline-block text-dark"
+            >
+              Featured Project
+            </h3>
+
+            {/* Project List (stacked vertically) */}
+            <div className="space-y-10 w-full  ">
+              {/* Project 1 */}
+              <div className="md:-mx-6 flex flex-col md:flex-row items-start md:items-center gap-10">
+                <Image
+                  src="/community-page/hands.jpg"
+                  alt="Project"
+                  className="rounded-md shadow-md w-full md:w-[60%] h-[240px] object-cover"
+                  height={500}
+                  width={500}
+                />
+                <div className="w-full">
+                  <p className="text-base text-gray-700">
+                    Our team provides education and shelter for underprivileged children,
+                    giving them hope and opportunities for a better future.
+                  </p>
+                  <Button
+                    variant="default"
+                    className="mt-4 bg-gray-700 text-white px-7 py-1 !rounded-full !text-sm "
+                  >
+                    More
+                  </Button>
+                </div>
+              </div>
+            </div>
+          </div>
+
         </div>
+
+
 
         {/* <!-- News & Events --> */}
         <div className="w-fit">
@@ -89,17 +129,17 @@ export default function Page() {
           >
             News & Events
           </h3>
-          <ul className="space-y-4 text-gray-700">
+          <ul className="space-y-4 text-gray-700 text-base ">
             <li>
-              <span className="text-primary font-semibold">November 24, 2025</span><br />
+              <span className=" font-semibold">November 24, 2025</span><br />
               Launch of our clean water initiative in rural areas.
             </li>
             <li>
-              <span className="text-primary font-semibold">October 18, 2025</span><br />
+              <span className=" font-semibold">October 18, 2025</span><br />
               Fundraising for community learning centers.
             </li>
             <li>
-              <span className="text-primary font-semibold">September 05, 2025</span><br />
+              <span className=" font-semibold">September 05, 2025</span><br />
               Volunteers&apos; training program begins.
             </li>
           </ul>
@@ -112,7 +152,7 @@ export default function Page() {
           >
             Program Areas
           </h3>
-          <ul className="list-disc list-inside space-y-2 text-gray-700">
+          <ul className="list-disc list-inside space-y-2 text-gray-700 text-base ">
             <li>Child Welfare</li>
             <li>Education & Empowerment</li>
             <li>Health Services</li>
