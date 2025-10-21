@@ -96,7 +96,7 @@ export default function Page() {
         e.preventDefault()
 
 
-        setLoading(true)
+
 
 
         if (!formValues.title || !formValues.publicationDate || !formValues.content || !formValues.author) {
@@ -105,54 +105,42 @@ export default function Page() {
         }
 
 
+
+        setLoading(true)
+
         const formattedDate = formatDate(formValues.publicationDate)
-              const imageUrl = await uploadImage()
+        const imageUrl = await uploadImage()
 
-              const payload = {
-                ...formValues,
-                publicationDate: formattedDate,
-                image: imageUrl || ""
-              }
-
-
-
-
-        try {
-
-
-            const response = await fetch("/api/blogs", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(payload),
-            })
-
-            if (!response.ok) {
-                const error = await response.json()
-                toast.error(error.error)
-            } else {
-                const data = await response.json()
-                console.log("Blog added:", data)
-                toast.success("Blog created successfully!")
-
-
-                setFormValues({
-                    author: "",
-                    content: "",
-                    image: "",
-                    title: "",
-                    publicationDate: ""
-                })
-                setFile(null)
-            }
-        } catch (error) {
-            console.error("Upload error", error)
-
-        }
-        finally {
-            setLoading(false)
+        const payload = {
+            ...formValues,
+            publicationDate: formattedDate,
+            image: imageUrl || ""
         }
 
+        const { error } = await supabase.from("blog").insert({
+            title: formValues.title,
+            author: formValues.author,
+            content: formValues.content,
+            image: imageUrl || "",
+            publicationDate: formValues.publicationDate
+        })
 
+        if (error) {
+            console.error("Failed to upload blog")
+            toast.error("Failed to upload blog")
+            return;
+        }
+
+        toast.success("Blog added successfully!")
+
+        setFormValues({
+            title: "",
+            content: "",
+            image: "",
+            author: "",
+            publicationDate: "",
+        })
+        setFile(null)
     }
 
 
@@ -160,7 +148,7 @@ export default function Page() {
 
 
     return (
-        <div className=" w-full min-h-screen flex items-center justify-center py-36 px-[3%] " >
+        <div className=" w-full min-h-screen flex items-center justify-center py-10 px-[3%] bg-white " >
             <form onSubmit={handleSubmit} className="w-full max-w-lg flex flex-col gap-10 items-center px-5 py-8 bg-gray-700 h-fit rounded-md text-white font-poppins  " >
                 <h1>Add Research Blog</h1>
 

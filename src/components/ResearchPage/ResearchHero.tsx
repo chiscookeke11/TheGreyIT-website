@@ -60,7 +60,7 @@ export default function ResearchHero() {
                                 modules={[Autoplay]}
                                 className="w-full h-[80vh]  "
                             >
-                                {trendingBlog?.map((data, index) => (
+                                {trendingBlog?.slice(0, 3).map((data, index) => (
                                     <SwiperSlide key={index}>
                                         <HeroCard data={data} />
                                     </SwiperSlide>
