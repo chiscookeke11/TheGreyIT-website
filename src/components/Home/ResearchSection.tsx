@@ -66,7 +66,7 @@ export default function ResearchSection() {
                 <h5 className="text-black text-2xl lg:text-3xl font-extrabold font-poppins" >Research Section </h5>
 
                 <div className="w-full overflow-x-auto flex items-center" >
-                    <div className=" w-fit flex items-center justify-center gap-10 px-6 py-3 " >
+                    <div className=" w-full flex items-center justify-center gap-10 px-6 py-3 " >
                         {
                             !recentBlogsData ? <div className="w-full flex items-center justify-center py-32" ><Spinner /></div>
                                 :

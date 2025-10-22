@@ -20,7 +20,7 @@ export default function ContactCard() {
 
                 <li className="flex items-center gap-4 text-base font-semibold">
                     <Mail size={20} />
-                    <a href="mailto:chiscookeke11@gmail.com" >thegreyltd@gmail.com</a>
+                    <a href="mailto:thegreyltd@gmail.com" >thegreyltd@gmail.com</a>
                 </li>
 
                 <li className="flex items-center gap-4 text-base font-semibold">
