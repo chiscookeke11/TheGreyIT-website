@@ -19,7 +19,7 @@ export const navLinksData = [
         url: "/courses"
     },
       {
-        label: "Blogs",
+        label: "Blog",
         url: "/research-blog"
     },
         {

@@ -8,7 +8,7 @@ export default function WhyUs() {
         <section className="bg-white px-[4%] py-14 flex flex-col md:flex-row items-center justify-center w-full gap-8 lg:gap-17  " >
 
 
-            <div className=" basis-[1/2]  w-full flex flex-col items-start gap-5 p-2 " >
+            <div className=" basis-2/5 w-full flex flex-col items-start gap-5 p-2 " >
                 <h1 className="text-black text-2xl lg:text-3xl font-extrabold font-poppins"  >Why Us?</h1>
                 <h1 className=" font-bold text-3xl lg:text-[45px] leading-[100%] text-[#000] max-w-md font-syne " >Because we make learning practical, simple and real</h1>
 
@@ -26,16 +26,16 @@ export default function WhyUs() {
             </div>
 
 
-            <div className=" basis-[1/2]  w-full flex items-center gap-6 h-full  justify-center " >
-                <div className="flex items-center justify-center rounded-lg overflow-hidden h-[300px] w-full "  >
+            <div className=" basis-3/5  w-full flex items-center gap-6 h-full  justify-center " >
+                <div className="flex items-center justify-center rounded-lg overflow-hidden h-[350px] md:h-[470px] w-full "  >
                     <Image src={"/basketball.png"} width={500} height={500} alt="image-1" className="object-center object-cover h-full w-full " />
                 </div>
             </div>
 
-             <div className="flex md:hidden gap-4  " >
-                    <Link href={"/courses"} >   <Button variant="default" className="font-syne " >Courses</Button></Link>
-                    <Link href={"/community"} >   <Button variant="default" className="font-syne " >Community</Button></Link>
-                </div>
+            <div className="flex md:hidden gap-4   " >
+                <Link href={"/courses"} >   <Button variant="default" className="font-syne " >Courses</Button></Link>
+                <Link href={"/community"} >   <Button variant="default" className="font-syne " >Community</Button></Link>
+            </div>
 
 
 
