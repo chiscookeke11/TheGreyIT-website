@@ -1,6 +1,5 @@
 import React from "react";
 import Image from "next/image";
-import Button from "@/components/UI/Button";
 import JoinUs from "@/components/about-us/JoinUsSection";
 import OurImpact from "@/components/about-us/OurImpact";
 
@@ -9,26 +8,23 @@ const About = () => {
     <div className="font-poppins flex flex-col  pt-20 lg:pt-32  gap-10 bg-white ">
 
 
-      <div className="bg-[#f2f5fc] w-full flex flex-col md:flex-row items-center justify-between gap-16  px-[3%] py-20">
-        <div className=" w-full basis-1/2 flex flex-col items-start gap-5 " >
-          <h2 className="  text-4xl md:text-5xl font-bold text-gray-700   ">About Us</h2>
-          <p className="text-gray-500 text-base md:text-lg ">
+      <div className="bg-[#f2f5fc] w-full flex flex-col items-center justify-between gap-16  px-[3%] py-20">
+        <div className=" w-full basis-1/2 flex flex-col items-center gap-5 " >
+          <h2 className="  text-3xl md:text-5xl font-bold text-gray-700 text-center  ">About Us</h2>
+          <p className="text-gray-500 text-base  max-w-3xl text-center ">
             We’re a company driven by purpose, creativity, and a desire to help
             businesses grow better. Our people, culture, and technology are built
             to create meaningful experiences for our customers and partners.
           </p>
-          <Button variant="default" >
-            Join Our Journey
-          </Button>
         </div>
 
-        <div className="flex justify-center basis-1/2  max-w-md md:max-w-none ">
+        <div className="flex justify-center max-w-5xl w-full overflow-hidden rounded-tr-[100px] rounded-bl-[100px] ">
           <Image
             src="/community-page/team.jpg"
             alt="Team collaboration"
-            className=" rounded-sm w-full h-full object-center object-cover"
+            className=" w-full h-full object-center object-cover"
             width={500}
-            height={400}
+            height={500}
           />
         </div>
       </div>
