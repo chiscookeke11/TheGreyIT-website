@@ -12,9 +12,4 @@ export const socialsData = [
         url: "#",
         icon: <Twitter size={20} />
     },
-    {
-        name: "Facebook",
-        url: "#",
-        icon: <Facebook size={20}/>
-    }
 ]

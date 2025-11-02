@@ -5,13 +5,13 @@ import OurImpact from "@/components/about-us/OurImpact";
 
 const About = () => {
   return (
-    <div className="font-poppins flex flex-col  pt-20 lg:pt-32  gap-10 bg-white ">
+    <div className="font-poppins flex flex-col  pt-20 lg:pt-28  gap-10 bg-white ">
 
 
-      <div className="bg-[#f2f5fc] w-full flex flex-col items-center justify-between gap-16  px-[3%] py-20">
+      <div className="bg-[#f2f5fc] w-full flex flex-col items-center justify-between gap-16  px-[3%] py-14 ">
         <div className=" w-full basis-1/2 flex flex-col items-center gap-5 " >
           <h2 className="  text-3xl md:text-5xl font-bold text-gray-700 text-center  ">About Us</h2>
-          <p className="text-gray-500 text-base  max-w-3xl text-center ">
+          <p className="text-gray-500 text-base md:text-lg  max-w-3xl text-center ">
             We’re a company driven by purpose, creativity, and a desire to help
             businesses grow better. Our people, culture, and technology are built
             to create meaningful experiences for our customers and partners.
