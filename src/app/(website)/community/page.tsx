@@ -83,84 +83,42 @@ export default function Page() {
             </div>
           </div>
 
+    {/* <!-- News & Events --> */}
+    <div className="w-full lg:w-[20%]">
+      <h3 className="text-xl font-syne font-semibold mb-4 border-b-2 border-primary inline-block text-dark">
+        News & Events
+      </h3>
+      <ul className="space-y-4 text-gray-700">
+        <li>
+          <span className="text-primary font-semibold">November 24, 2025</span><br />
+          Launch of our clean water initiative in rural areas.
+        </li>
+        <li>
+          <span className="text-primary font-semibold">October 18, 2025</span><br />
+          Fundraising for community learning centers.
+        </li>
+        <li>
+          <span className="text-primary font-semibold">September 05, 2025</span><br />
+          Volunteers&apos; training program begins.
+        </li>
+      </ul>
+    </div>
 
-          <div className="w-full flex flex-col gap-4 flex-1" >
-            <h3
-              className="text-xl font-syne w-fit font-semibold mb-2 border-b-2 border-primary inline-block text-dark"
-            >
-              Featured Project
-            </h3>
-
-            {/* Project List (stacked vertically) */}
-            <div className="space-y-10 w-full  ">
-              {/* Project 1 */}
-              <div className="md:-mx-6 flex flex-col md:flex-row items-start md:items-center gap-10">
-                <Image
-                  src="/community-page/hands.jpg"
-                  alt="Project"
-                  className="rounded-md shadow-md w-full md:w-[60%] h-[240px] object-cover"
-                  height={500}
-                  width={500}
-                />
-                <div className="w-full">
-                  <p className="text-base text-gray-700">
-                    Our team provides education and shelter for underprivileged children,
-                    giving them hope and opportunities for a better future.
-                  </p>
-                  <Button
-                    variant="default"
-                    className="mt-4 bg-gray-700 text-white px-7 py-1 !rounded-full !text-sm "
-                  >
-                    More
-                  </Button>
-                </div>
-              </div>
-            </div>
-          </div>
-
-        </div>
-
-
-
-        {/* <!-- News & Events --> */}
-        <div className="w-fit">
-          <h3
-            className="text-xl font-syne font-semibold mb-4 border-b-2 border-primary inline-block text-dark"
-          >
-            News & Events
-          </h3>
-          <ul className="space-y-4 text-gray-700 text-base ">
-            <li>
-              <span className=" font-semibold">November 24, 2025</span><br />
-              Launch of our clean water initiative in rural areas.
-            </li>
-            <li>
-              <span className=" font-semibold">October 18, 2025</span><br />
-              Fundraising for community learning centers.
-            </li>
-            <li>
-              <span className=" font-semibold">September 05, 2025</span><br />
-              Volunteers&apos; training program begins.
-            </li>
-          </ul>
-        </div>
-
-        {/* <!-- Program Areas --> */}
-        <div className="w-fit" >
-          <h3
-            className="text-xl font-syne font-semibold mb-4 border-b-2 border-primary inline-block text-dark"
-          >
-            Program Areas
-          </h3>
-          <ul className="list-disc list-inside space-y-2 text-gray-700 text-base ">
-            <li>Child Welfare</li>
-            <li>Education & Empowerment</li>
-            <li>Health Services</li>
-            <li>Community Development</li>
-            <li>Emergency Relief</li>
-          </ul>
-        </div>
-      </section>
+    {/* <!-- Program Areas --> */}
+    <div className="w-full lg:w-[20%]">
+      <h3 className="text-xl font-syne font-semibold mb-4 border-b-2 border-primary inline-block text-dark">
+        Program Areas
+      </h3>
+      <ul className="list-disc list-inside space-y-2 text-gray-700">
+        <li>Child Welfare</li>
+        <li>Education & Empowerment</li>
+        <li>Health Services</li>
+        <li>Community Development</li>
+        <li>Emergency Relief</li>
+      </ul>
+    </div>
+  </div>
+</section>
     </>
   )
 }
