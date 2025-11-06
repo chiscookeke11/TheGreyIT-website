@@ -1,39 +1,240 @@
 "use client"
 
-import { supabase } from "@/lib/supabaseClient"
+import { supabase } from "@/lib/supabaseClient";
+import { Eye, EyeOff } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
+import React, { useState } from "react";
+import toast from "react-hot-toast";
 
 
+
+
+const Spinner = () => {
+    return (
+        <div className="h-10 w-10 rounded-full border-4 border-gray-700 border-t-transparent animate-spin duration-150 ease-in-out transition-all " />
+    )
+}
 
 
 export default function AuthModal() {
+    const [authState, setAuthState] = useState<"Sign In" | "Sign Up">("Sign In")
+    const [showPassword, setShowPassword] = useState(false)
+    const [loading, setLoading] = useState(false)
+    const [formValues, setFormValues] = useState({
+        firstName: "",
+        lastName: "",
+        email: "",
+        password: "",
+        confirmPassword: ""
+    })
 
-const handleGoogleLogin = async () => {
-    const {error} = await supabase.auth.signInWithOAuth({
-        provider: "google",
-        options: {
-            redirectTo: `${window.location.origin}/admin`
+
+
+    // input change function
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const { name, value } = e.target
+
+
+        setFormValues((prev) => ({
+            ...prev,
+            [name]: value
+        }))
+
+    }
+
+
+
+    // google social login function
+    const handleGoogleLogin = async () => {
+        const { error } = await supabase.auth.signInWithOAuth({
+            provider: "google",
+            options: {
+                redirectTo: `${window.location.origin}/user`
+            }
+        });
+
+
+        if (error) console.error("Google login failed:", error.message)
+    }
+
+
+
+    // sign up function
+    const handleSignup = async (e: React.FormEvent<HTMLFormElement>) => {
+
+        e.preventDefault()
+
+
+        // check if all the values were entered
+        if (!formValues.firstName || !formValues.lastName || !formValues.email || !formValues.password || !formValues.confirmPassword) {
+            toast.error("Please provide the necessary credentials")
+            return
         }
-    });
+
+        // check  if the passwords match
+        if (formValues.password !== formValues.confirmPassword) {
+            toast.error("Passwords do not match")
+            return
+        }
 
 
-    if (error) console.error("Google login failed:", error.message)
-}
+        setLoading(true)
+        const { error } = await supabase.auth.signUp({
+            email: formValues.email,
+            password: formValues.password,
+            options: {
+                data: {
+                    first_name: formValues.firstName,
+                    last_name: formValues.lastName,
+                },
+                emailRedirectTo: "/admin"
+            }
+        })
+
+        if (error) {
+            toast.error(`Failed to sign up: ${error.message} `,)
+            console.error(error)
+            setLoading(false)
+        }
+        else {
+            toast.success("Sign Up successful! Please confirm your email")
+            setLoading(false)
+            setFormValues({
+                email: "",
+                confirmPassword: "",
+                firstName: "",
+                lastName: "",
+                password: ""
+            })
+        }
+    }
+
+
+
+
+    // Sign in function
+    const handleSignIn = async (e: React.FormEvent<HTMLFormElement>) => {
+
+        e.preventDefault()
+
+
+        if (!formValues.email || !formValues.password) {
+            toast.error("Please provide the necessary credentials")
+            return
+        }
+
+
+        setLoading(true)
+        const { data, error } = await supabase.auth.signInWithPassword({
+            email: formValues.email,
+            password: formValues.password,
+        })
+
+        if (error) {
+            toast.error(`login failed: ${error.message}`)
+            setLoading(false)
+        }
+
+        else {
+            toast.success("Success! You are now signed in")
+            console.log(data)
+            setLoading(false)
+            setFormValues({
+                email: "",
+                confirmPassword: "",
+                firstName: "",
+                lastName: "",
+                password: ""
+            })
+        }
+
+
+
+
+
+    }
+
 
 
 
 
 
     return (
-        <div>
-            <div className="p-8 rounded-lg h-screen bg-white flex flex-col items-center justify-center gap-6">
-                <h2 className="text-2xl font-semibold text-gray-700">Admin Login</h2>
-                <button
-                    onClick={handleGoogleLogin}
-                    className="bg-gray-700 text-white py-3 px-6 cursor-pointer rounded-md hover:bg-gray-500 transition-all font-poppins "
-                >
-                    Continue with Google
-                </button>
+        <form onSubmit={authState === "Sign Up" ? handleSignup : handleSignIn} className=" w-full max-w-2xl bg-white flex items-center justify-center flex-col gap-7 px-6 py-10 rounded-lg font-poppins " >
+            <h1 className="text-gray-700 font-bold font-poppins text-2xl md:text-4xl  " >{authState === "Sign In" ? "Sign In" : "Sign Up"} </h1>
+
+
+
+            <div className="w-full flex flex-col gap-6 items-center justify-center " >
+
+
+                {/* Name Section */}
+                {authState === "Sign Up" ? (
+                    <div className="w-full flex flex-row items-center justify-between gap-5" >
+
+                        {/* first name */}
+                        <label htmlFor="firstName" className=" w-full flex flex-col items-start gap-1  " >
+                            <span className="text-xl font-medium " >First Name</span>
+                            <input type="text" id="firstName" name="firstName" onChange={handleChange} value={formValues.firstName} placeholder="John" className="w-full py-4 px-5 border border-gray-700 outline-none focus:outline-none text-base rounded-sm " />
+                        </label>
+
+                        {/* last name  */}
+                        <label htmlFor="lastName" className=" w-full flex flex-col items-start gap-1  " >
+                            <span className="text-xl font-medium " >Last Name</span>
+                            <input type="text" id="lastName" name="lastName" onChange={handleChange} value={formValues.lastName} placeholder="Doe" className="w-full py-4 px-5 border border-gray-700 outline-none focus:outline-none text-base rounded-sm " />
+                        </label>
+                    </div>
+                ) : null}
+
+
+
+
+                {/* Email input */}
+                <label htmlFor="Email" className=" w-full flex flex-col items-start gap-1  " >
+                    <span className="text-xl font-medium " >Email</span>
+                    <input type="email" id="email" name="email" onChange={handleChange} value={formValues.email} placeholder="JohnDoe@gmail.com" className="w-full py-4 px-5 border border-gray-700 outline-none focus:outline-none text-base rounded-sm " />
+                </label>
+
+
+
+                {/* Password Input  */}
+                <label htmlFor="password" className=" w-full flex flex-col items-start gap-1  " >
+                    <span className="text-xl font-medium " >Password</span>
+                    <div className=" w-full flex gap-1 rounded-sm  py-4 px-5 border border-gray-700" >
+                        <input type={showPassword ? "text" : "password"} id="password" name="password" onChange={handleChange} value={formValues.password} placeholder="Enter Password" className="w-full  outline-none focus:outline-none text-base  " />
+                        <button type="button" className="cursor-pointer" onClick={() => setShowPassword((prev) => !prev)} > {showPassword ? <EyeOff /> : <Eye />} </button>
+                    </div>
+                </label>
+
+
+                {/* confirm password Input  */}
+                {authState === "Sign Up" ? (
+                    <label htmlFor="confirmPassword" className=" w-full flex flex-col items-start gap-1  " >
+                        <span className="text-xl font-medium " >Confirm Password</span>
+                        <div className=" w-full flex gap-1 rounded-sm  py-4 px-5 border border-gray-700" >
+                            <input type={showPassword ? "text" : "password"} id="confirmPassword" name="confirmPassword" onChange={handleChange} value={formValues.confirmPassword} placeholder="Enter Password" className="w-full  outline-none focus:outline-none text-base  " />
+                        </div>
+                    </label>
+                ) : null}
+
+                <Link href={"/reset-password"} className="ml-auto text-gray-700 text-sm font-medium outline-none " > Forgot Password? </Link>
+
+
+
             </div>
-        </div>
+
+            <button className="font-syne bg-gray-700 w-full max-w-xs text-white hover:bg-transparent hover:text-gray-700 mb-5  px-6 py-3  flex items-center justify-center font-medium  focus:outline-none cursor-pointer text-base md:text-lg  border-[1px]  transition-all duration-300 ease-in-out border-gray-700 rounded-sm  " > {loading ? <Spinner /> : authState === "Sign In" ? "Sign In" : "Create Account"} </button>
+
+
+            {authState === "Sign In" ? <p className=" text-base font-medium text-black text-center " >Don&apos;t have an account? <button className=" text-gray-700 font-medium cursor-pointer outline-none border-none" type="button" onClick={() => setAuthState("Sign Up")}> Create Account</button></p> : (
+                <p className=" text-base font-medium text-black text-center " >Already have an account? <button type="button" className=" text-gray-700 font-medium cursor-pointer outline-none border-none " onClick={() => setAuthState("Sign In")}> Sign In</button></p>
+            )}
+
+
+            <div className=" flex items-center justify-center gap-3 " >
+                <button type="button" onClick={handleGoogleLogin} aria-label="Login with google" className="cursor-pointer p-2 rounded-full h-10 w-10 overflow-hidden flex items-center justify-center " ><Image src={"/logos/google-logo.png"} alt="google logo" height={50} width={50} className="h-full w-full " /></button>
+            </div>
+        </form>
     )
 }

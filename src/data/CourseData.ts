@@ -25,7 +25,7 @@ export const CourseOverview: CourseDataTypes[] = [
     title: "Cybersecurity & Cloud",
     description:
       "AI, Cybersecurity & Cloud – Learn AI tools, defend systems, and manage cloud platforms.",
-    imageUrl: "/GetSkilled/cyber2.avif",
+    imageUrl: "/GetSkilled/cyber-sec.jpg",
     bgColor: "white",
     duration: "",
     price: 0,
@@ -56,7 +56,7 @@ export const CourseOverview: CourseDataTypes[] = [
   {
     title: "Digital Creativity & Design",
     description: "UI/UX, branding, and content creation.",
-    imageUrl: "/GetSkilled/digital-creativity.jpg",
+    imageUrl: "/GetSkilled/creativity.jpg",
     bgColor: "black",
     duration: "",
     price: 0,

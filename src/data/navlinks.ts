@@ -30,4 +30,8 @@ export const navLinksData = [
         label: "Contact Us",
         url: "/contact-us"
     },
+        {
+        label: "Sign In",
+        url: "/user"
+    },
 ]
