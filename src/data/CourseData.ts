@@ -9,6 +9,7 @@ export const CourseOverview: CourseDataTypes[] = [
     duration: "",
     price: 0,
     rating: 0,
+    pdfName: "software_engineering.pdf"
   },
   {
     title: "Data & Business Intelligence",
@@ -18,6 +19,7 @@ export const CourseOverview: CourseDataTypes[] = [
     duration: "",
     price: 0,
     rating: 0,
+    pdfName: "software_engineering.pdf"
   },
   {
     title: "Cybersecurity & Cloud",
@@ -28,8 +30,9 @@ export const CourseOverview: CourseDataTypes[] = [
     duration: "",
     price: 0,
     rating: 0,
+    pdfName: "software_engineering.pdf"
   },
-    {
+  {
     title: "Artificial Intelligence",
     description:
       "AI, Cybersecurity & Cloud – Learn AI tools, defend systems, and manage cloud platforms.",
@@ -38,15 +41,17 @@ export const CourseOverview: CourseDataTypes[] = [
     duration: "",
     price: 0,
     rating: 0,
+    pdfName: "data_science.pdf"
   },
   {
     title: "Academic Research & Writing",
     description: "From thesis to global publishing.",
-    imageUrl: "/GetSkilled/pexels-diva-plavalaguna-6149793.jpg",
+    imageUrl: "/GetSkilled/oladimeji-ajegbile-DNVNvFE5oms-unsplash.jpg",
     bgColor: "#62759A",
     duration: "",
     price: 0,
     rating: 0,
+    pdfName: "data_science.pdf"
   },
   {
     title: "Digital Creativity & Design",
@@ -56,6 +61,7 @@ export const CourseOverview: CourseDataTypes[] = [
     duration: "",
     price: 0,
     rating: 0,
+    pdfName: "data_science.pdf"
   },
   {
     title: "Office & Digital Literacy",
@@ -65,6 +71,7 @@ export const CourseOverview: CourseDataTypes[] = [
     duration: "",
     price: 0,
     rating: 0,
+    pdfName: "data_science.pdf"
   },
   {
     title: "Kids & Junior Tech",
@@ -74,5 +81,6 @@ export const CourseOverview: CourseDataTypes[] = [
     duration: "",
     price: 0,
     rating: 0,
+    pdfName: "data_science.pdf"
   },
 ];

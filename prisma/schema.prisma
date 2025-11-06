@@ -366,6 +366,7 @@ model course {
   price       Int
   imageUrl    String
   rating      Int
+  pdfName     String
 
   @@schema("public")
 }

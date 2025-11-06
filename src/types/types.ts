@@ -9,7 +9,8 @@ export interface CourseDataTypes {
   duration: string,
   price: number,
   rating: number,
-  id?: string
+  id?: string,
+  pdfName?: string,
 }
 
 

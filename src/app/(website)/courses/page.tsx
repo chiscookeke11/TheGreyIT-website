@@ -32,9 +32,9 @@ const highlights = [
 ]
 
 
-const downloadPdf = async () => {
+const downloadPdf = async (pdfName: string) => {
 
-    const { error, data } = await supabase.storage.from("course_outline_pdf").download("B.Sc. SEM IV.pdf")
+    const { error, data } = await supabase.storage.from("course_outline_pdf").download(pdfName)
 
     if (error) {
         console.error("Error downlaoding file:", error.message)
@@ -44,7 +44,7 @@ const downloadPdf = async () => {
         const url = URL.createObjectURL(data);
         const link = document.createElement("a")
         link.href = url
-        link.download = "course_outline_pdf"
+        link.download = `${pdfName}`
         document.body.appendChild(link)
         link.click()
         link.remove()
@@ -69,8 +69,13 @@ const CourseCard = ({ data, setShowModal, setSelectedCourse }: CourseCardProps) 
                 </ul>
 
 
-                <Button variant="default" className=" w-full !rounded-[100px] text-sm lg:text-base " >Register</Button>
-                <Button variant="default" onClick={downloadPdf} className="w-full !rounded-[100px] !bg-gray-700 !text-white !text-sm !lg:text-base " >View Curriculum</Button>
+              <Link href={"/user"} className="w-full" ><Button variant="default" className=" w-full !rounded-[100px] text-sm lg:text-base " >Register</Button></Link>
+                <Button variant="default"
+                    onClick={() => {
+                        if (data.pdfName) downloadPdf(data.pdfName)
+                        else console.warn("PDF not available")
+                    }}
+                    className="w-full !rounded-[100px] !bg-gray-700 !text-white !text-sm !lg:text-base " >View Curriculum</Button>
             </div>
 
 
@@ -97,47 +102,37 @@ export default function Page() {
 
 
 
+
+
+
+
+
+
     useEffect(() => {
         document.body.style.overflowY = showModal ? "hidden" : "auto"
     }, [showModal])
 
-    // manually handling caching and data fetching
+
+
+    // Function to fetch all blogs from the db
+    const supabaseFetch = async () => {
+        const { data, error } = await supabase.from("course").select("*")
+
+        if (error) {
+            console.log("Failed to fetch course:", error)
+        }
+
+
+        {
+            console.log("Fetch complete", data)
+            setCoursesData(data)
+        }
+    }
+
+
     useEffect(() => {
-        const CACHE_KEY = "coursesData"
-        const CACHE_DURATION = 1000 * 60 * 5
 
-        const cachedCourses = localStorage.getItem(CACHE_KEY)
-
-        if (cachedCourses) {
-            const parsed = JSON.parse(cachedCourses)
-
-
-            // checking expiry (5 Minutes)
-            if (Date.now() - parsed.timestamp < CACHE_DURATION) {
-                setCoursesData(parsed.data)
-                return; // use cached, no need to fetch
-            }
-            else {
-                localStorage.removeItem(CACHE_KEY)
-            }
-        }
-
-
-        // if no cachedCourses or not expired then we fetch fresh data
-        const fetchCourses = async () => {
-            try {
-
-                const res = await fetch("/api/courses")
-                const data = await res.json()
-                setCoursesData(data)
-                localStorage.setItem(CACHE_KEY, JSON.stringify({ data, timestamp: Date.now() }))
-            }
-            catch (error) {
-                console.error(error)
-            }
-        }
-
-        fetchCourses()
+        supabaseFetch()
     }, [])
 
 
