@@ -36,10 +36,10 @@ export default function Page() {
 
             <div className="flex-1 space-y-2 max-w-4xl " >
                 <h1 className="text-xl font-bold " >{currentProfile?.name} </h1>
-                <p className="text-base font-normal text-gray-600 " >{currentProfile?.position} </p>
+                <p className="text-lg font-normal text-gray-600 " >{currentProfile?.position} </p>
 
 
-                <p className="text-sm text-gray-600 my-5 " > {currentProfile?.about} </p>
+                <p className="text-base text-gray-600 my-5 " > {currentProfile?.about} </p>
 
                 <a href={currentProfile?.linkedInUrl} target="_blank" className="text-gray-700 w-8 h-8 rounded-sm flex items-center justify-center " ><Linkedin size={20} /> </a>
             </div>
