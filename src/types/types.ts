@@ -40,3 +40,12 @@ export interface ProfileDataType {
 
 
 
+
+
+export interface Results {
+  hasMinLength: boolean
+  hasDigit: boolean
+  hasSpecialCharacter: boolean
+  hasUpperCase: boolean
+  hasLowerCase: boolean
+}
