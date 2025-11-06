@@ -1,4 +1,10 @@
 import Image from "next/image";
+import { FaLinkedin } from "react-icons/fa";
+
+
+
+
+
 
 function AboutHero() {
   return (
@@ -67,7 +73,7 @@ function OurMission() {
       <div className="relative hidden md:block">
         {/* Subtle gradient overlay for depth */}
         <div className="absolute inset-0 z-10" />
-        
+
         {/* Sharp rectangle with soft shadow */}
         <div className="overflow-hidden shadow-2xl rounded-xl">
           <Image
@@ -177,7 +183,7 @@ function OurStory() {
   );
 }
 
-import { FaLinkedin } from "react-icons/fa";
+
 
 function Leadership() {
   const leaders = [
@@ -251,7 +257,7 @@ function Leadership() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-14 md:gap-20">
           {leaders.map((leader, index) => (
             <div key={index} className="flex flex-col items-center text-center">
-              
+
               {/* Profile Image Wrapper */}
               <div className="relative w-44 h-44 md:w-48 md:h-48">
                 <Image
