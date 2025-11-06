@@ -10,7 +10,7 @@ export const OurLabsData = [
     {
         title: "HARDWARE LAB",
         content: "Build, repair, and maintain computer systems & devices using real tools and diagonostics kits.",
-        image: "/OurLabs/hardware-lab.avif",
+        image: "/OurLabs/hardlab1.avif",
     },
     {
         title: "CYBERSECURITY LAB",

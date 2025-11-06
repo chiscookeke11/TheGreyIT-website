@@ -4,7 +4,7 @@ export const CourseOverview: CourseDataTypes[] = [
   {
     title: "Web & Mobile Development",
     description: "From beginner to full-stack.",
-    imageUrl: "",
+    imageUrl: "/GetSkilled/webdev.avif",
     bgColor: "black",
     duration: "",
     price: 0,
@@ -20,10 +20,20 @@ export const CourseOverview: CourseDataTypes[] = [
     rating: 0,
   },
   {
-    title: "AI & Cybersecurity & Cloud",
+    title: "Cybersecurity & Cloud",
     description:
       "AI, Cybersecurity & Cloud – Learn AI tools, defend systems, and manage cloud platforms.",
-    imageUrl: "",
+    imageUrl: "/GetSkilled/cyber2.avif",
+    bgColor: "white",
+    duration: "",
+    price: 0,
+    rating: 0,
+  },
+    {
+    title: "Artificial Intelligence",
+    description:
+      "AI, Cybersecurity & Cloud – Learn AI tools, defend systems, and manage cloud platforms.",
+    imageUrl: "/GetSkilled/Ai developer.jpg",
     bgColor: "white",
     duration: "",
     price: 0,
@@ -32,7 +42,7 @@ export const CourseOverview: CourseDataTypes[] = [
   {
     title: "Academic Research & Writing",
     description: "From thesis to global publishing.",
-    imageUrl: "",
+    imageUrl: "/GetSkilled/pexels-diva-plavalaguna-6149793.jpg",
     bgColor: "#62759A",
     duration: "",
     price: 0,

@@ -4,6 +4,7 @@ import CurriculumModal from "@/components/courses-page/CurriculumModal"
 import Button from "@/components/UI/Button"
 import Spinner from "@/components/UI/Spinner"
 import { CourseOverview } from "@/data/CourseData"
+import { supabase } from "@/lib/supabaseClient"
 import { CourseDataTypes } from "@/types/types"
 import { Timer } from "lucide-react"
 import Image from "next/image"
@@ -31,6 +32,28 @@ const highlights = [
 ]
 
 
+const downloadPdf = async () => {
+
+    const { error, data } = await supabase.storage.from("course_outline_pdf").download("B.Sc. SEM IV.pdf")
+
+    if (error) {
+        console.error("Error downlaoding file:", error.message)
+    }
+    else if (data) {
+        // Create a url for the blob and trigger download
+        const url = URL.createObjectURL(data);
+        const link = document.createElement("a")
+        link.href = url
+        link.download = "course_outline_pdf"
+        document.body.appendChild(link)
+        link.click()
+        link.remove()
+        URL.revokeObjectURL(url)
+    }
+
+}
+
+
 // Course card component
 const CourseCard = ({ data, setShowModal, setSelectedCourse }: CourseCardProps) => {
     return (
@@ -47,10 +70,7 @@ const CourseCard = ({ data, setShowModal, setSelectedCourse }: CourseCardProps) 
 
 
                 <Button variant="default" className=" w-full !rounded-[100px] text-sm lg:text-base " >Register</Button>
-                <Button variant="default" onClick={() => {
-                    setShowModal(true)
-                    setSelectedCourse(data.id)
-                }} className="w-full !rounded-[100px] !bg-gray-700 !text-white !text-sm !lg:text-base " >View Curriculum</Button>
+                <Button variant="default" onClick={downloadPdf} className="w-full !rounded-[100px] !bg-gray-700 !text-white !text-sm !lg:text-base " >View Curriculum</Button>
             </div>
 
 

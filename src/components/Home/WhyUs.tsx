@@ -20,7 +20,8 @@ export default function WhyUs() {
 
 
                 <div className="hidden md:flex gap-4  " >
-                    <Link href={"/courses"} >   <Button variant="default" className="font-syne " >Courses</Button></Link>
+                    <Link href={"/courses"} >
+                     <button  className="font-syne bg-gray-700 text-white hover:bg-transparent hover:text-gray-700   px-6 py-3  flex items-center justify-center font-medium  focus:outline-none cursor-pointer text-base md:text-lg  border-[1px]  transition-all duration-300 ease-in-out border-gray-700 rounded-sm  " >Courses</button></Link>
                     <Link href={"/community"} >   <Button variant="default" className="font-syne " >Community</Button></Link>
                 </div>
             </div>
@@ -28,12 +29,12 @@ export default function WhyUs() {
 
             <div className=" basis-3/5  w-full flex items-center gap-6 h-full  justify-center " >
                 <div className="flex items-center justify-center rounded-lg overflow-hidden h-[350px] md:h-[470px] w-full "  >
-                    <Image src={"/basketball.png"} width={500} height={500} alt="image-1" className="object-center object-cover h-full w-full " />
+                    <Image src={"/happy-lady.jpg"} width={1000} height={1000} alt="image-1" className="object-center object-cover h-full w-full " />
                 </div>
             </div>
 
             <div className="flex md:hidden gap-4   " >
-                <Link href={"/courses"} >   <Button variant="default" className="font-syne " >Courses</Button></Link>
+                <Link href={"/courses"} >   <Button variant="default" className="font-syne !bg-gray-700 text-white " >Courses</Button></Link>
                 <Link href={"/community"} >   <Button variant="default" className="font-syne " >Community</Button></Link>
             </div>
 
