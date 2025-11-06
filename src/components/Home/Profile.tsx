@@ -16,7 +16,7 @@ const ProfileCard = ({ data }: ProfileCardProps) => {
         <Link href={`/profile/${data.id}`} className="w-full" >
             <div className="w-full max-w-lg flex items-end bg-gray-400 px-4 py-4 rounded-xl h-[350px]  md:h-[505px] lg:h-[510px] relative overflow-hidden shadow-2xl " >
 
-                <div className=" bg-black/15 absolute inset-0 h-full w-full z-10 " />
+                <div className=" bg-black/30 absolute inset-0 h-full w-full z-10 " />
                 <Image src={data.imageUrl} alt={`${data.name}-img`} fill className="object-center object-cover" />
 
 

@@ -1,64 +1,100 @@
 import { ProfileDataType } from "@/types/types";
 
 
-
-
-
-
-
 export const ProfileData: ProfileDataType[] = [
   {
     id: 1,
-    name: "Tunde Onakoya",
-    position: "Founder, Chess in Slums Africa",
-    linkedInUrl: "https://linkedinlocalnigeria.com/speaker/tunde-onakoya",
-    imageUrl: "/profiles/tunde.jpg",
+    name: "Rebecca Enonchong",
+    position: "Founder & CEO, AppsTech (Cameroon)",
+    linkedInUrl: "https://linkedin.com/in/rebeccaenonchong",
+    imageUrl: "/profiles/Rebecca.jpg",
     about:
-      "Tunde Onakoya is a Nigerian chess master, coach, and social entrepreneur, best known as the Founder of Chess in Slums Africa, a non-profit initiative that uses chess as a tool to empower children living in underprivileged communities. His initiative has transformed lives by combining education, mentorship, and strategic thinking. Tunde has gained international recognition for breaking the Guinness World Record for the longest chess marathon and continues to inspire a generation through his advocacy for education and social change."
+      "Rebecca Enonchong inspires TheGreyIT students through advocacy, inclusion, and entrepreneurial leadership. Her journey embodies what TheGreyIT stands for—practical innovation rooted in community impact. As the founder of AppsTech, she built one of Africa’s earliest global enterprise software firms, serving clients in more than 50 countries. Beyond business, she founded ActivSpaces, one of Central Africa’s leading innovation hubs, mentoring young entrepreneurs and women-led start-ups. For our learners at TheGreyIT, Enonchong represents what happens when education meets empowerment. Lesson for TheGreyIT: Empowering others multiplies impact. True innovation creates space for everyone to grow."
   },
   {
     id: 2,
-    name: "Oluwatosin Olaseinde",
-    position: "Founder & CEO, Money Africa",
-    linkedInUrl: "https://linkedinlocalnigeria.com/speaker/oluwatosin-olaseinde",
-    imageUrl: "/profiles/tunde.jpg",
+    name: "Olugbenga “GB” Agboola",
+    position: "Founder & CEO, Flutterwave (Nigeria)",
+    linkedInUrl: "https://linkedin.com/in/gbagboola",
+    imageUrl: "/profiles/Olugbenga.webp",
     about:
-      "Oluwatosin Olaseinde is a chartered accountant, entrepreneur, and Founder of Money Africa, an ed-tech platform that promotes financial literacy and investment education across Africa. With over a decade of experience in accounting and finance, she has empowered thousands with practical knowledge about budgeting, saving, and investing. Tosin is a Mandela Washington Fellow and has been featured on global media platforms like BBC and CNN for her work in advancing financial literacy."
+      "Olugbenga “GB” Agboola inspires TheGreyIT students through integrity, scale, and transformative leadership. As the founder of Flutterwave, he built one of Africa’s most valuable fintech companies, simplifying cross-border payments for millions of businesses. His disciplined focus on reliability, compliance, and trust reflects the values TheGreyIT teaches in coding and design. Agboola’s journey from engineer to CEO shows that technical mastery and ethical leadership can redefine African technology. Lesson for TheGreyIT: Build solutions that last—impact is the real legacy."
   },
   {
     id: 3,
-    name: "Iyinoluwa Aboyeji",
-    position: "General Partner, Future Africa",
-    linkedInUrl: "https://linkedin.com/in/iyinoluwa-aboyeji",
-    imageUrl: "/profiles/tunde.jpg",
+    name: "Charlette N’Guessan",
+    position: "Co-Founder, BACE Group (Ivory Coast / Ghana)",
+    linkedInUrl: "https://linkedin.com/in/charlettenguessan",
+    imageUrl: "/profiles/Charlette.jpeg",
     about:
-      "Iyinoluwa Aboyeji is a Nigerian entrepreneur and investor, widely known as the co-founder of Andela and Flutterwave, two of Africa’s most successful tech companies. Through Future Africa, he invests in mission-driven innovators building the future of Africa. Iyin is passionate about empowering African youth and creating infrastructure that supports sustainable innovation across the continent."
+      "Charlette N’Guessan inspires TheGreyIT students through representation, courage, and problem-solving innovation. As the first woman to win the Africa Prize for Engineering Innovation, she developed BACE API, an AI-based facial recognition tool securing digital identity in Africa. Her work addresses real-world challenges our students study—data security and inclusivity. Her story shows that innovation can be African-made, African-owned, and globally recognised. Lesson for TheGreyIT: Innovation thrives where inclusion begins."
   },
   {
     id: 4,
     name: "Odunayo Eweniyi",
-    position: "Co-founder & COO, PiggyVest",
+    position: "Co-Founder & COO, PiggyVest (Nigeria)",
     linkedInUrl: "https://linkedin.com/in/odunayo-eweniyi",
-     imageUrl: "/profiles/tunde.jpg",
+    imageUrl: "/profiles/Odun-Eweniyi.webp",
     about:
-      "Odunayo Eweniyi is a Nigerian entrepreneur and co-founder of PiggyVest, Nigeria’s leading digital savings and investment platform. A strong advocate for women in tech and social impact, she also co-founded the Feminist Coalition, a non-profit focused on women's empowerment and equality. Her leadership and innovation have made her a key voice in Nigeria’s fintech ecosystem."
+      "Odunayo Eweniyi inspires TheGreyIT students through courage, creativity, and purpose-driven entrepreneurship. Her work with PiggyVest, Nigeria’s leading digital savings platform, shows how innovation can meet human needs. Beyond fintech, she co-founded the Feminist Coalition, championing gender inclusion and financial empowerment. Her journey reminds students that impact often begins with a small idea and consistent effort."
   },
   {
     id: 5,
-    name: "Temie Giwa-Tubosun",
-    position: "Founder & CEO, LifeBank",
-    linkedInUrl: "https://linkedin.com/in/temie-giwa-tubosun",
-    imageUrl: "/profiles/tunde.jpg",
+    name: "Dr Shikoh Gitau",
+    position: "Founder & CEO, Qhala (Kenya)",
+    linkedInUrl: "https://linkedin.com/in/shikohgitau",
+    imageUrl: "/profiles/Dr. Shikoh.jpg",
     about:
-      "Temie Giwa-Tubosun is the Founder and CEO of LifeBank, a health tech company that uses data and logistics to deliver critical medical supplies like blood and oxygen to hospitals across Africa. Her work has saved countless lives and earned her recognition from organizations such as the World Economic Forum and MIT. Temie is deeply committed to improving healthcare accessibility in Africa."
+      "Dr Shikoh Gitau inspires TheGreyIT students through research, human-centred design, and digital transformation. At Qhala, she helps governments adopt data-driven digital solutions. Her early work at Google Africa and Safaricom Alpha advanced access to healthcare, jobs, and education. For TheGreyIT learners, she embodies the fusion of research and practical innovation. Lesson for TheGreyIT: Coding alone isn’t enough—understanding the human behind the interface matters."
   },
   {
     id: 6,
-    name: "Hamzat Lawal",
-    position: "Founder & Chief Executive, Connected Development (CODE)",
-    linkedInUrl: "https://linkedin.com/in/hamzatlawal",
-    imageUrl: "/profiles/tunde.jpg",
+    name: "Shola Akinlade",
+    position: "Co-Founder & CEO, Paystack (Nigeria)",
+    linkedInUrl: "https://linkedin.com/in/sholaakinlade",
+    imageUrl: "/profiles/Shola-Akinlade.jpg",
     about:
-      "Hamzat Lawal is an environmental activist and social accountability advocate, best known as the Founder and Chief Executive of Connected Development (CODE) and the lead behind the Follow The Money initiative. He has worked across Africa to promote transparency, environmental justice, and good governance. His impact-driven leadership continues to influence policy and youth engagement across the continent."
+      "Shola Akinlade inspires TheGreyIT students through humility, teamwork, and sustainable innovation. As Co-Founder of Paystack, he revolutionised online payments and made history with Stripe’s acquisition of the company. His humility and dedication to team growth resonate deeply with our students. Beyond fintech, his creation of Sporting Lagos FC reflects his belief in empowering communities. Lesson for TheGreyIT: Stay humble, build local, think global."
+  },
+  {
+    id: 7,
+    name: "Dr Olubayo Adekanmbi",
+    position: "Founder, Data Science Nigeria (Nigeria)",
+    linkedInUrl: "https://linkedin.com/in/olubayoadekanmbi",
+    imageUrl: "/profiles/Dr-Olubayo.jpg",
+    about:
+      "Dr Olubayo Adekanmbi inspires TheGreyIT students through knowledge-sharing, mentorship, and research impact. Through Data Science Nigeria, he aims to train one million AI learners by 2030. His work bridges academia and industry, showing students that research and innovation thrive together. Lesson for TheGreyIT: Leadership is measured by how many others you help rise."
+  },
+  {
+    id: 8,
+    name: "Philip Emeagwali",
+    position: "Computer Scientist & Supercomputing Pioneer (Nigeria / USA)",
+    linkedInUrl: "https://en.wikipedia.org/wiki/Philip_Emeagwali",
+    imageUrl: "/profiles/Emeagwali.jpg",
+    about:
+      "Philip Emeagwali inspires TheGreyIT students through intellectual courage, persistence, and innovation. His pioneering work in parallel computing laid the foundation for modern internet infrastructure. His journey teaches that curiosity and perseverance—not privilege—are the true keys to discovery. Lesson for TheGreyIT: Knowledge becomes power only when paired with determination."
+  },
+  {
+    id: 9,
+    name: "Joseph Nguthiru",
+    position: "Founder, HyaPak (Kenya)",
+    linkedInUrl: "https://linkedin.com/in/joseph-nguthiru",
+    imageUrl: "/profiles/Joseph-Nguthiru.jpg",
+    about:
+      "Joseph Nguthiru inspires TheGreyIT students through sustainability, creativity, and community-driven innovation. His company, HyaPak, turns invasive water hyacinths into biodegradable packaging—proof that technology can serve both people and planet. His story reminds TheGreyIT learners that small prototypes can change systems when built with intention. Lesson for TheGreyIT: Build technology that heals, not harms."
+  },
+  {
+    id: 10,
+    name: "Iyinoluwa Aboyeji",
+    position: "Co-Founder, Andela & Flutterwave; Founder, Future Africa (Nigeria)",
+    linkedInUrl: "https://linkedin.com/in/iyinoluwa-aboyeji",
+    imageUrl: "/profiles/Aboyeji_Africa.jpeg",
+    about:
+      "Iyinoluwa Aboyeji inspires TheGreyIT students through vision, mentorship, and ecosystem growth. As Co-Founder of Andela and Flutterwave, and Founder of Future Africa, he connects learning with leadership and long-term impact. His story teaches students that true leadership multiplies opportunity for others. Lesson for TheGreyIT: Innovation grows when shared."
   }
 ];
+
+
+
+
+
