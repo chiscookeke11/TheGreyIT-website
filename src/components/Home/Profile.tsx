@@ -22,12 +22,12 @@ const ProfileCard = ({ data }: ProfileCardProps) => {
 
                 <div className="w-full  flex items-center justify-between z-20  " >
 
-                    <div className="font-poppins text-white">
+                    <div className="font-poppins text-white flex-1 ">
                         <h4 className=" text-lg font-bold " >{data.name} </h4>
                         <p className=" text-sm font-normal " >{data.position} </p>
                     </div>
 
-                    <a href={data.linkedInUrl} className="bg-white w-8 h-8 rounded-sm flex items-center justify-center " ><Linkedin size={20} /> </a>
+                    <a href={data.linkedInUrl} className="bg-white w-8 h-8 rounded-sm flex items-center justify-center  " ><Linkedin size={20} /> </a>
 
                 </div>
             </div>

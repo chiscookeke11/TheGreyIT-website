@@ -14,7 +14,7 @@ export const CourseOverview: CourseDataTypes[] = [
   {
     title: "Data & Business Intelligence",
     description: "Excel, Power BI, Python, SPSS.",
-    imageUrl: "",
+    imageUrl: "/GetSkilled/data_and_business_intelligence.jpg",
     bgColor: "#A5A4A2",
     duration: "",
     price: 0,
@@ -36,7 +36,7 @@ export const CourseOverview: CourseDataTypes[] = [
     title: "Artificial Intelligence",
     description:
       "AI, Cybersecurity & Cloud – Learn AI tools, defend systems, and manage cloud platforms.",
-    imageUrl: "/GetSkilled/Ai developer.jpg",
+    imageUrl: "/GetSkilled/artificial-intelligence.jpg",
     bgColor: "white",
     duration: "",
     price: 0,
@@ -56,7 +56,7 @@ export const CourseOverview: CourseDataTypes[] = [
   {
     title: "Digital Creativity & Design",
     description: "UI/UX, branding, and content creation.",
-    imageUrl: "",
+    imageUrl: "/GetSkilled/digital-creativity.jpg",
     bgColor: "black",
     duration: "",
     price: 0,

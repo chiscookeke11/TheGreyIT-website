@@ -100,6 +100,13 @@ export default function UserAuthModal() {
         else {
             toast.success("Sign Up successful! Please confirm your email")
             setLoading(false)
+            setFormValues({
+                email: "",
+                confirmPassword: "",
+                firstName: "",
+                lastName: "",
+                password: ""
+            })
         }
     }
 
@@ -133,6 +140,13 @@ export default function UserAuthModal() {
             toast.success("Success! You are now signed in")
             console.log(data)
             setLoading(false)
+            setFormValues({
+                email: "",
+                confirmPassword: "",
+                firstName: "",
+                lastName: "",
+                password: ""
+            })
         }
 
 
@@ -213,8 +227,8 @@ export default function UserAuthModal() {
             <button className="font-syne bg-gray-700 w-full max-w-xs text-white hover:bg-transparent hover:text-gray-700 mb-5  px-6 py-3  flex items-center justify-center font-medium  focus:outline-none cursor-pointer text-base md:text-lg  border-[1px]  transition-all duration-300 ease-in-out border-gray-700 rounded-sm  " > {loading ? <Spinner /> : authState === "Sign In" ? "Sign In" : "Create Account"} </button>
 
 
-            {authState === "Sign In" ? <p className=" text-base font-medium text-black " >Don&apos;t have an account? <button className=" text-gray-700 font-medium cursor-pointer outline-none border-none" type="button" onClick={() => setAuthState("Sign Up")}> Create Account</button></p> : (
-                <p className=" text-base font-medium text-black " >Already have an account? <button type="button" className=" text-gray-700 font-medium cursor-pointer outline-none border-none " onClick={() => setAuthState("Sign In")}> Sign In</button></p>
+            {authState === "Sign In" ? <p className=" text-base font-medium text-black text-center " >Don&apos;t have an account? <button className=" text-gray-700 font-medium cursor-pointer outline-none border-none" type="button" onClick={() => setAuthState("Sign Up")}> Create Account</button></p> : (
+                <p className=" text-base font-medium text-black text-center " >Already have an account? <button type="button" className=" text-gray-700 font-medium cursor-pointer outline-none border-none " onClick={() => setAuthState("Sign In")}> Sign In</button></p>
             )}
 
 
