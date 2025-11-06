@@ -26,7 +26,7 @@ const handleGoogleLogin = async () => {
     return (
         <div>
             <div className="p-8 rounded-lg h-screen bg-white flex flex-col items-center justify-center gap-6">
-                <h2 className="text-2xl font-semibold text-gray-700">Admin Login</h2>
+                <h2 className="text-2xl font-semibold text-gray-700">Addsdsin Login</h2>
                 <button
                     onClick={handleGoogleLogin}
                     className="bg-gray-700 text-white py-3 px-6 cursor-pointer rounded-md hover:bg-gray-500 transition-all font-poppins "
