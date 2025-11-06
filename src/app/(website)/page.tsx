@@ -3,6 +3,7 @@ import ContactUsSection from "@/components/Home/ContactUsSection";
 import GetSkilled from "@/components/Home/GetSkilled";
 import Hero from "@/components/Home/Hero";
 import OurLabs from "@/components/Home/OurLabs";
+import Profile from "@/components/Home/Profile";
 import ResearchSection from "@/components/Home/ResearchSection";
 import WhyUs from "@/components/Home/WhyUs";
 
@@ -17,6 +18,7 @@ export default function Home() {
       <WhyUs />
       <OurLabs />
       <GetSkilled />
+      <Profile/>
       <ErrorBoundary>
         <ResearchSection />
       </ErrorBoundary>

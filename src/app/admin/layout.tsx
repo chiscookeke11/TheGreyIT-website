@@ -34,7 +34,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
     }
   }, [])
 
-  // 🧩 Check if the user is in the admins table
+  //  Check if the user is in the admins table
   useEffect(() => {
     const checkAdmin = async () => {
       if (!user) return

@@ -29,4 +29,14 @@ export interface ResearchBlogType {
 };
 
 
+export interface ProfileDataType {
+  id: number,
+  name: string,
+  position: string,
+  linkedInUrl: string,
+  imageUrl: string,
+  about: string
+}
+
+
 

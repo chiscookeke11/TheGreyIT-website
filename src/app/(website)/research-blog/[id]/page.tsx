@@ -63,7 +63,7 @@ export default function Page() {
                         </section>
 
 
-                        <div className="w-full py-16 px-[3%] text-justify font-poppins font-medium text-lg bg-[#f2f5fc]  " dangerouslySetInnerHTML={{ __html: currentBlog.content }} />
+                        <div className="w-full py-16 px-[5%]  font-poppins font-medium text-lg bg-[#f2f5fc]  " dangerouslySetInnerHTML={{ __html: currentBlog.content }} />
 
 
 
