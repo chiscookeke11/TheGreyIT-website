@@ -18,7 +18,7 @@ export default function OurMission() {
 
 
             <div className="w-full basis-1/2 flex flex-col items-start gap-4  "  >
-                <h1 className="text-2xl md:text-4xl font-extrabold mb-7 text-gray-700"> Our Mission</h1>
+                <h1 className="text-2xl md:text-4xl font-extrabold mb-3 text-gray-700"> Our Mission</h1>
 
 
                 <p className="text-lg md:text-xl">
