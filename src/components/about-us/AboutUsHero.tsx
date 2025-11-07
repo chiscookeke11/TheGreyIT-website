@@ -16,10 +16,12 @@ export default function AboutHero() {
 
       <div className="absolute inset-0 bg-black/40 -z-0" />
 
-      <div className="relative text-start text-white px-3  max-w-5xl  font-poppins ">
+      <div className="relative text-start text-white px-3  max-w-5xl  font-poppins space-y-3 ">
         <h1 className=" text-3xl md:text-4xl lg:text-7xl  font-extrabold leading-[130%] ">
-          Building a safer ecommerce world through the power of AI
+         Learn. Build. Advance.
         </h1>
+
+        <p className=" max-w-5xl text-lg lg:text-xl font-semibold text-white " >Every course and mentorship at TheGreyit reflects this simple ideology; learning should lead to building something valuable, and building should lead to progress, for individuals, communities, and Africa as a whole. </p>
       </div>
     </section>
   );
