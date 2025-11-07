@@ -44,7 +44,7 @@ export default function Page() {
                 {ServicesData.map((service, i) => (
                     <div key={i} className={`w-full max-w-8xl flex flex-col  items-center  md:h-[500px] ${i % 2 === 0 ? " md:flex-row-reverse" : "md:flex-row"} `} >
 
-                        <div className="bg-red-700  w-full md:basis-1/2 h-full " >
+                        <div className="bg-gray-400 w-full md:basis-1/2 h-full " >
                             <Image src={service.imageUrl} alt={service.title} width={1000} height={1000} className="w-full h-full object-cover object-center" />
                         </div>
 
