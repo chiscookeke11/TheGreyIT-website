@@ -24,7 +24,7 @@ export default function Page() {
 
 
             {/* The hero section  */}
-            <section className="w-full  h-screen relative bg-center bg-cover bg-no-repeat flex items-center justify-center  " style={{ backgroundImage: 'url("/services-page/services.webp")' }}>
+            <section className="w-full  h-screen relative bg-center bg-cover bg-no-repeat flex items-center justify-center  " style={{ backgroundImage: 'url("/services-images/service-hero.jpg")' }}>
                 <div className="w-full h-full absolute inset-0 bg-gradient-to-b from-[rgba(4,9,30,0.6)] to-[rgba(4,9,30,0.6)] z-10 " />
                 <div className="flex items-center justify-center z-20 font-poppins flex-col gap-3 text-white px-[4%] " >
                     <h1 className="text-2xl md:text-4xl font-bold">Our Services</h1>
@@ -51,7 +51,7 @@ export default function Page() {
 
                         <div className="md:basis-1/2 w-full h-full px-5 lg:px-10 py-8 md:py-16 flex items-start justify-center flex-col  gap-3.5 text-start " >
                             <h3 className="text-xl md:text-2xl font-extrabold text-gray-700 mb-4 ">{service.title} </h3>
-                            <p className="text-lg md:text-xl mb-5 "> {service.content} </p>
+                            <p className="text-lg md:text-xl mb-5 whitespace-pre-line "> {service.content} </p>
                             <button
                                 onClick={() => {
                                     setSelectedSubject(service.title)

@@ -8,7 +8,7 @@ import Image from "next/image";
 export default function Leadership() {
 
   return (
-    <section className="py-20 px-[5%] bg-white flex flex-col items-center justify-center gap-16 " style={{ fontFamily: 'Proxima Nova, sans-serif' }}>
+    <section className="py-20 px-[5%] bg-[#f2f5fc] flex flex-col items-center justify-center gap-16 " style={{ fontFamily: 'Proxima Nova, sans-serif' }}>
 
       <h2 className="text-2xl md:text-5xl font-extrabold">Our Team</h2>
 

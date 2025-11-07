@@ -9,6 +9,8 @@ import React, { useEffect, useRef, useState } from "react";
 import CustomLink from "./CustomLink";
 import { useAppContext } from "@/context/AppContext";
 import { usePathname } from "next/navigation";
+import { User } from "@supabase/supabase-js";
+import { supabase } from "@/lib/supabaseClient";
 
 
 
@@ -21,9 +23,27 @@ export default function Navbar() {
     const pathName = usePathname()
     const mobileNavRef = useRef<HTMLDivElement | null>(null)
     const isLightBackground = pathName === "/" || pathName === "/courses" || pathName === "/our-services" || pathName === "/about-us" || pathName.includes("research-blog/");
+    const [user, setUser] = useState<User | null>(null)
 
 
 
+    useEffect(() => {
+        const getUser = async () => {
+            const { data, error } = await supabase.auth.getUser()
+            if (error) console.error("Auth check failed:", error.message)
+            setUser(data.user ?? null)
+        }
+
+        getUser()
+
+        const { data: authListener } = supabase.auth.onAuthStateChange((_event, session) => {
+            setUser(session?.user ?? null)
+        })
+
+        return () => {
+            authListener.subscription.unsubscribe()
+        }
+    }, [])
 
 
 
@@ -88,7 +108,7 @@ export default function Navbar() {
                     </li>
                 ))}
 
-                <Link href={"/user"} className={`text-base font-semibold font-poppins bg-white text-gray-700 py-3 px-4 rounded-[8px] hover:rounded-none transition-all duration-300 ease-in-out    `} > Sign In</Link>
+                <Link href={"/user"} className={`text-base font-semibold font-poppins bg-white text-gray-700 py-2 px-4 rounded-[8px] hover:rounded-none transition-all duration-300 ease-in-out    `} >  {user ? "Dashboard" : "Sign In"} </Link>
             </ul>
 
 
@@ -109,7 +129,7 @@ export default function Navbar() {
                         <li key={index} onClick={() => setShowMenu(false)} className=" text-lg font-poppins text-white " ><CustomLink href={navlink.url} > {navlink.label}</CustomLink> </li>
                     ))}
 
-                      <Link href={"/user"} className={`text-lg font-semibold font-poppins bg-white text-gray-700 py-3 px-4 rounded-sm    `} > Sign In</Link>
+                    <Link href={"/user"} className={`text-lg font-semibold font-poppins bg-white text-gray-700 py-2 px-4 rounded-sm    `} >{user ? "Dashboard" : "Sign In"}</Link>
                 </ul>
 
             </div>
