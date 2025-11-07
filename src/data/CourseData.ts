@@ -66,7 +66,7 @@ export const CourseOverview: CourseDataTypes[] = [
   {
     title: "Office & Digital Literacy",
     description: "Skills for career and workplace success.",
-    imageUrl: "",
+    imageUrl: "/GetSkilled/office-literacy.jpg",
     bgColor: "#A5A4A2",
     duration: "",
     price: 0,
@@ -76,7 +76,7 @@ export const CourseOverview: CourseDataTypes[] = [
   {
     title: "Kids & Junior Tech",
     description: "Coding, STEM, and safe internet use.",
-    imageUrl: "",
+    imageUrl: "/GetSkilled/kids_in_tech.jpg",
     bgColor: "white",
     duration: "",
     price: 0,

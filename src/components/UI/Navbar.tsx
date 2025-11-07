@@ -87,6 +87,8 @@ export default function Navbar() {
                         <CustomLink href={navlink.url}>{navlink.label}</CustomLink>
                     </li>
                 ))}
+
+                <Link href={"/user"} className={`text-base font-semibold font-poppins bg-white text-gray-700 py-3 px-4 rounded-sm    `} > Sign In</Link>
             </ul>
 
 
@@ -106,6 +108,8 @@ export default function Navbar() {
                     {navLinksData.map((navlink, index) => (
                         <li key={index} onClick={() => setShowMenu(false)} className=" text-lg font-poppins text-white " ><CustomLink href={navlink.url} > {navlink.label}</CustomLink> </li>
                     ))}
+
+                      <Link href={"/user"} className={`text-sm font-semibold font-poppins bg-white text-gray-700 py-3 px-4 rounded-sm    `} > Sign In</Link>
                 </ul>
 
             </div>

@@ -71,7 +71,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
 
   // show login modal if user is not logged in
   if (!user) {
-    return <div className=" w-full min-h-screen flex items-center justify-center py-4 px-6 " ><AuthModal /></div>
+    return <div className=" w-full min-h-screen flex items-center justify-center py-4 px-6 bg-[#f2f5fc] " ><AuthModal /></div>
   }
 
   // deny access if user isn’t admin

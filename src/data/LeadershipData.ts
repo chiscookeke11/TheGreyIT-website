@@ -1,62 +1,38 @@
- export const leaders = [
+ export const teams = [
     {
-      name: "Eido Gal",
-      title: "CEO & Co-Founder",
-      image: "/community-page/Me.png", // <- replace
+      name: "Abel Chidera Emmanuel",
+      title: "Founder & Managing Director, GICBC, Cert.BC ",
+      image: "/community-page/Me.png",
       linkedin: "https://www.linkedin.com",
     },
     {
-      name: "Assaf Feldman",
-      title: "CTO & Co-Founder",
-      image: "/community-page/Me.png", // <- replace
+      name: "Ezekwueme Augustine,",
+      title: "Co-founder & Operations Manager, ALSLT",
+      image: "/community-page/Me.png",
       linkedin: "https://www.linkedin.com",
     },
     {
-      name: "Aglika Dotcheva",
-      title: "CFO",
-      image: "/community-page/Me.png", // <- replace
+      name: "Chinedu Emmanuel Okeke ",
+      title: "Dev Lead",
+      image: "/team/_BIG6925.jpg",
       linkedin: "https://www.linkedin.com",
     },
     {
-      name: "Ravi Kumaraswami",
-      title: "President of Worldwide Field Operations",
-      image: "/community-page/Me.png", // <- replace
+      name: "Fedrick ",
+      title: "Developer",
+      image: "/community-page/Me.png",
       linkedin: "https://www.linkedin.com",
     },
     {
-      name: "Jeff Otto",
-      title: "Chief Marketing Officer",
-      image: "/community-page/Me.png", // <- replace
+      name: "Mbaeze Olivia",
+      title: "Office Assistant",
+      image: "/community-page/Me.png",
       linkedin: "https://www.linkedin.com",
     },
     {
-      name: "Dana Teplitsky",
-      title: "SVP, Global HR",
-      image: "/community-page/Me.png", // <- replace
-      linkedin: "https://www.linkedin.com",
-    },
-    {
-      name: "Shahar Yaari",
-      title: "SVP, Product",
-      image: "/community-page/Me.png", // <- replace
-      linkedin: "https://www.linkedin.com",
-    },
-    {
-      name: "Eric Treichel",
-      title: "General Counsel",
-      image: "/community-page/Me.png", // <- replace
-      linkedin: "https://www.linkedin.com",
-    },
-    {
-      name: "Nadav Lobel",
-      title: "SVP, Account Management & Analytics",
-      image: "/community-page/Me.png", // <- replace
-      linkedin: "https://www.linkedin.com",
-    },
-    {
-      name: "Avi Shauli",
-      title: "SVP, Engineering",
-      image: "/community-page/Me.png", // <- replace
+      name: "Chinaza Kenechukwu",
+      title: "Data Analyst",
+      image: "/community-page/Me.png",
       linkedin: "https://www.linkedin.com",
     },
   ];

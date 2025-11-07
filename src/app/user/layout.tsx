@@ -78,7 +78,7 @@ export default function UserDashboardLayout({ children }: { children: React.Reac
 
     // show login modal if user is not logged in
     if (!user) {
-        return <main className="w-full min-h-screen flex items-center justify-center py-4 px-6" ><UserAuthModal /></main>
+        return <main className="w-full min-h-screen flex items-center justify-center py-4 px-6 bg-[#f2f5fc]" ><UserAuthModal /></main>
     }
 
 
@@ -96,7 +96,7 @@ export default function UserDashboardLayout({ children }: { children: React.Reac
 
     return (
 
-        <div className="min-h-screen bg-white flex flex-col font-poppins">
+        <div className="min-h-screen bg-white flex flex-col font-poppins ">
             <nav className="p-5">
                 <Link href={"/"}>
                     <Image

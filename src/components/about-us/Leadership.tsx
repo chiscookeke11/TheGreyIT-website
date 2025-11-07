@@ -1,4 +1,4 @@
-import { leaders } from "@/data/LeadershipData";
+import { teams } from "@/data/LeadershipData";
 import Image from "next/image";
 import { FaLinkedin } from "react-icons/fa";
 
@@ -9,41 +9,22 @@ export default function Leadership() {
   return (
     <section className="py-20 bg-white">
       <div className="max-w-7xl mx-auto px-6 md:px-12 text-center font-poppins">
-        <h2 className="text-2xl md:text-4xl font-bold mb-16">Our Leadership</h2>
+        <h2 className="text-2xl md:text-4xl font-bold mb-16">Our Team</h2>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-14 md:gap-20">
-          {leaders.map((leader, index) => (
-            <div key={index} className="flex flex-col items-center text-center">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3  gap-14 md:gap-16 place-items-center justify-items-center ">
+          {teams.map((leader, index) => (
 
-              {/* Profile Image Wrapper */}
-              <div className="relative w-44 h-44 md:w-48 md:h-48 rounded-full ">
-                <Image
-                  src={leader.image}
-                  alt={leader.name}
-                  width={300}
-                  height={300}
-                  className="w-full h-full object-cover rounded-full shadow-lg"
-                />
+            <div key={index} className=" w-full bg-white shadow-2xl rounded-md px-6 py-8 flex items-center flex-col gap-8 min-w-sm" >
 
-                {/* LinkedIn Button */}
-                <a
-                  href={leader.linkedin}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="absolute bottom-3 right-3 bg-[#5865F2] text-white p-2 rounded-full shadow-md hover:scale-110 transition-transform"
-                >
-                  <FaLinkedin size={18} />
-                </a>
+              <div className=" w-[230px] h-[230px] flex items-center justify-center p-2 rounded-full bg-gray-700  " >
+                <Image src={leader.image} alt={`${leader.name}-img `} height={500} width={500} className="h-full w-full object-center object-cover rounded-full " />
               </div>
 
-              {/* Name */}
-              <h3 className="mt-6 text-base md:text-lg font-semibold hover:text-[#5865F2] transition-colors">
-                {leader.name}
-              </h3>
-
-              {/* Title */}
-              <p className="text-gray-600 mt-1 text-sm md:text-base">{leader.title}</p>
             </div>
+
+
+
+
           ))}
         </div>
       </div>
