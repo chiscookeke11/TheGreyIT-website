@@ -6,6 +6,7 @@ import OurLabs from "@/components/Home/OurLabs";
 import Profile from "@/components/Home/Profile";
 import ResearchSection from "@/components/Home/ResearchSection";
 import WhyUs from "@/components/Home/WhyUs";
+import NewsletterSection from "@/components/UI/NewsletterSection";
 
 
 
@@ -18,11 +19,12 @@ export default function Home() {
       <WhyUs />
       <OurLabs />
       <GetSkilled />
-      <Profile/>
+      <Profile />
       <ErrorBoundary>
         <ResearchSection />
       </ErrorBoundary>
       <ContactUsSection />
+      <NewsletterSection />
     </>
   );
 }

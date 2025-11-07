@@ -11,7 +11,7 @@ const brands = [
 
 export default function WhoWeAreSection() {
     return (
-        <section className=" bg-white overflow-hidden w-full px-[5%] py-10 md:py-16 flex items-center flex-col md:flex-row justify-between gap-20 !pt-32  " style={{ fontFamily: 'Proxima Nova, sans-serif' }}  >
+        <section className=" bg-white overflow-hidden w-full px-[5%] py-10 md:py-16 flex items-start flex-col md:flex-row justify-between gap-20 !pt-32  " style={{ fontFamily: 'Proxima Nova, sans-serif' }}  >
 
 
 

@@ -22,7 +22,7 @@ export const teams = [
   {
     name: "Chinedu Emmanuel Okeke ",
     title: "Dev Lead",
-    image: "/team/_BIG6925.jpg",
+    image: "/team/neduPortrait.jpg",
     socials: {
       linkedIn: "https://www.linkedin.com/in/chinedu-emmanuel-okeke-4080b8292/",
       facebook: "",
