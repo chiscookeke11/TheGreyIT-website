@@ -1,49 +1,51 @@
-import { Briefcase, Cloud, Globe, GraduationCap, HardDrive, Lock, Palette, ShoppingCart, Smartphone } from "lucide-react";
 
 export const ServicesData = [
   {
-    icon: <Globe size={30} />,
-    title: "Website Development",
-    content: "We build responsive and high-performing websites."
+    title: "Web Experience & Digital Platforms",
+    content: "We don’t just build websites — we create digital experiences that work hard for you. From portfolio sites to full enterprise systems, our team designs responsive, fast, and human-centered platforms that drive growth and visibility. ",
+    imageUrl: "/services-images/web-experience.jpg",
+    buttonText: "Build My Digital Space"
   },
   {
-    icon: <ShoppingCart size={30} />,
-    title: "E-Commerce Solutions",
-    content: "We create online stores that boost your digital sales."
+    title: "Software Solutions & App Development",
+    content: "We turn bold ideas into powerful, practical software.From web and mobile apps to smart business tools, our developers craft solutions that automate processes and scale seamlessly. ",
+    imageUrl: "/services-images/software-dev.jpg",
+    buttonText: "Launch My App"
   },
   {
-    icon: <Smartphone size={30} />,
-    title: "Web & Mobile App Development",
-    content: "We develop scalable web and mobile applications tailored to your needs."
+    title: "Cybersecurity & Data Protection",
+    content: "Your security is our priority. We help organisations detect threats, secure data, and meet compliance standards through ethical hacking, risk assessments, and endpoint defence systems. ",
+    imageUrl: "/services-images/cybe-sec.jpg",
+    buttonText: " Protect My Systems"
   },
   {
-    icon: <HardDrive size={30} />,
-    title: "Hardware & IoT Solutions",
-    content: "We provide hardware setups and IoT integrations for smarter systems."
+    title: "Cloud Infrastructure & IT Systems",
+    content: "Move beyond limits with modern cloud and IT infrastructure. We design, deploy, and manage scalable systems for schools, startups, and enterprises — keeping your data safe and operations always-on. ",
+    imageUrl: "/services-images/cloud-computing.jpg",
+    buttonText: "Go Cloud-Ready"
   },
   {
-    icon: <Palette size={30} />,
-    title: "UI/UX Design",
-    content: "We craft intuitive, user-centered designs that enhance engagement."
+    title: "Hardware Repairs & Technical Support",
+    content: "We fix, upgrade, and maintain what keeps you running. From laptop repairs to full system rebuilds, our experts deliver reliable, hands-on solutions that keep your tech in top shape. ",
+    imageUrl: "/services-images/hardware-repairs.jpg",
+    buttonText: " Fix My Device"
   },
   {
-    icon: <Cloud size={30} />,
-    title: "Cloud & Infrastructure",
-    content: "We deploy and manage reliable cloud-based infrastructures."
+    title: "Data Recovery & Backup Systems",
+    content: "Lost it? We’ll get it back. Our technicians recover, restore, and secure your critical files — with reliable backup plans to prevent future loss. ",
+    imageUrl: "/services-images/data-recovery.jpg",
+    buttonText: "Recover My Data"
   },
   {
-    icon: <Lock size={30} />,
-    title: "Cybersecurity",
-    content: "We secure your systems and protect your digital assets from threats."
+    title: "Networking & Smart Connectivity",
+    content: "We make connection seamless. From router setup and cabling to enterprise network design, we build fast, secure, and scalable systems that keep your world online. ",
+    imageUrl: "/services-images/smart-connectivity.jpg",
+    buttonText: "Connect My Space"
   },
   {
-    icon: <GraduationCap size={30} />,
-    title: "Training Programs",
-    content: "We offer hands-on training in web, hardware, and emerging technologies."
+    title: "Tech Consulting & Digital Maintenance",
+    content: "Tech shouldn’t be confusing — it should work for you. We provide expert consulting, digital transformation strategies, and maintenance services for schools, SMEs, and growing enterprises. ",
+    imageUrl: "/services-images/consultation.jpg",
+    buttonText: " Let’s Talk Tech"
   },
-  {
-    icon: <Briefcase size={30} />,
-    title: "Internships",
-    content: "We provide internship opportunities that build real-world experience."
-  }
 ];
