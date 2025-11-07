@@ -47,6 +47,9 @@ export default function AuthModal() {
 
     // google social login function
     const handleGoogleLogin = async () => {
+        setLoading(true)
+
+
         const { error } = await supabase.auth.signInWithOAuth({
             provider: "google",
             options: {
@@ -56,6 +59,9 @@ export default function AuthModal() {
 
 
         if (error) console.error("Google login failed:", error.message)
+
+
+        setLoading(false)
     }
 
 
@@ -224,7 +230,7 @@ export default function AuthModal() {
 
             </div>
 
-            <button className="font-syne bg-gray-700 w-full max-w-xs text-white hover:bg-transparent hover:text-gray-700 mb-5  px-6 py-3  flex items-center justify-center font-medium  focus:outline-none cursor-pointer text-base md:text-lg  border-[1px]  transition-all duration-300 ease-in-out border-gray-700 rounded-sm  " > {loading ? <Spinner /> : authState === "Sign In" ? "Sign In" : "Create Account"} </button>
+            <button disabled={loading} className="font-syne bg-gray-700 w-full max-w-xs text-white hover:bg-transparent hover:text-gray-700 mb-5  px-6 py-3  flex items-center justify-center font-medium  focus:outline-none cursor-pointer text-base md:text-lg  border-[1px]  transition-all duration-300 ease-in-out border-gray-700 rounded-sm  " > {loading ? <Spinner /> : authState === "Sign In" ? "Sign In" : "Create Account"} </button>
 
 
             {authState === "Sign In" ? <p className=" text-base font-medium text-black text-center " >Don&apos;t have an account? <button className=" text-gray-700 font-medium cursor-pointer outline-none border-none" type="button" onClick={() => setAuthState("Sign Up")}> Create Account</button></p> : (
@@ -233,7 +239,7 @@ export default function AuthModal() {
 
 
             <div className=" flex items-center justify-center gap-3 " >
-                <button type="button" onClick={handleGoogleLogin} aria-label="Login with google" className="cursor-pointer p-2 rounded-full h-10 w-10 overflow-hidden flex items-center justify-center " ><Image src={"/logos/google-logo.png"} alt="google logo" height={50} width={50} className="h-full w-full " /></button>
+                <button disabled={loading} type="button" onClick={handleGoogleLogin} aria-label="Login with google" className="cursor-pointer p-2 rounded-full h-10 w-10 overflow-hidden flex items-center justify-center " ><Image src={"/logos/google-logo.png"} alt="google logo" height={50} width={50} className="h-full w-full " /></button>
             </div>
         </form>
     )

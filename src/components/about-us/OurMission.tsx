@@ -13,7 +13,7 @@ const coreValues = [
 
 export default function OurMission() {
     return (
-        <section className="bg-white overflow-hidden w-full px-[5%] py-10 md:py-16 flex items-center flex-col md:flex-row justify-between gap-16 !pt-32 " style={{ fontFamily: 'Proxima Nova, sans-serif' }}>
+        <section className="bg-white overflow-hidden w-full px-[5%] py-10 md:py-16 flex items-center flex-col md:flex-row justify-between gap-16  " style={{ fontFamily: 'Proxima Nova, sans-serif' }}>
 
 
 

@@ -45,22 +45,22 @@ export default function OurStory() {
 
         <h1 className="text-2xl md:text-4xl font-extrabold mb-7 "> Our Story</h1>
 
-        <p >
+        <p className="text-lg md:text-xl font-medium">
           In 2018, a dream was born, a dream to build a community that empowers real change through practical learning.
         </p>
-        <p>
+        <p className="text-lg md:text-xl font-medium">
           It began with one person, Abel Chidera Emmanuel, whose vision was to make digital and research education accessible, hands-on, and meaningful for every learner. He imagined a platform where young Africans could learn, build, and advance, not through theory alone, but through mentorship, creativity, and experience.
         </p>
-        <p className="font-medium">
+        <p className="text-lg md:text-xl font-medium">
           Then came 2020. The silence of the COVID-19 era halted many voices, including this growing community. But in that silence, the dream grew stronger. The uncertainty of the world made one thing clearer , Africa needed a movement that would turn knowledge into tangible skill, and skill into opportunity. </p>
 
-        <p>
+        <p className="text-lg md:text-xl font-medium">
           In 2021, Ezekwueme Augustine shared the same belief: that education must evolve beyond classrooms to become a bridge between passion and progress. Together, they nurtured this vision quietly, until 2023, when <i>The Grey IT & Educational Consults Limited</i> (Thegreyit) was officially co-founded and registered with the Corporate Affairs Commission (CAC) as a hybrid hub for technology, research, and digital education.
         </p>
 
 
 
-        <p>
+        <p className="text-lg md:text-xl font-medium">
           By early 2025, TheGreyit proudly opened its first in-house training facility in Enugu, a milestone that marked the transition from an online learning community into a physical centre of innovation and impact. Since then, the mission has remained unchanged: to expand access, empower learners, and transform lives through digital literacy, research, and technology-driven education.
         </p>
       </div>

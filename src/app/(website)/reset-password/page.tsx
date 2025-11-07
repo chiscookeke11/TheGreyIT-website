@@ -49,7 +49,7 @@ export default function Page() {
         <div className="w-full h-screen flex items-center justify-center px-[5%] " >
             <form onSubmit={sendResetLink} className=" w-full max-w-2xl bg-white flex items-center justify-center flex-col gap-7 px-6 py-10 rounded-lg font-poppins ">
 
-                <h1 className="text-gray-700 font-bold font-poppins text-2xl md:text-4xl  "> Enter Your Email</h1> <h1 className="text-gray-700 font-bold font-poppins text-2xl md:text-4xl  "> Enter Your Email</h1>
+                <h1 className="text-gray-700 font-bold font-poppins text-2xl md:text-4xl  "> Enter Your Email</h1>
 
                 {/* Email input */}
                 <label htmlFor="Email" className=" w-full flex flex-col items-start gap-1  " >
