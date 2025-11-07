@@ -2,6 +2,7 @@
 
 import { supabase } from "@/lib/supabaseClient"
 import { Eye, EyeOff } from "lucide-react"
+import { useRouter } from "next/navigation"
 import React, { useState } from "react"
 import toast from "react-hot-toast"
 
@@ -19,7 +20,7 @@ const Spinner = () => {
 export default function Page() {
 
   const [showPassword, setShowPassword] = useState(false)
-
+  const router = useRouter()
   const [loading, setLoading] = useState(false)
   const [formValues, setFormValues] = useState({
     password: "",
@@ -58,6 +59,8 @@ export default function Page() {
 
 
 
+    setLoading(true)
+
     const { error } = await supabase.auth.updateUser({
       password: formValues.password
     })
@@ -65,6 +68,17 @@ export default function Page() {
     if (error) {
       toast.error(`Failed: ${error.message}`)
       console.error(error)
+      setLoading(false)
+    }
+
+    else {
+      toast.success("Password updated successfully")
+      setFormValues({
+        confirmPassword: "",
+        password: "",
+      })
+      router.push("/user")
+      setLoading(false)
     }
   }
 
@@ -97,7 +111,7 @@ export default function Page() {
         </label>
 
 
-        <button className="font-syne bg-gray-700 w-full max-w-xs text-white hover:bg-transparent hover:text-gray-700 mb-5  px-6 py-3  flex items-center justify-center font-medium  focus:outline-none cursor-pointer text-base md:text-lg  border-[1px]  transition-all duration-300 ease-in-out border-gray-700 rounded-sm  " > {loading ? <Spinner /> : "Update password"} </button>
+        <button disabled={loading} className="font-syne bg-gray-700 w-full max-w-xs text-white hover:bg-transparent hover:text-gray-700 mb-5  px-6 py-3  flex items-center justify-center font-medium  focus:outline-none cursor-pointer text-base md:text-lg  border-[1px]  transition-all duration-300 ease-in-out border-gray-700 rounded-sm  " > {loading ? <Spinner /> : "Update password"} </button>
       </form>
     </div>
   )

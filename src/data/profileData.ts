@@ -77,7 +77,7 @@ Lesson for TheGreyIT: Build solutions that last—impact is the real legacy.
     name: "Philip Emeagwali",
     position: "Computer Scientist & Supercomputing Pioneer (Nigeria / USA)",
     linkedInUrl: "https://en.wikipedia.org/wiki/Philip_Emeagwali",
-    imageUrl: "/profiles/Emeagwali.jpg",
+    imageUrl: "/profiles/philip.jpg",
     about:
       "Philip Emeagwali inspires TheGreyIT students through intellectual courage, persistence, and innovation. His pioneering work in parallel computing laid the foundation for modern internet infrastructure. His journey teaches that curiosity and perseverance—not privilege—are the true keys to discovery. Lesson for TheGreyIT: Knowledge becomes power only when paired with determination."
   },

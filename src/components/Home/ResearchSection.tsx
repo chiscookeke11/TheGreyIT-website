@@ -18,7 +18,7 @@ export default function ResearchSection() {
         target: targetRef
     })
 
-    const x = useTransform(scrollYProgress, [0, 1], ["10%", "-90%"])
+    const x = useTransform(scrollYProgress, [0, 1], ["10%", "-50%"])
 
     useEffect(() => {
         fetch("/api/blogs")
@@ -35,7 +35,7 @@ export default function ResearchSection() {
             <section className="w-full h-fit hidden lg:flex items-center justify-center gap-10 flex-col py-20 bg-[#f2f5fc] font-poppins  " >
 
 
-                <h5 className="text-black text-2xl lg:text-3xl font-extrabold font-poppins" >Research Section </h5>
+                <h5 className="text-black text-2xl lg:text-3xl font-extrabold font-poppins" >Blogs </h5>
 
 
 
@@ -64,7 +64,7 @@ export default function ResearchSection() {
 
             {/* Research Section for mobile view  */}
             <section className="w-full h-fit flex lg:hidden items-center justify-center gap-10 flex-col py-10 bg-[#f2f5fc] font-poppins" >
-                <h5 className="text-black text-2xl lg:text-3xl font-extrabold font-poppins" >Research Section </h5>
+                <h5 className="text-black text-2xl lg:text-3xl font-extrabold font-poppins" >Blogs </h5>
 
                 <div className="w-full overflow-x-auto flex items-center" >
                     <div className=" w-fit flex items-center justify-center gap-10 px-6 py-3 " >

@@ -10,7 +10,7 @@ import toast from "react-hot-toast"
 
 const Spinner = () => {
     return (
-        <div className="h-10 w-10 rounded-full border-4 border-gray-700 border-t-transparent animate-spin duration-150 ease-in-out transition-all " />
+        <div className="h-10 w-10 rounded-full border-4 border-gray-white border-t-transparent animate-spin duration-150 ease-in-out transition-all " />
     )
 }
 
@@ -27,20 +27,23 @@ export default function Page() {
     const sendResetLink = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
 
+        setLoading(true)
+
         const { data, error } = await supabase.auth.resetPasswordForEmail(email, {
-            redirectTo: "/update-password"
+            redirectTo: "https://the-grey-it-website.vercel.app/update_password"
         })
 
         if (error) {
             toast.error(`Failed to send link ${error.message} `)
             console.error(error.message)
+            setLoading(false)
         }
 
         console.log(data)
         setEmail("")
         toast.success("Password reset link sent successfully")
-
-
+        setEmail("")
+        setLoading(false)
     }
 
 
@@ -61,7 +64,7 @@ export default function Page() {
 
 
 
-                <button className="font-syne bg-gray-700 w-full max-w-xs text-white hover:bg-transparent hover:text-gray-700 mb-5  px-6 py-3  flex items-center justify-center font-medium  focus:outline-none cursor-pointer text-base md:text-lg  border-[1px]  transition-all duration-300 ease-in-out border-gray-700 rounded-sm  " > {loading ? <Spinner /> : "Send reset link"} </button>
+                <button disabled={loading} className="font-syne bg-gray-700 w-full max-w-xs text-white hover:bg-transparent hover:text-gray-700 mb-5  px-6 py-3  flex items-center justify-center font-medium  focus:outline-none cursor-pointer text-base md:text-lg  border-[1px]  transition-all duration-300 ease-in-out border-gray-700 rounded-sm  " > {loading ? <Spinner /> : "Send reset link"} </button>
 
 
             </form>
