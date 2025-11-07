@@ -18,7 +18,7 @@ export default function OurMission() {
 
 
             <div className="w-full basis-1/2 flex flex-col items-start gap-4  "  >
-                <h1 className="text-2xl md:text-4xl font-extrabold mb-7 "> Our Mission</h1>
+                <h1 className="text-2xl md:text-4xl font-extrabold mb-7 text-gray-700"> Our Mission</h1>
 
 
                 <p className="text-lg md:text-xl">
@@ -37,14 +37,14 @@ export default function OurMission() {
 
                 <div className="w-full flex flex-col gap-3 items-start mt-10 " >
 
-                    <p className="text-xl md:text-2xl font-bold" >Our Core Values</p>
+                    <p className="text-xl md:text-2xl font-bold text-gray-700" >Our Core Values</p>
 
                     <ul className=" flex flex-col gap-3 items-start list-disc text-lg lg:text-xl pl-5" >
                         {coreValues.map((value, i) => {
                             const [title, text] = value.split(":")
 
                             return (
-                                <li key={i} > <span className="font-extrabold " >{title}:</span> {text} </li>
+                                <li key={i} > <span className="font-extrabold text-gray-700" >{title}:</span> {text} </li>
                             )
                         })}
                     </ul>

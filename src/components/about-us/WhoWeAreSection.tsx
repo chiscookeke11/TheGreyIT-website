@@ -34,7 +34,7 @@ export default function WhoWeAreSection() {
 
 
             <div className="w-full basis-1/2 flex flex-col items-start gap-4  "  >
-                <h1 className="text-2xl md:text-4xl font-extrabold mb-7 "> Who We Are</h1>
+                <h1 className="text-2xl md:text-4xl font-extrabold mb-7 text-gray-700 "> Who We Are</h1>
 
 
                 <p className="text-lg md:text-xl">
@@ -43,14 +43,14 @@ export default function WhoWeAreSection() {
 
                 <div className="w-full flex flex-col gap-3 items-start mt-10 " >
 
-                    <p className="text-xl md:text-2xl font-bold" >We work through three main brands: </p>
+                    <p className="text-xl md:text-2xl font-bold text-gray-700 " >We work through three main brands: </p>
 
                     <ul className=" flex flex-col gap-3 items-start list-decimal text-lg lg:text-xl pl-5 py-3  " >
                         {brands.map((brand, i) => {
                             const [title, text] = brand.split("–")
 
                             return (
-                                <li key={i} > <span className="font-extrabold " >{title}:</span> {text} </li>
+                                <li key={i} > <span className="font-extrabold text-gray-700" >{title}:</span> {text} </li>
                             )
                         })}
                     </ul>
@@ -63,7 +63,7 @@ export default function WhoWeAreSection() {
 
 
                 <div className="w-full flex flex-col items-start gap-2 my-7 " >
-                    <h5 className="text-xl md:text-2xl font-extrabold ">Our Vision</h5>
+                    <h5 className="text-xl md:text-2xl font-extrabold text-gray-700">Our Vision</h5>
                     <p className="text-lg md:text-xl">To become Africa’s most trusted centre for technology, research, and education.
 
                         We aim to bridge digital skills with lifelong learning and help build a new generation of innovators. </p>

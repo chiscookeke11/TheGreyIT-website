@@ -43,7 +43,7 @@ export default function OurStory() {
 
       <div className=" flex flex-col items-start gap-5 basis-1/2 text-base lg:text-lg font-normal px-[5%] md:px-0 " >
 
-        <h1 className="text-2xl md:text-4xl font-extrabold mb-7 "> Our Story</h1>
+        <h1 className="text-2xl md:text-4xl font-extrabold mb-7 text-gray-700"> Our Story</h1>
 
         <p className="text-lg md:text-xl font-medium">
           In 2018, a dream was born, a dream to build a community that empowers real change through practical learning.
