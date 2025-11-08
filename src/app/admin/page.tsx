@@ -5,7 +5,7 @@ import Spinner from "@/components/UI/Spinner"
 import { supabase } from "@/lib/supabaseClient"
 import { ResearchBlogType } from "@/types/types"
 import { useInView } from "framer-motion"
-import { Trash } from "lucide-react"
+import { Fullscreen, Trash } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
 import { useEffect, useRef, useState } from "react"
@@ -81,20 +81,20 @@ export default function Page() {
                         {blogs.map((blog, index) => (
 
 
-                            <Link href={`/admin/blog/${blog.id}`} key={index} className="w-full" >
-                                <div className="w-full bg-gray-200 flex flex-col items-start gap-4 group  " >
-                                    <Image src={blog.image} alt={`${blog.title}-img`} height={500} width={500} className="flex-1 object-center object-cover  " />
-                                    <div className="w-full flex flex-col items-center justify-center gap-4 text-center py-5 px-3 " >
-                                        <h4 className="font-syne font-semibold text-xl "> {blog.title} </h4>
-                                        <div dangerouslySetInnerHTML={{ __html: blog.content.trim().slice(0, 60) + "..." }} className="flex items-center gap-1 text-sm font-normal " />
-                                        <div className="flex items-center gap-1 text-xs font-normal " ><p>By {blog.author}</p> <span className="bg-gray-300 block h-5 w-[1px] mx-2 " /> <p>{new Date(blog.publicationDate).toLocaleDateString()} </p></div>
-                                    </div>
 
-                                    <div className="h-0 overflow-hidden  bg-white w-full px-4  flex items-center justify-center gap-3 group-hover:h-fit group-hover:py-4 transition-all duration-300 ease-in-out " >
-                                        <button onClick={() => deleteBlog(blog.id)} className=" bg-gray-400 hover:bg-gray-700 hover:text-gray-200 transition-all ease-in-out duration-300 p-2 cursor-pointer rounded-sm text-white " ><Trash /></button>
-                                    </div>
+                            <div className="w-full bg-gray-200 flex flex-col items-start gap-4 group  " >
+                                <Image src={blog.image} alt={`${blog.title}-img`} height={500} width={500} className="flex-1 object-center object-cover  " />
+                                <div className="w-full flex flex-col items-center justify-center gap-4 text-center py-5 px-3 " >
+                                    <h4 className="font-syne font-semibold text-xl "> {blog.title} </h4>
+                                    <div dangerouslySetInnerHTML={{ __html: blog.content.trim().slice(0, 60) + "..." }} className="flex items-center gap-1 text-sm font-normal " />
+                                    <div className="flex items-center gap-1 text-xs font-normal " ><p>By {blog.author}</p> <span className="bg-gray-300 block h-5 w-[1px] mx-2 " /> <p>{new Date(blog.publicationDate).toLocaleDateString()} </p></div>
                                 </div>
-                            </Link>
+
+                                <div className="h-0 overflow-hidden  bg-white w-full px-4  flex items-center justify-center gap-3 group-hover:h-fit group-hover:py-4 transition-all duration-300 ease-in-out " >
+                                    <button onClick={() => deleteBlog(blog.id)} className=" bg-gray-400 hover:bg-gray-700 hover:text-gray-200 transition-all ease-in-out duration-300 p-2 cursor-pointer rounded-sm text-white " ><Trash /></button>
+                                    <Link href={`/admin/blog/${blog.id}`} key={index} className=" bg-gray-400 hover:bg-gray-700 hover:text-gray-200 transition-all ease-in-out duration-300 p-2 cursor-pointer rounded-sm text-white " ><Fullscreen /> </Link>
+                                </div>
+                            </div>
 
                         ))}
                     </div>
