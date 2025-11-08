@@ -1,5 +1,6 @@
 "use client"
 
+import NavigationMenu from "@/components/admin/NavigationMenu"
 import AuthModal from "@/components/UI/AuthModal"
 import Spinner from "@/components/UI/Spinner"
 import { supabase } from "@/lib/supabaseClient"
@@ -116,7 +117,12 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         </button>
       </header>
 
-      <main className="flex-1">{children}</main>
+
+
+      <main className="flex-1">
+        <NavigationMenu />
+        {children}
+      </main>
     </div>
   )
 }
