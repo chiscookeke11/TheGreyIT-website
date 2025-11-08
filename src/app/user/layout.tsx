@@ -110,7 +110,7 @@ export default function UserDashboardLayout({ children }: { children: React.Reac
             </nav>
 
             <header className="w-full flex items-center justify-between px-6 py-4 bg-gray-100 border-b border-[#008CC1]/20">
-                <h2 className="text-lg font-semibold text-gray-700">
+                <h2 className="text-lg font-semibold text-gray-700 flex-1">
                     Welcome, <span className="font-normal">{user.user_metadata.first_name.charAt(0).toUpperCase() + user.user_metadata.first_name.slice(1).toLowerCase()}</span>
                 </h2>
 
