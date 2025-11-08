@@ -1,5 +1,7 @@
 "use client"
 
+import { Mail } from "lucide-react"
+import Image from "next/image"
 import React, { useState } from "react"
 
 
@@ -18,10 +20,11 @@ export default function NewsletterSection() {
 
 
     return (
-        <section className=" bg-white w-full h-full flex items-center justify-center py-20 px-[6%] font-poppins ">
+        <section className=" bg-[#161925] w-full h-full flex items-center justify-center py-20 px-[6%] font-poppins relative overflow-hidden ">
+            {/* <Image src={"/newsletter/Group.svg"} alt="astract-shape" height={500} width={500} className="absolute right-[-170px] bottom-[-170px] " /> */}
 
 
-            <div className="w-full py-24 flex flex-col md:flex-row text-center md:text-start items-center gap-10 justify-evenly px-[4%] bg-gray-400 backdrop-blur-2xl rounded-xl " >
+            <div className="w-full py-24 flex flex-col md:flex-row text-center md:text-start items-center gap-10 justify-evenly px-[4%] bg-white/10 backdrop-blur-2xl z-20  rounded-xl " >
 
                 <h3 className="max-w-xl w-full basis-2/5 text-white text-xl md:text-3xl font-bold " >Subscribe our newsletter for latest updates</h3>
 
@@ -30,18 +33,22 @@ export default function NewsletterSection() {
 
 
                     <label htmlFor="email" className="w-full flex-1  " >
-                        <input
+                        <span className="border-[1px] bg-white/15 backdrop-blur-2xl rounded-[50px] flex items-center gap-2   px-6" >
+                        <Mail color="#ffffff" />
+                            <input
                             type="email"
                             id="email"
                             name="email"
+                            placeholder="Enter Your Email"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
-                            className="py-4 px-6 w-full outline-0 text-sm border-[1px] bg-white/15 backdrop-blur-2xl rounded-[50px] " />
+                            className=" py-4 w-full outline-0 text-base  font-medium placeholder:text-white text-white " />
 
+                        </span>
                     </label>
 
 
-                    <button className=" bg-gray-700 rounded-[50px] py-4 px-5  cursor-pointer flex items-center justify-center text-white  text-base font-medium  hover:rounded-[4px] duration-300 transition-all ease-in-out " >Subscribe Now</button>
+                    <button className=" bg-white rounded-[50px] py-4 px-5  cursor-pointer flex items-center justify-center text-neutral-700  text-base font-semibold  hover:rounded-[4px] duration-300 transition-all ease-in-out " >Subscribe Now</button>
                 </form>
 
             </div>
