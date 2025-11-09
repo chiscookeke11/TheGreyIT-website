@@ -108,7 +108,7 @@ export default function Navbar() {
                     </li>
                 ))}
 
-                <Link href={"/user"} className={`text-base font-semibold font-poppins bg-white text-gray-700 py-2 px-4 rounded-[8px] hover:rounded-none transition-all duration-300 ease-in-out    `} >  {user ? "Dashboard" : "Sign In"} </Link>
+                <Link href={"/user"} className={`text-base font-semibold font-poppins bg-white text-gray-700 py-2 px-4 rounded-[8px] hover:rounded-[50px] transition-all duration-300 ease-in-out    `} >  {user ? "Dashboard" : "Sign In"} </Link>
             </ul>
 
 

@@ -18,6 +18,7 @@
     "@tailwindcss/typography": "^0.5.19",
     "@tiptap/react": "^3.6.5",
     "@tiptap/starter-kit": "^3.6.5",
+    "animate.css": "^4.1.1",
     "dockerode": "^4.0.9",
     "emailjs-com": "^3.2.0",
     "framer-motion": "^12.23.16",

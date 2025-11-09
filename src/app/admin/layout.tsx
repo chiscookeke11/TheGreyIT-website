@@ -102,7 +102,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
 
       <header className="w-full flex items-center justify-between px-6 py-4 bg-gray-100 border-b border-[#008CC1]/20">
         <h2 className="text-lg font-semibold text-gray-700 flex-1">
-          Welcome, <span className="font-normal">{user.email}</span>
+          Welcome, <span className="font-normal text-sm md:text-base">{user.email}</span>
         </h2>
 
         <button

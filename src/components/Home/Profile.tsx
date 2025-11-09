@@ -2,7 +2,6 @@
 
 import { ProfileData } from "@/data/profileData"
 import { ProfileDataType } from "@/types/types"
-import { Linkedin } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
 
@@ -13,11 +12,11 @@ interface ProfileCardProps {
 
 const ProfileCard = ({ data }: ProfileCardProps) => {
     return (
-        <Link href={`/profile/${data.id}`} className="w-full" >
+        <Link href={`/profile/${data.id}`} className="w-full group" >
             <div className="w-full max-w-lg flex items-end bg-gray-400 px-4 py-4 rounded-xl h-[350px]  md:h-[505px] lg:h-[510px] relative overflow-hidden shadow-2xl " >
 
                 <div className=" bg-black/30 absolute inset-0 h-full w-full z-10 " />
-                <Image src={data.imageUrl} alt={`${data.name}-img`} fill className="object-center object-cover" />
+                <Image src={data.imageUrl} alt={`${data.name}-img`} fill className="object-center object-cover group-hover:scale-125 transition-all duration-300 ease-in-out " />
 
 
                 <div className="w-full  flex items-center justify-between z-20  " >
@@ -26,8 +25,6 @@ const ProfileCard = ({ data }: ProfileCardProps) => {
                         <h4 className=" text-lg font-bold " >{data.name} </h4>
                         <p className=" text-sm font-normal  " >{data.position} </p>
                     </div>
-
-                    <a href={data.linkedInUrl} className="bg-white w-8 h-8 rounded-sm flex items-center justify-center  " ><Linkedin size={20} /> </a>
 
                 </div>
             </div>

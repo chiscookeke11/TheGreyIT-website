@@ -1,15 +1,26 @@
 "use client"
 
 import Spinner from "@/components/UI/Spinner"
+import SideNav from "@/components/user/SideNav"
 import UserAuthModal from "@/components/user/UserAuthModal"
 import { supabase } from "@/lib/supabaseClient"
 import { User } from "@supabase/supabase-js"
-import Image from "next/image"
-import Link from "next/link"
-import { useEffect, useState } from "react"
+import {  useEffect, useState } from "react"
 
 
 
+
+
+const Header = ({ user }: { user: User }) => {
+    return (
+        <header className="w-full flex items-center justify-between px-6 py-4 bg-[#f2f5fc] border-b border-[#008CC1]/20">
+            <h2 className="text-lg font-semibold text-gray-700 flex-1">
+                Welcome, <span className="font-normal text-sm md:text-base">{user.user_metadata.first_name.charAt(0).toUpperCase() + user.user_metadata.first_name.slice(1).toLowerCase()}</span>
+            </h2>
+
+        </header>
+    )
+}
 
 
 
@@ -83,52 +94,27 @@ export default function UserDashboardLayout({ children }: { children: React.Reac
 
 
 
-    // deny access if user isn’t admin
-    //   if (!isAdmin) {
-    //     return (
-    //       <div className="w-full h-screen flex flex-col items-center justify-center bg-white font-poppins ">
-    //         <h2 className="text-2xl font-semibold text-red-600 mb-2">Access Denied</h2>
-    //         <p className="text-gray-600">You don’t have permission to access this page.</p>
-    //       </div>
-    //     )
-    //   }
+
 
 
     return (
 
-        <div className="min-h-screen bg-white flex flex-col font-poppins ">
-            <nav className="p-5">
-                <Link href={"/"}>
-                    <Image
-                        src={"/logos/THEGREYAElogoBlack.png"}
-                        width={180}
-                        height={180}
-                        alt="TheGreyIT-logo"
-                        className="object-center w-[100px]"
-                    />
-                </Link>
-            </nav>
 
-            <header className="w-full flex items-center justify-between px-6 py-4 bg-gray-100 border-b border-[#008CC1]/20">
-                <h2 className="text-lg font-semibold text-gray-700 flex-1">
-                    Welcome, <span className="font-normal">{user.user_metadata.first_name.charAt(0).toUpperCase() + user.user_metadata.first_name.slice(1).toLowerCase()}</span>
-                </h2>
+        <div className=" bg-[#FAFBFC] w-full h-full relative flex items-start text-black font-poppins " >
+            <SideNav setUser={setUser} />
 
-                <button
-                    onClick={async () => {
-                        const { error } = await supabase.auth.signOut()
-                        if (error) console.error("Sign-out error:", error.message)
-                        else setUser(null)
-                    }}
-                    className="bg-gray-700 text-white px-5 py-2 rounded-md hover:bg-gray-500 transition-all cursor-pointer"
-                >
-                    Sign Out
-                </button>
-            </header>
-            <main>
-                {children}
+
+
+
+            <main className="h-screen   w-full relative flex flex-col items-start flex-1  " >
+                <Header user={user}  />
+                <div className="w-full h-fit overflow-y-auto " >
+                    {children}
+                </div>
             </main>
+
         </div>
+
     )
 }
 

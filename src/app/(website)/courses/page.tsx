@@ -100,14 +100,6 @@ export default function Page() {
     const [showModal, setShowModal] = useState(false)
     const [selectedCourse, setSelectedCourse] = useState<string | undefined>("")
 
-
-
-
-
-
-
-
-
     useEffect(() => {
         document.body.style.overflowY = showModal ? "hidden" : "auto"
     }, [showModal])
@@ -144,7 +136,7 @@ export default function Page() {
 
 
             {/* Courses page hero section  */}
-            <div className="w-full h-[93vh] flex items-center justify-center relative bg-no-repeat bg-cover bg-center text-white font-poppins  " style={{ backgroundImage: 'url("/courses-page/hero-img-2.webp")' }}  >
+            <div className="w-full h-[95vh] flex items-center justify-center relative bg-no-repeat bg-cover bg-center text-white font-poppins  " style={{ backgroundImage: 'url("/courses-page/hero-img-2.webp")' }}  >
                 <div className="w-full h-full absolute inset-0 bg-gradient-to-b from-[rgba(4,9,30,0.5)] to-[rgba(4,9,30,0.5)] z-10 " />
 
 
