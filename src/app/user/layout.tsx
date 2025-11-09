@@ -15,7 +15,7 @@ const Header = ({ user }: { user: User }) => {
     return (
         <header className="w-full flex items-center justify-between px-6 py-4 bg-[#f2f5fc] border-b border-[#008CC1]/20">
             <h2 className="text-lg font-semibold text-gray-700 flex-1">
-                Welcome, <span className="font-normal text-sm md:text-base">{user.user_metadata.first_name.charAt(0).toUpperCase() + user.user_metadata.first_name.slice(1).toLowerCase()}</span>
+                Welcome, <span className="font-normal text-sm md:text-base">{ user.user_metadata.first_name ?  user.user_metadata.first_name.charAt(0).toUpperCase() + user.user_metadata.first_name.slice(1).toLowerCase() : user.email}</span>
             </h2>
 
         </header>

@@ -27,7 +27,7 @@ export default function OurStory() {
 
         <div className=" w-full md:w-[67%] aspect-16/9 hidden md:flex items-center justify-center  " >
           <Image
-            src="/about-us/about-us-2.jpg"
+            src="/about-us/second-image.jpg"
             alt="Founders Eido & Assaf"
             width={1000}
             height={1000}
