@@ -1,49 +1,52 @@
 "use client"
 
+import { useEffect, useRef, useState } from "react"
+import { supabase } from "@/lib/supabaseClient"
 import NavigationMenu from "@/components/admin/NavigationMenu"
 import AuthModal from "@/components/UI/AuthModal"
 import Spinner from "@/components/UI/Spinner"
-import { supabase } from "@/lib/supabaseClient"
-import { User } from "@supabase/supabase-js"
 import Image from "next/image"
 import Link from "next/link"
-import { useEffect, useState } from "react"
+import { User } from "@supabase/supabase-js"
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
+  const cachedUser = useRef<User | null>(null)
   const [user, setUser] = useState<User | null>(null)
   const [loading, setLoading] = useState(true)
   const [isAdmin, setIsAdmin] = useState(false)
   const [checkingAdmin, setCheckingAdmin] = useState(false)
 
-useEffect(() => {
-  const initAuth = async () => {
-    setLoading(true)
-
-    // get current session quickly from cache
-    const { data: { session } } = await supabase.auth.getSession()
-    setUser(session?.user ?? null)
-    setLoading(false)
-
-    // listen for auth state changes
-    const { data: listener } = supabase.auth.onAuthStateChange((_event, session) => {
-      setUser(session?.user ?? null)
-    })
-
-    return () => {
-      listener.subscription.unsubscribe()
-    }
-  }
-
-  initAuth()
-}, [])
-
-
-  //  Check if the user is in the admins table
+  // ✅ stable auth initialization
   useEffect(() => {
-    const checkAdmin = async () => {
-      if (!user) return
-      setCheckingAdmin(true)
+    const initAuth = async () => {
+      setLoading(true)
+      const { data: { session } } = await supabase.auth.getSession()
+      const currentUser = session?.user ?? null
+      cachedUser.current = currentUser
+      setUser(currentUser)
+      setLoading(false)
 
+      // listen for auth changes
+      const { data: listener } = supabase.auth.onAuthStateChange((_event, session) => {
+        const updatedUser = session?.user ?? null
+        cachedUser.current = updatedUser
+        setUser(updatedUser)
+      })
+
+      return () => {
+        listener.subscription.unsubscribe()
+      }
+    }
+
+    initAuth()
+  }, [])
+
+  // ✅ check admin only when user changes
+  useEffect(() => {
+    if (!user) return
+    setCheckingAdmin(true)
+
+    const checkAdmin = async () => {
       const { data, error } = await supabase
         .from("admins")
         .select("*")
@@ -51,19 +54,16 @@ useEffect(() => {
         .single()
 
       if (error) {
-        console.error("Error checking admin:", error.message)
         setIsAdmin(false)
       } else {
         setIsAdmin(!!data)
       }
-
       setCheckingAdmin(false)
     }
 
     checkAdmin()
-  }, [user])
+  }, [user?.id])
 
-  // show loading while checking session or admin status
   if (loading || checkingAdmin) {
     return (
       <div className="w-full h-screen flex flex-col gap-3 items-center justify-center bg-white">
@@ -73,22 +73,19 @@ useEffect(() => {
     )
   }
 
-  // show login modal if user is not logged in
   if (!user) {
-    return <div className=" w-full min-h-screen flex items-center justify-center py-4 px-6 bg-[#f2f5fc] " ><AuthModal /></div>
+    return <div className="w-full min-h-screen flex items-center justify-center py-4 px-6 bg-[#f2f5fc]"><AuthModal /></div>
   }
 
-  // deny access if user isn’t admin
   if (!isAdmin) {
     return (
-      <div className="w-full h-screen flex flex-col items-center justify-center bg-white font-poppins ">
+      <div className="w-full h-screen flex flex-col items-center justify-center bg-white font-poppins">
         <h2 className="text-2xl font-semibold text-red-600 mb-2">Access Denied</h2>
         <p className="text-gray-600">You don’t have permission to access this page.</p>
       </div>
     )
   }
 
-  // Show admin layout
   return (
     <div className="min-h-screen bg-white flex flex-col font-poppins">
       <nav className="p-5">
@@ -111,16 +108,13 @@ useEffect(() => {
         <button
           onClick={async () => {
             const { error } = await supabase.auth.signOut()
-            if (error) console.error("Sign-out error:", error.message)
-            else setUser(null)
+            if (!error) setUser(null)
           }}
           className="bg-gray-700 text-white px-5 py-2 rounded-md hover:bg-gray-500 transition-all cursor-pointer"
         >
           Sign Out
         </button>
       </header>
-
-
 
       <main className="flex-1">
         <NavigationMenu />
