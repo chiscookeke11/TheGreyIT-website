@@ -15,25 +15,28 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   const [isAdmin, setIsAdmin] = useState(false)
   const [checkingAdmin, setCheckingAdmin] = useState(false)
 
-  useEffect(() => {
-    const getUser = async () => {
-      setLoading(true)
-      const { data, error } = await supabase.auth.getUser()
-      if (error) console.error("Auth check failed:", error.message)
-      setUser(data.user ?? null)
-      setLoading(false)
-    }
+useEffect(() => {
+  const initAuth = async () => {
+    setLoading(true)
 
-    getUser()
+    // get current session quickly from cache
+    const { data: { session } } = await supabase.auth.getSession()
+    setUser(session?.user ?? null)
+    setLoading(false)
 
-    const { data: authListener } = supabase.auth.onAuthStateChange((_event, session) => {
+    // listen for auth state changes
+    const { data: listener } = supabase.auth.onAuthStateChange((_event, session) => {
       setUser(session?.user ?? null)
     })
 
     return () => {
-      authListener.subscription.unsubscribe()
+      listener.subscription.unsubscribe()
     }
-  }, [])
+  }
+
+  initAuth()
+}, [])
+
 
   //  Check if the user is in the admins table
   useEffect(() => {

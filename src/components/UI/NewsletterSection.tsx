@@ -1,7 +1,6 @@
 "use client"
 
 import { Mail } from "lucide-react"
-import Image from "next/image"
 import React, { useState } from "react"
 
 
@@ -9,7 +8,7 @@ import React, { useState } from "react"
 
 
 export default function NewsletterSection() {
-    const [email, setEmail] = useState("")
+    const [newsLetterEmail, setNewsLetterEmail] = useState("")
 
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -32,17 +31,17 @@ export default function NewsletterSection() {
                 <form onSubmit={handleSubmit} className="w-full basis-3/5 max-w-lg flex flex-col md:flex-row items-center justify-evenly gap-5  " >
 
 
-                    <label htmlFor="email" className="w-full flex-1  " >
+                    <label htmlFor="newsLetterEmail" className="w-full flex-1  " >
                         <span className="border-[1px] bg-white/15 backdrop-blur-2xl rounded-[50px] flex items-center gap-2   px-6" >
-                        <Mail color="#ffffff" />
+                            <Mail color="#ffffff" />
                             <input
-                            type="email"
-                            id="email"
-                            name="email"
-                            placeholder="Enter Your Email"
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
-                            className=" py-4 w-full outline-0 text-base  font-medium placeholder:text-white text-white " />
+                                type="email"
+                                id="newsLetterEmail"
+                                name="newsLetterEmail"
+                                placeholder="Enter Your Email"
+                                value={newsLetterEmail}
+                                onChange={(e) => setNewsLetterEmail(e.target.value)}
+                                className=" py-4 w-full outline-0 text-base  font-medium placeholder:text-white text-white " />
 
                         </span>
                     </label>

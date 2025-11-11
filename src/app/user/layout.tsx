@@ -67,7 +67,6 @@ export default function UserDashboardLayout({ children }: { children: React.Reac
 
 
 
-    // check if the user is in the students table
 
 
 
