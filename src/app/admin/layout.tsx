@@ -16,7 +16,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   const [isAdmin, setIsAdmin] = useState(false)
   const [checkingAdmin, setCheckingAdmin] = useState(false)
 
-  // ✅ stable auth initialization
+  //  stable auth initialization
   useEffect(() => {
     const initAuth = async () => {
       setLoading(true)
@@ -41,7 +41,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
     initAuth()
   }, [])
 
-  // ✅ check admin only when user changes
+  //  check admin only when user changes
   useEffect(() => {
     if (!user) return
     setCheckingAdmin(true)

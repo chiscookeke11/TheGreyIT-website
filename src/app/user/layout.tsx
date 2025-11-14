@@ -1,11 +1,13 @@
 "use client"
 
+import Button from "@/components/UI/Button"
 import Spinner from "@/components/UI/Spinner"
 import SideNav from "@/components/user/SideNav"
 import UserAuthModal from "@/components/user/UserAuthModal"
 import { supabase } from "@/lib/supabaseClient"
 import { User } from "@supabase/supabase-js"
-import {  useEffect, useState } from "react"
+import { ArrowRight, BookOpen, Medal } from "lucide-react"
+import { useEffect, useState } from "react"
 
 
 
@@ -13,10 +15,35 @@ import {  useEffect, useState } from "react"
 
 const Header = ({ user }: { user: User }) => {
     return (
-        <header className="w-full flex items-center justify-between px-6 py-4 bg-[#f2f5fc] border-b border-[#008CC1]/20">
-            <h2 className="text-lg font-semibold text-gray-700 flex-1">
-                Welcome, <span className="font-normal text-sm md:text-base">{ user.user_metadata.first_name ?  user.user_metadata.first_name.charAt(0).toUpperCase() + user.user_metadata.first_name.slice(1).toLowerCase() : user.email}</span>
-            </h2>
+        <header className="w-full flex items-center justify-between px-6 py-10 bg-gray-700 text-white rounded-2xl ">
+            <div className="w-fit flex items-center gap-5 " >
+
+
+                <div className=" w-[100px] h-[100px] flex items-center justify-center rounded-full border  border-white " >
+                    <div className="w-[90px] h-[90px] bg-[#f2f5fc] rounded-full flex items-center text-center justify-center " >
+                        <h2 className="text-black" >
+                            {user.user_metadata.first_name.charAt(0) + user.user_metadata.last_name.charAt(0)}
+                        </h2>
+                    </div>
+                </div>
+
+
+
+                <div className="flex flex-col gap-2 items-start flex-1 " >
+                    <h2 className="text-lg font-semibold  ">
+                        Hello, <span className="font-normal text-sm md:text-base">{user.user_metadata.first_name ? user.user_metadata.first_name.charAt(0).toUpperCase() + user.user_metadata.first_name.slice(1).toLowerCase() : user.email}</span>
+                    </h2>
+                    <div className="flex items-center gap-3 text-xs " >
+                        <p className=" flex items-center gap-1 "> <BookOpen size={13} /> {0} Course Enrolled</p>
+                        <p className=" flex items-center gap-1 "><Medal size={13} /> {0} Certificate</p>
+
+                    </div>
+                </div>
+            </div>
+
+            <Button variant="default" className="bg-white hover:bg-white hover:text-gray-700! hover:rounded-[50px] text-sm! gap-3 " >
+                View Courses  <ArrowRight size={15} />
+            </Button>
 
         </header>
     )
@@ -99,15 +126,15 @@ export default function UserDashboardLayout({ children }: { children: React.Reac
     return (
 
 
-        <div className=" bg-[#FAFBFC] w-full h-full relative flex items-start text-black font-poppins " >
-            <SideNav setUser={setUser} />
+        <div className="  bg-[#FAFBFC] w-full h-full relative flex items-center flex-col gap-8 text-black font-poppins px-[8%] py-20 " >
+
+            <Header user={user} />
 
 
 
-
-            <main className="h-screen   w-full relative flex flex-col items-start flex-1  " >
-                <Header user={user}  />
-                <div className="w-full h-fit overflow-y-auto " >
+            <main className="h-screen   w-full relative flex f items-start gap-5 flex-1    " >
+                <SideNav setUser={setUser} user={user} />
+                <div className="w-full h-fit overflow-y-auto  bg-red-700 " >
                     {children}
                 </div>
             </main>
