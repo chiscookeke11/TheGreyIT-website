@@ -26,12 +26,12 @@ export const sideNavLinks = [
     },
     {
         label: "Certficates",
-        route: "#",
+        route: "/user/certificates",
         icon: ""
     },
     {
         label: "Wishlist",
-        route: "#",
+        route: "/user/wishlist",
         icon: ""
     },
     {
@@ -41,7 +41,7 @@ export const sideNavLinks = [
     },
     {
         label: "Profile",
-        route: "#",
+        route: "/user/profile",
         icon: ""
     },
 ]

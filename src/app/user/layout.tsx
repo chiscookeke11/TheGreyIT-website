@@ -126,7 +126,7 @@ console.log(user)
     return (
 
 
-        <div className="  bg-[#FAFBFC] w-full h-full relative flex items-center flex-col gap-8 text-black font-poppins  px-[4%]  lg:px-[7%] py-20 " >
+        <div className="  bg-[#FAFBFC] w-full h-full relative flex items-center flex-col gap-8 text-black font-poppins  px-[4%]  py-20 " >
 
             <Header user={user} />
 
@@ -134,7 +134,7 @@ console.log(user)
 
             <main className="  w-full h-full lg:h-screen relative flex flex-col md:flex-row items-center md:items-start gap-10 md:gap-5 lg:gap-10 flex-1     " >
                 <SideNav setUser={setUser} user={user} />
-                <div className="w-full h-full overflow-y-auto  bg-red-700 " >
+                <div className="w-full h-full overflow-y-auto  " >
                     {children}
                 </div>
             </main>
