@@ -15,7 +15,7 @@ import { useEffect, useState } from "react"
 
 const Header = ({ user }: { user: User }) => {
     return (
-        <header className="w-full flex items-center justify-between px-6 py-10 bg-gray-700 text-white rounded-2xl ">
+        <header className="w-full flex flex-col md:flex-row items-start md:items-center  justify-between gap-6 px-6 py-10 bg-gray-700 text-white rounded-2xl ">
             <div className="w-fit flex items-center gap-5 " >
 
 
@@ -33,7 +33,7 @@ const Header = ({ user }: { user: User }) => {
                     <h2 className="text-lg font-semibold  ">
                         Hello, <span className="font-normal text-sm md:text-base">{user.user_metadata.first_name ? user.user_metadata.first_name.charAt(0).toUpperCase() + user.user_metadata.first_name.slice(1).toLowerCase() : user.email}</span>
                     </h2>
-                    <div className="flex items-center gap-3 text-xs " >
+                    <div className="flex flex-col md:flex-row  md:items-center  gap-3 text-xs " >
                         <p className=" flex items-center gap-1 "> <BookOpen size={13} /> {0} Course Enrolled</p>
                         <p className=" flex items-center gap-1 "><Medal size={13} /> {0} Certificate</p>
 
@@ -41,7 +41,7 @@ const Header = ({ user }: { user: User }) => {
                 </div>
             </div>
 
-            <Button variant="default" className="bg-white hover:bg-white hover:text-gray-700! hover:rounded-[50px] text-sm! gap-3 " >
+            <Button variant="default" className="bg-white hover:bg-white hover:text-gray-700! hover:rounded-[50px] text-sm! gap-3 ml-auto " >
                 View Courses  <ArrowRight size={15} />
             </Button>
 
@@ -126,15 +126,15 @@ export default function UserDashboardLayout({ children }: { children: React.Reac
     return (
 
 
-        <div className="  bg-[#FAFBFC] w-full h-full relative flex items-center flex-col gap-8 text-black font-poppins px-[8%] py-20 " >
+        <div className="  bg-[#FAFBFC] w-full h-full relative flex items-center flex-col gap-8 text-black font-poppins  px-[4%]  lg:px-[7%] py-20 " >
 
             <Header user={user} />
 
 
 
-            <main className="h-screen   w-full relative flex f items-start gap-5 flex-1    " >
+            <main className="  w-full h-full lg:h-screen relative flex flex-col lg:flex-row items-center lg:items-start gap-10 flex-1     " >
                 <SideNav setUser={setUser} user={user} />
-                <div className="w-full h-fit overflow-y-auto  bg-red-700 " >
+                <div className="w-full h-full overflow-y-auto  bg-red-700 " >
                     {children}
                 </div>
             </main>

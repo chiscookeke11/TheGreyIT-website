@@ -1,12 +1,12 @@
 export const sideNavLinks = [
     {
         label: "Dashboard",
-        route: "#",
+        route: "/user",
         icon: ""
     },
     {
         label: "Courses",
-        route: "#",
+        route: "/user/Courses",
         icon: ""
     },
     {
