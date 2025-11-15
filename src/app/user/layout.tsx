@@ -59,7 +59,7 @@ export default function UserDashboardLayout({ children }: { children: React.Reac
     const [checkingUser, setCheckingUser] = useState(false)
 
 
-
+console.log(user)
 
 
     useEffect(() => {
@@ -132,7 +132,7 @@ export default function UserDashboardLayout({ children }: { children: React.Reac
 
 
 
-            <main className="  w-full h-full lg:h-screen relative flex flex-col lg:flex-row items-center lg:items-start gap-10 flex-1     " >
+            <main className="  w-full h-full lg:h-screen relative flex flex-col md:flex-row items-center md:items-start gap-10 md:gap-5 lg:gap-10 flex-1     " >
                 <SideNav setUser={setUser} user={user} />
                 <div className="w-full h-full overflow-y-auto  bg-red-700 " >
                     {children}

@@ -22,7 +22,7 @@ export default function SideNav({ setUser, user }: SideNavProps) {
 
 
     return (
-        <aside className={`bg-[#f2f5fc] h-full  flex flex-col items-center justify-center  py-6 pt-20 pb-20 gap-4  px-5  transition-all duration-300 ease-in-out lg:max-w-sm w-full  rounded-xl  `} >
+        <aside className={`bg-[#f2f5fc] h-full  flex flex-col items-center justify-center  py-6 pt-20 pb-20 gap-4  px-5 md:px-3 lg:px-5 transition-all duration-300 ease-in-out md:max-w-[270px] lg:max-w-sm w-full  rounded-xl  `} >
 
 
 
