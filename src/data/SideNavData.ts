@@ -10,11 +10,6 @@ export const sideNavLinks = [
         icon: ""
     },
     {
-        label: "Categories",
-        route: "#",
-        icon: ""
-    },
-    {
         label: "Transactions",
         route: "#",
         icon: ""

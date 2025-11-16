@@ -25,6 +25,7 @@ export default function UserAuthModal() {
         firstName: "",
         lastName: "",
         email: "",
+        phoneNumber: "",
         password: "",
         confirmPassword: ""
     })
@@ -35,6 +36,9 @@ export default function UserAuthModal() {
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target
 
+        if (name === "phoneNumber" && isNaN(Number(value))) {
+            return;
+        }
 
         setFormValues((prev) => ({
             ...prev,
@@ -92,6 +96,7 @@ export default function UserAuthModal() {
                 data: {
                     first_name: formValues.firstName,
                     last_name: formValues.lastName,
+                    phoneNumber: formValues.phoneNumber
                 },
                 emailRedirectTo: "/users"
             }
@@ -110,7 +115,8 @@ export default function UserAuthModal() {
                 confirmPassword: "",
                 firstName: "",
                 lastName: "",
-                password: ""
+                password: "",
+                phoneNumber: ""
             })
         }
     }
@@ -150,7 +156,8 @@ export default function UserAuthModal() {
                 confirmPassword: "",
                 firstName: "",
                 lastName: "",
-                password: ""
+                password: "",
+                phoneNumber: ""
             })
         }
 
@@ -200,6 +207,23 @@ export default function UserAuthModal() {
                     <span className="text-xl font-medium " >Email</span>
                     <input type="email" id="email" name="email" onChange={handleChange} value={formValues.email} placeholder="JohnDoe@gmail.com" className="w-full py-4 px-5 border border-gray-700 outline-none focus:outline-none text-base rounded-sm " />
                 </label>
+
+
+
+                {/* Phone number */}
+                {authState === "Sign Up" ? (
+                    <label htmlFor="phoneNumber" className=" w-full flex flex-col items-start gap-1  " >
+                        <span className="text-lg font-medium " >Phone Number</span>
+                        <input
+                            type="tel"
+                            id="phoneNumber"
+                            name="phoneNumber"
+                            value={formValues.phoneNumber}
+                            onChange={handleChange}
+                            className="w-full py-4 px-5 border border-gray-700 outline-none focus:outline-none text-base rounded-sm " />
+                    </label>)
+                    : null
+                }
 
 
 
