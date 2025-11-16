@@ -2,6 +2,7 @@
 
 import { supabase } from "@/lib/supabaseClient"
 import { User } from "@supabase/supabase-js"
+import { error } from "console"
 import { Eye, EyeOff } from "lucide-react"
 import React, { useEffect, useState } from "react"
 import toast from "react-hot-toast"
@@ -12,6 +13,7 @@ export default function Page() {
     const [user, setUser] = useState<User | null>(null)
     const [currentTab, setCurrentTab] = useState<"Profile" | "Password">("Profile")
     const [showPassword, setShowPassword] = useState(false)
+    const email = user?.user_metadata.email
     const [formValues, setFormValues] = useState({
         firstName: "",
         lastName: "",
@@ -21,6 +23,7 @@ export default function Page() {
 
 
     const [passwordValues, setPasswordValues] = useState({
+        oldPassword: "",
         newPassword: "",
         confirmNewPassword: ""
     })
@@ -125,6 +128,42 @@ export default function Page() {
             toast.success("Profile updated successfully")
         }
 
+
+
+    }
+
+    const changePassword = async (e: React.FormEvent<HTMLFormElement>) => {
+e.preventDefault()
+
+        // First we reauthenticate
+        const { data: loginData, error: loginError } = await supabase.auth.signInWithPassword({
+            email: email,
+            password: passwordValues.oldPassword
+
+        });
+
+        if (loginError) {
+            return {
+                error: "Old Password is incorrect"
+            }
+        }
+
+
+
+        // Next we update the new password
+        const { data, error } = await supabase.auth.updateUser({
+            password: passwordValues.newPassword,
+        })
+
+
+        if (error) {
+            return {
+                error: error.message
+            }
+        }
+
+
+       toast.success("Password changed successfully!")
 
 
     }
@@ -241,15 +280,27 @@ export default function Page() {
                 )
                     :
                     (
-                        <form className=" w-full h-full bg-[#f2f5fc] flex items-center justify-center flex-col gap-7 px-6 py-10 rounded-lg font-poppins ">
-                            <div className="w-full grid-cols-1 grid md:grid-cols-2 gap-8 place-items-center justify-items-center " >
+                        <form onSubmit={changePassword} className=" w-full h-full bg-[#f2f5fc] flex items-center justify-center flex-col gap-7 px-6 py-10 rounded-lg font-poppins ">
+                            <div className="w-full grid grid-cols-1 gap-8 place-items-center justify-items-center " >
 
 
-                                {/* Password Input  */}
+
+
+                                {/* Old Password Input  */}
+                                <label htmlFor="oldPassword" className=" w-full flex flex-col items-start gap-1  " >
+                                    <span className="text-xl font-medium " >Old Password</span>
+                                    <div className=" w-full flex gap-1 rounded-sm  py-4 px-5 border border-gray-700" >
+                                        <input type={showPassword ? "text" : "password"} id="oldPassword" name="oldPassword" onChange={handlePasswordChange} value={passwordValues.oldPassword} placeholder="Enter Old Password" className="w-full  outline-none focus:outline-none text-base  " />
+                                        <button type="button" className="cursor-pointer" onClick={() => setShowPassword((prev) => !prev)} > {showPassword ? <EyeOff /> : <Eye />} </button>
+                                    </div>
+                                </label>
+
+
+                                {/* New Password Input  */}
                                 <label htmlFor="newPassword" className=" w-full flex flex-col items-start gap-1  " >
                                     <span className="text-xl font-medium " >Password</span>
                                     <div className=" w-full flex gap-1 rounded-sm  py-4 px-5 border border-gray-700" >
-                                        <input type={showPassword ? "text" : "password"} id="newPassword" name="newPassword" onChange={handlePasswordChange} value={passwordValues.newPassword} placeholder="Enter Password" className="w-full  outline-none focus:outline-none text-base  " />
+                                        <input type={showPassword ? "text" : "password"} id="newPassword" name="newPassword" onChange={handlePasswordChange} value={passwordValues.newPassword} placeholder="Enter New Password" className="w-full  outline-none focus:outline-none text-base  " />
                                         <button type="button" className="cursor-pointer" onClick={() => setShowPassword((prev) => !prev)} > {showPassword ? <EyeOff /> : <Eye />} </button>
                                     </div>
                                 </label>
@@ -260,7 +311,7 @@ export default function Page() {
                                 <label htmlFor="confirmNewPassword" className=" w-full flex flex-col items-start gap-1  " >
                                     <span className="text-xl font-medium " >Confirm Password</span>
                                     <div className=" w-full flex gap-1 rounded-sm  py-4 px-5 border border-gray-700" >
-                                        <input type={showPassword ? "text" : "password"} id="confirmNewPassword" name="confirmNewPassword" onChange={handlePasswordChange} value={passwordValues.confirmNewPassword} placeholder="Enter Password" className="w-full  outline-none focus:outline-none text-base  " />
+                                        <input type={showPassword ? "text" : "password"} id="confirmNewPassword" name="confirmNewPassword" onChange={handlePasswordChange} value={passwordValues.confirmNewPassword} placeholder="Confirm New Password" className="w-full  outline-none focus:outline-none text-base  " />
                                     </div>
                                 </label>
 

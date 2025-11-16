@@ -54,7 +54,7 @@ export default function UserAuthModal() {
 
         setLoading(true)
 
-        const { error } = await supabase.auth.signInWithOAuth({
+        const { error, data } = await supabase.auth.signInWithOAuth({
             provider: "google",
             options: {
                 redirectTo: `${window.location.origin}/user`
@@ -65,6 +65,7 @@ export default function UserAuthModal() {
         if (error) console.error("Google login failed:", error.message)
 
         setLoading(false)
+        console.log(data)
     }
 
 
