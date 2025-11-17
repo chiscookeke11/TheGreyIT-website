@@ -49,3 +49,13 @@ export interface Results {
   hasUpperCase: boolean
   hasLowerCase: boolean
 }
+
+
+
+export interface TransactionType {
+  id: number;
+  course: string;
+  reference: string;
+  status: "successful" | "pending" | "failed";
+  date: string;
+}

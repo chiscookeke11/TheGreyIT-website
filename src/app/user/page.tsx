@@ -22,23 +22,23 @@ export default function Page() {
 
 
 
-                <div className=" h-full min-h-[150px] w-full flex flex-col md:flex-row items-center justify-evenly gap-5 md:gap-10 px-2 " >
+                <div className=" h-full min-h-[150px] w-full flex flex-col lg:flex-row items-center justify-evenly gap-5 md:gap-10 px-2 " >
 
-                    <button className="w-full max-w-[350px] h-full flex flex-row items-center justify-start gap-5 py-12 px-5 rounded-sm bg-white border border-gray-300 " >
+                    <button className="w-full lg:max-w-[350px] h-full flex flex-row items-center justify-start gap-5 py-12 px-5 rounded-sm bg-white border border-gray-300 " >
                         <BookOpen size={35} />
                         <h3 className="text-start text-xl font-medium " > <span className="text-2xl font-semibold" > {0}</span><br /> Enrolled Courses</h3>
 
                     </button>
 
 
-                    <button className="w-full max-w-[350px] h-full flex flex-row items-center justify-start gap-5 py-12 px-5 rounded-sm bg-white border border-gray-300 " >
+                    <button className="w-full lg:max-w-[350px] h-full flex flex-row items-center justify-start gap-5 py-12 px-5 rounded-sm bg-white border border-gray-300 " >
                         <GraduationCap size={35} />
                         <h3 className="text-start text-xl font-medium " > <span className="text-2xl font-semibold" > {0}+</span><br /> Active Courses</h3>
 
                     </button>
 
 
-                    <button className="w-full max-w-[350px] h-full flex flex-row items-center justify-start gap-5 py-12 px-5 rounded-sm bg-white border border-gray-300 " >
+                    <button className="w-full lg:max-w-[350px] h-full flex flex-row items-center justify-start gap-5 py-12 px-5 rounded-sm bg-white border border-gray-300 " >
                         <CircleCheckBig size={35} />
                         <h3 className="text-start text-xl font-medium " > <span className="text-2xl font-semibold " >{0}</span> <br /> Completed Courses</h3>
 
@@ -55,7 +55,7 @@ export default function Page() {
                 <div className="w-full flex items-center justify-between" >
                     <h1 className=" text-xl md:text-2xl font-semibold text-black   " >Transactions</h1>
                     <Link
-                        className="bg-gray-700 w-fit text-white px-5 py-3 lg:text-start rounded-md hover:bg-gray-600 transition-all duration-300 ease-in-out cursor-pointer  block"
+                        className="bg-gray-700 w-fit text-white text-sm px-4 py-2 lg:text-start rounded-md hover:bg-gray-600 transition-all duration-300 ease-in-out cursor-pointer  block"
                         href={"/user/transactions"} > See More</Link>
                 </div>
 
