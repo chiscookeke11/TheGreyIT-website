@@ -1,11 +1,12 @@
 "use client"
 
 import { supabase } from "@/lib/supabaseClient"
+import { CourseDataTypes } from "@/types/types";
 import { useEffect, useState } from "react"
 
 type Bookmark = {
   course_id: string;
-  course: any;
+  course: CourseDataTypes;
 };
 
 export default function Page() {
@@ -26,8 +27,15 @@ export default function Page() {
         return;
       }
 
-      console.log("the bookmarks:", data);
-      setBookmarks(data ?? []); // <-- FIX
+      if (data) {
+        // Map the course array to a single object
+        const formattedData: Bookmark[] = data.map((item) => ({
+          course_id: item.course_id,
+          course: item.course[0], // take the first course object
+        }));
+
+        setBookmarks(formattedData);
+      }
     };
 
     fetchBookmarks();
@@ -39,11 +47,19 @@ export default function Page() {
         {bookmarks.length === 0 ? "No item found" : "Bookmarks Loaded"}
       </h3>
 
-
-{bookmarks.map((item) => (
-    <p key={item.course_id} > {item.course.title} </p>
+     {bookmarks.map((item) => (
+  <div key={item.course_id}>
+    <p>Course ID: {item.course_id}</p>
+    {item.course ? (
+      <>
+        <p>Title: {item.course.title}</p>
+        <p>Rating: {item.course.rating}</p>
+      </>
+    ) : (
+      <p>No course data available</p>
+    )}
+  </div>
 ))}
-
 
     </div>
   );
