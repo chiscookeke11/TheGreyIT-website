@@ -1,5 +1,6 @@
 "use client"
 
+import TransactionsTable from "@/components/user/TransactionsTable"
 import { BookOpen, CircleCheckBig, GraduationCap } from "lucide-react"
 import Link from "next/link"
 
@@ -54,12 +55,14 @@ export default function Page() {
                 <div className="w-full flex items-center justify-between" >
                     <h1 className=" text-xl md:text-2xl font-semibold text-black   " >Transactions</h1>
                     <Link
-                    className="bg-gray-700 w-fit text-white px-5 py-3 lg:text-start rounded-md hover:bg-gray-600 transition-all duration-300 ease-in-out cursor-pointer  block"
-                    href={"/user/transactions"} > See More</Link>
+                        className="bg-gray-700 w-fit text-white px-5 py-3 lg:text-start rounded-md hover:bg-gray-600 transition-all duration-300 ease-in-out cursor-pointer  block"
+                        href={"/user/transactions"} > See More</Link>
                 </div>
 
                 <hr className="w-full border-t border-gray-400 " />
 
+                {/* Transaction Table */}
+                <TransactionsTable />
             </div>
 
 

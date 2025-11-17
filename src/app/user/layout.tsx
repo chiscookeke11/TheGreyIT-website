@@ -26,7 +26,7 @@ const Header = ({ user }: { user: User }) => {
 
                         {
                             user.app_metadata.provider === "google" && user.user_metadata.avatar_url ?
-                                <Image src={""} alt={user.app_metadata.email} width={500} height={500} className="w-full h-full rounded-full" />
+                                <Image src={user.user_metadata.avatar_url} alt={user.app_metadata.email} width={500} height={500} className="w-full h-full rounded-full" />
                                 :
                                 <h2 className="text-black" >
                                     {user.user_metadata.first_name ? user.user_metadata.first_name.charAt(0) + user.user_metadata.last_name.charAt(0) : user.user_metadata.full_name.charAt(0).toUpperCase() + user.user_metadata.full_name.split(" ")[1].charAt(0).toUpperCase()}
