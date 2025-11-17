@@ -26,21 +26,21 @@ export default function Page() {
 
                     <button className="w-full lg:max-w-[350px] h-full flex flex-row items-center justify-start gap-5 py-12 px-5 rounded-sm bg-white border border-gray-300 " >
                         <BookOpen size={35} />
-                        <h3 className="text-start text-xl font-medium " > <span className="text-2xl font-semibold" > {0}</span><br /> Enrolled Courses</h3>
+                        <h3 className="text-start text-base md:text-xl font-medium " > <span className="text-2xl font-semibold" > {0}</span><br /> Enrolled Courses</h3>
 
                     </button>
 
 
                     <button className="w-full lg:max-w-[350px] h-full flex flex-row items-center justify-start gap-5 py-12 px-5 rounded-sm bg-white border border-gray-300 " >
                         <GraduationCap size={35} />
-                        <h3 className="text-start text-xl font-medium " > <span className="text-2xl font-semibold" > {0}+</span><br /> Active Courses</h3>
+                        <h3 className="text-start text-base md:text-xl font-medium " > <span className="text-2xl font-semibold" > {0}+</span><br /> Active Courses</h3>
 
                     </button>
 
 
                     <button className="w-full lg:max-w-[350px] h-full flex flex-row items-center justify-start gap-5 py-12 px-5 rounded-sm bg-white border border-gray-300 " >
                         <CircleCheckBig size={35} />
-                        <h3 className="text-start text-xl font-medium " > <span className="text-2xl font-semibold " >{0}</span> <br /> Completed Courses</h3>
+                        <h3 className="text-start text-base md:text-xl font-medium " > <span className="text-2xl font-semibold " >{0}</span> <br /> Completed Courses</h3>
 
                     </button>
 

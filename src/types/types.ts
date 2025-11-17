@@ -59,3 +59,9 @@ export interface TransactionType {
   status: "successful" | "pending" | "failed";
   date: string;
 }
+
+
+export interface Bookmark {
+  course_id: number;
+  course: CourseDataTypes;
+};
