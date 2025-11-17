@@ -22,7 +22,7 @@ const Header = ({ user }: { user: User }) => {
                 <div className=" w-[100px] h-[100px] flex items-center justify-center rounded-full border  border-white " >
                     <div className="w-[90px] h-[90px] bg-[#f2f5fc] rounded-full flex items-center text-center justify-center " >
                         <h2 className="text-black" >
-                            {user.user_metadata.first_name.charAt(0) + user.user_metadata.last_name.charAt(0)}
+                             {user.user_metadata.first_name ? user.user_metadata.first_name.charAt(0) + user.user_metadata.last_name.charAt(0) : user.user_metadata.full_name}
                         </h2>
                     </div>
                 </div>
