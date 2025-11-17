@@ -2,10 +2,20 @@
 
 import { supabase } from "@/lib/supabaseClient"
 import { User } from "@supabase/supabase-js"
-import { error } from "console"
 import { Eye, EyeOff } from "lucide-react"
 import React, { useEffect, useState } from "react"
 import toast from "react-hot-toast"
+
+
+
+
+const Spinner = () => {
+    return (
+        <div className="h-10 w-10 rounded-full border-4 border-white border-t-transparent animate-spin duration-150 ease-in-out transition-all " />
+    )
+}
+
+
 
 
 
@@ -13,6 +23,7 @@ export default function Page() {
     const [user, setUser] = useState<User | null>(null)
     const [currentTab, setCurrentTab] = useState<"Profile" | "Password">("Profile")
     const [showPassword, setShowPassword] = useState(false)
+    const [loading, setLoading] = useState(false)
     const email = user?.user_metadata.email
     const [formValues, setFormValues] = useState({
         firstName: "",
@@ -52,12 +63,10 @@ export default function Page() {
         }
 
         getUser()
-
         // listen for state changes in the layout
         const { data: authListener } = supabase.auth.onAuthStateChange((_event, session) => {
             const currentUser = session?.user ?? null
             setUser(currentUser)
-
             setFormValues({
                 firstName: currentUser?.user_metadata.first_name ?? "",
                 lastName: currentUser?.user_metadata.last_name ?? "",
@@ -95,7 +104,6 @@ export default function Page() {
 
     // password input change function
     const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-
         const { name, value } = e.target
 
         setPasswordValues((prev) => ({
@@ -111,6 +119,7 @@ export default function Page() {
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
 
+        setLoading(true)
 
         const { data, error } = await supabase.auth.updateUser({
             data: {
@@ -121,19 +130,26 @@ export default function Page() {
         })
 
         if (error) {
+            setLoading(false)
             toast.error("Failed to update profile")
             console.error(error.message)
         }
         else {
             toast.success("Profile updated successfully")
+            setLoading(false)
         }
 
 
 
     }
 
+
+    // Function to update password
     const changePassword = async (e: React.FormEvent<HTMLFormElement>) => {
-e.preventDefault()
+        e.preventDefault()
+
+
+        setLoading(true)
 
         // First we reauthenticate
         const { data: loginData, error: loginError } = await supabase.auth.signInWithPassword({
@@ -143,6 +159,7 @@ e.preventDefault()
         });
 
         if (loginError) {
+            setLoading(false)
             return {
                 error: "Old Password is incorrect"
             }
@@ -157,21 +174,18 @@ e.preventDefault()
 
 
         if (error) {
+            setLoading(false)
             return {
                 error: error.message
             }
         }
 
 
-       toast.success("Password changed successfully!")
+        toast.success("Password changed successfully!")
+        setLoading(false)
 
 
     }
-
-
-
-
-
 
 
 
@@ -189,12 +203,14 @@ e.preventDefault()
                 <div className=" w-full flex items-center gap-6 flex-wrap " >
 
                     <button
+                        disabled={loading}
                         onClick={() => setCurrentTab("Profile")}
-                        className={`font-syne   hover:bg-transparent hover:text-gray-700   px-6 py-2  flex items-center justify-center font-medium  focus:outline-none cursor-pointer text-sm   border-[1px]  transition-all duration-300 ease-in-out border-gray-700 rounded-sm  text-gray-700  `} >PROFILE</button>
+                        className={`font-syne   hover:bg-transparent hover:text-gray-700   px-6 py-2  flex items-center justify-center font-medium  focus:outline-none cursor-pointer text-sm   border-[1px]  transition-all duration-300 ease-in-out border-gray-700 rounded-sm ${currentTab === "Profile" ? "bg-transparent text-gray-700 " : "bg-gray-700 text-white"} `}>PROFILE</button>
 
                     <button
+                        disabled={loading}
                         onClick={() => setCurrentTab("Password")}
-                        className={`font-syne   hover:bg-transparent hover:text-gray-700   px-6 py-2  flex items-center justify-center font-medium  focus:outline-none cursor-pointer text-sm   border-[1px]  transition-all duration-300 ease-in-out border-gray-700 rounded-sm  `} >PASSWORD</button>
+                        className={`font-syne   hover:bg-transparent hover:text-gray-700   px-6 py-2  flex items-center justify-center font-medium  focus:outline-none cursor-pointer text-sm   border-[1px]  transition-all duration-300 ease-in-out border-gray-700 rounded-sm ${currentTab === "Password" ? "bg-transparent text-gray-700 " : "bg-gray-700 text-white"} `} >PASSWORD</button>
 
                 </div>
 
@@ -269,9 +285,9 @@ e.preventDefault()
 
 
 
-                        <button className={`bg-gray-700 w-fit text-white px-5 py-4 text-xl lg:text-start rounded-md hover:bg-gray-600 transition-all duration-300 ease-in-out cursor-pointer  block mr-auto `}
+                        <button disabled={loading} className={`bg-gray-700 w-fit text-white px-5 py-4 text-xl lg:text-start rounded-md hover:bg-gray-600 transition-all duration-300 ease-in-out cursor-pointer  block mr-auto `}
                         >
-                            Update Info
+                            {loading ? <Spinner /> : "Update Info"}
                         </button>
 
                     </form>
@@ -301,7 +317,6 @@ e.preventDefault()
                                     <span className="text-xl font-medium " >Password</span>
                                     <div className=" w-full flex gap-1 rounded-sm  py-4 px-5 border border-gray-700" >
                                         <input type={showPassword ? "text" : "password"} id="newPassword" name="newPassword" onChange={handlePasswordChange} value={passwordValues.newPassword} placeholder="Enter New Password" className="w-full  outline-none focus:outline-none text-base  " />
-                                        <button type="button" className="cursor-pointer" onClick={() => setShowPassword((prev) => !prev)} > {showPassword ? <EyeOff /> : <Eye />} </button>
                                     </div>
                                 </label>
 
@@ -320,9 +335,9 @@ e.preventDefault()
                             </div>
 
 
-                            <button className={`bg-gray-700 w-fit text-white px-5 py-4 text-xl lg:text-start rounded-md hover:bg-gray-600 transition-all duration-300 ease-in-out cursor-pointer  block mr-auto `}
+                            <button disabled={loading} className={`bg-gray-700 w-fit text-white px-5 py-4 text-xl lg:text-start rounded-md hover:bg-gray-600 transition-all duration-300 ease-in-out cursor-pointer  block mr-auto `}
                             >
-                                Update Password
+                                {loading ? <Spinner /> : "Update Password"}
                             </button>
                         </form>
 

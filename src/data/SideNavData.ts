@@ -1,42 +1,53 @@
+import {
+    LayoutDashboard,
+    BookOpen,
+    Receipt,
+    CalendarCheck,
+    Award,
+    Heart,
+    MessageSquare,
+    User,
+} from "lucide-react";
+
 export const sideNavLinks = [
     {
         label: "Dashboard",
         route: "/user",
-        icon: ""
+        icon: LayoutDashboard,
     },
     {
         label: "Courses",
         route: "/user/Courses",
-        icon: ""
+        icon: BookOpen,
     },
     {
         label: "Transactions",
-        route: "#",
-        icon: ""
+        route: "/user/transactions",
+        icon: Receipt,
     },
     {
         label: "Attendance",
-        route: "#",
-        icon: ""
+        route: "/user/attendance",
+        icon: CalendarCheck,
     },
     {
-        label: "Certficates",
+        label: "Certificates",
         route: "/user/certificates",
-        icon: ""
+        icon: Award,
     },
     {
         label: "Wishlist",
         route: "/user/wishlist",
-        icon: ""
+        icon: Heart,
     },
     {
         label: "Reviews",
-        route: "#",
-        icon: ""
+        route: "/user/reviews",
+        icon: MessageSquare,
     },
     {
         label: "Profile",
         route: "/user/profile",
-        icon: ""
+        icon: User,
     },
-]
+];

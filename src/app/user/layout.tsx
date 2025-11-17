@@ -7,6 +7,8 @@ import UserAuthModal from "@/components/user/UserAuthModal"
 import { supabase } from "@/lib/supabaseClient"
 import { User } from "@supabase/supabase-js"
 import { ArrowRight, BookOpen, Medal } from "lucide-react"
+import Image from "next/image"
+import Link from "next/link"
 import { useEffect, useState } from "react"
 
 
@@ -21,9 +23,15 @@ const Header = ({ user }: { user: User }) => {
 
                 <div className=" w-[100px] h-[100px] flex items-center justify-center rounded-full border  border-white " >
                     <div className="w-[90px] h-[90px] bg-[#f2f5fc] rounded-full flex items-center text-center justify-center " >
-                        <h2 className="text-black" >
-                             {user.user_metadata.first_name ? user.user_metadata.first_name.charAt(0) + user.user_metadata.last_name.charAt(0) : user.user_metadata.full_name.charAt(0).toUpperCase() + user.user_metadata.full_name.split(" ")[1].charAt(0).toUpperCase()  }
-                        </h2>
+
+                        {
+                            user.app_metadata.provider === "google" && user.user_metadata.avatar_url ?
+                                <Image src={""} alt={user.app_metadata.email} width={500} height={500} className="w-full h-full rounded-full" />
+                                :
+                                <h2 className="text-black" >
+                                    {user.user_metadata.first_name ? user.user_metadata.first_name.charAt(0) + user.user_metadata.last_name.charAt(0) : user.user_metadata.full_name.charAt(0).toUpperCase() + user.user_metadata.full_name.split(" ")[1].charAt(0).toUpperCase()}
+                                </h2>
+                        }
                     </div>
                 </div>
 
@@ -41,9 +49,11 @@ const Header = ({ user }: { user: User }) => {
                 </div>
             </div>
 
-            <Button variant="default" className="bg-white hover:bg-white hover:text-gray-700! hover:rounded-[50px] text-sm! gap-3 ml-auto " >
-                View Courses  <ArrowRight size={15} />
-            </Button>
+            <Link href={"/user/Courses"} >
+                <Button variant="default" className="bg-white hover:bg-white hover:text-gray-700! hover:rounded-[50px] text-sm! gap-3 ml-auto " >
+                    View Courses  <ArrowRight size={15} />
+                </Button>
+            </Link>
 
         </header>
     )
@@ -59,7 +69,7 @@ export default function UserDashboardLayout({ children }: { children: React.Reac
     const [checkingUser, setCheckingUser] = useState(false)
 
 
-console.log(user)
+    console.log(user)
 
 
     useEffect(() => {
