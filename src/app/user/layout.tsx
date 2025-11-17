@@ -1,6 +1,7 @@
 "use client"
 
 import Button from "@/components/UI/Button"
+import Navbar from "@/components/UI/Navbar"
 import Spinner from "@/components/UI/Spinner"
 import SideNav from "@/components/user/SideNav"
 import UserAuthModal from "@/components/user/UserAuthModal"
@@ -136,8 +137,8 @@ export default function UserDashboardLayout({ children }: { children: React.Reac
     return (
 
 
-        <div className="  bg-[#FAFBFC] w-full h-full relative flex items-center flex-col gap-8 text-black font-poppins  px-[4%]  py-20 " >
-
+        <div className="  bg-[#FAFBFC] w-full h-full relative flex items-center flex-col gap-8 text-black font-poppins  px-[4%] py-32 " >
+<Navbar/>
             <Header user={user} />
 
 
