@@ -1,47 +1,16 @@
 "use client"
 
 import TransactionsTable from "@/components/user/TransactionsTable"
-import { supabase } from "@/lib/supabaseClient"
-import { UserData } from "@/types/types"
+import { useAppContext } from "@/context/AppContext"
 import { BookOpen, CircleCheckBig, GraduationCap } from "lucide-react"
 import Link from "next/link"
-import { useEffect, useState } from "react"
-import toast from "react-hot-toast"
 
 
 
 
 
 export default function Page() {
-
-
-    const [userData, setUserData] = useState<UserData | null>(null)
-
-
-
-
-    const fetchUserData = async () => {
-          const {data, error} = await supabase.from("user_data").select("*")
-
-
-          if (error) {
-            console.error("error fetching user data:", error)
-          }
-
-          else{
-            toast.success("Fetched")
-            console.log(data)
-            setUserData(data[0] || null)
-          }
-    }
-
-
-    useEffect(() => {
-
-        fetchUserData()
-    }, [])
-
-
+    const { userData } = useAppContext()
 
     return (
         <div className="w-full h-full flex flex-col gap-7 items-center justify-center font-poppins" >
@@ -67,14 +36,14 @@ export default function Page() {
 
                     <button className="w-full lg:max-w-[350px] h-full flex flex-row items-center justify-start gap-5 py-12 px-5 rounded-sm bg-white border border-gray-300 " >
                         <GraduationCap size={35} />
-                        <h3 className="text-start text-base md:text-xl font-medium " > <span className="text-2xl font-semibold" > {0}+</span><br /> Active Courses</h3>
+                        <h3 className="text-start text-base md:text-xl font-medium " > <span className="text-2xl font-semibold" > {userData?.active_courses}+</span><br /> Active Courses</h3>
 
                     </button>
 
 
                     <button className="w-full lg:max-w-[350px] h-full flex flex-row items-center justify-start gap-5 py-12 px-5 rounded-sm bg-white border border-gray-300 " >
                         <CircleCheckBig size={35} />
-                        <h3 className="text-start text-base md:text-xl font-medium " > <span className="text-2xl font-semibold " >{0}</span> <br /> Completed Courses</h3>
+                        <h3 className="text-start text-base md:text-xl font-medium " > <span className="text-2xl font-semibold " >{userData?.completed_courses}</span> <br /> Completed Courses</h3>
 
                     </button>
 

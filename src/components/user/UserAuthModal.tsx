@@ -48,6 +48,39 @@ export default function UserAuthModal() {
     }
 
 
+    // function for generating a random code
+    const randomCode = (length: number): string => {
+        const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+        let result = '';
+
+        for (let i = 0; i < length; i++) {
+            result += chars.charAt(Math.floor(Math.random() * chars.length))
+        }
+        return result;
+    }
+
+
+// Then check if it exists in the db
+    const generateUniqueReferral = async () => {
+        let exists: boolean = true;
+        let code;
+
+        while (exists) {
+            code = randomCode(8)
+            const { data, error } = await supabase.from("user_data").select("id").eq("referral_code", code);
+
+            if (error) {
+                console.error("Error:", error)
+            }
+
+            exists = (data?.length ?? 0) > 0
+        }
+        console.log(code)
+        return code
+    }
+
+
+
 
     // google social login function
     const handleGoogleLogin = async () => {
@@ -118,8 +151,9 @@ export default function UserAuthModal() {
 
 
             // Then add user data to the table
+            const referralCode = await generateUniqueReferral()
             const { error } = await supabase.from('user_data').insert({
-                referral_code: "hhfdjhd",
+                referral_code: referralCode,
                 user_id: signupData.user?.id
             })
 
@@ -172,10 +206,6 @@ export default function UserAuthModal() {
             })
         }
 
-
-
-
-
     }
 
 
@@ -186,8 +216,6 @@ export default function UserAuthModal() {
     return (
         <form onSubmit={authState === "Sign Up" ? handleSignup : handleSignIn} className=" w-full max-w-2xl bg-white flex items-center justify-center flex-col gap-7 px-6 py-10 rounded-lg font-poppins " >
             <h1 className="text-gray-700 font-bold font-poppins text-2xl md:text-4xl  " >{authState === "Sign In" ? "Sign In" : "Sign Up"} </h1>
-
-
 
             <div className="w-full flex flex-col gap-6 items-center justify-center " >
 

@@ -32,7 +32,7 @@ const syne = Syne({
 
 
 export const metadata: Metadata = {
-  title: "ThegreyIT | Lear. Build. Advance",
+  title: "ThegreyIT | Learn. Build. Advance",
   description: "Learn. Build. Advance",
 };
 
