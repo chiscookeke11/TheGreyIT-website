@@ -67,17 +67,18 @@ export default function ResearchSection() {
                 <h5 className="text-black text-2xl lg:text-3xl font-extrabold font-poppins" >Blogs </h5>
 
                 <div className="w-full overflow-x-auto flex items-center" >
-                    <div className=" w-fit flex items-center justify-center gap-10 px-6 py-3 " >
+
                         {
-                            !recentBlogsData ? <div className="w-full flex items-center justify-center py-32" ><Spinner /></div>
+                            !recentBlogsData ? <div className="w-full bg-amber-600 flex items-center justify-center py-32" ><Spinner /></div>
                                 :
-                                recentBlogsData.length < 1 ? "No blogs found"
+                                recentBlogsData.length < 1 ? <div className="w-full bg-amber-600 flex items-center justify-center py-32" >No blogs found</div>
                                     :
                                     recentBlogsData?.slice(0, 3).map((blog, index) => (
+                                         <div className=" w-fit flex items-center justify-center gap-10 px-6 py-3 " >
                                         <ResearchCard blog={blog} key={index} />
+                                            </div>
                                     ))
                         }
-                    </div>
                 </div>
 
             </section>

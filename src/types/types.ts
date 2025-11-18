@@ -65,3 +65,14 @@ export interface Bookmark {
   course_id: number;
   course: CourseDataTypes;
 };
+
+
+export interface UserData {
+  id: number;
+  user_id: string;
+  active_courses: number;
+  completed_courses: number;
+  enrolled_courses: number;
+  referral_code: string;
+  created_at: string;
+}

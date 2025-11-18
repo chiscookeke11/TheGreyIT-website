@@ -85,7 +85,7 @@ const CourseCard = ({ data, setShowModal, setSelectedCourse }: CourseCardProps) 
 
 
                 <div className=" absolute top-[-15px] left-[-15px] flex items-start justify-center py-4 bg-white w-full h-full rounded-md " >
-                    <Image src={"/basketball.png"} height={500} width={500} alt={`${data.title}-image`} className=" w-11/12 h-11/12 lg:h-9/12 object-cover object-center rounded-sm " />
+                    <Image src={data.imageUrl} height={500} width={500} alt={`${data.title}-image`} className=" w-11/12 h-11/12 lg:h-9/12 object-cover object-center rounded-sm " />
                 </div>
             </div>
 
@@ -106,7 +106,7 @@ export default function Page() {
 
 
 
-    // Function to fetch all blogs from the db
+    // Function to fetch all Courses from the db
     const supabaseFetch = async () => {
         const { data, error } = await supabase.from("course").select("*")
 

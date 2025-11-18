@@ -72,25 +72,21 @@ export default function UserAuthModal() {
 
     // sign up function
     const handleSignup = async (e: React.FormEvent<HTMLFormElement>) => {
-
         e.preventDefault()
-
 
         // check if all the values were entered
         if (!formValues.firstName || !formValues.lastName || !formValues.email || !formValues.password || !formValues.confirmPassword) {
             toast.error("Please provide the necessary credentials")
             return
         }
-
         // check  if the passwords match
         if (formValues.password !== formValues.confirmPassword) {
             toast.error("Passwords do not match")
             return
         }
 
-
         setLoading(true)
-        const { error } = await supabase.auth.signUp({
+        const { error, data: signupData } = await supabase.auth.signUp({
             email: formValues.email,
             password: formValues.password,
             options: {
@@ -119,6 +115,20 @@ export default function UserAuthModal() {
                 password: "",
                 phoneNumber: ""
             })
+
+
+            // Then add user data to the table
+            const { error } = await supabase.from('user_data').insert({
+                referral_code: "hhfdjhd",
+                user_id: signupData.user?.id
+            })
+
+            if (error) {
+                console.error("Error creating user data", error)
+            }
+            else {
+                toast.success("USer data created ")
+            }
         }
     }
 
