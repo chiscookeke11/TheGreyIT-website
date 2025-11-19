@@ -5,6 +5,7 @@ import Navbar from "@/components/UI/Navbar"
 import Spinner from "@/components/UI/Spinner"
 import SideNav from "@/components/user/SideNav"
 import UserAuthModal from "@/components/user/UserAuthModal"
+import { useAppContext } from "@/context/AppContext"
 import { supabase } from "@/lib/supabaseClient"
 import { User } from "@supabase/supabase-js"
 import { ArrowRight, BookOpen, Medal } from "lucide-react"
@@ -17,6 +18,8 @@ import { useEffect, useState } from "react"
 
 
 const Header = ({ user }: { user: User }) => {
+const {userData, certificatesData} = useAppContext()
+
     return (
         <header className="w-full flex flex-col md:flex-row items-start md:items-center  justify-between gap-6 px-6 py-10 bg-gray-700 text-white rounded-2xl ">
             <div className="w-fit flex items-center gap-5 " >
@@ -43,8 +46,8 @@ const Header = ({ user }: { user: User }) => {
                         Hello, <span className="font-normal text-sm md:text-base">{user.user_metadata.first_name ? user.user_metadata.first_name.charAt(0).toUpperCase() + user.user_metadata.first_name.slice(1).toLowerCase() : user.email}</span>
                     </h2>
                     <div className="flex flex-col md:flex-row  md:items-center  gap-3 text-xs " >
-                        <p className=" flex items-center gap-1 "> <BookOpen size={13} /> {0} Course Enrolled</p>
-                        <p className=" flex items-center gap-1 "><Medal size={13} /> {0} Certificate</p>
+                        <p className=" flex items-center gap-1 "> <BookOpen size={13} /> {userData?.list_enrolled_courses?.length ||  0} Course Enrolled</p>
+                        <p className=" flex items-center gap-1 "><Medal size={13} /> {certificatesData?.length} Certificate</p>
 
                     </div>
                 </div>

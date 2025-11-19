@@ -23,15 +23,12 @@ export default function Page() {
 
                 <hr className="w-full border-t border-gray-400 " />
 
-                {userData?.referral_code}
-
-
 
                 <div className=" h-full min-h-[150px] w-full flex flex-col lg:flex-row items-center justify-evenly gap-5 md:gap-10 px-2 " >
 
                     <button className="w-full lg:max-w-[350px] h-full flex flex-row items-center justify-start gap-5 py-12 px-5 rounded-sm bg-white border border-gray-300 " >
                         <BookOpen size={35} />
-                        <h3 className="text-start text-base md:text-xl font-medium " > <span className="text-2xl font-semibold" > {userData?.enrolled_courses}</span><br /> Enrolled Courses</h3>
+                        <h3 className="text-start text-base md:text-xl font-medium " > <span className="text-2xl font-semibold" > {userData?.list_enrolled_courses.length}</span><br /> Enrolled Courses</h3>
 
                     </button>
 
@@ -45,7 +42,7 @@ export default function Page() {
 
                     <button className="w-full lg:max-w-[350px] h-full flex flex-row items-center justify-start gap-5 py-12 px-5 rounded-sm bg-white border border-gray-300 " >
                         <CircleCheckBig size={35} />
-                        <h3 className="text-start text-base md:text-xl font-medium " > <span className="text-2xl font-semibold " >{userData?.completed_courses}</span> <br /> Completed Courses</h3>
+                        <h3 className="text-start text-base md:text-xl font-medium " > <span className="text-2xl font-semibold " >{userData?.list_completed_courses?.length}</span> <br /> Completed Courses</h3>
 
                     </button>
 

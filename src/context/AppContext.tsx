@@ -1,6 +1,6 @@
 "use client";
 import { supabase } from "@/lib/supabaseClient";
-import { TransactionType, UserData } from "@/types/types";
+import {  CertificatesDataType, TransactionType, UserData } from "@/types/types";
 import React, { createContext, useContext, useState, ReactNode, useEffect } from "react";
 import toast from "react-hot-toast";
 
@@ -14,6 +14,8 @@ type AppContextType = {
   setUserData: React.Dispatch<React.SetStateAction<UserData | null>>
   transactionData: TransactionType[] | null
   setTransactionData: React.Dispatch<React.SetStateAction<TransactionType[] | null>>
+  certificatesData: CertificatesDataType[] | null
+  setCertificatesData: React.Dispatch<React.SetStateAction<CertificatesDataType[] | null>>
 };
 
 
@@ -30,6 +32,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
   const [userData, setUserData] = useState<UserData | null>(null)
   const [activeNav, setActiveNav] = useState<number | null>(0);
   const [transactionData, setTransactionData] = useState<TransactionType[] | null>(null)
+  const [certificatesData, setCertificatesData] = useState<CertificatesDataType[] | null>(null)
 
 
 
@@ -45,8 +48,6 @@ export function AppProvider({ children }: { children: ReactNode }) {
     }
 
     else {
-      toast.success("Fetched")
-      console.log(data)
       setUserData(data[0] || null)
     }
   }
@@ -61,16 +62,35 @@ export function AppProvider({ children }: { children: ReactNode }) {
     }
 
     else {
-      console.log(data)
       setTransactionData(data)
     }
   }
+
+
+  // function to fetch user's certificates
+  const fetchUserCertifcates = async () => {
+    const {data, error} = await supabase.from("certificates").select("*")
+
+if (error) {
+  console.error("Error fetching certificates", error)
+}
+
+else {
+  setCertificatesData(data)
+  console.log("The certificates:", data)
+}
+  }
+
+
+
+
 
 
 
   useEffect(() => {
     fetchUserTransactions()
     fetchUserData()
+    fetchUserCertifcates()
   }, [])
 
 
@@ -90,7 +110,9 @@ export function AppProvider({ children }: { children: ReactNode }) {
         userData,
         setUserData,
         transactionData,
-        setTransactionData
+        setTransactionData,
+        certificatesData,
+        setCertificatesData
       }}>
 
       {children}

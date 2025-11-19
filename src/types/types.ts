@@ -71,9 +71,16 @@ export interface UserData {
   id: number;
   user_id: string;
   active_courses: number;
-  completed_courses: number;
-  enrolled_courses: number;
   referral_code: string;
   created_at: string;
+  list_enrolled_courses: number[]
+  list_completed_courses: number[]
 }
 
+export interface CertificatesDataType {
+  user_id: string;
+  course_id: string;
+  doc_link: string;
+  certificate_name: string;
+  id: number
+}
