@@ -12,31 +12,19 @@ import { useEffect, useState } from "react"
 
 
 export default function Page() {
-    const [allCoursesData, setAllCoursesData] = useState<CourseDataTypes[] | null>(null)
+    const { userData, allCoursesData } = useAppContext()
     const [enrolledCourses, setEnrolledCourse] = useState<CourseDataTypes[] | null>(null)
     const [completedCourses, setCompletedCourses] = useState<CourseDataTypes[] | null>(null)
     const [courseType, setCourseType] = useState(allCoursesData)
-    const { userData } = useAppContext()
 
 
 
 
+    // useEffect to update the list of all courses when it has been fetched
+    useEffect(() => {
+        setCourseType(allCoursesData)
+    }, [allCoursesData])
 
-    // Function to fetch all courses from the db
-    const fetchAllCourses = async () => {
-        const { data, error } = await supabase.from("course").select("*")
-
-        if (error) {
-            console.error("Failed to fetch course:", error)
-        }
-
-
-        {
-            setAllCoursesData(data)
-            setCourseType(data)
-
-        }
-    }
 
 
 
@@ -61,7 +49,7 @@ export default function Page() {
     // function to fetch all completed courses
     const fetchCompletedCourse = async () => {
         const courses = userData?.list_completed_courses
-        const { data, error } = await supabase.from("course").select("*").in("id", userData?.list_completed_courses ?? [])
+        const { data, error } = await supabase.from("course").select("*").in("id", courses ?? [])
 
         if (error) {
             console.error("Error")
@@ -75,7 +63,6 @@ export default function Page() {
 
 
     useEffect(() => {
-        fetchAllCourses()
 
         if (userData) {
             fetchEnrolledCourse()

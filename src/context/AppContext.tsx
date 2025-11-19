@@ -1,6 +1,6 @@
 "use client";
 import { supabase } from "@/lib/supabaseClient";
-import {  CertificatesDataType, TransactionType, UserData } from "@/types/types";
+import { CertificatesDataType, CourseDataTypes, TransactionType, UserData } from "@/types/types";
 import React, { createContext, useContext, useState, ReactNode, useEffect } from "react";
 import toast from "react-hot-toast";
 
@@ -16,6 +16,8 @@ type AppContextType = {
   setTransactionData: React.Dispatch<React.SetStateAction<TransactionType[] | null>>
   certificatesData: CertificatesDataType[] | null
   setCertificatesData: React.Dispatch<React.SetStateAction<CertificatesDataType[] | null>>
+  allCoursesData: CourseDataTypes[] | null;
+  setAllCoursesData: React.Dispatch<React.SetStateAction<CourseDataTypes[] | null>>
 };
 
 
@@ -33,7 +35,25 @@ export function AppProvider({ children }: { children: ReactNode }) {
   const [activeNav, setActiveNav] = useState<number | null>(0);
   const [transactionData, setTransactionData] = useState<TransactionType[] | null>(null)
   const [certificatesData, setCertificatesData] = useState<CertificatesDataType[] | null>(null)
+   const [allCoursesData, setAllCoursesData] = useState<CourseDataTypes[] | null>(null)
 
+
+
+
+
+    // Function to fetch all courses from the db
+    const fetchAllCourses = async () => {
+        const { data, error } = await supabase.from("course").select("*")
+
+        if (error) {
+            console.error("Failed to fetch course:", error)
+        }
+
+
+        {
+            setAllCoursesData(data)
+        }
+    }
 
 
 
@@ -69,16 +89,18 @@ export function AppProvider({ children }: { children: ReactNode }) {
 
   // function to fetch user's certificates
   const fetchUserCertifcates = async () => {
-    const {data, error} = await supabase.from("certificates").select("*")
+    const certifiedCourses = userData?.list_completed_courses
 
-if (error) {
-  console.error("Error fetching certificates", error)
-}
+    const { data, error } = await supabase.from("certificates").select("*").in("course_id", certifiedCourses ?? [])
 
-else {
-  setCertificatesData(data)
-  console.log("The certificates:", data)
-}
+    if (error) {
+      console.error("Error fetching certificates", error)
+    }
+
+    else {
+      setCertificatesData(data)
+      console.log("The certificates:", data)
+    }
   }
 
 
@@ -88,11 +110,14 @@ else {
 
 
   useEffect(() => {
+    fetchAllCourses()
     fetchUserTransactions()
     fetchUserData()
-    fetchUserCertifcates()
   }, [])
 
+  useEffect(() => {
+    fetchUserCertifcates()
+  }, [userData])
 
 
 
@@ -112,7 +137,9 @@ else {
         transactionData,
         setTransactionData,
         certificatesData,
-        setCertificatesData
+        setCertificatesData,
+        allCoursesData,
+        setAllCoursesData
       }}>
 
       {children}

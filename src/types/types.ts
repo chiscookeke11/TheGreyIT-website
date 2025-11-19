@@ -11,6 +11,7 @@ export interface CourseDataTypes {
   rating: number,
   id?: string,
   pdfName?: string,
+  skills?: string[]
 }
 
 
@@ -82,5 +83,6 @@ export interface CertificatesDataType {
   course_id: string;
   doc_link: string;
   certificate_name: string;
-  id: number
+  id: number;
+  pdfName: string;
 }
