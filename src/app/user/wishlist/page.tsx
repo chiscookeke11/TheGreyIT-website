@@ -12,42 +12,42 @@ type Bookmark = {
 };
 
 export default function Page() {
-  const [bookmarks, setBookmarks] = useState<Bookmark[]>([]);
-  const [loading, setLoading] = useState(true);
+  // const [bookmarks, setBookmarks] = useState<Bookmark[]>([]);
+  // const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    const fetchBookmarks = async () => {
-      const { data, error } = await supabase
-        .from("user_bookmarks")
-        .select(`
-          course_id,
-          course (*)
-        `)
-        .eq("user_id", "4f1f8edf-a8f0-4281-a2b7-143f77b86ff3");
+  // useEffect(() => {
+  //   const fetchBookmarks = async () => {
+  //     const { data, error } = await supabase
+  //       .from("user_bookmarks")
+  //       .select(`
+  //         course_id,
+  //         course (*)
+  //       `)
+  //       .eq("user_id", "4f1f8edf-a8f0-4281-a2b7-143f77b86ff3");
 
-      if (error) {
-        console.error("Error fetching bookmarks", error);
-        setLoading(false);
-        return;
-      }
+  //     if (error) {
+  //       console.error("Error fetching bookmarks", error);
+  //       setLoading(false);
+  //       return;
+  //     }
 
-      if (data) {
-        const formattedData: Bookmark[] = (data as any[]).map((item) => ({
-          course_id: item.course_id,
-          course: Array.isArray(item.course) ? item.course[0] : item.course,
-        }));
+  //     if (data) {
+  //       const formattedData: Bookmark[] = (data as any[]).map((item) => ({
+  //         course_id: item.course_id,
+  //         course: Array.isArray(item.course) ? item.course[0] : item.course,
+  //       }));
 
-        setBookmarks(formattedData);
-      }
-      setLoading(false);
-    };
+  //       setBookmarks(formattedData);
+  //     }
+  //     setLoading(false);
+  //   };
 
-    fetchBookmarks();
-  }, []);
+  //   fetchBookmarks();
+  // }, []);
 
   return (
     <div className="w-full min-h-screen flex flex-col gap-7 items-start justify-start text-black bg-[#f2f5fc] p-8">
-      <h3 className="font-semibold text-2xl">
+      {/* <h3 className="font-semibold text-2xl">
         {bookmarks.length === 0 ? "No bookmarks found" : `My Bookmarks (${bookmarks.length})`}
       </h3>
 
@@ -91,7 +91,7 @@ export default function Page() {
             </div>
           </div>
         ))}
-      </div>
+      </div> */}
     </div>
   );
 }

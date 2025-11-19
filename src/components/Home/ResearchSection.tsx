@@ -74,8 +74,8 @@ export default function ResearchSection() {
                                 recentBlogsData.length < 1 ? <div className="w-full bg-amber-600 flex items-center justify-center py-32" >No blogs found</div>
                                     :
                                     recentBlogsData?.slice(0, 3).map((blog, index) => (
-                                         <div className=" w-fit flex items-center justify-center gap-10 px-6 py-3 " >
-                                        <ResearchCard blog={blog} key={index} />
+                                         <div key={index} className=" w-fit flex items-center justify-center gap-10 px-6 py-3 " >
+                                        <ResearchCard blog={blog}  />
                                             </div>
                                     ))
                         }
