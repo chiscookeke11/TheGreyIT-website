@@ -54,7 +54,7 @@ export default function Page() {
                             </div>
                         )
                         :
-                        <div className="w-full h-full min-h-[60vh] flex flex-col gap-7 items-stretch font-poppins bg-[#f2f5fc]  py-7 px-4  ">
+                        <div className="w-full h-full min-h-[30vh] flex flex-col gap-7 items-stretch font-poppins bg-[#f2f5fc]  py-7 px-4  ">
 
 
                             {
@@ -68,7 +68,7 @@ export default function Page() {
 
 
                                     return (
-                                        <div key={certificate.id} className=" w-full bg-white rounded-sm py-8 px-5 flex items-start gap-8 " >
+                                        <div key={certificate.id} className=" w-full bg-white rounded-sm py-8 px-5 flex flex-col md:flex-row items-start gap-8 " >
 
                                             {/* course thumbnail  */}
                                             <div className="w-[80px] bg-gray-500 h-[80px] flex items-center justify-center overflow-hidden " >
