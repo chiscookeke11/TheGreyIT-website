@@ -1,5 +1,6 @@
 "use client"
 
+import { useAppContext } from "@/context/AppContext"
 import { supabase } from "@/lib/supabaseClient"
 import { User } from "@supabase/supabase-js"
 import { Eye, EyeOff } from "lucide-react"
@@ -25,6 +26,7 @@ export default function Page() {
     const [showPassword, setShowPassword] = useState(false)
     const [loading, setLoading] = useState(false)
     const email = user?.user_metadata.email
+    const {userData} = useAppContext()
     const [formValues, setFormValues] = useState({
         firstName: "",
         lastName: "",
@@ -57,7 +59,7 @@ export default function Page() {
                 firstName: currentUser?.user_metadata.first_name ?? "",
                 lastName: currentUser?.user_metadata.last_name ?? "",
                 phoneNumber: currentUser?.user_metadata.phoneNumber ?? "",
-                referralCode: currentUser?.user_metadata.referralCode ?? ""
+                referralCode: userData?.referral_code ?? ""
             });
 
         }
@@ -71,7 +73,7 @@ export default function Page() {
                 firstName: currentUser?.user_metadata.first_name ?? "",
                 lastName: currentUser?.user_metadata.last_name ?? "",
                 phoneNumber: currentUser?.user_metadata.phoneNumber ?? "",
-                referralCode: currentUser?.user_metadata.referralCode ?? ""
+                referralCode: userData?.referral_code ?? ""
             });
         })
 
@@ -186,8 +188,6 @@ export default function Page() {
 
 
     }
-
-
 
 
 

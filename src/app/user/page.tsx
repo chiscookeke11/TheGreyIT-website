@@ -23,6 +23,8 @@ export default function Page() {
 
                 <hr className="w-full border-t border-gray-400 " />
 
+                {userData?.referral_code}
+
 
 
                 <div className=" h-full min-h-[150px] w-full flex flex-col lg:flex-row items-center justify-evenly gap-5 md:gap-10 px-2 " >

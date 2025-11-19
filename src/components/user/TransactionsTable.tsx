@@ -1,11 +1,15 @@
-import { transactionData } from "@/data/TransactionData";
+"use client"
+
+import { useAppContext } from "@/context/AppContext";
 
 
 export default function TransactionsTable() {
+const {transactionData} = useAppContext()
+
     return (
         <>
             {
-                transactionData.length < 1 ?
+               transactionData && transactionData?.length < 1 ?
                     <div className=" w-full h-[30vh] flex items-center justify-center " >
                         <h3 className="font-semibold text-2xl" >No Transaction found</h3>
                     </div>
@@ -39,7 +43,7 @@ export default function TransactionsTable() {
                                 </thead>
 
                                 <tbody className="w-full" >
-                                    {transactionData.map((t, index) => (
+                                    {transactionData?.map((t, index) => (
                                         <tr key={t.id} className="border-b border-gray-600">
                                             <td className="text-center p-3 text-sm md:text-base">{index + 1}</td>
                                             <td className="text-center p-3 text-sm md:text-base">{t.course}</td>
@@ -54,7 +58,7 @@ export default function TransactionsTable() {
                                             >
                                                 {t.status}
                                             </td>
-                                            <td className="text-center p-3 text-sm md:text-base">{t.date}</td>
+                                            <td className="text-center p-3 text-sm md:text-base">{new Date(t.date).toISOString().split("T")[0]}</td>
                                         </tr>
                                     ))}
                                 </tbody>

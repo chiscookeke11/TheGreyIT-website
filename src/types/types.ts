@@ -57,7 +57,7 @@ export interface TransactionType {
   course: string;
   reference: string;
   status: "successful" | "pending" | "failed";
-  date: string;
+  date: Date;
 }
 
 
@@ -76,3 +76,4 @@ export interface UserData {
   referral_code: string;
   created_at: string;
 }
+

@@ -1,6 +1,6 @@
 "use client";
 import { supabase } from "@/lib/supabaseClient";
-import { UserData } from "@/types/types";
+import { TransactionType, UserData } from "@/types/types";
 import React, { createContext, useContext, useState, ReactNode, useEffect } from "react";
 import toast from "react-hot-toast";
 
@@ -12,6 +12,8 @@ type AppContextType = {
   setActiveNav: React.Dispatch<React.SetStateAction<number | null>>;
   userData: UserData | null
   setUserData: React.Dispatch<React.SetStateAction<UserData | null>>
+  transactionData: TransactionType[] | null
+  setTransactionData: React.Dispatch<React.SetStateAction<TransactionType[] | null>>
 };
 
 
@@ -27,10 +29,13 @@ const AppContext = createContext<AppContextType | undefined>(undefined);
 export function AppProvider({ children }: { children: ReactNode }) {
   const [userData, setUserData] = useState<UserData | null>(null)
   const [activeNav, setActiveNav] = useState<number | null>(0);
+  const [transactionData, setTransactionData] = useState<TransactionType[] | null>(null)
 
 
 
 
+
+  // function to fetch userData
   const fetchUserData = async () => {
     const { data, error } = await supabase.from("user_data").select("*")
 
@@ -47,10 +52,32 @@ export function AppProvider({ children }: { children: ReactNode }) {
   }
 
 
-  useEffect(() => {
+  // function to fetch user transactions
+  const fetchUserTransactions = async () => {
+    const { data, error } = await supabase.from("transactions").select("*")
 
+    if (error) {
+      console.error("Error fetching transactions", error)
+    }
+
+    else {
+      console.log(data)
+      setTransactionData(data)
+    }
+  }
+
+
+
+  useEffect(() => {
+    fetchUserTransactions()
     fetchUserData()
   }, [])
+
+
+
+
+
+
 
 
 
@@ -62,7 +89,8 @@ export function AppProvider({ children }: { children: ReactNode }) {
         setActiveNav,
         userData,
         setUserData,
-
+        transactionData,
+        setTransactionData
       }}>
 
       {children}
