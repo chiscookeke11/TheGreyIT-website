@@ -62,3 +62,41 @@ export const fetchUserCertificates = async (certifiedCourses: number[]) => {
 
     return data;
 };
+
+
+
+
+// Function to add or remove bookmarks
+export const toggleBookmark = async (userId: string, course_id: string) => {
+
+    // Fetching the current bookmarks
+    const { data: bookmarksData, error: fetchError } = await supabase.from("user_data").select("bookmarks").eq("user_id", userId).maybeSingle()
+
+
+    if (fetchError) {
+        console.error(fetchError)
+        return;
+    }
+
+    let bookmarks = bookmarksData?.bookmarks || []
+
+    // The toggle logic
+    if (bookmarks.includes(course_id)) {
+        bookmarks = bookmarks.filter((id: string) => id !== course_id)
+    }
+
+    else {
+        bookmarks.push(course_id)
+    }
+
+    // update supabase array column
+    const { error: updateError } = await supabase.from("user_data").update({ bookmarks: bookmarks }).eq("user_id", userId)
+
+    if (updateError) {
+        console.error(updateError)
+        return;
+    }
+
+
+    return bookmarks;
+}
