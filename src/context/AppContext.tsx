@@ -1,4 +1,5 @@
 "use client";
+import { fetchAllCourses, fetchUserCertificates, fetchUserData, fetchUserTransactions } from "@/lib/appActions";
 import { supabase } from "@/lib/supabaseClient";
 import { CertificatesDataType, CourseDataTypes, TransactionType, UserData } from "@/types/types";
 import React, { createContext, useContext, useState, ReactNode, useEffect } from "react";
@@ -8,16 +9,29 @@ import toast from "react-hot-toast";
 
 // 1. Define the shape of the context
 type AppContextType = {
+
   activeNav: number | null;
   setActiveNav: React.Dispatch<React.SetStateAction<number | null>>;
+
   userData: UserData | null
   setUserData: React.Dispatch<React.SetStateAction<UserData | null>>
+
   transactionData: TransactionType[] | null
   setTransactionData: React.Dispatch<React.SetStateAction<TransactionType[] | null>>
+
   certificatesData: CertificatesDataType[] | null
   setCertificatesData: React.Dispatch<React.SetStateAction<CertificatesDataType[] | null>>
+
   allCoursesData: CourseDataTypes[] | null;
   setAllCoursesData: React.Dispatch<React.SetStateAction<CourseDataTypes[] | null>>
+
+  reloadUserData: () => Promise<void>;
+
+  reloadTransactions: () => Promise<void>;
+
+  reloadCertificates: () => Promise<void>;
+
+  reloadCourses: () => Promise<void>;
 };
 
 
@@ -35,94 +49,36 @@ export function AppProvider({ children }: { children: ReactNode }) {
   const [activeNav, setActiveNav] = useState<number | null>(0);
   const [transactionData, setTransactionData] = useState<TransactionType[] | null>(null)
   const [certificatesData, setCertificatesData] = useState<CertificatesDataType[] | null>(null)
-   const [allCoursesData, setAllCoursesData] = useState<CourseDataTypes[] | null>(null)
+  const [allCoursesData, setAllCoursesData] = useState<CourseDataTypes[] | null>(null)
 
 
 
 
+  const reloadUserData = async () => {
+    const result = await fetchUserData();
+    setUserData(result);
+  };
 
-    // Function to fetch all courses from the db
-    const fetchAllCourses = async () => {
-        const { data, error } = await supabase.from("course").select("*")
+  const reloadTransactions = async () => {
+    const result = await fetchUserTransactions();
+    setTransactionData(result);
+  };
 
-        if (error) {
-            console.error("Failed to fetch course:", error)
-        }
+  const reloadCourses = async () => {
+    const result = await fetchAllCourses();
+    setAllCoursesData(result);
+  };
 
+  const reloadCertificates = async () => {
+    if (!userData?.list_completed_courses) return;
+    const result = await fetchUserCertificates(userData.list_completed_courses);
+    setCertificatesData(result);
+  };
 
-        {
-            setAllCoursesData(data)
-        }
-    }
-
-
-
-
-  // function to fetch userData
-  const fetchUserData = async () => {
-    const { data, error } = await supabase.from("user_data").select("*")
-
-
-    if (error) {
-      console.error("error fetching user data:", error)
-    }
-
-    else {
-      setUserData(data[0] || null)
-    }
-  }
-
-
-  // function to fetch user transactions
-  const fetchUserTransactions = async () => {
-    const { data, error } = await supabase.from("transactions").select("*")
-
-    if (error) {
-      console.error("Error fetching transactions", error)
-    }
-
-    else {
-      setTransactionData(data)
-    }
-  }
-
-
-  // function to fetch user's certificates
-  const fetchUserCertifcates = async () => {
-    const certifiedCourses = userData?.list_completed_courses
-
-    const { data, error } = await supabase.from("certificates").select("*").in("course_id", certifiedCourses ?? [])
-
-    if (error) {
-      console.error("Error fetching certificates", error)
-    }
-
-    else {
-      setCertificatesData(data)
-      console.log("The certificates:", data)
-    }
-  }
-
-
-
-
-
-
-
+  // auto-run when user changes
   useEffect(() => {
-    fetchAllCourses()
-    fetchUserTransactions()
-    fetchUserData()
-  }, [])
-
-  useEffect(() => {
-    fetchUserCertifcates()
-  }, [userData])
-
-
-
-
-
+    if (userData) reloadCertificates();
+  }, [userData]);
 
 
 
@@ -139,7 +95,11 @@ export function AppProvider({ children }: { children: ReactNode }) {
         certificatesData,
         setCertificatesData,
         allCoursesData,
-        setAllCoursesData
+        setAllCoursesData,
+        reloadCertificates,
+        reloadCourses,
+        reloadTransactions,
+        reloadUserData,
       }}>
 
       {children}

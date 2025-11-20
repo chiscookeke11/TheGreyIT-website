@@ -71,14 +71,13 @@ export default function UserDashboardLayout({ children }: { children: React.Reac
     const [user, setUser] = useState<User | null>(null)
     const [loading, setLoading] = useState(true)
     const [checkingUser, setCheckingUser] = useState(false)
+    const { reloadUserData, reloadCertificates, reloadTransactions } = useAppContext()
 
 
 
 
 
     useEffect(() => {
-
-
         // check is the user is login in
         const getUser = async () => {
 
@@ -90,9 +89,7 @@ export default function UserDashboardLayout({ children }: { children: React.Reac
 
             setUser(data.user ?? null)
             setLoading(false)
-
         }
-
         getUser()
 
         // listen for state changes in the layout
@@ -108,6 +105,14 @@ export default function UserDashboardLayout({ children }: { children: React.Reac
 
 
 
+
+
+    // Fetching the data from the db once the user has been loaded
+    useEffect(() => {
+        reloadUserData()
+        reloadCertificates()
+        reloadTransactions()
+    }, [user])
 
 
 
