@@ -106,7 +106,8 @@ export default function Page() {
                             <Spinner />
                         </div>
                         :
-                        courseType && courseType.length < 1 ? <div className="w-full flex flex-col gap-7 items-center justify-center h-[50vh] " >
+                        courseType && courseType.length < 1 ?
+                         <div className="w-full flex flex-col gap-7 items-center justify-center h-[50vh] " >
                             <Image src={"/user/not-found-error-alert-svgrepo-com.svg"} alt="icon" height={500} width={500} className=" w-[250px] h-[250px] object-center " priority />
                             No course found </div>
                             :

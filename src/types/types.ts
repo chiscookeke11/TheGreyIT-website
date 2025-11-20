@@ -42,7 +42,6 @@ export interface ProfileDataType {
 
 
 
-
 export interface Results {
   hasMinLength: boolean
   hasDigit: boolean
@@ -76,6 +75,7 @@ export interface UserData {
   created_at: string;
   list_enrolled_courses: number[]
   list_completed_courses: number[]
+  bookmarks: number[]
 }
 
 export interface CertificatesDataType {

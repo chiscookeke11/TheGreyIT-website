@@ -80,6 +80,10 @@ export function AppProvider({ children }: { children: ReactNode }) {
     if (userData) reloadCertificates();
   }, [userData]);
 
+  useEffect(() => {
+    reloadCourses()
+  }, [])
+
 
 
 
