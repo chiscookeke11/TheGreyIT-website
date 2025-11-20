@@ -73,7 +73,7 @@ export default function UserCourseCard({ track, bookmarks, setbookmarks }: UserC
 
             {/* Bookmark button  */}
             <button
-                onClick={() => handleBookmarkClick(track.id!, userData?.user_id!)}
+                onClick={() => handleBookmarkClick(track.id ?? "", userData?.user_id ?? "")}
                 className={`absolute outline-0 top-3 right-4 z-10 rounded-sm p-4 flex items-center justify-center text-gray-700 cursor-pointer bg-white   `} >
                 <Heart size={20} color="white" fill={bookmarks?.includes(Number(track.id)) ? "red" : "black"} />
             </button>
