@@ -22,7 +22,7 @@ export default function WhyUs() {
                 <div className="hidden md:flex gap-4  " >
                     <Link href={"/courses"} >
                      <button  className="font-syne bg-gray-700 text-white hover:bg-transparent hover:text-gray-700   px-6 py-3  flex items-center justify-center font-medium  focus:outline-none cursor-pointer text-base md:text-lg  border-[1px]  transition-all duration-300 ease-in-out border-gray-700 rounded-sm  " >Courses</button></Link>
-                    <Link href={"/community"} >   <Button variant="default" className="font-syne " >Community</Button></Link>
+                    <Link href={"/our-services"} >   <Button variant="default" className="font-syne " >Community</Button></Link>
                 </div>
             </div>
 
