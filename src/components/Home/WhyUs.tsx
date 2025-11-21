@@ -35,7 +35,7 @@ export default function WhyUs() {
 
             <div className="flex md:hidden gap-4   " >
                 <Link href={"/courses"} >   <Button variant="default" className="font-syne !bg-gray-700 text-white " >Courses</Button></Link>
-                <Link href={"/community"} >   <Button variant="default" className="font-syne " >Community</Button></Link>
+                <Link href={"/our-services"} >   <Button variant="default" className="font-syne " >Our Services</Button></Link>
             </div>
 
 
