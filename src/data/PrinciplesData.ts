@@ -2,7 +2,7 @@
     {
       title: "Client Success First",
       subtitle: "When our clients win, we win.",
-      text: "We build enduring and trusted partnerships and stay focused on solving their most pressing challenges. This isn’t talk — it’s our business model.",
+      text: "We build enduring and trusted partnerships and stay focused on solving their most pressing challenges. This isn’t talk, it’s our business model.",
     },
     {
       title: "Drive Results",

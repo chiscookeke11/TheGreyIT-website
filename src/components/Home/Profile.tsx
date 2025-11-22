@@ -41,7 +41,7 @@ export default function Profile() {
         <section className="w-full bg-white py-36 px-[7%] flex items-center justify-center flex-col gap-12  " >
             <div className="text-center flex flex-col items-center justify-center gap-7 " >
                 <h2 className="text-red-700 text-5xl lg:text-6xl font-extrabold font-poppins max-w-3xl text-center  " >Real Minds.<br/> Real Impact.</h2>
-                <p className="font-normal text-base lg:text-lg font-syne max-w-2xl " >Innovators shaping Africa’s digital future — coding, researching, and creating solutions that transform communities.</p>
+                <p className="font-normal text-base lg:text-lg font-syne max-w-2xl " >Innovators shaping Africa’s digital future; coding, researching, and creating solutions that transform communities.</p>
             </div>
 
 

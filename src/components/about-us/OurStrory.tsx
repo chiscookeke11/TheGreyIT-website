@@ -28,7 +28,7 @@ export default function OurStory() {
         <div className=" w-full md:w-[67%] aspect-16/9 hidden md:flex items-center justify-center  " >
           <Image
             src="/about-us/second-image.jpg"
-            alt="Founders Eido & Assaf"
+            alt="team"
             width={1000}
             height={1000}
             className="w-full h-auto object-cover md:rounded-xl"
@@ -69,8 +69,8 @@ export default function OurStory() {
 
       <div className=" w-full flex  aspect-16/9 md:hidden items-center justify-center " >
         <Image
-          src="/community-page/About_story-2.jpg"
-          alt="Founders Eido & Assaf"
+       src="/about-us/second-image.jpg"
+          alt="Team"
           width={1000}
           height={1000}
           className="w-full h-auto object-cover md:rounded-xl"

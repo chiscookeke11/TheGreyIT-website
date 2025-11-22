@@ -51,7 +51,7 @@ export default function Page() {
 
                         <div className="md:basis-1/2 w-full h-full px-5 lg:px-10 py-8 md:py-16 flex items-start justify-center flex-col  gap-3.5 text-start " >
                             <h3 className="text-xl md:text-2xl font-extrabold text-gray-700 mb-4 ">{service.title} </h3>
-                            <p className="text-lg md:text-xl mb-3 md:mb-5 whitespace-pre-line "> {service.content} </p>
+                            <p className="text-lg md:text-xl mb-3 md:mb-7 whitespace-pre-line "> {service.content} </p>
                             <button
                                 onClick={() => {
                                     setSelectedSubject(service.title)
