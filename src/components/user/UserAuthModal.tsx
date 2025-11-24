@@ -300,9 +300,9 @@ export default function UserAuthModal() {
             )}
 
 
-            <div className=" flex items-center justify-center gap-3 " >
+            {/* <div className=" flex items-center justify-center gap-3 " >
                 <button disabled={loading} type="button" onClick={handleGoogleLogin} aria-label="Login with google" className="cursor-pointer p-2 rounded-full h-10 w-10 overflow-hidden flex items-center justify-center " ><Image src={"/logos/google-logo.png"} alt="google logo" height={50} width={50} className="h-full w-full " /></button>
-            </div>
+            </div> */}
         </form>
     )
 }

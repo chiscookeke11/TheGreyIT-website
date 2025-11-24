@@ -138,7 +138,7 @@ export default function Page() {
             // then sign write hasDownloaded to true in the db
             const { data: statusData, error: statusError } = await supabase
                 .from("certificates")
-                .update({hasDownloaded: true })
+                .update({ hasDownloaded: true })
                 .eq("id", currentCertificate?.id)
                 .eq("user_id", currentCertificate?.user_id);
 
@@ -146,11 +146,6 @@ export default function Page() {
                 console.error(statusError);
                 return;
             }
-
-            console.log(statusData);
-
-
-
         }
 
     }
