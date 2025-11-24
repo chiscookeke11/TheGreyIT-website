@@ -1,7 +1,9 @@
 "use client"
 
+import { supabase } from "@/lib/supabaseClient"
 import { Mail } from "lucide-react"
 import React, { useState } from "react"
+import toast from "react-hot-toast"
 
 
 
@@ -9,11 +11,58 @@ import React, { useState } from "react"
 
 export default function NewsletterSection() {
     const [newsLetterEmail, setNewsLetterEmail] = useState("")
+    const [loading, setLoading] = useState(true)
 
 
-    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault()
-    }
+
+
+
+
+
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+
+        if (!newsLetterEmail) {
+            toast.error("Please provide an email!")
+            return
+        }
+
+
+        setLoading(true)
+        // Fetch all subscribed emails
+        const { data: emailsData, error: emailsError } = await supabase
+            .from("newsletter")
+            .select("email");
+
+        if (emailsError) {
+            toast.error("Failed to subscribe to our newsletter!");
+            return;
+        }
+
+        // Check if the email already exists
+        const emailExists = emailsData.some(
+            (item: { email: string }) => item.email === newsLetterEmail
+        );
+
+        if (emailExists) {
+            toast.error("You have already subscribed for this newsletter!");
+            return;
+        }
+
+        // Insert new email
+        const { error } = await supabase.from("newsletter").insert({
+            email: newsLetterEmail,
+        });
+
+        if (error) {
+            toast.error("Failed to subscribe to our newsletter!");
+            console.error(error);
+        } else {
+            toast.success("You have subscribed to our newsletter!");
+            setNewsLetterEmail("");
+        }
+    };
+
 
 
 
