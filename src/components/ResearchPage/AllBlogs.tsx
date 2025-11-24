@@ -11,46 +11,32 @@ export default function AllBlogs() {
   const ref = useRef(null)
   const isInView = useInView(ref)
   const [blogs, setBlogs] = useState<ResearchBlogType[]>([])
-  const [page, setPage] = useState(0)
   const [loading, setLoading] = useState(false)
-  const [hasMore, setHasMore] = useState(true)
 
-  // Fetch 8 blogs at a time
+
+
   const fetchBlogs = async () => {
-    setLoading(true)
-    const limit = 8
-    const from = page * limit
-    const to = from + limit - 1 // Supabase range is inclusive
 
-    const { data, error } = await supabase
-      .from("blog")
-      .select("*")
-      .order("publicationDate", { ascending: false })
-      .range(from, to)
+        setLoading(true)
+        const { data, error } = await supabase.from("blog").select("*")
 
-    if (error) {
-      console.error("Failed to fetch blogs", error)
-    } else {
-      if (data.length === 0) {
-        setHasMore(false)
-      } else {
-        setBlogs(prev => [...prev, ...data])
-      }
+        if (error) {
+            setLoading(false)
+        }
+        else if (data) {
+            setBlogs(data)
+            setLoading(false)
+        }
     }
-    setLoading(false)
-  }
 
-  // Load more when the ref div is in view
-  useEffect(() => {
-    if (isInView && hasMore && !loading) {
-      setPage(prev => prev + 1)
-    }
-  }, [isInView])
 
-  // Fetch blogs whenever page changes
-  useEffect(() => {
-    fetchBlogs()
-  }, [page])
+
+    // Fetch blogs whenever page changes
+    useEffect(() => {
+        fetchBlogs()
+    }, [])
+
+
 
   return (
     <section className="bg-[#f2f5fc] w-full py-20 px-[4%] text-black flex flex-col items-center justify-center gap-16 relative">

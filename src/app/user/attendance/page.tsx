@@ -50,8 +50,8 @@ export default function Page() {
 
     return (
         <div className="w-full h-full min-h-[60vh] flex flex-col gap-7 items-center justify-center font-poppins bg-[#f2f5fc] py-10 px-5">
-            <div className="max-w-4xl mx-auto p-6 bg-white rounded-2xl shadow-lg">
-                <h2 className="text-2xl font-bold mb-4 text-center">Attendance Calendar</h2>
+            <div className="max-w-4xl mx-auto p-1 bg-white rounded-2xl shadow-lg py-7 ">
+                <h2 className="text-2xl font-bold mb-4 text-center  ">Attendance Calendar</h2>
                 <FullCalendar
                     plugins={[dayGridPlugin]}
                     initialView="dayGridMonth"

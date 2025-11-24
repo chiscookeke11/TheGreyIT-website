@@ -1,12 +1,8 @@
 "use client"
 
 import { supabase } from "@/lib/supabaseClient"
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import toast from "react-hot-toast"
-
-
-
-
 
 const Spinner = () => {
     return (
@@ -14,14 +10,45 @@ const Spinner = () => {
     )
 }
 
-
-
-
-
 export default function Page() {
     const [email, setEmail] = useState("")
     const [loading, setLoading] = useState(false)
+    const [isCounting, setIsCounting] = useState(false)
+    const [countdown, setCountdown] = useState(180)
 
+    // Check localStorage for persisted timer
+    useEffect(() => {
+        const savedEndTime = localStorage.getItem("resetCooldownEnd")
+        if (savedEndTime) {
+            const endTime = parseInt(savedEndTime)
+            const now = new Date().getTime()
+            if (endTime > now) {
+                setIsCounting(true)
+                setCountdown(Math.ceil((endTime - now) / 1000))
+            } else {
+                localStorage.removeItem("resetCooldownEnd")
+            }
+        }
+    }, [])
+
+    // Countdown effect
+    useEffect(() => {
+        if (!isCounting) return
+
+        const timer = setInterval(() => {
+            setCountdown((prev) => {
+                if (prev <= 1) {
+                    clearInterval(timer)
+                    setIsCounting(false)
+                    localStorage.removeItem("resetCooldownEnd")
+                    return 180
+                }
+                return prev - 1
+            })
+        }, 1000)
+
+        return () => clearInterval(timer)
+    }, [isCounting])
 
     // function to send update password link to the user
     const sendResetLink = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -34,39 +61,61 @@ export default function Page() {
         })
 
         if (error) {
-            toast.error(`Failed to send link ${error.message} `)
+            toast.error(`Failed to send link: ${error.message}`)
             console.error(error.message)
             setLoading(false)
+            return
         }
 
-        console.log(data)
-        setEmail("")
         toast.success("Password reset link sent successfully")
         setEmail("")
         setLoading(false)
+
+        // Start cooldown
+        const endTime = new Date().getTime() + 180 * 1000 // 3 mins from now
+        localStorage.setItem("resetCooldownEnd", endTime.toString())
+        setCountdown(180)
+        setIsCounting(true)
     }
 
-
-
     return (
-        <div className="w-full h-screen flex items-center justify-center px-[5%] " >
-            <form onSubmit={sendResetLink} className=" w-full max-w-2xl bg-white flex items-center justify-center flex-col gap-7 px-6 py-10 rounded-lg font-poppins ">
-
-                <h1 className="text-gray-700 font-bold font-poppins text-2xl md:text-4xl  "> Enter Your Email</h1>
+        <div className="w-full h-screen flex items-center justify-center px-[5%]">
+            <form
+                onSubmit={sendResetLink}
+                className="w-full max-w-2xl bg-white flex items-center justify-center flex-col gap-2 px-6 py-10 rounded-lg font-poppins"
+            >
+                <h1 className="text-gray-700 font-bold text-2xl md:text-4xl mb-5">
+                    Enter Your Email
+                </h1>
 
                 {/* Email input */}
-                <label htmlFor="Email" className=" w-full flex flex-col items-start gap-1  " >
-                    <span className="text-xl font-medium " >Email</span>
-                    <input type="email" id="email" name="email" onChange={(e) => setEmail(e.target.value)} value={email} placeholder="JohnDoe@gmail.com" className="w-full py-4 px-5 border border-gray-700 outline-none focus:outline-none text-base rounded-sm " />
+                <label htmlFor="email" className="w-full flex flex-col items-start gap-1 mb-3">
+                    <span className="text-xl font-medium">Email</span>
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        onChange={(e) => setEmail(e.target.value)}
+                        value={email}
+                        placeholder="JohnDoe@gmail.com"
+                        className="w-full py-4 px-5 border border-gray-700 outline-none focus:outline-none text-base rounded-sm"
+                    />
                 </label>
 
+                {/* Timer display */}
+                {isCounting && (
+                    <p className="mt-2 mb-4 ml-auto text-gray-500 text-xs ">
+                        Please wait {countdown}s before sending another link.
+                    </p>
+                )}
 
-
-
-
-                <button disabled={loading} className="font-syne bg-gray-700 w-full max-w-xs text-white hover:bg-transparent hover:text-gray-700 mb-5  px-6 py-3  flex items-center justify-center font-medium  focus:outline-none cursor-pointer text-base md:text-lg  border-[1px]  transition-all duration-300 ease-in-out border-gray-700 rounded-sm  " > {loading ? <Spinner /> : "Send reset link"} </button>
-
-
+                <button
+                    type="submit"
+                    disabled={loading || isCounting || !email}
+                    className="font-syne bg-gray-700 w-full max-w-xs text-white hover:bg-transparent hover:text-gray-700 mb-5 px-6 py-3 flex items-center justify-center font-medium focus:outline-none cursor-pointer text-base md:text-lg border-[1px] transition-all duration-300 ease-in-out border-gray-700 rounded-sm"
+                >
+                    {loading ? <Spinner /> : "Send reset link"}
+                </button>
             </form>
         </div>
     )
