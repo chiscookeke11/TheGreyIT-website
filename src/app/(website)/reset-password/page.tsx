@@ -1,6 +1,7 @@
 "use client"
 
 import { supabase } from "@/lib/supabaseClient"
+import Link from "next/link"
 import React, { useState, useEffect } from "react"
 import toast from "react-hot-toast"
 
@@ -67,7 +68,7 @@ export default function Page() {
             return
         }
 
-        toast.success("Password reset link sent successfully")
+        toast.success(`Password reset link sent to the email: ${email}`)
         setEmail("")
         setLoading(false)
 
@@ -89,7 +90,7 @@ export default function Page() {
                 </h1>
 
                 {/* Email input */}
-                <label htmlFor="email" className="w-full flex flex-col items-start gap-1 mb-3">
+                <label htmlFor="email" className="w-full flex flex-col items-start gap-1 ">
                     <span className="text-xl font-medium">Email</span>
                     <input
                         type="email"
@@ -102,9 +103,12 @@ export default function Page() {
                     />
                 </label>
 
+
+                <Link href={"/user"} className=" text-sm ml-auto font-medium hover:font-medium hover:transition-all duration-300 ease-in-out text-gray-700 mb-3" >Sign in</Link>
+
                 {/* Timer display */}
                 {isCounting && (
-                    <p className="mt-2 mb-4 ml-auto text-gray-500 text-xs ">
+                    <p className="mt-3 mb-4 ml-auto text-gray-500 text-xs ">
                         Please wait {countdown}s before sending another link.
                     </p>
                 )}
@@ -112,10 +116,12 @@ export default function Page() {
                 <button
                     type="submit"
                     disabled={loading || isCounting || !email}
-                    className="font-syne bg-gray-700 w-full max-w-xs text-white hover:bg-transparent hover:text-gray-700 mb-5 px-6 py-3 flex items-center justify-center font-medium focus:outline-none cursor-pointer text-base md:text-lg border-[1px] transition-all duration-300 ease-in-out border-gray-700 rounded-sm"
+                    className={` font-syne bg-gray-700 w-full max-w-xs text-white hover:bg-transparent hover:text-gray-700 mb-5 px-6 py-3 flex items-center justify-center font-medium focus:outline-none text-base md:text-lg border-[1px] transition-all duration-300 ease-in-out border-gray-700 rounded-sm ${isCounting? "cursor-not-allowed  " : "cursor-pointer"}  `}
                 >
                     {loading ? <Spinner /> : "Send reset link"}
                 </button>
+
+
             </form>
         </div>
     )

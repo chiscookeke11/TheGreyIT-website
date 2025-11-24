@@ -12,6 +12,8 @@ import Image from "next/image";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
+import Confetti from 'react-confetti';
+import { useWindowSize } from '@react-hook/window-size';
 
 
 
@@ -22,7 +24,9 @@ export default function Page() {
     const [currentCertificate, setCurrentCertificate] = useState<CertificatesDataType | null>(null)
     const { certificatesData, allCoursesData } = useAppContext()
     const [theCourse, setTheCourse] = useState<CourseDataTypes | null>(null);
-
+    const [showConfetti, setShowConfetti] = useState(true)
+    const [width, height] = useWindowSize();
+    const [hasDownloaded, setHasDownloaded] = useState<boolean | null>(false)
 
 
     // Fetching the user details
@@ -76,6 +80,40 @@ export default function Page() {
     }, [currentCertificate, allCoursesData]);
 
 
+    // Check if the user has downloaded the certificate
+    useEffect(() => {
+        if (!currentCertificate) return;
+
+        const fetchCertificateState = async () => {
+            const { data, error } = await supabase.from("certificates").select("hasDownloaded").eq("id", currentCertificate?.id).eq("user_id", currentCertificate?.user_id).single()
+
+            if (error) {
+                console.error(error)
+                return;
+            }
+            setHasDownloaded(data?.hasDownloaded ?? false)
+            console.log(data)
+
+        }
+        fetchCertificateState()
+    }, [currentCertificate])
+
+
+    // display confetti once all the data has been fetched
+    useEffect(() => {
+
+        if (!loading && theCourse) {
+
+            const timer = setTimeout(() => {
+                setShowConfetti(false);
+            }, 10000);
+
+            return () => clearTimeout(timer);
+        }
+
+    }, [theCourse]);
+
+
 
     // Function to download certificate
     const downloadCertificate = async (pdfName: string) => {
@@ -95,6 +133,19 @@ export default function Page() {
             link.click()
             link.remove()
             URL.revokeObjectURL(url)
+
+
+            // then sign write hasDownloaded to true in the db
+            const { data: statusData, error: statusError } = await supabase
+                .from("certificates")
+                .update({ hasDownloaded: true })
+                .eq("id", currentCertificate?.id)
+                .eq("user_id", currentCertificate?.user_id);
+
+            if (statusError) {
+                console.error(statusError);
+                return;
+            }
         }
 
     }
@@ -126,6 +177,7 @@ export default function Page() {
 
     return (
         <div className="flex flex-col items-start w-full gap-10 mt-5  " >
+            {showConfetti && !hasDownloaded && <Confetti width={width} height={height} />}
 
             <h1 className=" text-xl md:text-3xl font-semibold  " > {theCourse?.title} Certificate </h1>
 
@@ -186,8 +238,8 @@ export default function Page() {
 
 
                     <Button
-                    onClick={shareCertificate}
-                    variant="default" className="w-full rounded-none! bg-gray-700 text-white hover:bg-transparent hover:text-gray-700! " >Share Certificate</Button>
+                        onClick={shareCertificate}
+                        variant="default" className="w-full rounded-none! bg-gray-700 text-white hover:bg-transparent hover:text-gray-700! " >Share Certificate</Button>
 
                     <Button variant="default"
                         onClick={() => {
