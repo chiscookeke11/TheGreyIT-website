@@ -13,10 +13,26 @@ import toast from "react-hot-toast"
 
 
 
+
+
+
+const ConfirmationModal = () => {
+    return (
+        <div className="w-full fixed inset-0 h-screen bg-black/25 backdrop-blur-2xl flex items-center justify-center px-[4%] py-7  " >
+<div className="bg-white rounded-sm " >
+
+</div>
+        </div>
+    )
+}
+
+
+
 export default function Page() {
     const ref = useRef(null)
     const [blogs, setBlogs] = useState<ResearchBlogType[]>([])
     const [loading, setLoading] = useState(false)
+    const [openConfirmationModal, setOpenConfirmationModal] = useState(false)
 
 
 
@@ -59,6 +75,11 @@ export default function Page() {
     }
 
 
+    useEffect(() => {
+        document.body.style.overflowY = openConfirmationModal ? "hidden" : "auto"
+
+    }, [openConfirmationModal])
+
 
 
 
@@ -90,7 +111,7 @@ export default function Page() {
                                 </div>
 
                                 <div className="h-0 overflow-hidden  bg-white w-full px-4  flex items-center justify-center gap-3 group-hover:h-fit group-hover:py-4 transition-all duration-300 ease-in-out " >
-                                    <button onClick={() => deleteBlog(blog.id)} className=" bg-gray-400 hover:bg-gray-700 hover:text-gray-200 transition-all ease-in-out duration-300 p-2 cursor-pointer rounded-sm text-white " ><Trash /></button>
+                                    <button onClick={() => setOpenConfirmationModal(true)} className=" bg-gray-400 hover:bg-gray-700 hover:text-gray-200 transition-all ease-in-out duration-300 p-2 cursor-pointer rounded-sm text-white " ><Trash /></button>
                                     <Link href={`/admin/blog/${blog.id}`}  className=" bg-gray-400 hover:bg-gray-700 hover:text-gray-200 transition-all ease-in-out duration-300 p-2 cursor-pointer rounded-sm text-white " ><Fullscreen /> </Link>
                                 </div>
                             </div>
@@ -98,6 +119,8 @@ export default function Page() {
                         ))}
                     </div>
                 )}
+
+                {openConfirmationModal && <ConfirmationModal/>}
 
 
                 <div ref={ref} className="w-10 h-10 absolute right-0 bottom-0" />
