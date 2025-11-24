@@ -9,9 +9,16 @@ import toast from "react-hot-toast"
 
 
 
+const Spinner = () => {
+    return (
+        <div className="h-5 w-5 rounded-full border-4 border-gray-white border-t-transparent animate-spin duration-150 ease-in-out transition-all " />
+    )
+}
+
+
 export default function NewsletterSection() {
     const [newsLetterEmail, setNewsLetterEmail] = useState("")
-    const [loading, setLoading] = useState(true)
+    const [loading, setLoading] = useState(false)
 
 
 
@@ -46,6 +53,7 @@ export default function NewsletterSection() {
 
         if (emailExists) {
             toast.error("You have already subscribed for this newsletter!");
+            setLoading(false)
             return;
         }
 
@@ -57,9 +65,11 @@ export default function NewsletterSection() {
         if (error) {
             toast.error("Failed to subscribe to our newsletter!");
             console.error(error);
+            setLoading(false)
         } else {
             toast.success("You have subscribed to our newsletter!");
             setNewsLetterEmail("");
+            setLoading(false)
         }
     };
 
@@ -96,7 +106,7 @@ export default function NewsletterSection() {
                     </label>
 
 
-                    <button className=" bg-white rounded-[50px] py-4 px-5  cursor-pointer flex items-center justify-center text-neutral-700  text-base font-semibold  hover:rounded-[4px] duration-300 transition-all ease-in-out " >Subscribe Now</button>
+                    <button className=" bg-white rounded-[50px] py-4 px-5  cursor-pointer flex items-center justify-center text-neutral-700  text-base font-semibold  hover:rounded-[4px] duration-300 transition-all ease-in-out " >{loading ? <Spinner /> : "Subscribe Now"} </button>
                 </form>
 
             </div>
