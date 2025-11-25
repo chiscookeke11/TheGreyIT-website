@@ -9,7 +9,7 @@ interface ReviewCardProps {
 
 export default function ReviewCard({ data }: ReviewCardProps) {
 
-    const reviewDate = new Date(data.userReview.userReviewDate)
+    const reviewDate = new Date(data.userReviewDate)
     const now = Date.now()
 
     // Difference in milliseconds
@@ -31,8 +31,8 @@ export default function ReviewCard({ data }: ReviewCardProps) {
                     </div>
 
                     <div>
-                        <h4 className="text-sm font-semibold" >{data.userReview.userName}</h4>
-                        <RatingStars ratingValue={data.userReview.userRating} size={15} />
+                        <h4 className="text-sm font-semibold" >{data.userName}</h4>
+                        <RatingStars ratingValue={data.userRating} size={15} />
                     </div>
                 </div>
 
@@ -41,7 +41,7 @@ export default function ReviewCard({ data }: ReviewCardProps) {
             </div>
 
             {/* card body  */}
-            <p className="text-sm font-normal text-gray-600 " >{data.userReview.review}            </p>
+            <p className="text-sm font-normal text-gray-600 " >{data.review}            </p>
 
 
         </div>
