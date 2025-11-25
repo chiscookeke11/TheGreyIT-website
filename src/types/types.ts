@@ -86,3 +86,18 @@ export interface CertificatesDataType {
   id: number;
   pdfName: string;
 }
+
+
+
+
+export interface reviewDataType {
+  rating: number;
+  courseName: string;
+  userReview: {
+    userName: string;
+    userImage: string;
+    review: string;
+    userRating: number,
+    userReviewDate: Date
+  }
+}
