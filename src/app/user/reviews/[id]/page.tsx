@@ -66,11 +66,11 @@ export default function Page() {
             <button
                 onClick={() => router.back()}
                 className="h-12 w-12 flex items-center justify-center bg-gray-700 rounded-full font-bold cursor-pointer text-white hover:bg-gray-500 transition-all duration-300 ease-in-out " ><ArrowLeft /></button>
-
+            <h3 className="font-bold text-2xl md:text-4xl text-gray-700 text-center " > {currentCourse?.title} Reviews </h3>
             {/* mini hero section  */}
             {courseReviews && courseReviews?.length > 0 && (
                 <div className=" w-full  flex items-center flex-col gap-2 " >
-                    <h3 className="font-bold text-4xl text-gray-700 " > {currentCourse?.title} Reviews </h3>
+                    <h3 className="font-bold text-2xl md:text-4xl text-gray-700 text-center " > {currentCourse?.title} Reviews </h3>
                     <h1 className="font-extrabold text-5xl my-3 " >4.0</h1>
 
                     <RatingStars ratingValue={4} />
@@ -114,6 +114,9 @@ export default function Page() {
                         </div>
                     )
             }
+
+
+
 
         </div>
     )
