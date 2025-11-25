@@ -1,3 +1,4 @@
+import { number } from "framer-motion";
 
 
 
@@ -91,13 +92,12 @@ export interface CertificatesDataType {
 
 
 export interface reviewDataType {
-  rating: number;
-  courseName: string;
-  userReview: {
-    userName: string;
-    userImage: string;
-    review: string;
-    userRating: number,
-    userReviewDate: Date
-  }
+  id: number;
+  userName: string;
+  userImage: string;
+  review: string;
+  userRating: number;
+  userReviewDate: Date;
+  courseId: number
 }
+
