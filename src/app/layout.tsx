@@ -3,6 +3,7 @@ import { Geist, Geist_Mono, Poppins, Syne } from "next/font/google";
 import "./globals.css";
 import { AppProvider } from "@/context/AppContext";
 import { Toaster } from "react-hot-toast";
+import Image from "next/image";
 
 
 
@@ -50,6 +51,10 @@ export default function RootLayout({
         <AppProvider>
           {children}
           <Toaster position="top-right" reverseOrder={false} />
+
+          <a href="https://wa.me/2349066895390" target="_blank" className="fixed z-50 text-black bottom-6 right-6  h-16 w-16 p-2 rounded-full flex items-center justify-center hover:scale-105 duration-300 ease-in-out " >
+          <Image src={"/logos/WhatsApp.svg"} alt="whatsapp logo" height={500} width={500} className="w-full h-full " />
+            </a>
         </AppProvider>
       </body>
     </html>
