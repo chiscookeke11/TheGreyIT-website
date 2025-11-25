@@ -21,8 +21,8 @@ export default function Page() {
         <div className="w-full rounded-xl bg-[#f2f5fc] py-7 px-6  " >
 
             <button
-            onClick={() => router.back()}
-             className="h-12 w-12 flex items-center justify-center bg-gray-700 rounded-full font-bold cursor-pointer text-white hover:bg-gray-500 transition-all duration-300 ease-in-out " ><ArrowLeft /></button>
+                onClick={() => router.back()}
+                className="h-12 w-12 flex items-center justify-center bg-gray-700 rounded-full font-bold cursor-pointer text-white hover:bg-gray-500 transition-all duration-300 ease-in-out " ><ArrowLeft /></button>
 
             {/* mini hero section  */}
             <div className=" w-full  flex items-center flex-col gap-2 " >
@@ -52,7 +52,7 @@ export default function Page() {
                 {/* the review card  */}
 
                 {mockReviews.map((review, index) => (
- <ReviewCard data={review}  />
+                    <ReviewCard data={review} key={index} />
                 ))}
 
             </div>
