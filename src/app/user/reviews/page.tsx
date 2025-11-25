@@ -11,10 +11,16 @@ import Link from "next/link";
 
 export default function Page() {
   const { userData, allCoursesData } = useAppContext()
+
+
+
+
   return (
     <div className=" rounded-xl bg-[#f2f5fc] py-7 px-6  flex items-center flex-col gap-7 justify-center   " >
-      {/* <Image src={"/user/not-found-error-alert-svgrepo-com.svg"} alt="icon" height={500} width={500} className=" w-[250px] h-[250px] object-center " />
-          <h3 className="font-semibold text-2xl" >No Reviews </h3> */}
+
+                <h1 className=" text-xl md:text-2xl font-semibold text-black mr-auto  " >Reviews</h1>
+
+                <hr className="w-full border-t border-gray-400 " />
 
 
 
@@ -31,11 +37,11 @@ export default function Page() {
               No course found </div>
             :
             (
-              <section className=" w-full mt-5  grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 place-items-center justify-items-center gap-5 gap-y-9 font-poppins " >
+              <section className=" w-full mt-5  grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 place-items-center justify-items-center gap-5 gap-y-9 font-poppins " >
 
                 {allCoursesData?.map((track, index) => (
                   // Course card
-                  <Link href={`/user/reviews/${track.id}`} key={index}> <UserCourseCard track={track} /></Link>
+                  <Link href={`/user/reviews/${track.id}`} key={index} className="w-full" > <UserCourseCard track={track} /></Link>
                 ))}
 
 
