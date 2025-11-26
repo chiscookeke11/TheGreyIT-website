@@ -21,7 +21,7 @@ export const teams = [
   },
   {
     name: "Chinedu Emmanuel Okeke ",
-    title: "Dev Lead",
+    title: "Lead Developer",
     image: "/Team/neduPortrait.jpg",
     socials: {
       linkedIn: "https://www.linkedin.com/in/chinedu-emmanuel-okeke-4080b8292/",
@@ -32,7 +32,7 @@ export const teams = [
   {
     name: "Fedrick ",
     title: "Developer",
-    image: "/community-page/Me.png",
+    image: "/Team/Fredrick.JPG",
     socials: {
       linkedIn: "https://www.linkedin.com/in/chikamso-nwoha-143247385/",
       facebook: "",
@@ -42,7 +42,7 @@ export const teams = [
   {
     name: "Mbaeze Olivia",
     title: "Office Assistant",
-    image: "/community-page/Me.png",
+    image: "/Team/olivia.jpg",
     socials: {
       linkedIn: "https://www.linkedin.com/in/mbaeze-olivia-b57188385/",
       facebook: "",
