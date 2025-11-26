@@ -62,11 +62,11 @@ export default function Page() {
 
     return (
         <div className="w-full min-h-screen flex flex-col bg-white">
-            <header className="h-[250px] bg-[#f2f5fc] flex flex-col items-start justify-end px-[2%] py-6 text-gray-700 font-semibold text-2xl md:text-4xl">
+            <header className=" h-[150px] md:h-[250px] bg-[#f2f5fc] flex flex-col items-start justify-end px-[4%] py-6 text-gray-700 font-semibold text-2xl md:text-4xl">
                 Students certificate Authentication
             </header>
 
-            <div className="w-full h-full flex items-center justify-center px-[2%] py-40 ">
+            <div className="w-full h-full flex items-center justify-center px-[4%] py-40 ">
                 <form
                     onSubmit={handleSubmit}
                     className="w-full max-w-3xl bg-[#f2f5fc] rounded-md py-5 px-3 shadow-sm flex flex-col items-start gap-6"
@@ -78,7 +78,7 @@ export default function Page() {
                         authentication
                     </h3>
 
-                    <div className="w-[60%] min-w-xs flex items-center gap-3  ">
+                    <div className="w-full min-w-xs flex items-center gap-3  ">
                         <input
                             type="number"
                             value={certNumber}
@@ -86,7 +86,7 @@ export default function Page() {
                                 setCertNumber(e.target.value ? Number(e.target.value) : "")
                             }
                             placeholder="Enter Cert No."
-                            className="w-full flex-1 outline-none border border-gray-700 h-full py-4 px-4 rounded-sm"
+                            className="w-[70%] flex-1 outline-none border border-gray-700 h-full py-4 px-4 rounded-sm"
                         />
                         <Button variant="default">{loading ? <Spinner /> : "Verify"}</Button>
                     </div>
@@ -96,7 +96,7 @@ export default function Page() {
 
                             <Image src={"/verify_certificate/file.png"} width={500} height={500} alt="icon" className="w-[150px] h-[150px] mx-auto " />
 
-                            <h3 className="text-red-600 font-semibold text-2xl mx-auto mb-2 ">
+                            <h3 className="text-red-600 font-semibold text-2xl mx-auto mb-2 text-center ">
                                 Verification Unsuccessful
                             </h3>
 
@@ -135,12 +135,12 @@ export default function Page() {
 
                     {/* Result for Successful Verification  */}
                     {result && (
-                        <div className=" w-full p-4 rounded-md mt-4 flex flex-col gap-3 items-start  ">
+                        <div className=" w-full py-4 px-2 rounded-md mt-4 flex flex-col gap-3 items-start  ">
 
                             <Image src={"/verify_certificate/success.svg"} width={500} height={500} alt="icon" className="w-[150px] h-[150px] mx-auto " />
 
 
-                            <h2 className="font-semibold text-green-700 text-2xl mb-2 mx-auto ">
+                            <h2 className="font-semibold text-green-700 text-2xl mb-2 mx-auto text-center ">
                                 Certificate Verification Successful
                             </h2>
 
