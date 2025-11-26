@@ -86,6 +86,11 @@ export interface CertificatesDataType {
   certificate_name: string;
   id: number;
   pdfName: string;
+  certifcate_number: number;
+  student_name: string;
+  course_title: string;
+  certificate_type: string;
+  date_of_completion: Date;
 }
 
 
