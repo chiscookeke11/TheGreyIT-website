@@ -21,6 +21,7 @@ export default function Page() {
     const { allCoursesData } = useAppContext()
     const [courseReviews, setCourseReviews] = useState<reviewDataType[] | null>(null)
     const [currentCourse, setCurrentCourse] = useState<CourseDataTypes | null>(null)
+    const [showReviewModal, setShowReviewModal] = useState(false)
 
 
 
@@ -121,11 +122,11 @@ export default function Page() {
 
 
 
-            <Button variant="default" className="font-syne !bg-gray-700 text-white ml-auto ">Leave a review</Button>
+            <Button onClick={() => setShowReviewModal(true)} variant="default" className="font-syne !bg-gray-700 text-white ml-auto mt-6 ">Leave a review</Button>
 
 
             {/* The review popup modal  */}
-            <ReviewModal id={Number(id)} />
+            {showReviewModal && <ReviewModal setShowReviewModal={setShowReviewModal} id={Number(id)} />}
         </div>
     )
 }
