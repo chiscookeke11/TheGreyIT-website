@@ -23,6 +23,10 @@ export const navLinksData = [
         url: "/research-blog"
     },
     {
+        label: "Verify Certificate",
+        url: "/verify_certificate"
+    },
+    {
         label: "Contact Us",
         url: "/contact-us"
     },

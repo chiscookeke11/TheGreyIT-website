@@ -62,19 +62,19 @@ export default function Page() {
 
     return (
         <div className="w-full min-h-screen flex flex-col bg-white">
-            <header className=" h-[150px] md:h-[250px] bg-[#f2f5fc] flex flex-col items-start justify-end px-[4%] py-6 text-gray-700 font-semibold text-2xl md:text-4xl">
+            <header className=" h-[150px] md:h-[250px] bg-[#f2f5fc] flex flex-col items-start justify-end px-[4%] py-6 text-gray-700 font-semibold text-2xl md:text-3xl">
                 Students certificate Authentication
             </header>
 
             <div className="w-full h-full flex items-center justify-center px-[4%] py-40 ">
                 <form
                     onSubmit={handleSubmit}
-                    className="w-full max-w-3xl bg-[#f2f5fc] rounded-md py-5 px-3 shadow-sm flex flex-col items-start gap-6"
+                    className="w-full max-w-3xl bg-[#f2f5fc] rounded-md py-5 px-3 md:px-7 shadow-md flex flex-col items-start gap-6"
                 >
                     <hr className="bg-gray-500 w-full border border-gray-500 my-3" />
 
-                    <h3 className=" text-gray-700 font-semibold text-lg " >
-                        Enter Cert. No. on the input box below to check certificate
+                    <h3 className=" text-gray-700 font-semibold text-xl w-[90%] " >
+                        Enter Certificate Number on the input box below to check certificate
                         authentication
                     </h3>
 
@@ -108,7 +108,6 @@ export default function Page() {
                             <ul className="flex flex-col gap-1 font-medium my-5 list-disc pl-5 ">
                                 <h4> <b>Possible reasons include:</b> </h4>
                                 <li>Incorrect Certificate ID</li>
-                                <li>Misspelt student name</li>
                                 <li>Expired or revoked certificate</li>
                                 <li>A document that was <b>not issued</b> by The Grey IT</li>
                             </ul>
