@@ -7,6 +7,7 @@ import { supabase } from "@/lib/supabaseClient";
 import toast from "react-hot-toast";
 import { XIcon } from "lucide-react";
 import { User } from "@supabase/supabase-js";
+import { useAppContext } from "@/context/AppContext";
 
 
 
@@ -27,6 +28,7 @@ interface ReviewModalProps {
 export default function ReviewModal({ id, setShowReviewModal }: ReviewModalProps) {
     const [user, setUser] = useState<User | null>(null)
     const cachedUser = useRef<User | null>(null)
+    const { userData } = useAppContext()
     const [reviewMessage, setReviewMessage] = useState("")
     const [rating, setRating] = useState(0);
     const [loading, setLoading] = useState(false)
@@ -46,8 +48,7 @@ export default function ReviewModal({ id, setShowReviewModal }: ReviewModalProps
 
 
     // The user profile image
-    const userImage = user?.app_metadata.provider === "google" && user.user_metadata.avatar_url ? user.user_metadata.avatar_url : "hhfdjhdf"
-
+    const userImage = userData?.user_image ? userData.user_image : user?.app_metadata.provider === "google" && user.user_metadata.avatar_url ? user.user_metadata.avatar_url : "";
 
 
 

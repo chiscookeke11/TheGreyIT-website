@@ -76,7 +76,8 @@ export interface UserData {
   created_at: string;
   list_enrolled_courses: number[]
   list_completed_courses: number[]
-  bookmarks: number[]
+  bookmarks: number[];
+  user_image: string;
 }
 
 export interface CertificatesDataType {
