@@ -32,10 +32,13 @@ export default function Page() {
 
 
     const totalRating = courseReviews?.reduce((sum, review) => {
-        return sum + review.userRating
-    }, 0)
+        return sum + review.userRating;
+    }, 0) ?? 0;
 
-    const overallRating = totalRating! / courseReviews?.length!;
+    const overallRating = courseReviews && courseReviews.length > 0
+        ? totalRating / courseReviews.length
+        : 0;
+
 
 
 
