@@ -118,7 +118,7 @@ export default function ContactForm({ showForm, setShowForm, subject }: ContactF
             {showForm && (<button onClick={() => setShowForm?.(false)} className=" ml-auto cursor-pointer " type="button"  > <XIcon size={35} /> </button>)}
 
 
-            <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-10   " >
+            <div className="w-full grid grid-cols-2 gap-5 md:gap-10   " >
 
                 <label htmlFor="firstName" className=" flex flex-col gap-1 items-start font-medium text-sm text-[#8D8D8D]  " >
                     <span>First Name</span>

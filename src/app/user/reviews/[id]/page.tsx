@@ -1,5 +1,7 @@
 "use client"
 
+import Button from "@/components/UI/Button"
+import ReviewModal from "@/components/UI/ReviewModal"
 import Spinner from "@/components/UI/Spinner"
 import ReviewCard from "@/components/user/ReviewCard"
 import RatingStars from "@/components/user/ReviewStarsComponent"
@@ -66,14 +68,14 @@ export default function Page() {
             <button
                 onClick={() => router.back()}
                 className="h-12 w-12 flex items-center justify-center bg-gray-700 rounded-full font-bold cursor-pointer text-white hover:bg-gray-500 transition-all duration-300 ease-in-out " ><ArrowLeft /></button>
-            <h3 className="font-bold text-2xl md:text-4xl text-gray-700 text-center " > {currentCourse?.title} Reviews </h3>
+            {courseReviews && courseReviews.length < 1 && (<h3 className="font-bold text-2xl md:text-4xl text-gray-700 text-center " > {currentCourse?.title} Reviews </h3>)}
             {/* mini hero section  */}
             {courseReviews && courseReviews?.length > 0 && (
                 <div className=" w-full  flex items-center flex-col gap-2 " >
                     <h3 className="font-bold text-2xl md:text-4xl text-gray-700 text-center " > {currentCourse?.title} Reviews </h3>
                     <h1 className="font-extrabold text-5xl my-3 " >4.0</h1>
 
-                    <RatingStars ratingValue={4} />
+                    <RatingStars readonly={true} ratingValue={4} />
 
                     <p className="text-sm font-medium text-gray-600 text-center " >based on {courseReviews.length} reviews </p>
 
@@ -118,6 +120,12 @@ export default function Page() {
 
 
 
+
+            <Button variant="default" className="font-syne !bg-gray-700 text-white ml-auto ">Leave a review</Button>
+
+
+            {/* The review popup modal  */}
+            <ReviewModal id={Number(id)} />
         </div>
     )
 }
