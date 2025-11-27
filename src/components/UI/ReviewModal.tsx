@@ -7,6 +7,7 @@ import { supabase } from "@/lib/supabaseClient";
 import toast from "react-hot-toast";
 import { XIcon } from "lucide-react";
 import { User } from "@supabase/supabase-js";
+import { useAppContext } from "@/context/AppContext";
 
 
 
@@ -27,6 +28,7 @@ interface ReviewModalProps {
 export default function ReviewModal({ id, setShowReviewModal }: ReviewModalProps) {
     const [user, setUser] = useState<User | null>(null)
     const cachedUser = useRef<User | null>(null)
+    const { userData } = useAppContext()
     const [reviewMessage, setReviewMessage] = useState("")
     const [rating, setRating] = useState(0);
     const [loading, setLoading] = useState(false)
@@ -46,8 +48,7 @@ export default function ReviewModal({ id, setShowReviewModal }: ReviewModalProps
 
 
     // The user profile image
-    const userImage = user?.app_metadata.provider === "google" && user.user_metadata.avatar_url ? user.user_metadata.avatar_url : "hhfdjhdf"
-
+    const userImage = userData?.user_image ? userData.user_image : user?.app_metadata.provider === "google" && user.user_metadata.avatar_url ? user.user_metadata.avatar_url : "";
 
 
 
@@ -111,7 +112,7 @@ export default function ReviewModal({ id, setShowReviewModal }: ReviewModalProps
         const { data: existingReview } = await supabase
             .from("userReviews")
             .select("*")
-            .eq("userId", user?.id)
+            .eq("user_id", user?.id)
             .eq("courseId", id)
             .maybeSingle();
 
@@ -139,7 +140,7 @@ export default function ReviewModal({ id, setShowReviewModal }: ReviewModalProps
         }
 
         else {
-            toast.success("Success!")
+            toast.success("Thank you for your review!")
             setLoading(false)
             setRating(0)
             setReviewMessage("")
@@ -157,14 +158,14 @@ export default function ReviewModal({ id, setShowReviewModal }: ReviewModalProps
             <form onSubmit={handleSubmit} className=" w-full max-w-2xl bg-white rounded-md px-5 py-7 flex items-center flex-col gap-5  " >
                 <button onClick={() => setShowReviewModal(false)} className=" ml-auto cursor-pointer " type="button"  > <XIcon size={35} /> </button>
 
-                <h2 className="text-2xl font-semibold text-gray-700" >Kindly review this course</h2>
+                <h2 className="text-xl font-semibold text-gray-700" >Kindly review this course</h2>
                 <h5 className="text-3xl font-medium text-gray-700 " >{rating}</h5>
                 <div className=" w-full flex flex-col items-start gap-5 " >
 
                     <span className="flex flex-col gap-1 items-start text-lg " >
                         Rate this course
                         <div className="w-fit flex items-end gap-4" >
-                            <RatingStars readonly={false} ratingValue={rating} size={25} onChange={(rate) => setRating(rate)} />
+                            <RatingStars readonly={false} ratingValue={rating} size={30} onChange={(rate) => setRating(rate)} />
                         </div>
                         <p className="text-sm text-red-500 " >{error.star} </p>
                     </span>

@@ -20,6 +20,8 @@ import { useEffect, useState } from "react"
 const Header = ({ user }: { user: User }) => {
     const { userData, certificatesData } = useAppContext()
 
+    const profilePic = userData?.user_image ? userData.user_image  : user.user_metadata.avatar_url
+console.log(profilePic)
     return (
         <header className="w-full flex flex-col md:flex-row items-start md:items-center  justify-between gap-6 px-6 py-10 bg-gray-700 text-white rounded-2xl ">
             <div className="w-fit flex items-center gap-5 " >
@@ -29,8 +31,8 @@ const Header = ({ user }: { user: User }) => {
                     <div className="w-[90px] h-[90px] bg-[#f2f5fc] rounded-full flex items-center text-center justify-center " >
 
                         {
-                            user.app_metadata.provider === "google" && user.user_metadata.avatar_url ?
-                                <Image src={user.user_metadata.avatar_url} alt={user.app_metadata.email} width={1000} height={1000} className="w-full h-full rounded-full" />
+                            userData?.user_image || (user.app_metadata.provider === "google" && user.user_metadata.avatar_url) ?
+                                <Image src={profilePic} alt={"Profile pic"} width={1000} height={1000} className="w-full h-full rounded-full" />
                                 :
                                 <h2 className="text-black" >
                                     {user.user_metadata.first_name ? user.user_metadata.first_name.charAt(0) + user.user_metadata.last_name.charAt(0) : user.user_metadata.full_name.charAt(0).toUpperCase() + user.user_metadata.full_name.split(" ")[1].charAt(0).toUpperCase()}

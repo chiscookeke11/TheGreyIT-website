@@ -25,6 +25,23 @@ export default function Page() {
 
 
 
+    useEffect(() => {
+        document.body.style.overflowY = showReviewModal ? "hidden" : "auto"
+
+    }, [showReviewModal])
+
+
+    const totalRating = courseReviews?.reduce((sum, review) => {
+        return sum + review.userRating;
+    }, 0) ?? 0;
+
+    const overallRating = courseReviews && courseReviews.length > 0
+        ? totalRating / courseReviews.length
+        : 0;
+
+
+
+
     // Fetch the current course data
     useEffect(() => {
         if (!allCoursesData) return;
@@ -68,13 +85,16 @@ export default function Page() {
 
             <button
                 onClick={() => router.back()}
-                className="h-12 w-12 flex items-center justify-center bg-gray-700 rounded-full font-bold cursor-pointer text-white hover:bg-gray-500 transition-all duration-300 ease-in-out " ><ArrowLeft /></button>
+                className="h-12 w-12 flex items-center justify-center bg-gray-700 rounded-full font-bold cursor-pointer text-white hover:bg-gray-500 transition-all duration-300 ease-in-out mb-6 " ><ArrowLeft /></button>
+
+
+
             {courseReviews && courseReviews.length < 1 && (<h3 className="font-bold text-2xl md:text-4xl text-gray-700 text-center " > {currentCourse?.title} Reviews </h3>)}
             {/* mini hero section  */}
             {courseReviews && courseReviews?.length > 0 && (
                 <div className=" w-full  flex items-center flex-col gap-2 " >
                     <h3 className="font-bold text-2xl md:text-4xl text-gray-700 text-center " > {currentCourse?.title} Reviews </h3>
-                    <h1 className="font-extrabold text-5xl my-3 " >4.0</h1>
+                    <h1 className="font-extrabold text-5xl my-3 " > {Number(overallRating.toFixed(1))} </h1>
 
                     <RatingStars readonly={true} ratingValue={4} />
 
