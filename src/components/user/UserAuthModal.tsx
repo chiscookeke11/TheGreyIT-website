@@ -4,6 +4,7 @@ import { supabase } from "@/lib/supabaseClient";
 import { Eye, EyeOff } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import React, { useState } from "react";
 import toast from "react-hot-toast";
 
@@ -21,6 +22,7 @@ export default function UserAuthModal() {
     const [authState, setAuthState] = useState<"Sign In" | "Sign Up">("Sign In")
     const [showPassword, setShowPassword] = useState(false)
     const [loading, setLoading] = useState(false)
+    const router = useRouter()
     const [formValues, setFormValues] = useState({
         firstName: "",
         lastName: "",
@@ -60,7 +62,7 @@ export default function UserAuthModal() {
     }
 
 
-// Then check if it exists in the db
+    // Then check if it exists in the db
     const generateUniqueReferral = async () => {
         let exists: boolean = true;
         let code;
@@ -138,7 +140,7 @@ export default function UserAuthModal() {
             setLoading(false)
         }
         else {
-            toast.success("Sign Up successful! Please confirm your email")
+            router.push("/verify_email")
             setLoading(false)
             setFormValues({
                 email: "",
