@@ -32,7 +32,7 @@ export default function ReviewCard({ data }: ReviewCardProps) {
 
                     <div>
                         <h4 className="text-sm font-semibold" >{data.userName}</h4>
-                        <RatingStars ratingValue={data.userRating} size={15} />
+                        <RatingStars readonly={true} ratingValue={data.userRating} size={15} />
                     </div>
                 </div>
 
