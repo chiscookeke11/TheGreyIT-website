@@ -62,19 +62,17 @@ export default function Page() {
               No bookmarks found </div>
             :
             (
-              <section className=" w-full mt-5  grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 place-items-center justify-items-center gap-5 gap-y-9 font-poppins " >
+              <section className=" w-full mt-5  grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 place-items-center justify-items-center gap-5 gap-y-9 font-poppins " >
 
                 {bookmarkedCourses?.map((track, index) => (
                   // Course card
                   <UserCourseCard key={index} bookmarks={bookmarks} setbookmarks={setbookmarks} track={track} isBookmarked={bookmarks?.includes(Number(track.id)) ?? false}  />
                 ))}
 
-
               </section>
 
             )
       }
-
 
     </div>
   );

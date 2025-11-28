@@ -32,7 +32,7 @@ console.log(profilePic)
 
                         {
                             userData?.user_image || (user.app_metadata.provider === "google" && user.user_metadata.avatar_url) ?
-                                <Image src={profilePic} alt={"Profile pic"} width={1000} height={1000} className="w-full h-full rounded-full" />
+                                <Image src={profilePic} alt={"Profile pic"} width={1000} height={1000} className="w-full h-full rounded-full object-center object-cover " />
                                 :
                                 <h2 className="text-black" >
                                     {user.user_metadata.first_name ? user.user_metadata.first_name.charAt(0) + user.user_metadata.last_name.charAt(0) : user.user_metadata.full_name.charAt(0).toUpperCase() + user.user_metadata.full_name.split(" ")[1].charAt(0).toUpperCase()}
