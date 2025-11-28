@@ -7,17 +7,19 @@ import { Clock, Heart, Radio } from "lucide-react";
 import Image from "next/image";
 import React from "react";
 import toast from "react-hot-toast";
+import RatingStars from "./ReviewStarsComponent";
 
 
 interface UserCourseCardProps {
     track: CourseDataTypes;
     bookmarks?: number[] | null
     setbookmarks?: React.Dispatch<React.SetStateAction<number[] | null>>
+    isBookmarked: boolean;
 }
 
 
 
-export default function UserCourseCard({ track, bookmarks, setbookmarks }: UserCourseCardProps) {
+export default function UserCourseCard({ track, bookmarks, setbookmarks, isBookmarked }: UserCourseCardProps) {
 
     const { userData } = useAppContext()
 
@@ -41,6 +43,7 @@ export default function UserCourseCard({ track, bookmarks, setbookmarks }: UserC
 
     }
 
+    console.log(isBookmarked)
 
 
     return (
@@ -64,7 +67,7 @@ export default function UserCourseCard({ track, bookmarks, setbookmarks }: UserC
                 <hr className="w-full border-t border-gray-400 " />
                 <div className="w-full flex items-center justify-between text-sm " >
                     <p> {"Tutor"} </p>
-                    <p> {track.rating} </p>
+                    <RatingStars ratingValue={track.rating} size={20} readonly={true}  />
 
                 </div>
 
@@ -75,7 +78,7 @@ export default function UserCourseCard({ track, bookmarks, setbookmarks }: UserC
             {bookmarks && <button
                 onClick={() => handleBookmarkClick(track.id ?? "", userData?.user_id ?? "")}
                 className={`absolute outline-0 top-3 right-4 z-10 rounded-sm p-4 flex items-center justify-center text-gray-700 cursor-pointer bg-white   `} >
-                <Heart size={20} color="white" fill={bookmarks?.includes(Number(track.id)) ? "red" : "black"} />
+                <Heart size={20} color="white" fill={isBookmarked ? "red" : "black"} />
             </button>}
         </div>
     )
