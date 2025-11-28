@@ -18,11 +18,14 @@ export const fetchAllCourses = async () => {
 
 
 
+// getting a user Id
+const { data: { user }, error,} = await supabase.auth.getUser();
+
 
 // function to fetch user data
 export const fetchUserData = async () => {
 
-    const { data, error } = await supabase.from("user_data").select("*")
+    const { data, error } = await supabase.from("user_data").select("*").eq('user_id', user?.id)
 
     if (error) {
         console.error("Error fetching user data:", error)
@@ -36,7 +39,7 @@ export const fetchUserData = async () => {
 
 // Function to fetch user transactions
 export const fetchUserTransactions = async () => {
-    const { data, error } = await supabase.from("transactions").select("*");
+    const { data, error } = await supabase.from("transactions").select("*").eq('user_id', user?.id);
 
     if (error) {
         console.error("Error fetching transactions:", error);

@@ -47,7 +47,7 @@ export default function UserCourseCard({ track, bookmarks, setbookmarks, isBookm
 
 
     return (
-        <div className=" w-full max-w-sm overflow-hidden bg-white h-full  flex flex-col items-start gap-4 rounded-md shadow-sm group relative " >
+        <div className=" w-full  max-w-sm overflow-hidden bg-white h-full  flex flex-col items-start gap-4 rounded-md shadow-sm group relative " >
             {/* Course image */}
             <div className="w-full h-[220px] bg-gray-400 flex items-center justify-center rounded-xs overflow-hidden" >
                 <Image src={track.imageUrl} alt={`${track.title}-image`} height={500} width={500} className=" w-full h-full object-center object-cover rounded-xs group-hover:scale-110 duration-300 ease-in-out transition-all " />
@@ -79,6 +79,7 @@ export default function UserCourseCard({ track, bookmarks, setbookmarks, isBookm
                 onClick={() => handleBookmarkClick(track.id ?? "", userData?.user_id ?? "")}
                 className={`absolute outline-0 top-3 right-4 z-10 rounded-sm p-4 flex items-center justify-center text-gray-700 cursor-pointer bg-white   `} >
                 <Heart size={20} color="white" fill={isBookmarked ? "red" : "black"} />
+
             </button>}
         </div>
     )
