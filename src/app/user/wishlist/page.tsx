@@ -31,7 +31,7 @@ export default function Page() {
       }
 
       else {
-        console.log("The bookmarkrd courses:", data)
+        console.log("The bookmarkrd courses:", data, userData?.list_enrolled_courses)
         setBookmarkedCourses(data)
       }
     }
@@ -66,7 +66,7 @@ export default function Page() {
 
                 {bookmarkedCourses?.map((track, index) => (
                   // Course card
-                  <UserCourseCard key={index} bookmarks={bookmarks} setbookmarks={setbookmarks} track={track} />
+                  <UserCourseCard key={index} bookmarks={bookmarks} setbookmarks={setbookmarks} track={track} isBookmarked={bookmarks?.includes(Number(track.id)) ?? false}  />
                 ))}
 
 

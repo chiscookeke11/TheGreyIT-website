@@ -118,7 +118,7 @@ export default function Page() {
 
                                     {courseType?.map((track, index) => (
                                         // Course card
-                                        <UserCourseCard key={index} track={track} bookmarks={bookmarks} setbookmarks={setbookmarks} />
+                                        <UserCourseCard key={index} track={track} bookmarks={bookmarks} setbookmarks={setbookmarks} isBookmarked={bookmarks?.includes(Number(track.id)) ?? false} />
                                     ))}
 
 
