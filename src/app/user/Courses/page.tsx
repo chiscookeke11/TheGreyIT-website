@@ -117,9 +117,8 @@ export default function Page() {
 
                                     {courseType?.map((track, index) => (
                                         // Course card
-                                        <Link href={` /user/Courses/${track.id} `} className="w-full" >
+                                        <Link href={` /user/Courses/${track.id} `} className="w-full"           key={index} >
                                             <UserCourseCard
-                                                key={index}
                                                 track={track}
                                                 bookmarks={bookmarks}
                                                 setbookmarks={setbookmarks}

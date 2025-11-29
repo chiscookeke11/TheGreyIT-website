@@ -58,7 +58,7 @@ const DescriptionSection = () => {
 
             {/* skills you will gain section  */}
             <div className="space-y-5" >
-                <h4 className=" text-lg md:text-2xl font-semibold  " >Skills you'll gain</h4>
+                <h4 className=" text-lg md:text-2xl font-semibold  " >Skills you&apos;ll gain</h4>
 
                 <ul className=" flex items-center flex-wrap gap-4 w-full max-w-3xl   " >
                     <li className="flex items-center justify-center bg-[#f2f5fc] px-3 py-2 text-sm font-medium rounded-4xl text-gray-900 " > Artificial Intelligence</li>
