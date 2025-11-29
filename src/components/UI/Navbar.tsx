@@ -126,10 +126,10 @@ export default function Navbar() {
 
                 <ul className={`w-fit flex flex-col items-start gap-8 pl-5  `} >
                     {navLinksData.map((navlink, index) => (
-                        <li key={index} onClick={() => setShowMenu(false)} className=" text-lg font-poppins text-white " ><CustomLink href={navlink.url} > {navlink.label}</CustomLink> </li>
+                        <li key={index} onClick={() => setShowMenu(false)} className=" text-base font-poppins text-white " ><CustomLink href={navlink.url} > {navlink.label}</CustomLink> </li>
                     ))}
 
-                    <Link href={"/user"} className={`text-lg font-semibold font-poppins bg-white text-gray-700 py-2 px-4 rounded-sm    `} >{user ? "Dashboard" : "Sign In"}</Link>
+                    <Link href={"/user"} className={`text-base font-semibold font-poppins bg-white text-gray-700 py-2 px-4 rounded-sm    `} >{user ? "Dashboard" : "Sign In"}</Link>
                 </ul>
 
             </div>

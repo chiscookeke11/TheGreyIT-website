@@ -57,7 +57,7 @@ export interface TransactionType {
   id: number;
   course: string;
   reference: string;
-  status: "successful" | "pending" | "failed";
+  status: "success" | "pending" | "failed";
   date: Date;
 }
 
@@ -107,3 +107,13 @@ export interface reviewDataType {
   courseId: number
 }
 
+
+
+export type PaystackReference = {
+  message: string;
+  reference: string;
+  status: string;
+  trans: string;
+  transaction: string;
+  trxref: string;
+};
