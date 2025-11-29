@@ -233,8 +233,8 @@ export default function Page() {
                 try {
                     await sendPaymentConfirmationEmail({
                         name: user?.user_metadata?.full_name ?? user?.email ?? "Learner",
-                        email: user?.email!,
-                        course_title: currentCourse?.title!,
+                        email: user?.email ?? "",
+                        course_title: currentCourse?.title ?? "",
                         reference: reference.reference,
                         status: reference.status,
                         date: new Date().toLocaleString(),
