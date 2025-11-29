@@ -225,7 +225,7 @@ export default function Page() {
 
             else {
                 console.log(updateData)
-                // window.location.reload();
+                window.location.reload();
 
 
                 // Then finally send the confirmation email
