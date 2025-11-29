@@ -1,4 +1,5 @@
 import { supabase } from "./supabaseClient"
+import emailjs from 'emailjs-com';
 
 
 
@@ -103,3 +104,30 @@ export const toggleBookmark = async (userId: string, course_id: string) => {
 
     return bookmarks;
 }
+
+
+
+export const sendPaymentConfirmationEmail = (data: {
+  name: string;
+  email: string;
+  course_title: string;
+  reference: string;
+  status: string;
+  date: string;
+  dashboard_link: string;
+}) => {
+  return emailjs.send(
+    process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
+    process.env.NEXT_PUBLIC_EMAILJS_PAYMENT_CONFIRMATION_TEMPLATE_ID!,
+    {
+      name: data.name,
+      email: data.email,
+      course_title: data.course_title,
+      reference: data.reference,
+      status: data.status,
+      date: data.date,
+      dashboard_link: data.dashboard_link,
+    },
+    process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!
+  );
+};

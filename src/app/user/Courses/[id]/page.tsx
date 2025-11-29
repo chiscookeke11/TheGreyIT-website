@@ -1,12 +1,16 @@
 "use client"
 
 import Button from "@/components/UI/Button";
+import { useAppContext } from "@/context/AppContext";
+import { sendPaymentConfirmationEmail } from "@/lib/appActions";
 import { supabase } from "@/lib/supabaseClient";
-import { CourseDataTypes } from "@/types/types";
+import { CourseDataTypes, PaystackReference } from "@/types/types";
+import { User } from "@supabase/supabase-js";
 import { Check, Languages } from "lucide-react";
 import Image from "next/image";
 import { useParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import toast from "react-hot-toast";
 import { PaystackButton } from 'react-paystack';
 
 
@@ -118,11 +122,41 @@ export default function Page() {
     const [currentTab, setCurrentTab] = useState("description")
     const { id } = useParams()
     const [currentCourse, setCurrentCourse] = useState<CourseDataTypes | null>(null)
-
+    const [user, setUser] = useState<User | null>(null)
+    const cachedUser = useRef<User | null>(null)
+    const public_key = process.env.NEXT_PUBLIC_PAYSTACK_PUBLIC_KEY!
+    const { userData } = useAppContext()
 
 
     useEffect(() => {
+        const initAuth = async () => {
+            // setLoading(true)
+            const { data: { session } } = await supabase.auth.getSession()
+            const currentUser = session?.user ?? null
+            cachedUser.current = currentUser
+            setUser(currentUser)
+            // setLoading(false)
 
+            // listen for auth changes
+            const { data: listener } = supabase.auth.onAuthStateChange((_event, session) => {
+                const updatedUser = session?.user ?? null
+                cachedUser.current = updatedUser
+                setUser(updatedUser)
+            })
+
+            return () => {
+                listener.subscription.unsubscribe()
+            }
+        }
+
+        initAuth()
+    }, [])
+
+
+
+
+    // Here we fetch the current course details
+    useEffect(() => {
         const fetchCourseDetails = async () => {
             const { data, error } = await supabase.from("course").select("*").eq("id", id).single()
 
@@ -144,39 +178,90 @@ export default function Page() {
 
     // the paystack config
     const config = {
-    reference: (new Date()).getTime().toString(),
-    email: "okekec807@gmail.com",
-    amount: 20000 * 100, //Amount is in the country's lowest currency. E.g Kobo, so 20000 kobo = N200
-    publicKey: 'pk_test_ca03b7bd5132456cbbbe5e3fd209bede7b86cc7a',
-  };
-
-
-   // you can call this function anything
-    const handlePaystackSuccessAction = (reference) => {
-      // Implementation for whatever you want to do with reference and after success call.
-      console.log(reference);
+        reference: (new Date()).getTime().toString(),
+        email: user?.email ?? "",
+        amount: currentCourse?.price ? currentCourse.price * 100 : 0,
+        publicKey: public_key,
     };
 
 
-       // you can call this function anything
+
+    const handlePaystackSuccessAction = async (reference: PaystackReference) => {
+        console.log(reference);
+
+        // store this transaction in the transaction table
+        const { data, error } = await supabase.from("transactions").insert({
+            reference: reference.reference,
+            status: reference.status,
+            date: new Date().toISOString(),
+            user_id: user?.id,
+            course: currentCourse?.title,
+            course_id: currentCourse?.id,
+        })
+
+        if (error) {
+            toast.error("Failed!")
+            console.error(error)
+        }
+        else {
+            console.log(data)
+            toast.success("Payment successful!")
+
+
+
+            // add the course id to the users enrolled courses array
+            const updatedList = [
+                ...(userData?.list_enrolled_courses || []),
+                currentCourse?.id
+            ]
+
+            const { data: updateData, error: updateError } = await supabase.from("user_data").update({
+                list_enrolled_courses: updatedList
+            }).eq("user_id", user?.id)
+
+            if (updateError) {
+                console.error(updateError)
+            }
+
+            else {
+                console.log(updateData)
+                // window.location.reload();
+
+
+                // Then finally send the confirmation email
+
+                try {
+                    await sendPaymentConfirmationEmail({
+                        name: user?.user_metadata?.full_name ?? user?.email ?? "Learner",
+                        email: user?.email!,
+                        course_title: currentCourse?.title!,
+                        reference: reference.reference,
+                        status: reference.status,
+                        date: new Date().toLocaleString(),
+                        dashboard_link: `${process.env.NEXT_PUBLIC_APP_URL}/user/courses/${id}`
+                    });
+                } catch (err) {
+                    console.error("Failed to send confirmation email", err);
+                }
+
+            }
+        }
+    };
+
+
+    // you can call this function anything
     const handlePaystackCloseAction = () => {
-      // implementation for  whatever you want to do when the Paystack dialog closed.
-      console.log('closed')
+        // implementation for  whatever you want to do when the Paystack dialog closed.
+        console.log('closed')
     }
 
 
-     const componentProps = {
+    const componentProps = {
         ...config,
-        text: 'Paystack Button Implementation',
-        onSuccess: (reference) => handlePaystackSuccessAction(reference),
+        text: 'Enroll',
+        onSuccess: (reference: PaystackReference) => handlePaystackSuccessAction(reference),
         onClose: handlePaystackCloseAction,
     };
-
-
-
-
-
-
 
 
 
@@ -192,7 +277,7 @@ export default function Page() {
                         alt="Riskified team collaborating"
                         width={1500}
                         height={1500}
-                        className="w-[200px]  object-cover object-center rounded-sm mb-4 "
+                        className=" w-[100px] md:w-[200px]  object-cover object-center rounded-sm mb-4 "
                         priority
                     />
 
@@ -202,8 +287,8 @@ export default function Page() {
                     <div className=" text-sm md:text-sm" > Instructor: Abel Chidera Emmanuel   </div>
 
 
-                    <Button variant="default" className="font-syne py-2! px-10 my-1 mt-5 rounded-[100px]! " >Enroll</Button>
-                     <PaystackButton {...componentProps} />
+
+                    <PaystackButton {...componentProps} className=" font-syne py-2! px-10 my-1 mt-5 rounded-[100px]! border border-gray-700 cursor-pointer hover:bg-gray-700 hover:text-white transition-all duration-300 ease-in-out " />
                     <p className="text-sm" ><span className="font-bold">26,684</span> already enrolled</p>
                 </div>
 
@@ -232,15 +317,15 @@ export default function Page() {
                 {/* info belt  */}
                 <div
                     className="
-                w-[98%] mx-auto
-  grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6
-  items-center
-  justify-between
-  gap-6
-  shadow-xl rounded-xl py-8 px-2.5 md:px-5
-  bg-white
-  mt-[-35%] sm:mt-[-27%] lg:mt-[-12%]
-  text-sm
+                                    w-[98%] mx-auto
+                    grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6
+                    items-center
+                    justify-between
+                    gap-6
+                    shadow-xl rounded-xl py-8 px-2.5 md:px-5
+                    bg-white
+                    mt-[-35%] sm:mt-[-27%] lg:mt-[-12%]
+                    text-sm
                 " >
                     <div className="flex w-fit flex-col items-start gap-0.5" >
                         <h6 className="font-semibold text-sm md:text-base" >Skill Level</h6>

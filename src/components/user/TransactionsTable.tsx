@@ -56,7 +56,7 @@ export default function TransactionsTable() {
                                                 <td className="text-center p-3 text-sm md:text-base">{t.course}</td>
                                                 <td className="text-center p-3 text-sm md:text-base">{t.reference}</td>
                                                 <td
-                                                    className={`text-center p-3 text-sm md:text-base font-semibold ${t.status === "successful"
+                                                    className={`text-center p-3 text-sm md:text-base font-semibold ${t.status === "success"
                                                         ? "text-green-500"
                                                         : t.status === "pending"
                                                             ? "text-yellow-400"
