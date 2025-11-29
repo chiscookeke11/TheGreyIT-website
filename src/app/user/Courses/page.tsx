@@ -4,13 +4,12 @@
 import Spinner from "@/components/UI/Spinner"
 import UserCourseCard from "@/components/user/UserCourseCard"
 import { useAppContext } from "@/context/AppContext"
-import { toggleBookmark } from "@/lib/appActions"
 import { supabase } from "@/lib/supabaseClient"
 import { CourseDataTypes } from "@/types/types"
-import { Clock, Heart, Radio } from "lucide-react"
 import Image from "next/image"
+import Link from "next/link"
 import { useEffect, useState } from "react"
-import toast from "react-hot-toast"
+
 
 
 
@@ -118,7 +117,14 @@ export default function Page() {
 
                                     {courseType?.map((track, index) => (
                                         // Course card
-                                        <UserCourseCard key={index} track={track} bookmarks={bookmarks} setbookmarks={setbookmarks} isBookmarked={bookmarks?.includes(Number(track.id)) ?? false} />
+                                        <Link href={` /user/Courses/${track.id} `} className="w-full"           key={index} >
+                                            <UserCourseCard
+                                                track={track}
+                                                bookmarks={bookmarks}
+                                                setbookmarks={setbookmarks}
+                                                isBookmarked={bookmarks?.includes(Number(track.id)) ?? false}
+                                            />
+                                        </Link>
                                     ))}
 
 

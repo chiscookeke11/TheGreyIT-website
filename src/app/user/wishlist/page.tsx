@@ -49,6 +49,7 @@ export default function Page() {
   return (
     <div className="w-full min-h-screen flex flex-col gap-7 items-start justify-start text-black bg-[#f2f5fc] p-8">
       <h1 className=" text-xl md:text-2xl font-semibold text-black   " >Wishlist</h1>
+             <hr className="w-full border-t border-gray-400 " />
 
       {
         !bookmarkedCourses ?

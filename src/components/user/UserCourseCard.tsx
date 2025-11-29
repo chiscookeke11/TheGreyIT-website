@@ -43,8 +43,6 @@ export default function UserCourseCard({ track, bookmarks, setbookmarks, isBookm
 
     }
 
-    console.log(isBookmarked)
-
 
     return (
         <div className=" w-full  max-w-sm overflow-hidden bg-white h-full  flex flex-col items-start gap-4 rounded-md shadow-sm group relative " >
@@ -67,7 +65,7 @@ export default function UserCourseCard({ track, bookmarks, setbookmarks, isBookm
                 <hr className="w-full border-t border-gray-400 " />
                 <div className="w-full flex items-center justify-between text-sm " >
                     <p> {"Tutor"} </p>
-                    <RatingStars ratingValue={track.rating} size={20} readonly={true}  />
+                    <RatingStars ratingValue={track.rating} size={20} readonly={true} />
 
                 </div>
 
