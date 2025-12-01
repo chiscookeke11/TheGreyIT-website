@@ -53,18 +53,18 @@ export default function VerifyEmail() {
 
 
     return (
-        <div className="w-full h-[110vh] flex items-center justify-center py-5 px-[4%] bg-gray-700  flex-col gap-10 font-poppins " >
+        <div className="w-full h-[130vh] flex items-center justify-center py-5 px-[4%] bg-gray-700  flex-col gap-10 font-poppins " >
 
 
-
+{/*
             <Image
                 src="/logos/thegreyitlogo.png"
                 alt="Riskified team collaborating"
                 width={1500}
                 height={1500}
-                className="w-[250px] h-fit object-cover object-center rounded-sm"
+                className="w-[200px] h-fit object-cover object-center rounded-sm"
                 priority
-            />
+            /> */}
 
 
             <div className=" w-full max-w-3xl flex flex-col text-gray-700 items-center gap-5 bg-[#f2f5fc]  rounded-sm py-10 px-4 " >
@@ -74,17 +74,17 @@ export default function VerifyEmail() {
 
                 </div>
 
-                <h1 className=" text-2xl font-bold text-gray-700 text-center ">Verify your email address</h1>
+                <h1 className=" text-lg md:text-2xl font-bold text-gray-700 text-center ">Verify your email address</h1>
 
 
-                <p className="text-center font-medium text-lg " > Please click the link that was sent to <strong>{email ?? "the email"}</strong> to verify your email. </p>
+                <p className="text-center font-medium text-base md:text-lg " > Please click the link that was sent to <strong>{email ?? "the email"}</strong> to verify your email. </p>
 
 
-                <hr className=" w-[20%] border border-gray-500 my-10 " />
+                <hr className=" w-[15%] border border-gray-500 my-8 " />
 
 
 
-                <p className="text-center text-base font-medium ">Did not receive the email? <br />
+                <p className="text-center text-sm md:text-base font-medium ">Did not receive the email? <br />
                     <button
                         onClick={() => resendVerificationEmail(email ?? "")}
                         className=" cursor-pointer outline-none border-0 hover:text-gray-500  " >
