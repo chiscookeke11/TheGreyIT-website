@@ -1,18 +1,14 @@
-import Button from "../../../components/UI/Button";
+import Spinner from "@/components/UI/Spinner";
+import VerifyEmail from "@/components/verify-email-component/verify-email";
+import { Suspense } from "react";
 
 
 
 
 export default function Page() {
     return (
-        <div className="w-full h-screen flex items-center justify-center py-5 px-[4%] bg-[#f2f5fc] flex-col gap-5 font-poppins " >
-
-            <h1 className=" text-2xl font-bold text-gray-700 text-center ">Sign Up successful!<br /> Please confirm your email</h1>
-
-            <a href="https://mail.google.com/" target="_blank">
-                <Button variant="default" className="font-syne !bg-gray-700 text-white ">Go to Gmail</Button>
-            </a>
-
-        </div>
+    <Suspense fallback={<div className="w-full h-screen flex items-center justify-center " ><Spinner/></div>}>
+      <VerifyEmail />
+    </Suspense>
     )
 }

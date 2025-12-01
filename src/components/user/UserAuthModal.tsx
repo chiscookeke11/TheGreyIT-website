@@ -139,7 +139,7 @@ export default function UserAuthModal() {
             setLoading(false)
         }
         else {
-            router.push("/verify_email")
+            router.push(`/verify_email?email=${formValues.email}`)
             setLoading(false)
             setFormValues({
                 email: "",
