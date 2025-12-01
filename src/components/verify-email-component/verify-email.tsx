@@ -84,7 +84,7 @@ export default function VerifyEmail() {
 
 
 
-                <p className="text-center text-sm md:text-base font-medium ">Did not receive the email? <br />
+                <p className="text-center text-sm md:text-base font-medium "><span className="font-semibold  " >Did not receive the email?</span> <br />
                     <button
                         onClick={() => resendVerificationEmail(email ?? "")}
                         className=" cursor-pointer outline-none border-0 hover:text-gray-500  " >
