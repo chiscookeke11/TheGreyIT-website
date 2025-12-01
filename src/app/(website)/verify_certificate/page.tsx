@@ -18,10 +18,28 @@ const Spinner = () => {
 
 
 export default function Page() {
-    const [certNumber, setCertNumber] = useState<number | "">("");
+    const [certNumber, setCertNumber] = useState("");
     const [result, setResult] = useState<CertificatesDataType | null>(null);
     const [notFound, setNotFound] = useState(false);
     const [loading, setLoading] = useState(false)
+
+
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const { name, value } = e.target
+
+        if (isNaN(Number(value))) {
+            return;
+        }
+
+
+        else
+            setCertNumber(e.target.value)
+
+    }
+
+
+
+
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -80,11 +98,9 @@ export default function Page() {
 
                     <div className="w-full min-w-xs flex items-center gap-3  ">
                         <input
-                            type="number"
+                            type="text"
                             value={certNumber}
-                            onChange={(e) =>
-                                setCertNumber(e.target.value ? Number(e.target.value) : "")
-                            }
+                            onChange={handleChange}
                             placeholder="Enter Cert No."
                             className="w-[70%] flex-1 outline-none border border-gray-700 h-full py-4 px-4 rounded-sm"
                         />
@@ -175,7 +191,7 @@ export default function Page() {
                             <ul className="flex flex-col gap-1 font-medium my-5" >
                                 <h4 className="text-lg font-semibold" ><b>Verification Office</b></h4>
                                 <li>  Email: verification@thegreyit.org</li>
-                                <li> Phone: +234-[ 906 689 5390</li>
+                                <li> Phone: +234- 906 689 5390</li>
                                 <li>Website: <a href="https://thegreyit.org" className="text-blue-600" target="_blank" >https://thegreyit.org</a></li>
                             </ul>
 
