@@ -2,20 +2,18 @@ export const teams = [
   {
     name: "Abel Chidera Emmanuel",
     title: "Founder & Managing Director, GICBC, Cert.BC ",
-    image: "/community-page/Me.png",
+    image: "",
     socials: {
       linkedIn: "https://www.linkedin.com/in/chidera-e-abel-gicbc-cert-bc-176639155/",
-      facebook: "",
       twitter: "https://x.com/Abel_C_emmanuel"
     }
   },
   {
     name: "Ezekwueme Augustine,",
     title: "Co-founder & Operations Manager, ALSLT",
-    image: "/community-page/Me.png",
+    image: "",
     socials: {
       linkedIn: "https://www.linkedin.com/in/ezekwueme-augustine-aislt-8abb97252/",
-      facebook: "",
       twitter: ""
     }
   },
@@ -25,7 +23,6 @@ export const teams = [
     image: "/Team/neduPortrait.jpg",
     socials: {
       linkedIn: "https://www.linkedin.com/in/chinedu-emmanuel-okeke-4080b8292/",
-      facebook: "",
       twitter: ""
     }
   },
@@ -42,21 +39,37 @@ export const teams = [
   {
     name: "Mbaeze Olivia",
     title: "Office Assistant",
-    image: "/Team/olivia.jpg",
+    image: "/Team/OliviaEdited.png",
     socials: {
       linkedIn: "https://www.linkedin.com/in/mbaeze-olivia-b57188385/",
-      facebook: "",
       twitter: ""
     }
   },
   {
     name: "Chinaza Kenechukwu",
     title: "Data Analyst",
-    image: "/community-page/Me.png",
+    image: "",
     socials: {
       linkedIn: "https://www.linkedin.com/in/chinaza-kenechukwu-a58078253/",
-      facebook: "",
       twitter: ""
+    }
+  },
+   {
+    name: "zoezi Kelechi Victor",
+    title: "Data Analyst",
+    image: "/Team/victor.JPG",
+    socials: {
+      linkedIn: "https://www.linkedin.com/in/prominent-victor-k-a43603311/?lipi=urn%3Ali%3Apage%3Ad_flagship3_feed%3Bu%2BCznVnsSoyYwzyvAe3MYg%3D%3D ",
+      twitter: "https://x.com/ProminentVictor"
+    }
+  },
+   {
+    name: "Unaji Akachukwu Wisdom",
+    title: "Data Analyst",
+    image: "/Team/victor.JPG",
+    socials: {
+      linkedIn: "https://www.linkedin.com/in/unaji-wisdom",
+      twitter: "https//x.com/unaji_wisdom?s=09"
     }
   },
 ];
