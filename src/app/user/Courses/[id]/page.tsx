@@ -1,6 +1,7 @@
 "use client"
 
 import Button from "@/components/UI/Button";
+import Spinner from "@/components/UI/Spinner";
 import { useAppContext } from "@/context/AppContext";
 import { sendPaymentConfirmationEmail } from "@/lib/appActions";
 import { supabase } from "@/lib/supabaseClient";
@@ -126,16 +127,16 @@ export default function Page() {
     const cachedUser = useRef<User | null>(null)
     const public_key = process.env.NEXT_PUBLIC_PAYSTACK_PUBLIC_KEY!
     const { userData } = useAppContext()
+    const [loading, setLoading] = useState(false)
 
 
     useEffect(() => {
         const initAuth = async () => {
-            // setLoading(true)
             const { data: { session } } = await supabase.auth.getSession()
             const currentUser = session?.user ?? null
             cachedUser.current = currentUser
             setUser(currentUser)
-            // setLoading(false)
+
 
             // listen for auth changes
             const { data: listener } = supabase.auth.onAuthStateChange((_event, session) => {
@@ -157,22 +158,30 @@ export default function Page() {
 
     // Here we fetch the current course details
     useEffect(() => {
+
+        setLoading(true)
+
         const fetchCourseDetails = async () => {
             const { data, error } = await supabase.from("course").select("*").eq("id", id).single()
 
 
             if (error) {
                 console.error(error)
+                setLoading(false)
             }
 
             else {
-                console.log(data)
                 setCurrentCourse(data)
+                setLoading(false)
             }
         }
 
         fetchCourseDetails()
     }, [id])
+
+
+
+
 
 
 
@@ -206,6 +215,17 @@ export default function Page() {
         else {
             console.log(data)
             toast.success("Payment successful!")
+
+
+            // add the student email to the course table
+            // 1. Fetch existing array
+            const { data: oldData } = await supabase.from("course").select("enrolled_students").eq("id", currentCourse?.id).single();
+
+            // 2. Append new email
+            const updatedArray = [...(oldData?.enrolled_students || []), user?.email];
+
+            // 3. Update
+            await supabase.from("course").update({ enrolled_students: updatedArray }).eq("id", currentCourse?.id);
 
 
 
@@ -264,6 +284,21 @@ export default function Page() {
     };
 
 
+    if (loading) {
+        return (
+            <>
+                <div className="w-full h-screen flex flex-col gap-8 items-center justify-center py-10 px-5" >
+
+
+                    <p className="text-gray-700 text-xl font-medium text-center " >Fetching course details </p>
+                    <Spinner />
+
+
+                </div>
+            </>
+        )
+    }
+
 
     return (
         <div className="w-full h-full bg-[#f2f5fc] pt-16   rounded-xl space-y-40  " >
@@ -284,19 +319,30 @@ export default function Page() {
                     <h1 className=" text-2xl md:text-3xl font-semibold text-gray-700 "  > {currentCourse?.title} </h1>
                     <p className=" lg:w-[75%] text-sm md:text-base text-gray-600 " > {currentCourse?.description} </p>
 
-                    <div className=" text-sm md:text-sm" > Instructor: Abel Chidera Emmanuel   </div>
+                    <div className=" text-sm md:text-sm" > Instructor: {currentCourse?.tutor}   </div>
 
 
 
-                    <PaystackButton {...componentProps} className=" font-syne py-2! px-10 my-1 mt-5 rounded-[100px]! border border-gray-700 cursor-pointer hover:bg-gray-700 hover:text-white transition-all duration-300 ease-in-out " />
-                    <p className="text-sm" ><span className="font-bold">26,684</span> already enrolled</p>
+                    {currentCourse?.id && userData?.list_enrolled_courses.includes(Number(currentCourse?.id)) ? ""
+                        :
+                        <PaystackButton {...componentProps} className=" font-syne py-2! px-10 my-1 mt-5 rounded-[100px]! border border-gray-700 cursor-pointer hover:bg-gray-700 hover:text-white transition-all duration-300 ease-in-out " />
+                    }
+                    {currentCourse?.enrolled_students && (
+                        <p className="text-sm">
+                            <span className="font-bold">
+                                {currentCourse.enrolled_students.length}
+                            </span>{" "}
+                            already enrolled
+                        </p>
+                    )}
+
                 </div>
 
 
 
                 {/* right side  */}
-                <div className="w-full max-w-xs bg-amber-500 h-[420px] hidden lg:block  " >
-                    Image here
+                <div className="w-full max-w-xs bg-gray-400 h-[420px] hidden lg:block  " >
+                    <Image src={currentCourse?.imageUrl ?? ""} alt={`${currentCourse?.title}-image`} height={1000} width={1000} className="w-full h-full" />
                 </div>
 
 

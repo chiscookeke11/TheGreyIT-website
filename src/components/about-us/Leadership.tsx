@@ -40,12 +40,12 @@ export default function Leadership() {
 
             <div className="w-fit flex items-center gap-4" >
 
-              <a href={member.socials.linkedIn} className=" text-sm  text-gray-700 hover:text-white transition-all duration-250 transform hover:scale-125 h-10 w-10 rounded-full hover:bg-gray-700 flex items-center justify-center center " >
+              <a href={member.socials.linkedIn} target="_blank" className=" text-sm  text-gray-700 hover:text-white transition-all duration-250 transform hover:scale-125 h-10 w-10 rounded-full hover:bg-gray-700 flex items-center justify-center center " >
                 <Linkedin />
               </a>
 
 
-              <a href={member.socials.twitter} className=" text-sm  text-gray-700 hover:text-white transition-all duration-250 transform hover:scale-125 h-10 w-10 rounded-full hover:bg-gray-700 flex items-center justify-center center " >
+              <a href={member.socials.twitter} target="_blank" className=" text-sm  text-gray-700 hover:text-white transition-all duration-250 transform hover:scale-125 h-10 w-10 rounded-full hover:bg-gray-700 flex items-center justify-center center " >
                 <Twitter />
               </a>
 

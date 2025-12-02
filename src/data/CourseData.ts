@@ -9,7 +9,11 @@ export const CourseOverview: CourseDataTypes[] = [
     duration: "",
     price: 0,
     rating: 0,
-    pdfName: "software_engineering.pdf"
+    pdfName: "software_engineering.pdf",
+    enrolled_students: [""],
+    tutor: "",
+    id: "",
+    skills: []
   },
   {
     title: "Data & Business Intelligence",
@@ -19,7 +23,11 @@ export const CourseOverview: CourseDataTypes[] = [
     duration: "",
     price: 0,
     rating: 0,
-    pdfName: "software_engineering.pdf"
+    pdfName: "software_engineering.pdf",
+    enrolled_students: [""],
+    tutor: "",
+    id: "",
+    skills: []
   },
   {
     title: "Cybersecurity & Cloud",
@@ -30,7 +38,11 @@ export const CourseOverview: CourseDataTypes[] = [
     duration: "",
     price: 0,
     rating: 0,
-    pdfName: "software_engineering.pdf"
+    pdfName: "software_engineering.pdf",
+    enrolled_students: [""],
+    tutor: "",
+    id: "",
+    skills: []
   },
   {
     title: "Artificial Intelligence",
@@ -41,7 +53,11 @@ export const CourseOverview: CourseDataTypes[] = [
     duration: "",
     price: 0,
     rating: 0,
-    pdfName: "data_science.pdf"
+    pdfName: "data_science.pdf",
+    enrolled_students: [""],
+    tutor: "",
+    id: "",
+    skills: []
   },
   {
     title: "Academic Research & Writing",
@@ -51,7 +67,11 @@ export const CourseOverview: CourseDataTypes[] = [
     duration: "",
     price: 0,
     rating: 0,
-    pdfName: "data_science.pdf"
+    pdfName: "data_science.pdf",
+    enrolled_students: [""],
+    tutor: "",
+    id: "",
+    skills: []
   },
   {
     title: "Digital Creativity & Design",
@@ -61,7 +81,11 @@ export const CourseOverview: CourseDataTypes[] = [
     duration: "",
     price: 0,
     rating: 0,
-    pdfName: "data_science.pdf"
+    pdfName: "data_science.pdf",
+    enrolled_students: [""],
+    tutor: "",
+    id: "",
+    skills: []
   },
   {
     title: "Office & Digital Literacy",
@@ -71,7 +95,11 @@ export const CourseOverview: CourseDataTypes[] = [
     duration: "",
     price: 0,
     rating: 0,
-    pdfName: "data_science.pdf"
+    pdfName: "data_science.pdf",
+    enrolled_students: [""],
+    tutor: "",
+    id: "",
+    skills: []
   },
   {
     title: "Kids & Junior Tech",
@@ -81,6 +109,10 @@ export const CourseOverview: CourseDataTypes[] = [
     duration: "",
     price: 0,
     rating: 0,
-    pdfName: "data_science.pdf"
+    pdfName: "data_science.pdf",
+    enrolled_students: [""],
+    tutor: "",
+    id: "",
+    skills: []
   },
 ];

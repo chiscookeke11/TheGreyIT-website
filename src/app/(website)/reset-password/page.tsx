@@ -2,6 +2,7 @@
 
 import { supabase } from "@/lib/supabaseClient"
 import Link from "next/link"
+import { useRouter } from "next/navigation"
 import React, { useState, useEffect } from "react"
 import toast from "react-hot-toast"
 
@@ -15,7 +16,12 @@ export default function Page() {
     const [email, setEmail] = useState("")
     const [loading, setLoading] = useState(false)
     const [isCounting, setIsCounting] = useState(false)
-    const [countdown, setCountdown] = useState(180)
+    const [countdown, setCountdown] = useState(90)
+    const router = useRouter()
+
+
+
+
 
     // Check localStorage for persisted timer
     useEffect(() => {
@@ -42,7 +48,7 @@ export default function Page() {
                     clearInterval(timer)
                     setIsCounting(false)
                     localStorage.removeItem("resetCooldownEnd")
-                    return 180
+                    return 90
                 }
                 return prev - 1
             })
@@ -67,8 +73,7 @@ export default function Page() {
             setLoading(false)
             return
         }
-
-        toast.success(`Password reset link sent to the email: ${email}`)
+        router.push(`/forget-password?email=${email}`)
         setEmail("")
         setLoading(false)
 
@@ -116,7 +121,7 @@ export default function Page() {
                 <button
                     type="submit"
                     disabled={loading || isCounting || !email}
-                    className={` font-syne bg-gray-700 w-full max-w-xs text-white hover:bg-transparent hover:text-gray-700 mb-5 px-6 py-3 flex items-center justify-center font-medium focus:outline-none text-base md:text-lg border-[1px] transition-all duration-300 ease-in-out border-gray-700 rounded-sm ${isCounting? "cursor-not-allowed  " : "cursor-pointer"}  `}
+                    className={` font-syne bg-gray-700 w-full max-w-xs text-white hover:bg-transparent hover:text-gray-700 mb-5 px-6 py-3 flex items-center justify-center font-medium focus:outline-none text-base md:text-lg border-[1px] transition-all duration-300 ease-in-out border-gray-700 rounded-sm ${isCounting ? "cursor-not-allowed  " : "cursor-pointer"}  `}
                 >
                     {loading ? <Spinner /> : "Send reset link"}
                 </button>
