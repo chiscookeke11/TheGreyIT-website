@@ -6,19 +6,14 @@ import Spinner from "@/components/UI/Spinner"
 import { CourseOverview } from "@/data/CourseData"
 import { supabase } from "@/lib/supabaseClient"
 import { CourseDataTypes } from "@/types/types"
-import { Download, Timer } from "lucide-react"
-import Image from "next/image"
+import { Download, } from "lucide-react"
 import Link from "next/link"
-import React, { SetStateAction, useEffect, useState } from "react"
+import React, { useEffect, useState } from "react"
 import Marquee from "react-fast-marquee";
 
 
 
-interface CourseCardProps {
-    data: CourseDataTypes
-    setShowModal: React.Dispatch<SetStateAction<boolean>>
-    setSelectedCourse: React.Dispatch<SetStateAction<string | undefined>>
-}
+
 
 
 const highlights = [
@@ -131,24 +126,48 @@ export default function Page() {
 
 
             {/* Course description section  */}
-            <section className=" w-full h-fit py-14 md:py-28 px-[4%]  grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 place-items-center justify-items-center gap-10 font-poppins " >
+            {!coursesData ?
+                (
+                    <div className=" w-full h-screen flex items-center justify-center  " >
+                        <Spinner />
 
-                {CourseOverview.map((track, index) => (
-                    <div key={index} className=" w-full bg-[#f2f5fc] h-full py-6 px-5 flex flex-col items-start gap-4 rounded-lg shadow-sm " >
-                        <span className=" h-10 w-10 md:h-14 md:w-14 flex items-center justify-center bg-gray-700 text-white rounded-sm font-medium text-lg md:text-xl text-left shadow-xl " >{index + 1} </span>
-                        <h3 className=" font-syne font-bold text-xl  " > {track.title} </h3>
-                        <p className=" font-normal text-base   md:mt-1 " >{track.description} </p>
-
-
-                        <div className="w-full flex items-center gap-4 mt-3 " >
-                            <Link href={"/user"} className="w-full basis-1/2 " ><Button variant="default" className=" w-full !rounded-[100px] text-sm lg:text-sm " >Register</Button></Link>
-                            <Button variant="default" className="w-full basis-1/2 !rounded-[100px] !bg-gray-700 !text-white !text-sm !lg:text-sm hover:bg-transparent! hover:text-gray-700! flex items-center gap-3 " >View Curriculum <Download size={15} /> </Button>
-                        </div>
                     </div>
-                ))}
+                )
+                :
+                coursesData.length < 1 ?
+                    (
+                        <div className="w-full h-screen flex items-center justify-center bg-[#f2f5fc] " >
+                            <p className="font-medium text-lg text-gray-700 " >No courses found!</p>
+
+                        </div>
+                    )
+                    :
+                    (
+                        <section className=" w-full h-fit py-14 md:py-28 px-[4%]  grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 place-items-center justify-items-center gap-10 font-poppins " >
+
+                            {coursesData?.map((track, index) => (
+                                <div key={index} className=" w-full bg-[#f2f5fc] h-full py-6 px-5 flex flex-col items-start gap-4 rounded-lg shadow-sm " >
+                                    <span className=" h-10 w-10 md:h-14 md:w-14 flex items-center justify-center bg-gray-700 text-white rounded-sm font-medium text-lg md:text-xl text-left shadow-xl " >{index + 1} </span>
+                                    <h3 className=" font-syne font-bold text-xl mt-3  " > {track.title} </h3>
+                                    <p className=" font-normal text-base   md:mt-1 " >{track.description} </p>
 
 
-            </section>
+                                    <div className="w-full flex flex-col md:flex-row items-center gap-4  mt-auto " >
+                                        <Link href={"/user"} className="w-full basis-1/2 " ><Button variant="default" className=" w-full !rounded-[100px] text-sm! lg:text-sm " >Register</Button></Link>
+                                        <Button
+                                            onClick={() => {
+                                                if (track.pdfName) downloadPdf(track.pdfName)
+                                                else console.warn("PDF not available")
+                                            }}
+                                            variant="default" className="w-full basis-1/2 !rounded-[100px] !bg-gray-700 !text-white text-sm! !lg:text-sm hover:bg-transparent! hover:text-gray-700! flex items-center gap-3 whitespace-nowrap " >View Curriculum <Download size={15} /> </Button>
+                                    </div>
+                                </div>
+                            ))}
+
+
+                        </section>
+                    )
+            }
 
 
 
