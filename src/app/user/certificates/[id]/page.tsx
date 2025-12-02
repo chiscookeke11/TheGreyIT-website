@@ -205,7 +205,7 @@ export default function Page() {
                         <h1 className=" text-gray-700 font-bold text-lg md:text-xl " > Completed by  {user ? user?.user_metadata.first_name + " " + user?.user_metadata.last_name : "-"}   </h1>
 
                         <div className="space-y-1 font-semibold text-base " >
-                            <h3>May 9, 2024</h3>
+                            <h3>May =10, 2024</h3>
                             <h3>9 hours (approximately)</h3>
                             <h3>Grade Achieved: 85.4%</h3>
                         </div>
