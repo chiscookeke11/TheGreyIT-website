@@ -53,7 +53,7 @@ export default function VerifyEmail() {
 
 
     return (
-        <div className="w-full h-[130vh] flex items-center justify-center py-5 px-[4%] bg-gray-700  flex-col gap-10 font-poppins " >
+        <div className="w-full h-screen flex items-center justify-center py-5 px-[4%] bg-gray-700  flex-col gap-10 font-poppins " >
 
 
 {/*

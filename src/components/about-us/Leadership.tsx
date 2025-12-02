@@ -17,7 +17,7 @@ export default function Leadership() {
 
           <div key={index} className=" w-full h-full bg-white shadow-2xl rounded-md px-6 py-8 flex items-center flex-col gap-8 lg:gap-12 min-w-xs max-w-md " >
 
-            <div className=" w-[180px] h-[180px] md:w-[230px] md:h-[230px] flex items-center justify-center p-1 rounded-full bg-gray-700  " >
+            <div className=" w-[180px] h-[180px] md:w-[230px] md:h-[230px] flex items-center justify-center p-1  bg-gray-700 rounded-full " >
               <Image src={member.image} alt={`${member.name}-img `} height={500} width={500} className="h-full w-full object-center object-cover rounded-full " />
             </div>
 
@@ -39,9 +39,6 @@ export default function Leadership() {
 
 
             <div className="w-fit flex items-center gap-4" >
-              <a href={member.socials.facebook} className=" text-sm  text-gray-700 hover:text-white transition-all duration-250 transform hover:scale-125 h-10 w-10 rounded-full hover:bg-gray-700 flex items-center justify-center center " >
-                <Facebook />
-              </a>
 
               <a href={member.socials.linkedIn} className=" text-sm  text-gray-700 hover:text-white transition-all duration-250 transform hover:scale-125 h-10 w-10 rounded-full hover:bg-gray-700 flex items-center justify-center center " >
                 <Linkedin />
