@@ -4,24 +4,49 @@
 import Spinner from "@/components/UI/Spinner"
 import { supabase } from "@/lib/supabaseClient"
 import { ResearchBlogType } from "@/types/types"
-import { Fullscreen, Trash } from "lucide-react"
+import { Fullscreen, LogOut, Trash, X } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
-import { useEffect, useRef, useState } from "react"
+import { SetStateAction, useEffect, useRef, useState } from "react"
 import toast from "react-hot-toast"
 
 
 
+interface ConfirmationModalProps {
+    deleteBlog: (blogId: number) => void;
+    setOpenConfirmationModal: React.Dispatch<SetStateAction<boolean>>
+    currentId: number | null
+}
 
 
 
-
-const ConfirmationModal = () => {
+const ConfirmationModal = ({ deleteBlog, setOpenConfirmationModal, currentId }: ConfirmationModalProps) => {
     return (
         <div className="w-full fixed inset-0 h-screen bg-black/25 backdrop-blur-2xl flex items-center justify-center px-[4%] py-7  " >
-<div className="bg-white rounded-sm " >
+            <div className="bg-white rounded-sm w-full max-w-md py-7 px-5 flex flex-col items-center justify-center gap-4 " >
+                <button
+                    className="ml-auto cursor-pointer text-red-700  mb-3 "
+                    onClick={() => setOpenConfirmationModal(false)}
+                ><X size={24} /></button>
 
-</div>
+                <h1 className="text-center font-semibold text-lg md:text-xl " >Are you sure you want to delete this blog?</h1>
+
+                <div className="flex w-fit items-center gap-32 justify-between mt-5 " >
+                    <button onClick={() => {
+                        if (currentId) {
+                            deleteBlog(currentId)
+                            setOpenConfirmationModal(false)
+                        }
+                        else return
+                    }}
+                        className="w-full bg-red-700 text-white py-2 px-4 rounded-sm flex items-center gap-1 cursor-pointer " > <Trash size={15} /> Yes</button>
+                    <button
+                        onClick={() => setOpenConfirmationModal(false)}
+                        className="w-full bg-green-700 text-white py-2 px-4 rounded-sm flex items-center gap-1 cursor-pointer"><LogOut size={15} />No</button>
+
+                </div>
+
+            </div>
         </div>
     )
 }
@@ -33,6 +58,7 @@ export default function Page() {
     const [blogs, setBlogs] = useState<ResearchBlogType[]>([])
     const [loading, setLoading] = useState(false)
     const [openConfirmationModal, setOpenConfirmationModal] = useState(false)
+    const [currentId, setCurrentId] = useState<number | null>(null)
 
 
 
@@ -111,8 +137,13 @@ export default function Page() {
                                 </div>
 
                                 <div className="h-0 overflow-hidden  bg-white w-full px-4  flex items-center justify-center gap-3 group-hover:h-fit group-hover:py-4 transition-all duration-300 ease-in-out " >
-                                    <button onClick={() => setOpenConfirmationModal(true)} className=" bg-gray-400 hover:bg-gray-700 hover:text-gray-200 transition-all ease-in-out duration-300 p-2 cursor-pointer rounded-sm text-white " ><Trash /></button>
-                                    <Link href={`/admin/blog/${blog.id}`}  className=" bg-gray-400 hover:bg-gray-700 hover:text-gray-200 transition-all ease-in-out duration-300 p-2 cursor-pointer rounded-sm text-white " ><Fullscreen /> </Link>
+                                    <button onClick={() => {
+                                        setOpenConfirmationModal(true)
+                                        setCurrentId(blog.id)
+                                    }}
+                                        className=" bg-gray-400 hover:bg-gray-700 hover:text-gray-200 transition-all ease-in-out duration-300 p-2 cursor-pointer rounded-sm text-white " ><Trash /></button>
+
+                                    <Link href={`/admin/blog/${blog.id}`} className=" bg-gray-400 hover:bg-gray-700 hover:text-gray-200 transition-all ease-in-out duration-300 p-2 cursor-pointer rounded-sm text-white " ><Fullscreen /> </Link>
                                 </div>
                             </div>
 
@@ -120,7 +151,11 @@ export default function Page() {
                     </div>
                 )}
 
-                {openConfirmationModal && <ConfirmationModal/>}
+                {openConfirmationModal && <ConfirmationModal
+                    deleteBlog={deleteBlog}
+                    setOpenConfirmationModal={setOpenConfirmationModal}
+                    currentId={currentId}
+                />}
 
 
                 <div ref={ref} className="w-10 h-10 absolute right-0 bottom-0" />

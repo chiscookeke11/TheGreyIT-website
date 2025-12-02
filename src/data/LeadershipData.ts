@@ -27,13 +27,12 @@ export const teams = [
     }
   },
   {
-    name: "Fedrick ",
+    name: "Chikamso Fredrick",
     title: "Developer",
     image: "/Team/Fredrick.JPG",
     socials: {
-      linkedIn: "https://www.linkedin.com/in/chikamso-nwoha-143247385/",
-      facebook: "",
-      twitter: ""
+      linkedIn: "https://www.linkedin.com/in/chikamso-nwoha",
+      twitter: "https://x.com/ChikamsoNw56341"
     }
   },
   {
@@ -41,8 +40,8 @@ export const teams = [
     title: "Office Assistant",
     image: "/Team/OliviaEdited.png",
     socials: {
-      linkedIn: "https://www.linkedin.com/in/mbaeze-olivia-b57188385/",
-      twitter: ""
+      linkedIn: "http://linkedin.com/in/mbaeze-olivia-b57188385",
+      twitter: "https://x.com/settings/profile"
     }
   },
   {
@@ -55,8 +54,8 @@ export const teams = [
     }
   },
    {
-    name: "zoezi Kelechi Victor",
-    title: "Data Analyst",
+    name: "Ozoezi Kelechi Victor",
+    title: "Researcher",
     image: "/Team/victor.JPG",
     socials: {
       linkedIn: "https://www.linkedin.com/in/prominent-victor-k-a43603311/?lipi=urn%3Ali%3Apage%3Ad_flagship3_feed%3Bu%2BCznVnsSoyYwzyvAe3MYg%3D%3D ",
@@ -65,8 +64,8 @@ export const teams = [
   },
    {
     name: "Unaji Akachukwu Wisdom",
-    title: "Data Analyst",
-    image: "/Team/victor.JPG",
+    title: "Researcher",
+    image: "/Team/",
     socials: {
       linkedIn: "https://www.linkedin.com/in/unaji-wisdom",
       twitter: "https//x.com/unaji_wisdom?s=09"
