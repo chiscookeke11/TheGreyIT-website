@@ -179,7 +179,7 @@ export default function Page() {
         <div className="flex flex-col items-start w-full gap-10 mt-5  " >
             {showConfetti && !hasDownloaded && <Confetti width={width} height={height} />}
 
-            <h1 className=" text-xl md:text-3xl font-semibold  " > {theCourse?.title} Certificate </h1>
+            <h1 className=" text-xl md:text-3xl font-semibold  " > {theCourse?.title} Certifewicate </h1>
 
 
             <div className="  w-full h-fit flex flex-col lg:flex-row items-center justify-center gap-10  " >
