@@ -5,7 +5,7 @@ import { toggleBookmark } from "@/lib/appActions";
 import { CourseDataTypes } from "@/types/types";
 import { Clock, Heart, Radio } from "lucide-react";
 import Image from "next/image";
-import React from "react";
+import React, { SetStateAction } from "react";
 import toast from "react-hot-toast";
 import RatingStars from "./ReviewStarsComponent";
 
@@ -15,11 +15,12 @@ interface UserCourseCardProps {
     bookmarks?: number[] | null
     setbookmarks?: React.Dispatch<React.SetStateAction<number[] | null>>
     isBookmarked: boolean;
+    setBookmarkedCourses?: React.Dispatch<SetStateAction<CourseDataTypes[] | null>>
 }
 
 
 
-export default function UserCourseCard({ track, bookmarks, setbookmarks, isBookmarked }: UserCourseCardProps) {
+export default function UserCourseCard({ track, bookmarks, setbookmarks, isBookmarked, setBookmarkedCourses }: UserCourseCardProps) {
 
     const { userData } = useAppContext()
 
@@ -36,6 +37,7 @@ export default function UserCourseCard({ track, bookmarks, setbookmarks, isBookm
         }
 
         if (!updatedBookmarks.includes(course_id)) {
+            setBookmarkedCourses?.((prev) => prev ? prev?.filter((course) => course.id !== course_id) : null)
             toast.success("Course removed from your wishlist")
         }
 
@@ -74,8 +76,7 @@ export default function UserCourseCard({ track, bookmarks, setbookmarks, isBookm
 
             {/* Bookmark button  */}
             {bookmarks && <button
-                onClick={(e) =>
-                {
+                onClick={(e) => {
                     e.preventDefault()
                     handleBookmarkClick(track.id ?? "", userData?.user_id ?? "")
                 }

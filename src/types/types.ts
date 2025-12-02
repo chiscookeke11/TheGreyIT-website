@@ -12,7 +12,9 @@ export interface CourseDataTypes {
   rating: number,
   id?: string,
   pdfName?: string,
-  skills?: string[]
+  skills?: string[],
+  tutor: string,
+  enrolled_students: string[] | null
 }
 
 

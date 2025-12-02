@@ -7,6 +7,7 @@ import Image from "next/image";
 import { useAppContext } from "@/context/AppContext";
 import Spinner from "@/components/UI/Spinner";
 import UserCourseCard from "@/components/user/UserCourseCard";
+import Link from "next/link";
 
 type Bookmark = {
   course_id: number;
@@ -49,7 +50,7 @@ export default function Page() {
   return (
     <div className="w-full min-h-screen flex flex-col gap-7 items-start justify-start text-black bg-[#f2f5fc] p-8">
       <h1 className=" text-xl md:text-2xl font-semibold text-black   " >Wishlist</h1>
-             <hr className="w-full border-t border-gray-400 " />
+      <hr className="w-full border-t border-gray-400 " />
 
       {
         !bookmarkedCourses ?
@@ -67,7 +68,16 @@ export default function Page() {
 
                 {bookmarkedCourses?.map((track, index) => (
                   // Course card
-                  <UserCourseCard key={index} bookmarks={bookmarks} setbookmarks={setbookmarks} track={track} isBookmarked={bookmarks?.includes(Number(track.id)) ?? false}  />
+                  <Link href={` /user/Courses/${track.id} `} className="w-full cursor-pointer" key={index} >
+                    <UserCourseCard
+                      key={index}
+                      bookmarks={bookmarks}
+                      setbookmarks={setbookmarks}
+                      track={track}
+                      setBookmarkedCourses={setBookmarkedCourses}
+                      isBookmarked={bookmarks?.includes(Number(track.id)) ?? false}
+                    />
+                  </Link>
                 ))}
 
               </section>

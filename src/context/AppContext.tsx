@@ -74,6 +74,11 @@ export function AppProvider({ children }: { children: ReactNode }) {
     setCertificatesData(result);
   };
 
+
+  useEffect(() => {
+    reloadUserData()
+  }, [])
+
   // auto-run when user changes
   useEffect(() => {
     if (userData) reloadCertificates();

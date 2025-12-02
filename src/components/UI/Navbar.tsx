@@ -22,7 +22,7 @@ export default function Navbar() {
     const { activeNav, setActiveNav } = useAppContext()
     const pathName = usePathname()
     const mobileNavRef = useRef<HTMLDivElement | null>(null)
-    const isLightBackground = pathName === "/" || pathName === "/courses" || pathName === "/our-services" || pathName === "/about-us" || pathName === "/verify_email" || pathName.includes("research-blog/");
+    const isLightBackground = pathName === "/" || pathName === "/courses" || pathName === "/our-services" || pathName === "/about-us" || pathName === "/verify_email" || pathName === "/forget-password" || pathName.includes("research-blog/");
     const [user, setUser] = useState<User | null>(null)
 
 

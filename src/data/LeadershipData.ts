@@ -31,7 +31,7 @@ export const teams = [
     title: "Developer",
     image: "/Team/Fredrick.JPG",
     socials: {
-      linkedIn: "https://www.linkedin.com/in/chikamso-nwoha",
+      linkedIn: "https://www.linkedin.com/in/chikamso-nwoha-143247385/",
       twitter: "https://x.com/ChikamsoNw56341"
     }
   },
