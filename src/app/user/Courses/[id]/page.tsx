@@ -245,7 +245,6 @@ export default function Page() {
 
             else {
                 console.log(updateData)
-                window.location.reload();
 
 
                 // Then finally send the confirmation email
@@ -264,6 +263,7 @@ export default function Page() {
                     console.error("Failed to send confirmation email", err);
                 }
 
+                window.location.reload();
             }
         }
     };
@@ -341,9 +341,11 @@ export default function Page() {
 
 
                 {/* right side  */}
-                <div className="w-full max-w-xs bg-gray-400 h-[420px] hidden lg:block  " >
-                    <Image src={currentCourse?.imageUrl ?? ""} alt={`${currentCourse?.title}-image`} height={1000} width={1000} className="w-full h-full" />
-                </div>
+                {currentCourse?.imageUrl && (
+                    <div className="w-full max-w-sm bg-gray-400 h-[420px] hidden lg:block  " >
+                        <Image src={currentCourse?.imageUrl} alt={`${currentCourse?.title}-image`} height={1000} width={1000} className="w-full h-full object-cover object-center " />
+                    </div>
+                )}
 
 
 

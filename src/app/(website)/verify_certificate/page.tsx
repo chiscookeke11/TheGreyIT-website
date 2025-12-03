@@ -27,12 +27,6 @@ export default function Page() {
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target
 
-        if (isNaN(Number(value))) {
-            return;
-        }
-
-
-        else
             setCertNumber(e.target.value)
 
     }
@@ -137,7 +131,7 @@ export default function Page() {
                             <ul className="flex flex-col gap-1 font-medium my-5" >
                                 <h4 className="text-lg font-semibold" ><b>Verification Office</b></h4>
                                 <li>  Email: verification@thegreyit.org</li>
-                                <li> Phone: +234-[ 906 689 5390</li>
+                                <li> Phone: +234-906 689 5390</li>
                                 <li>Website: <a href="https://thegreyit.org" className="text-blue-600" target="_blank" >https://thegreyit.org</a></li>
                             </ul>
 
