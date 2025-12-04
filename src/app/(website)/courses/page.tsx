@@ -146,7 +146,7 @@ export default function Page() {
                         <section className=" w-full h-fit py-14 md:py-28 px-[4%]  grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 place-items-center justify-items-center gap-10 font-poppins " >
 
                             {coursesData?.map((track, index) => (
-                                <div key={index} className=" w-full bg-[#f2f5fc] h-full py-6 px-5 flex flex-col items-start gap-4 rounded-lg shadow-sm " >
+                                <div key={index} className=" w-full bg-[#f2f5fc] h-full py-6 px-5 flex flex-col items-start gap-4 rounded-lg shadow-sm relative" >
                                     <span className=" h-10 w-10 md:h-14 md:w-14 flex items-center justify-center bg-gray-700 text-white rounded-sm font-medium text-lg md:text-xl text-left shadow-xl " >{index + 1} </span>
                                     <h3 className=" font-syne font-bold text-xl mt-3  " > {track.title} </h3>
                                     <p className=" font-normal text-base   md:mt-1 " >{track.description} </p>
@@ -160,6 +160,10 @@ export default function Page() {
                                                 else console.warn("PDF not available")
                                             }}
                                             variant="default" className="w-full basis-1/2 !rounded-[100px] !bg-gray-700 !text-white text-sm! !lg:text-sm hover:bg-transparent! hover:text-gray-700! flex items-center gap-3 whitespace-nowrap " >View Curriculum <Download size={15} /> </Button>
+                                    </div>
+
+                                    <div className="absolute right-0 top-0 bg-red-600 font-medium text-white py-1 px-3 w-fit text-base rounded-xs  " >
+                                        ₦ {track.price.toLocaleString()}
                                     </div>
                                 </div>
                             ))}
