@@ -31,7 +31,7 @@ export default function Page() {
     if (!currentMember) return (
 
         <div className="w-full h-screen flex items-center justify-center" >
-            <Spinner/>
+            <Spinner />
         </div>
     )
 
@@ -55,38 +55,44 @@ export default function Page() {
 
 
                 {/* core skills if any  */}
-                <ul className=" flex flex-col items-start gap-2 list-disc my-10" >
-                    <p className="text-gray-900 font-semibold text-base md:text-lg" >Core Skills</p>
-                    {
-                        currentMember?.coreSkills?.map((skill, index) => (
-                            <li className="text-sm font-medium " key={index} > {skill} </li>
-                        ))
-                    }
-                </ul>
+                {currentMember.coreSkills && currentMember.coreSkills.length > 0 && (
+                    <ul className=" flex flex-col items-start gap-2 list-disc my-10" >
+                        <p className="text-gray-900 font-semibold text-base md:text-lg" >Core Skills</p>
+                        {
+                            currentMember?.coreSkills?.map((skill, index) => (
+                                <li className="text-sm font-medium " key={index} > {skill} </li>
+                            ))
+                        }
+                    </ul>
+                )}
 
 
 
                 {/* Tools/Software if any  */}
-                <ul className=" flex flex-col items-start gap-2 list-disc my-10" >
-                    <p className="text-gray-900 font-semibold text-base md:text-lg" >Core Skills</p>
-                    {
-                        currentMember?.tools?.map((tools, index) => (
-                            <li className="text-sm font-medium " key={index} > {tools} </li>
-                        ))
-                    }
-                </ul>
+                {currentMember.tools && currentMember.tools.length > 0 && (
+                    <ul className=" flex flex-col items-start gap-2 list-disc my-10" >
+                        <p className="text-gray-900 font-semibold text-base md:text-lg" >Tools/Software</p>
+                        {
+                            currentMember?.tools?.map((tools, index) => (
+                                <li className="text-sm font-medium " key={index} > {tools} </li>
+                            ))
+                        }
+                    </ul>
+                )}
 
 
 
                 {/* Tools/Software if any  */}
-                <ul className=" flex flex-col items-start gap-2 list-disc my-10" >
-                    <p className="text-gray-900 font-semibold text-base md:text-lg" >Certifications</p>
-                    {
-                        currentMember?.certifications?.map((cert, index) => (
-                            <li className="text-sm font-medium " key={index} > {cert} </li>
-                        ))
-                    }
-                </ul>
+                {currentMember.certifications && currentMember.certifications.length > 0 && (
+                    <ul className=" flex flex-col items-start gap-2 list-disc my-10" >
+                        <p className="text-gray-900 font-semibold text-base md:text-lg" >Certifications</p>
+                        {
+                            currentMember?.certifications?.map((cert, index) => (
+                                <li className="text-sm font-medium " key={index} > {cert} </li>
+                            ))
+                        }
+                    </ul>
+                )}
 
 
 
