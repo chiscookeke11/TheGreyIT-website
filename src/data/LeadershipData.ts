@@ -54,7 +54,7 @@ He is currently pursuing a Bachelor of Science in Chemistry Education (B.Sc.) at
       "State Management (Redux, Zustand, Context API, React Query)",
       "Database Management (MongoDB, PostgreSQL, Prisma)",
       "Performance Optimization & Debugging",
-      "Open-Source Collaboration & Git/GitHub Workflow" 
+      "Open-Source Collaboration & Git/GitHub Workflow"
     ],
 
     tools: [
@@ -89,7 +89,35 @@ He is currently pursuing a Bachelor of Science in Chemistry Education (B.Sc.) at
       linkedIn: "https://www.linkedin.com/in/chikamso-nwoha-143247385/",
       twitter: "https://x.com/ChikamsoNw56341"
     },
-    description: ""
+    description: `
+    Nwoha Chikamso is a self-driven aspiring software developer, AI researcher, and digital innovator with a deep interest in artificial intelligence, web development, and advanced technology systems. Although early in his professional journey, he has built a strong foundation in Python programming, web technologies, and system-level problem solving through consistent self-study and hands-on projects.
+
+Currently focused on developing full-stack web applications and AI-based systems, Chikamso is actively working toward building intelligent software, autonomous systems, and a long-term Artificial Superintelligence (ASI) research framework. His technical interests span web scraping, APIs, automation, machine intelligence, and decentralized digital systems. He is also passionate about using technology to build real-world solutions, digital platforms, and innovative communities.
+
+Chikamso thrives in environments that demand critical thinking, creativity, and continuous learning. He approaches problems with a research-oriented mindset, combining technical skills with curiosity and long-term vision. Beyond coding, he is deeply interested in personal development, cognitive training, and building real-life systems inspired by adventure, exploration, and strategic thinking.
+
+Always eager to grow, Chikamso is steadily expanding his expertise in full-stack development, artificial intelligence, and advanced system architecture with the long-term goal of becoming a high-level technologist and independent AI researcher.
+    `,
+    coreSkills: [
+      "Programming & Software Development: Python (core logic, scripting, automation), basic JavaScript",
+      "Web Development (Junior–Intermediate Level): HTML, CSS, Tailwind, React (learning), Node.js & Express (basic backend), APIs",
+      "Research & Systems Thinking: Technical research, system design, AI architecture planning, problem decomposition",
+      "Data & Automation: Web scraping, data handling, basic JSON and file operations",
+      "Creativity & Innovation: Concept development for apps, AI systems, and digital platforms",
+      "Self-Management & Discipline: Independent learning, long-term project planning, productivity systems"
+    ],
+
+    tools: [
+      "Development Tools: VS Code, Git (basic), Node.js environment",
+      "Programming & Data: Python, JavaScript, JSON, REST APIs",
+      "Web Technologies: HTML, CSS, Tailwind CSS, React (in progress), Express.js",
+      "Productivity & Research: Google Workspace, Online documentation, Technical forums, AI tools",
+      "Operating Environment: Windows 11, Local servers, Command Line",
+    ],
+
+    certifications: [
+    ]
+
   },
 
 

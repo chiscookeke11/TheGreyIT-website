@@ -18,7 +18,7 @@ export default function Leadership() {
        <Link key={index} href={`/about-us/${member.id} `} className="w-full h-full"  >
           <div  className=" w-full h-full bg-white  rounded-md px-6 py-8 flex items-center flex-col gap-3 lg:gap-6 min-w-xs max-w-xs " >
 
-            <div className=" w-[180px] h-[180px] md:w-[230px] md:h-[300px] flex items-center justify-center p-1  bg-gray-700  " >
+            <div className=" w-[180px] h-[230px] md:w-[230px] md:h-[300px] flex items-center justify-center p-1  bg-gray-700  " >
               <Image src={member.image} alt={`${member.name}-img `} height={500} width={500} className="h-full w-full object-center object-cover   " />
             </div>
 
