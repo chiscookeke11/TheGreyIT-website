@@ -119,3 +119,21 @@ export type PaystackReference = {
   transaction: string;
   trxref: string;
 };
+
+
+
+export interface TeamMemberDataType {
+  id: number;
+  name: string;
+  title: string;
+  image: string;
+  socials: {
+    linkedIn: string;
+    twitter: string
+  };
+  description: string;
+  coreSkills?: string[];
+  tools?: string[];
+  certifications?: string[]
+
+}
