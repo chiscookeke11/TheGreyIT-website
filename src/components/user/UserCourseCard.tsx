@@ -58,13 +58,13 @@ export default function UserCourseCard({ track, bookmarks, setbookmarks, isBookm
             {/* Course description */}
             <div className="w-full flex flex-col gap-3 items-start p-3 " >
                 <div className="w-full flex items-center gap-[40%] text-sm " >
-                    <small className=" flex items-center gap-2 " ><Radio size={20} /> Live</small>
-                    <small className=" flex items-center gap-2 "><Clock size={20} /> 1 week</small>
+                    <small className=" flex items-center gap-2 text-red-600 " ><Radio size={20} /> Live</small>
+                    <small className=" flex items-center gap-2 text-gray-600"><Clock size={20} /> 1 week</small>
                 </div>
 
                 <h3 className="text-base font-semibold  " >{track.title} </h3>
-                <h4 className=" text-base font-semibold  " >${track.price} </h4>
-                <hr className="w-full border-t border-gray-400 " />
+                <h4 className=" text-base font-semibold text-red-600  " >${track.price} </h4>
+                <hr className="w-full border-t border-gray-400  " />
                 <div className="w-full flex items-center justify-between text-sm " >
                     <p> {"Tutor"} </p>
                     <RatingStars ratingValue={track.rating} size={20} readonly={true} />
