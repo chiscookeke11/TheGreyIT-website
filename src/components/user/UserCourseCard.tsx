@@ -16,11 +16,12 @@ interface UserCourseCardProps {
     setbookmarks?: React.Dispatch<React.SetStateAction<number[] | null>>
     isBookmarked: boolean;
     setBookmarkedCourses?: React.Dispatch<SetStateAction<CourseDataTypes[] | null>>
+    no_of_reviews?: number | null
 }
 
 
 
-export default function UserCourseCard({ track, bookmarks, setbookmarks, isBookmarked, setBookmarkedCourses }: UserCourseCardProps) {
+export default function UserCourseCard({ track, bookmarks, setbookmarks, isBookmarked, setBookmarkedCourses, no_of_reviews }: UserCourseCardProps) {
 
     const { userData } = useAppContext()
 
@@ -63,11 +64,11 @@ export default function UserCourseCard({ track, bookmarks, setbookmarks, isBookm
                 </div>
 
                 <h3 className="text-base font-semibold  " >{track.title} </h3>
-                <h4 className=" text-base font-semibold text-red-600  " >${track.price} </h4>
+                <h4 className=" text-base font-semibold text-red-600  " >&#8358; {track.price} </h4>
                 <hr className="w-full border-t border-gray-400  " />
                 <div className="w-full flex items-center justify-between text-sm " >
                     <p> {"Tutor"} </p>
-                    <RatingStars ratingValue={track.rating} size={20} readonly={true} />
+                   {no_of_reviews ? (<p>Total reviews: <span className="font-semibold" >{no_of_reviews}</span></p>) : ( <RatingStars ratingValue={track.rating} size={20} readonly={true} />)}
 
                 </div>
 

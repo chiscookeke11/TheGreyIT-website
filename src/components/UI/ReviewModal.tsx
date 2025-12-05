@@ -148,6 +148,7 @@ export default function ReviewModal({ id, setShowReviewModal }: ReviewModalProps
                 star: "",
                 textError: ""
             })
+            setShowReviewModal(false)
         }
     }
 

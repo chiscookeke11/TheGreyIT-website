@@ -30,7 +30,7 @@ export const teams: TeamMemberDataType[] = [
   {
     id: 3,
     name: "Chinedu Emmanuel Okeke ",
-    title: "Lead Developer",
+    title: "Lead Software Developer",
     image: "/Team/neduPortrait.jpg",
     socials: {
       linkedIn: "https://www.linkedin.com/in/chinedu-emmanuel-okeke-4080b8292/",
@@ -83,7 +83,7 @@ He is currently pursuing a Bachelor of Science in Chemistry Education (B.Sc.) at
   {
     id: 4,
     name: "Chikamso Fredrick",
-    title: "Developer",
+    title: "Software Developer",
     image: "/Team/Fredrick.JPG",
     socials: {
       linkedIn: "https://www.linkedin.com/in/chikamso-nwoha-143247385/",
@@ -166,7 +166,7 @@ Always eager to grow, Chikamso is steadily expanding his expertise in full-stack
     id: 6,
     name: "Chinaza Kenechukwu",
     title: "Data Analyst",
-    image: "",
+    image: "/Team/chinaza_kenechukwu.jpg",
     socials: {
       linkedIn: "https://www.linkedin.com/in/chinaza-kenechukwu-a58078253/",
       twitter: "",
