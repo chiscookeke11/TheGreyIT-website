@@ -125,7 +125,7 @@ export default function ReviewModal({ id, setShowReviewModal }: ReviewModalProps
 
         const { error } = await supabase.from("userReviews").insert({
             userName: userName,
-            userImage: userImage,
+            userEmail: user?.email,
             review: reviewMessage,
             userRating: rating,
             userReviewDate: new Date().toISOString().split("T")[0],

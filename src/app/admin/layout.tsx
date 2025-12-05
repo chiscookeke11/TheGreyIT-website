@@ -51,7 +51,6 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         .from("admins")
         .select("*")
         .eq("user_id", user.id)
-        .single()
 
       if (error) {
         setIsAdmin(false)

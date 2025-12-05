@@ -19,7 +19,7 @@ export default function Page() {
 
     const fetchCertifiedCourses = async () => {
 
-        const { data, error } = await supabase.from("course").select("*").in("id", certifiedCourses ?? []).single()
+        const { data, error } = await supabase.from("course").select("*").in("id", certifiedCourses ?? [])
 
         if (error) {
             console.error(error)
