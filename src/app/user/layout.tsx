@@ -110,7 +110,7 @@ export default function UserDashboardLayout({ children }: { children: React.Reac
 
     useEffect(() => {
         reloadUserData()
-    }, [])
+    }, [user])
 
 
     // Fetching the data from the db once the user has been loaded

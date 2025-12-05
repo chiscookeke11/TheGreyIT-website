@@ -284,7 +284,7 @@ export default function Page() {
                     <form onSubmit={handleSubmit} className=" w-full h-full bg-[#f2f5fc] flex items-center justify-center flex-col gap-7 px-6 py-10 rounded-lg font-poppins ">
 
                         {/* Image display  */}
-                        <label htmlFor="image" className="w-[90px] h-[90px] bg-[#f2f5fc] rounded-full flex items-center text-center justify-center mr-auto relative " >
+                        <label htmlFor="image" className="w-[90px] h-[90px] bg-[#f2f5fc] rounded-full flex items-center text-center justify-center mr-auto relative border-2 border-gray-700 " >
 
                             {previewUrl ? (
                                 <Image
