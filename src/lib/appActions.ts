@@ -57,7 +57,7 @@ export const fetchUserCertificates = async (certifiedCourses: number[]) => {
     const { data, error } = await supabase
         .from("certificates")
         .select("*")
-        .in("course_id", certifiedCourses);
+        .in("course_id", certifiedCourses).eq("user_id", user?.id);
 
     if (error) {
         console.error("Error fetching certificates:", error);

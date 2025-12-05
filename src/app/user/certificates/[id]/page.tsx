@@ -179,7 +179,7 @@ export default function Page() {
         <div className="flex flex-col items-start w-full gap-10 mt-5  " >
             {showConfetti && !hasDownloaded && <Confetti width={width} height={height} />}
 
-            <h1 className=" text-xl md:text-3xl font-semibold  " > {theCourse?.title} Certifewicate </h1>
+            <h1 className=" text-xl md:text-3xl font-semibold  " > {theCourse?.title} Certificate </h1>
 
 
             <div className="  w-full h-fit flex flex-col lg:flex-row items-center justify-center gap-10  " >
@@ -205,13 +205,13 @@ export default function Page() {
                         <h1 className=" text-gray-700 font-bold text-lg md:text-xl " > Completed by  {user ? user?.user_metadata.first_name + " " + user?.user_metadata.last_name : "-"}   </h1>
 
                         <div className="space-y-1 font-semibold text-base " >
-                            <h3>May =10, 2024</h3>
+                            <h3> {new Date(currentCertificate?.date_of_completion).toLocaleString("en-US", { month: "long" })} {new Date(currentCertificate.date_of_completion).getDate()},  {new Date(currentCertificate?.date_of_completion).getFullYear()}  </h3>
                             <h3>9 hours (approximately)</h3>
                             <h3>Grade Achieved: 85.4%</h3>
                         </div>
 
                         <p >
-                            Chinedu Emmanuel Okeke&apos;s account is verified. Coursera certifies their successful completion of Speaking and Presenting: Conversation Starters
+                             {user ? user?.user_metadata.first_name + " " + user?.user_metadata.last_name : "-"} &apos;s account is verified. TheGreyIt ltd certifies their successful completion of {theCourse?.title}.
                         </p>
 
 

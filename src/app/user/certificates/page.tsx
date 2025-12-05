@@ -19,7 +19,7 @@ export default function Page() {
 
     const fetchCertifiedCourses = async () => {
 
-        const { data, error } = await supabase.from("course").select("*").in("id", certifiedCourses ?? [])
+        const { data, error } = await supabase.from("course").select("*").in("id", certifiedCourses ?? []).single()
 
         if (error) {
             console.error(error)
@@ -89,9 +89,7 @@ export default function Page() {
 
 
                                                 <Link href={`/user/certificates/${certificate.id}`} className="text-blue-700 text-xs font-medium underline hover:no-underline " > View certificate </Link>
-                                                <h4 className=" font-normal text-sm text-gray-600 " >Completed May 2024</h4>
-
-
+                                                <h4 className=" font-normal text-sm text-gray-600 " >Completed {new Date(certificate?.date_of_completion).toLocaleString("en-US", { month: "long" })}  {new Date(certificate?.date_of_completion).getFullYear()} </h4>
 
                                             </div>
                                         </div>
