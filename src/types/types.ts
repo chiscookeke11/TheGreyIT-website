@@ -106,7 +106,9 @@ export interface reviewDataType {
   review: string;
   userRating: number;
   userReviewDate: Date;
-  courseId: number
+  courseId: number;
+  userEmail: string;
+  user_id: string
 }
 
 

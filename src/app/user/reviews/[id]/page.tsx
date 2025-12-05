@@ -69,7 +69,6 @@ export default function Page() {
             }
 
             setCourseReviews(data)
-            console.log(data)
         }
 
         fetchCourseReviews()

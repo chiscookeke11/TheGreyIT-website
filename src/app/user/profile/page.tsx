@@ -4,6 +4,7 @@ import { useAppContext } from "@/context/AppContext"
 import { supabase } from "@/lib/supabaseClient"
 import { User } from "@supabase/supabase-js"
 import { Eye, EyeOff } from "lucide-react"
+import Image from "next/image"
 import React, { useEffect, useState } from "react"
 import toast from "react-hot-toast"
 
@@ -26,21 +27,55 @@ export default function Page() {
     const [showPassword, setShowPassword] = useState(false)
     const [loading, setLoading] = useState(false)
     const email = user?.user_metadata.email
-    const {userData} = useAppContext()
+    const { userData } = useAppContext()
+    const [file, setFile] = useState<File | null>(null)
+    const [previewUrl, setPreviewUrl] = useState<string | null>(null)
+
+
     const [formValues, setFormValues] = useState({
         firstName: "",
         lastName: "",
         phoneNumber: "",
-        referralCode: ""
+        referralCode: "",
+        imageLink: ""
     })
 
 
     const [passwordValues, setPasswordValues] = useState({
         oldPassword: "",
         newPassword: "",
-        confirmNewPassword: ""
+        confirmNewPassword: "",
+        imageLink: ""
     })
 
+
+
+    // Function for uploading image to  supabase storage
+    const uploadImage = async () => {
+        if (!file) return toast.error("Please select an image")
+
+
+        const filename = `${Date.now()}-${file.name}`
+
+        const { error } = await supabase.storage
+            .from("profile_image")
+            .upload(filename, file)
+
+
+        if (error) {
+            console.error("Upload error", error.message)
+            toast.error(`Upload failed: ${error.message}`)
+            return
+        }
+
+        const { data: publicUrl } = supabase.storage
+            .from("profile_image")
+            .getPublicUrl(filename)
+
+
+
+        return publicUrl.publicUrl
+    }
 
 
     // fetch user details
@@ -55,12 +90,13 @@ export default function Page() {
 
             const currentUser = data.user
             setUser(currentUser)
-            setFormValues({
+            setFormValues(prev => ({
+                ...prev,
                 firstName: currentUser?.user_metadata.first_name ?? "",
                 lastName: currentUser?.user_metadata.last_name ?? "",
                 phoneNumber: currentUser?.user_metadata.phoneNumber ?? "",
-                referralCode: userData?.referral_code ?? ""
-            });
+                imageLink: prev.imageLink
+            }));
 
         }
 
@@ -69,12 +105,12 @@ export default function Page() {
         const { data: authListener } = supabase.auth.onAuthStateChange((_event, session) => {
             const currentUser = session?.user ?? null
             setUser(currentUser)
-            setFormValues({
+            setFormValues(prev => ({
+                ...prev,
                 firstName: currentUser?.user_metadata.first_name ?? "",
                 lastName: currentUser?.user_metadata.last_name ?? "",
                 phoneNumber: currentUser?.user_metadata.phoneNumber ?? "",
-                referralCode: userData?.referral_code ?? ""
-            });
+            }));
         })
 
         return () => {
@@ -82,6 +118,16 @@ export default function Page() {
         }
 
     }, [])
+
+
+    useEffect(() => {
+        if (userData) {
+            setFormValues(prev => ({
+                ...prev,
+                referralCode: userData.referral_code ?? ""
+            }));
+        }
+    }, [userData]);
 
 
 
@@ -123,11 +169,14 @@ export default function Page() {
 
         setLoading(true)
 
-        const { data, error } = await supabase.auth.updateUser({
+        const imageUrl = await uploadImage()
+
+        const { error } = await supabase.auth.updateUser({
             data: {
                 first_name: formValues.firstName,
                 last_name: formValues.lastName,
-                phoneNumber: formValues.phoneNumber
+                phoneNumber: formValues.phoneNumber,
+                imageUrl: imageUrl
             }
         })
 
@@ -137,9 +186,22 @@ export default function Page() {
             console.error(error.message)
         }
         else {
-            toast.success("Profile updated successfully")
-            setLoading(false)
+
+            const { error: updateError } = await supabase.from("user_data").update({
+                user_image: imageUrl
+            }).eq("user_id", user?.id)
+
+            if (updateError) {
+                console.error(updateError)
+            }
+
+            else {
+                setLoading(false)
+                toast.success("Profile updated successfully")
+            }
+
         }
+
 
 
 
@@ -170,7 +232,7 @@ export default function Page() {
 
 
         // Next we update the new password
-        const { data, error } = await supabase.auth.updateUser({
+        const { error } = await supabase.auth.updateUser({
             password: passwordValues.newPassword,
         })
 
@@ -220,6 +282,57 @@ export default function Page() {
                 currentTab === "Profile" ? (
 
                     <form onSubmit={handleSubmit} className=" w-full h-full bg-[#f2f5fc] flex items-center justify-center flex-col gap-7 px-6 py-10 rounded-lg font-poppins ">
+
+                        {/* Image display  */}
+                        <label htmlFor="image" className="w-[90px] h-[90px] bg-[#f2f5fc] rounded-full flex items-center text-center justify-center mr-auto relative " >
+
+                            {previewUrl ? (
+                                <Image
+                                    src={previewUrl}
+                                    alt="New preview"
+                                    width={1000}
+                                    height={1000}
+                                    className="w-full h-full z-20 rounded-full object-cover"
+                                />
+                            ) : userData?.user_image ? (
+                                <Image
+                                    src={userData.user_image}
+                                    alt="Profile pic"
+                                    width={1000}
+                                    height={1000}
+                                    className="w-full h-full z-20 rounded-full object-cover"
+                                />
+                            ) : (
+                                <Image
+                                    src="/user/User-icon-vector-16.svg"
+                                    alt="Default"
+                                    width={1000}
+                                    height={1000}
+                                    className="w-[60%] h-[60%] z-20 rounded-full object-contain"
+                                />
+                            )}
+
+
+
+                            {/* image upload input  */}
+                            <input
+                                type="file"
+                                id="image"
+                                accept="image/*"
+                                onChange={(e) => {
+                                    if (e.target.files && e.target.files[0]) {
+                                        const selectedFile = e.target.files[0]
+                                        setFile(selectedFile)
+                                        setPreviewUrl(URL.createObjectURL(selectedFile))
+                                    }
+                                }}
+                                className="absolute top-0 left-0 opacity-0 h-full w-full bg-gray-600 rounded-full file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:text-gray-700 file:bg-white hover:file:bg-gray-300 file:cursor-pointer"
+                            />
+                        </label>
+
+
+
+
 
 
                         <div className="w-full grid-cols-1 grid md:grid-cols-2 gap-8 place-items-center justify-items-center " >
