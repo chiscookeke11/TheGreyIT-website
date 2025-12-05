@@ -26,10 +26,10 @@ export default function ReviewCard({ data }: ReviewCardProps) {
 
 
 
-    // now we fetch the user image using the email
+    // now we fetch the user details using the id
     useEffect(() => {
         const fetchUserImage = async () => {
-            const { data, error } = await supabase.from("user_data").select("user_image").eq("user_id", user_id).single()
+            const { data, error } = await supabase.from("user_data").select("*").eq("user_id", user_id).single()
 
             if (error) {
                 return;
