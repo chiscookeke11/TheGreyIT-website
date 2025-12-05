@@ -50,7 +50,10 @@ export default function SideNav({ setUser, user }: SideNavProps) {
                     onClick={async () => {
                         const { error } = await supabase.auth.signOut()
                         if (error) console.error("Sign-out error:", error.message)
-                        else setUser(null)
+                        else {
+                    setUser(null)
+                localStorage.removeItem("")
+                }
                     }}
                     className={`bg-gray-700 w-full text-white px-5 py-3 lg:text-start rounded-md hover:bg-gray-600 transition-all duration-300 ease-in-out cursor-pointer  block `}
                 >
