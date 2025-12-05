@@ -20,8 +20,8 @@ import { useEffect, useState } from "react"
 const Header = ({ user }: { user: User }) => {
     const { userData, certificatesData } = useAppContext()
 
-    const profilePic = userData?.user_image ? userData.user_image  : user.user_metadata.avatar_url
-console.log(profilePic)
+    const profilePic = userData?.user_image ? userData.user_image : user.user_metadata.avatar_url
+    console.log(profilePic)
     return (
         <header className="w-full flex flex-col md:flex-row items-start md:items-center  justify-between gap-6 px-6 py-10 bg-gray-700 text-white rounded-2xl ">
             <div className="w-fit flex items-center gap-5 " >
@@ -49,7 +49,7 @@ console.log(profilePic)
                     </h2>
                     <div className="flex flex-col md:flex-row  md:items-center  gap-3 text-xs " >
                         <p className=" flex items-center gap-1 "> <BookOpen size={13} /> {userData?.list_enrolled_courses?.length || 0} Course Enrolled</p>
-                        <p className=" flex items-center gap-1 "><Medal size={13} /> {certificatesData?.length} Certificate</p>
+                        <p className=" flex items-center gap-1 "><Medal size={13} /> {certificatesData?.length || 0} Certificate</p>
 
                     </div>
                 </div>
@@ -108,10 +108,13 @@ export default function UserDashboardLayout({ children }: { children: React.Reac
 
 
 
+    useEffect(() => {
+        reloadUserData()
+    }, [])
+
 
     // Fetching the data from the db once the user has been loaded
     useEffect(() => {
-        reloadUserData()
         reloadCertificates()
         reloadTransactions()
     }, [user])

@@ -17,7 +17,7 @@ export default function TransactionsTable() {
                     </div>
                     :
                     transactionData?.length < 1 ?
-                        <div className=" w-full h-[30vh] flex flex-col gap-7 items-center justify-center " >
+                        <div className=" w-full min-h-[30vh] flex flex-col gap-7 items-center justify-center " >
                             <Image src={"/user/not-found-error-alert-svgrepo-com.svg"} alt="icon" height={500} width={500} className=" w-[250px] h-[250px] object-center " />
                             <h3 className="font-semibold text-2xl" >No Transaction found</h3>
                         </div>

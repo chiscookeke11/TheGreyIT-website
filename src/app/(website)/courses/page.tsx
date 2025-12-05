@@ -162,7 +162,7 @@ export default function Page() {
                                             variant="default" className="w-full basis-1/2 !rounded-[100px] !bg-gray-700 !text-white text-sm! !lg:text-sm hover:bg-transparent! hover:text-gray-700! flex items-center gap-3 whitespace-nowrap " >View Curriculum <Download size={15} /> </Button>
                                     </div>
 
-                                    <div className="absolute right-0 top-0 bg-red-600 font-medium text-white py-1 px-3 w-fit text-base rounded-xs  " >
+                                    <div className="absolute right-0 top-0 bg-red-500 font-medium text-white py-1 px-3 w-fit text-base rounded-xs  " >
                                         ₦ {track.price.toLocaleString()}
                                     </div>
                                 </div>
