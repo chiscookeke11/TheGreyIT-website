@@ -94,6 +94,10 @@ export default function Page() {
                     </ul>
                 )}
 
+                {currentMember.motivation && (
+                    <p className="text-base text-gray-600 my-5 whitespace-pre-line " ><strong className="text-black" >Motivation:</strong> {currentMember.motivation} </p>
+                )}
+
 
 
                 <div className="w-fit flex items-center gap-3" >

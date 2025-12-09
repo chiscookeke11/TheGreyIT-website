@@ -18,12 +18,34 @@ export const teams: TeamMemberDataType[] = [
     id: 2,
     name: "Ezekwueme Augustine,",
     title: "Co-founder & Operations Manager",
-    image: "",
+    image: "/Team/Austin_Portrait.jpg",
     socials: {
       linkedIn: "https://www.linkedin.com/in/ezekwueme-augustine-aislt-8abb97252/",
-      twitter: ""
+      twitter: "https://x.com/AustinEze19"
     },
-    description: ""
+    description: `
+Ezekwueme Augustine E. is the Co-Founder and Operations Manager at TheGreyIT, where he leads cybersecurity strategy, mobile application development, and hardware/electronics innovation. A certified cybersecurity professional, he specialises in penetration testing, asset security, and threat-intelligence modelling. His multidisciplinary background enables him to merge advanced security practices with practical engineering solutions, strengthening TheGreyIT’s ability to deliver secure, scalable, and future-ready digital systems. Augustine also contributes to research, training, and digital capability development across the organisation.
+
+Augustine is a certified Associate of the Institute of Science Laboratory Technology (AISLT) with a strong academic foundation in Physics and Electronics from the University of Nigeria, Nsukka. His training covers electronic instrumentation, semiconductor technology, thin-film systems, material characterisation, and applied physics. Through continuous professional development, he has expanded into cybersecurity, machine learning (ML), large language models (LLMs), and Internet of Things (IoT) systems allowing him to apply scientific, analytical, and technological skills to modern digital challenges.
+
+Augustine has built his career as a technologist, researcher, instructor, and cybersecurity engineer, contributing to Nigeria’s evolving digital innovation ecosystem. His published research on cybersecurity and digital sovereignty reflects his commitment to national security, governance, and digital transformation in West Africa.
+    `,
+    coreSkills: [
+      "Penetration testing (pentesting)",
+      "Threat-intelligence modelling",
+      "Asset and network security",
+      "Mobile app development",
+      "Electronics and hardware systems",
+      "IoT development",
+      "Digital forensics and incident analysis",
+    ],
+
+    tools: [
+      "Cybersecurity Tools: Kali Linux, Ubuntu, Wireshark, Metasploit, Nmap, Burp Suite, GoPhish, Nikto, Snort, OWASP ZAP, SQLMap, GHIDRA, DeHashed, CyberChef, Aircrack-ng, OpenVAS, REMnux, OSSEC, ROAR, Suricata, pfSense, Wazuh SIEM, Autopsy Forensics, Nessus, Splunk. ",
+      "Development & Engineering Tools: Flutter, Visual Studio Code, Android Studio, Firebase, GitHub, Docker, Postman, REST API tools, MATLAB, Python, ESP32/NodeMCU, HTML/CSS/Java frameworks, virtualization platforms, and network administration utilities."
+    ],
+
+motivation: "To advance digital technology in Nigeria and globally, ensuring that the digital environment remains safe, secure, and accessible for all users."
   },
 
 
