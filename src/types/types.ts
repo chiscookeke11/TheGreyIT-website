@@ -136,6 +136,6 @@ export interface TeamMemberDataType {
   description: string;
   coreSkills?: string[];
   tools?: string[];
-  certifications?: string[]
-
+  certifications?: string[];
+  motivation?: string
 }

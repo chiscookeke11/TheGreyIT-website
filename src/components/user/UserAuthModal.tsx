@@ -83,26 +83,6 @@ export default function UserAuthModal() {
 
 
 
-    // google social login function
-    const handleGoogleLogin = async () => {
-
-        setLoading(true)
-
-        const { error, data } = await supabase.auth.signInWithOAuth({
-            provider: "google",
-            options: {
-                redirectTo: `${window.location.origin}/user`
-            }
-        });
-
-
-        if (error) console.error("Google login failed:", error.message)
-
-        setLoading(false)
-        console.log(data)
-    }
-
-
 
     // sign up function
     const handleSignup = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -139,7 +119,6 @@ export default function UserAuthModal() {
             setLoading(false)
         }
         else {
-            router.push(`/verify_email?email=${formValues.email}`)
             setLoading(false)
             setFormValues({
                 email: "",
@@ -162,7 +141,7 @@ export default function UserAuthModal() {
                 console.error("Error creating user data", error)
             }
             else {
-                toast.success("USer data created ")
+                    router.push(`/verify_email?email=${formValues.email}`)
             }
         }
     }
