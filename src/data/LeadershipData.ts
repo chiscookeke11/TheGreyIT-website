@@ -45,7 +45,7 @@ Augustine has built his career as a technologist, researcher, instructor, and cy
       "Development & Engineering Tools: Flutter, Visual Studio Code, Android Studio, Firebase, GitHub, Docker, Postman, REST API tools, MATLAB, Python, ESP32/NodeMCU, HTML/CSS/Java frameworks, virtualization platforms, and network administration utilities."
     ],
 
-motivation: "To advance digital technology in Nigeria and globally, ensuring that the digital environment remains safe, secure, and accessible for all users."
+    motivation: "To advance digital technology in Nigeria and globally, ensuring that the digital environment remains safe, secure, and accessible for all users."
   },
 
 
@@ -146,7 +146,7 @@ Always eager to grow, Chikamso is steadily expanding his expertise in full-stack
   {
     id: 5,
     name: "Mbaeze Olivia Chimuanya",
-    title: "Office Assistant",
+    title: "Writer",
     image: "/Team/olivia.jpg",
     socials: {
       linkedIn: "http://linkedin.com/in/mbaeze-olivia-b57188385",
