@@ -11,16 +11,16 @@ interface RecentBlogCardProps {
 
 export default function RecentBlogCard({ data }: RecentBlogCardProps) {
     return (
-        <Link href={`/research-blog/${data.slug}`} className="w-full h-full max-w-xs  md:max-w-none min-h-[300px] flex flex-col items-center justify-between font-poppins " >
+        <Link href={`/research-blog/${encodeURIComponent(data.slug)}`} className="w-full h-full max-w-xs  md:max-w-none  flex flex-col items-center  font-poppins " >
 
 
-            <div className=" w-full bg-gray-300 h-full " >
+            <div className=" w-full bg-gray-300 h-[200px]  " >
                 <Image src={data.image} alt="image" height={500} width={500} className="object-cover object-center h-full w-full " />
             </div>
 
             <div className=" w-full flex flex-col items-center gap-3   py-2 text-center  " >
 
-                <h1 className="font-syne font-semibold text-xl " >{data.title} </h1>
+                <h1 className="font-syne font-semibold text-base " >{data.title} </h1>
                 <div dangerouslySetInnerHTML= {{__html:  data.content.trim().slice(0, 60) + "..."}} className="flex items-center gap-1 text-sm font-normal "  />
                 <div className="flex items-center gap-1 text-xs font-normal " ><p>By {data.author}</p> <span className="bg-gray-300 block h-5 w-[1px] mx-2 " /> <p>{new Date(data.publicationDate).toLocaleDateString()} </p></div>
             </div>

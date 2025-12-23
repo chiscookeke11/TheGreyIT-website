@@ -3,17 +3,23 @@
 import Spinner from "@/components/UI/Spinner"
 import { supabase } from "@/lib/supabaseClient"
 import { ResearchBlogType } from "@/types/types"
-import { useParams } from "next/navigation"
-import { useEffect, useState } from "react"
+import React, { useEffect, useState } from "react"
 
 
 
-export default function Page() {
 
-    const { slug } = useParams()
+
+interface PageProps {
+    params: Promise<{
+        slug: string
+    }>
+}
+
+
+export default function Page({ params }: PageProps) {
+
+    const { slug } = React.use(params)
     const [currentBlog, setCurrentBlog] = useState<ResearchBlogType | null>(null)
-
-
 
 
 

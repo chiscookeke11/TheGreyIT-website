@@ -2,39 +2,41 @@
 
 import RecentBlogCard from "./RecentBlogCard"
 import { useEffect, useRef, useState } from "react"
-import { useInView } from "framer-motion"
+// import { useInView } from "framer-motion"
 import { ResearchBlogType } from "@/types/types"
 import Spinner from "../UI/Spinner"
 import { supabase } from "@/lib/supabaseClient"
 
 export default function AllBlogs() {
   const ref = useRef(null)
-  const isInView = useInView(ref)
-  const [blogs, setBlogs] = useState<ResearchBlogType[]>([])
+  // const isInView = useInView(ref)
+  const [blogs, setBlogs] = useState<ResearchBlogType[] | null>(null)
   const [loading, setLoading] = useState(false)
 
 
 
-  const fetchBlogs = async () => {
 
-        setLoading(true)
-        const { data, error } = await supabase.from("blog").select("*")
+  // Fetch blogs whenever page changes
+  useEffect(() => {
 
-        if (error) {
-            setLoading(false)
-        }
-        else if (data) {
-            setBlogs(data)
-            setLoading(false)
-        }
+    const fetchBlogs = async () => {
+
+      const { data, error } = await supabase.from("blog").select("*")
+
+      if (error) {
+        setLoading(false)
+        console.error("Error fetching all blogs:", error)
+      }
+      else if (data) {
+        setBlogs(data)
+        console.log(data)
+      }
     }
 
 
 
-    // Fetch blogs whenever page changes
-    useEffect(() => {
-        fetchBlogs()
-    }, [])
+    fetchBlogs()
+  }, [])
 
 
 
@@ -44,7 +46,7 @@ export default function AllBlogs() {
         All Blogs
       </h5>
 
-      {blogs.length === 0 && loading ? (
+      {!blogs ? (
         <Spinner />
       ) : blogs.length < 1 ? (
         "No blogs available"
@@ -56,7 +58,6 @@ export default function AllBlogs() {
         </div>
       )}
 
-      {loading && <Spinner />}
 
       <div ref={ref} className="w-10 h-10 absolute right-0 bottom-0" />
     </section>

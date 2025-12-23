@@ -128,22 +128,23 @@ export default function Page() {
 
 
 
-                            <div key={index} className="w-full bg-gray-200 flex flex-col items-start gap-4 group  " >
-                                <Image src={blog.image} alt={`${blog.title}-img`} height={500} width={500} className="flex-1 object-center object-cover  " />
+                            <div key={index} className="w-full h-full  bg-gray-200 flex flex-col items-start gap-3 group  " >
+                                <Image src={blog.image} alt={`${blog.title}-img`} height={500} width={500} className=" object-center object-cover h-[250px]  " />
                                 <div className="w-full flex flex-col items-center justify-center gap-4 text-center py-5 px-3 " >
-                                    <h4 className="font-syne font-semibold text-xl "> {blog.title} </h4>
+                                    <h4 className="font-syne font-semibold text-base "> {blog.title} </h4>
+                                    <p className="text-xs text-gray-600">Slug: {blog.slug ?? "—"}</p>
                                     <div dangerouslySetInnerHTML={{ __html: blog.content.trim().slice(0, 60) + "..." }} className="flex items-center gap-1 text-sm font-normal " />
                                     <div className="flex items-center gap-1 text-xs font-normal " ><p>By {blog.author}</p> <span className="bg-gray-300 block h-5 w-[1px] mx-2 " /> <p>{new Date(blog.publicationDate).toLocaleDateString()} </p></div>
                                 </div>
 
-                                <div className="h-0 overflow-hidden  bg-white w-full px-4  flex items-center justify-center gap-3 group-hover:h-fit group-hover:py-4 transition-all duration-300 ease-in-out " >
+                                <div className=" w-full px-4  flex items-center justify-center gap-3  mt-auto mb-4 " >
                                     <button onClick={() => {
                                         setOpenConfirmationModal(true)
                                         setCurrentId(blog.id)
                                     }}
                                         className=" bg-gray-400 hover:bg-gray-700 hover:text-gray-200 transition-all ease-in-out duration-300 p-2 cursor-pointer rounded-sm text-white " ><Trash /></button>
 
-                                    <Link href={`/admin/blog/${blog.id}`} className=" bg-gray-400 hover:bg-gray-700 hover:text-gray-200 transition-all ease-in-out duration-300 p-2 cursor-pointer rounded-sm text-white " ><Fullscreen /> </Link>
+                                    <Link href={`/admin/blog/${encodeURIComponent(blog.slug)}`} className=" bg-gray-400 hover:bg-gray-700 hover:text-gray-200 transition-all ease-in-out duration-300 p-2 cursor-pointer rounded-sm text-white " ><Fullscreen /> </Link>
                                 </div>
                             </div>
 

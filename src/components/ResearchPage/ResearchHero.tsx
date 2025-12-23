@@ -8,10 +8,7 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 import { Autoplay } from 'swiper/modules';
 import Spinner from "../UI/Spinner";
-
-
-
-
+import { supabase } from "@/lib/supabaseClient";
 
 
 
@@ -21,11 +18,26 @@ export default function ResearchHero() {
     const [trendingBlog, setTrendingBlog] = useState<null | ResearchBlogType[]>(null)
 
 
-    useEffect(() => {
-        fetch("/api/blogs")
-            .then((res) => res.json())
-            .then((data) => setTrendingBlog(data))
-    }, [])
+
+     useEffect(() => {
+
+            const fetchRecentBlogs = async () => {
+
+                const { data, error } = await supabase.from("blog").select("*").order("publicationDate", { ascending: false }).limit(4)
+
+                if (error) {
+                    console.error("Error fetching recent blogs:", error)
+                }
+                else if (data) {
+                    setTrendingBlog(data)
+                    console.log(data)
+                }
+
+            }
+
+            fetchRecentBlogs()
+
+        }, [])
 
     return (
         <section className="w-full flex items-center justify-center flex-col gap-10   mx-auto mt-7 md:mt-5 md:gap-5  px-[4%] py-10 bg-[#f2f5fc] " >
