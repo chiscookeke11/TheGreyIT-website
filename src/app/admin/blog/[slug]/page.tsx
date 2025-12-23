@@ -13,7 +13,7 @@ import { useEffect, useState } from "react"
 
 export default function Page() {
 
-    const { id } = useParams()
+    const { slug } = useParams()
     const [currentBlog, setCurrentBlog] = useState<ResearchBlogType | null>(null)
 
 
@@ -21,12 +21,12 @@ export default function Page() {
 
 
     useEffect(() => {
-        if (!id) return;
+        if (!slug) return;
 
 
         const fetchBlog = async () => {
             try {
-                const res = await fetch(`/api/blogs/${id}`);
+                const res = await fetch(`/api/blogs/${slug}`);
                 if (!res.ok) throw new Error("Failed to fetch blog")
 
                 const data = await res.json();
@@ -37,7 +37,7 @@ export default function Page() {
             }
         }
         fetchBlog()
-    }, [id])
+    }, [slug])
 
 
 

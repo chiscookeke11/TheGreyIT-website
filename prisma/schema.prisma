@@ -352,6 +352,7 @@ model blog {
   author          String
   content         String
   image           String
+  slug            String   @unique
   createdAt       DateTime @default(now())
   publicationDate String?
 

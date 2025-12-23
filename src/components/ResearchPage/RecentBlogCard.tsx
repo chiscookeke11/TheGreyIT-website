@@ -11,7 +11,7 @@ interface RecentBlogCardProps {
 
 export default function RecentBlogCard({ data }: RecentBlogCardProps) {
     return (
-        <Link href={`/research-blog/${data.id}`} className="w-full h-full max-w-xs  md:max-w-none min-h-[300px] flex flex-col items-center justify-between font-poppins " >
+        <Link href={`/research-blog/${data.slug}`} className="w-full h-full max-w-xs  md:max-w-none min-h-[300px] flex flex-col items-center justify-between font-poppins " >
 
 
             <div className=" w-full bg-gray-300 h-full " >

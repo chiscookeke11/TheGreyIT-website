@@ -65,8 +65,6 @@ export default function ContactForm({ showForm, setShowForm, subject }: ContactF
     }
 
 
-    console.log(formValues)
-
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
 
