@@ -4,16 +4,35 @@ import RecentBlogCard from "./RecentBlogCard";
 import { useEffect, useState } from "react";
 import { ResearchBlogType } from "@/types/types";
 import Spinner from "../UI/Spinner";
+import { supabase } from "@/lib/supabaseClient";
 
 
 
 export default function RecentBlogs() {
     const [recentBlogsData, setRecentBlogsData] = useState<null | ResearchBlogType[]>(null)
 
+
+
+
     useEffect(() => {
-        fetch("/api/blogs/recent")
-            .then((res) => res.json())
-            .then((data) => setRecentBlogsData(data))
+
+        const fetchRecentBlogs = async () => {
+
+            const { data, error } = await supabase.from("blog").select("*").order("publicationDate", { ascending: false }).limit(4)
+
+            if (error) {
+                console.error("Error fetching recent blogs:", error)
+                setRecentBlogsData([])
+            }
+            else if (data) {
+                setRecentBlogsData(data)
+                console.log(data)
+            }
+
+        }
+
+        fetchRecentBlogs()
+
     }, [])
 
 

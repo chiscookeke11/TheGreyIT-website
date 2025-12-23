@@ -5,36 +5,43 @@
 "use client"
 
 import Spinner from "@/components/UI/Spinner"
+import { supabase } from "@/lib/supabaseClient"
 import { ResearchBlogType } from "@/types/types"
-import { useParams } from "next/navigation"
-import { useEffect, useState } from "react"
+import React, { useEffect, useState } from "react"
 
+interface PageProps {
+    params: Promise<{
+        slug: string
+    }>
+}
 
+export default function Page({ params }: PageProps) {
 
-export default function Page() {
-
-    const { slug } = useParams()
+    const { slug } = React.use(params)
     const [currentBlog, setCurrentBlog] = useState<ResearchBlogType | null>(null)
-
-
 
 
 
     useEffect(() => {
         if (!slug) return;
-
+        if (Array.isArray(slug)) return;
 
         const fetchBlog = async () => {
-            try {
-                const res = await fetch(`/api/blogs/${slug}`);
-                if (!res.ok) throw new Error("Failed to fetch blog")
+            const trimmedSlug = slug.trim()
 
-                const data = await res.json();
-                setCurrentBlog(data)
 
-            } catch (error) {
-                console.error(error)
+            const { data, error } = await supabase.from("blog").select("*").eq("slug", trimmedSlug).maybeSingle()
+            console.log(slug)
+            if (error) {
+                console.error("Failed to fetch", error)
+                return;
             }
+
+            if (!data) {
+                console.log("No blog found for this slug");
+                return;
+            }
+            setCurrentBlog(data)
         }
         fetchBlog()
     }, [slug])
