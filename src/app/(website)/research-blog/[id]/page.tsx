@@ -1,6 +1,7 @@
 "use client"
 
 import Spinner from "@/components/UI/Spinner"
+import { supabase } from "@/lib/supabaseClient"
 import { ResearchBlogType } from "@/types/types"
 import { useParams } from "next/navigation"
 import { useEffect, useState } from "react"
@@ -9,7 +10,7 @@ import { useEffect, useState } from "react"
 
 export default function Page() {
 
-    const { id } = useParams()
+    const { slug } = useParams()
     const [currentBlog, setCurrentBlog] = useState<ResearchBlogType | null>(null)
 
 
@@ -17,23 +18,33 @@ export default function Page() {
 
 
     useEffect(() => {
-        if (!id) return;
+        if (!slug) return;
+        if (Array.isArray(slug)) return;
+
+
 
 
         const fetchBlog = async () => {
-            try {
-                const res = await fetch(`/api/blogs/${id}`);
-                if (!res.ok) throw new Error("Failed to fetch blog")
+            const trimmedSlug = slug.trim()
 
-                const data = await res.json();
-                setCurrentBlog(data)
 
-            } catch (error) {
-                console.error(error)
+            const { data, error } = await supabase.from("blog").select("*").eq("slug", trimmedSlug).maybeSingle()
+            console.log(slug)
+            if (error) {
+                console.error("Failed to fetch", error)
+                return;
             }
+
+            if (!data) {
+                console.log("No blog found for this slug");
+                return;
+            }
+
+            setCurrentBlog(data)
         }
+
         fetchBlog()
-    }, [id])
+    }, [slug])
 
 
 
@@ -63,7 +74,7 @@ export default function Page() {
                         </section>
 
 
-                        <div className="w-full py-16 px-[5%]  font-poppins font-medium text-lg bg-[#f2f5fc]  " dangerouslySetInnerHTML={{ __html: currentBlog.content }} />
+                        <div className="w-full py-16 px-[5%] md:px-[7%] lg:px-[15%]  font-poppins font-medium text-base bg-[#f2f5fc]  " dangerouslySetInnerHTML={{ __html: currentBlog.content }} />
 
 
 

@@ -42,7 +42,6 @@ export default function Page() {
     }
 
 
-    console.log("The form values", formValues)
 
 
     // Function for uploading image to  supabase storage
@@ -74,19 +73,19 @@ export default function Page() {
 
 
     // function that convert input date to "YYYY-MM-DD HH:MM:SS"
-    const formatDate = (dateString: string) => {
-        const dateObj = new Date(dateString);
+    // const formatDate = (dateString: string) => {
+    //     const dateObj = new Date(dateString);
 
-        const yyyy = dateObj.getFullYear()
-        const mm = String(dateObj.getMonth() + 1).padStart(2, "0");
-        const dd = String(dateObj.getDate()).padStart(2, "0")
-        const hh = "12"
-        const min = "00"
-        const ss = "00"
+    //     const yyyy = dateObj.getFullYear()
+    //     const mm = String(dateObj.getMonth() + 1).padStart(2, "0");
+    //     const dd = String(dateObj.getDate()).padStart(2, "0")
+    //     const hh = "12"
+    //     const min = "00"
+    //     const ss = "00"
 
 
-        return `${yyyy}-${mm}-${dd} ${hh}:${min}:${ss}`
-    }
+    //     return `${yyyy}-${mm}-${dd} ${hh}:${min}:${ss}`
+    // }
 
 
 
@@ -108,26 +107,28 @@ export default function Page() {
 
         setLoading(true)
 
-        const formattedDate = formatDate(formValues.publicationDate)
+
         const imageUrl = await uploadImage()
 
-        const payload = {
-            ...formValues,
-            publicationDate: formattedDate,
-            image: imageUrl || ""
-        }
+        const { data: { session }, error: sessionError } = await supabase.auth.getSession();
+if (sessionError) throw sessionError;
+
+console.log(session?.user.id);
+
 
         const { error } = await supabase.from("blog").insert({
             title: formValues.title,
             author: formValues.author,
             content: formValues.content,
             image: imageUrl || "",
-            publicationDate: formValues.publicationDate
+            publicationDate: formValues.publicationDate,
+            slug: formValues.title.toLowerCase().replace(/\s+/g, '-').replace(/[^\w-]/g, ''),
         })
 
         if (error) {
-            console.error("Failed to upload blog")
+            console.error("Failed to upload blog", error)
             toast.error("Failed to upload blog")
+            setLoading(false)
             return;
         }
 
