@@ -90,13 +90,13 @@ export default function Page() {
                 onSubmit={sendResetLink}
                 className="w-full max-w-2xl bg-white flex items-center justify-center flex-col gap-2 px-6 py-10 rounded-lg font-poppins"
             >
-                <h1 className="text-gray-700 font-bold text-2xl md:text-4xl mb-5">
+                <h1 className="text-gray-700 font-bold text-xl md:text-3xl mb-5">
                     Enter Your Email
                 </h1>
 
                 {/* Email input */}
                 <label htmlFor="email" className="w-full flex flex-col items-start gap-1 ">
-                    <span className="text-xl font-medium">Email</span>
+                    <span className="text-base font-medium">Email</span>
                     <input
                         type="email"
                         id="email"
@@ -104,7 +104,7 @@ export default function Page() {
                         onChange={(e) => setEmail(e.target.value)}
                         value={email}
                         placeholder="JohnDoe@gmail.com"
-                        className="w-full py-4 px-5 border border-gray-700 outline-none focus:outline-none text-base rounded-sm"
+                        className="w-full py-3 px-5 border border-gray-700 outline-none focus:outline-none text-sm rounded-sm"
                     />
                 </label>
 
