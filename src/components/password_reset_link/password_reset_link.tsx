@@ -52,7 +52,7 @@ export default function PasswordResetLink() {
                     Please check your inbox and follow the instructions to create a new password. </p>
 
 
-                <hr className=" w-[15%] border border-gray-500 my-8 " />
+                <hr className=" w-[55%] border border-gray-500 my-8 " />
 
 
 

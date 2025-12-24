@@ -12,7 +12,7 @@ import toast from "react-hot-toast";
 
 const Spinner = () => {
     return (
-        <div className="h-10 w-10 rounded-full border-4 border-gray-700 border-t-transparent animate-spin duration-150 ease-in-out transition-all " />
+        <div className="h-10 w-10 rounded-full border-4 border-white border-t-transparent animate-spin duration-150 ease-in-out transition-all group-hover:border-gray-700 group-hover:border-t-transparent " />
     )
 }
 
@@ -141,7 +141,7 @@ export default function UserAuthModal() {
                 console.error("Error creating user data", error)
             }
             else {
-                    router.push(`/verify_email?email=${formValues.email}`)
+                router.push(`/verify_email?email=${formValues.email}`)
             }
         }
     }
@@ -194,8 +194,8 @@ export default function UserAuthModal() {
 
 
     return (
-        <form onSubmit={authState === "Sign Up" ? handleSignup : handleSignIn} className=" w-full max-w-2xl bg-white flex items-center justify-center flex-col gap-7 px-6 py-10 rounded-lg font-poppins " >
-            <h1 className="text-gray-700 font-bold font-poppins text-2xl md:text-4xl  " >{authState === "Sign In" ? "Sign In" : "Sign Up"} </h1>
+        <form onSubmit={authState === "Sign Up" ? handleSignup : handleSignIn} className=" w-full  h-full max-w-2xl bg-white flex items-center justify-center flex-col gap-7 px-8 py-4 rounded-lg font-poppins " >
+            <h1 className="text-gray-700 font-bold font-poppins text-xl md:text-3xl  " >{authState === "Sign In" ? "Sign In" : "Create an Account"} </h1>
 
             <div className="w-full flex flex-col gap-6 items-center justify-center " >
 
@@ -206,65 +206,69 @@ export default function UserAuthModal() {
 
                         {/* first name */}
                         <label htmlFor="firstName" className=" w-full flex flex-col items-start gap-1  " >
-                            <span className="text-xl font-medium " >First Name</span>
-                            <input type="text" id="firstName" name="firstName" onChange={handleChange} value={formValues.firstName} placeholder="John" className="w-full py-4 px-5 border border-gray-700 outline-none focus:outline-none text-base rounded-sm " />
+                            <span className="text-base font-medium " >First Name</span>
+                            <input type="text" id="firstName" name="firstName" onChange={handleChange} value={formValues.firstName} placeholder="John" className="w-full py-3 px-5 border border-gray-700 outline-none focus:outline-none text-sm rounded-sm " />
                         </label>
 
                         {/* last name  */}
                         <label htmlFor="lastName" className=" w-full flex flex-col items-start gap-1  " >
-                            <span className="text-xl font-medium " >Last Name</span>
-                            <input type="text" id="lastName" name="lastName" onChange={handleChange} value={formValues.lastName} placeholder="Doe" className="w-full py-4 px-5 border border-gray-700 outline-none focus:outline-none text-base rounded-sm " />
+                            <span className="text-base font-medium " >Last Name</span>
+                            <input type="text" id="lastName" name="lastName" onChange={handleChange} value={formValues.lastName} placeholder="Doe" className="w-full py-3 px-5 border border-gray-700 outline-none focus:outline-none text-sm rounded-sm" />
                         </label>
                     </div>
                 ) : null}
 
 
 
-
-                {/* Email input */}
-                <label htmlFor="Email" className=" w-full flex flex-col items-start gap-1  " >
-                    <span className="text-xl font-medium " >Email</span>
-                    <input type="email" id="email" name="email" onChange={handleChange} value={formValues.email} placeholder="JohnDoe@gmail.com" className="w-full py-4 px-5 border border-gray-700 outline-none focus:outline-none text-base rounded-sm " />
-                </label>
-
-
-
-                {/* Phone number */}
-                {authState === "Sign Up" ? (
-                    <label htmlFor="phoneNumber" className=" w-full flex flex-col items-start gap-1  " >
-                        <span className="text-lg font-medium " >Phone Number</span>
-                        <input
-                            type="tel"
-                            id="phoneNumber"
-                            name="phoneNumber"
-                            value={formValues.phoneNumber}
-                            onChange={handleChange}
-                            className="w-full py-4 px-5 border border-gray-700 outline-none focus:outline-none text-base rounded-sm " />
-                    </label>)
-                    : null
-                }
+                <div className="w-full flex flex-row items-center justify-between gap-5" >
+                    {/* Email input */}
+                    <label htmlFor="Email" className=" w-full flex flex-col items-start gap-1  " >
+                        <span className="text-base font-medium " >Email</span>
+                        <input type="email" id="email" name="email" onChange={handleChange} value={formValues.email} placeholder="JohnDoe@gmail.com" className="w-full py-3 px-5 border border-gray-700 outline-none focus:outline-none text-sm rounded-sm" />
+                    </label>
 
 
 
-                {/* Password Input  */}
-                <label htmlFor="password" className=" w-full flex flex-col items-start gap-1  " >
-                    <span className="text-xl font-medium " >Password</span>
-                    <div className=" w-full flex gap-1 rounded-sm  py-4 px-5 border border-gray-700" >
-                        <input type={showPassword ? "text" : "password"} id="password" name="password" onChange={handleChange} value={formValues.password} placeholder="Enter Password" className="w-full  outline-none focus:outline-none text-base  " />
-                        <button type="button" className="cursor-pointer" onClick={() => setShowPassword((prev) => !prev)} > {showPassword ? <EyeOff /> : <Eye />} </button>
-                    </div>
-                </label>
+                    {/* Phone number */}
+                    {authState === "Sign Up" ? (
+                        <label htmlFor="phoneNumber" className=" w-full flex flex-col items-start gap-1  " >
+                            <span className="text-base font-medium " >Phone Number</span>
+                            <input
+                                type="tel"
+                                id="phoneNumber"
+                                name="phoneNumber"
+                                value={formValues.phoneNumber}
+                                onChange={handleChange}
+                                className="w-full py-3 px-5 border border-gray-700 outline-none focus:outline-none text-sm rounded-sm " />
+                        </label>)
+                        : null
+                    }
+                </div>
 
 
-                {/* confirm password Input  */}
-                {authState === "Sign Up" ? (
-                    <label htmlFor="confirmPassword" className=" w-full flex flex-col items-start gap-1  " >
-                        <span className="text-xl font-medium " >Confirm Password</span>
-                        <div className=" w-full flex gap-1 rounded-sm  py-4 px-5 border border-gray-700" >
-                            <input type={showPassword ? "text" : "password"} id="confirmPassword" name="confirmPassword" onChange={handleChange} value={formValues.confirmPassword} placeholder="Enter Password" className="w-full  outline-none focus:outline-none text-base  " />
+
+                <div className="w-full flex flex-row items-center justify-between gap-5" >
+                    {/* Password Input  */}
+                    <label htmlFor="password" className=" w-full flex flex-col items-start gap-1  " >
+                        <span className="text-base font-medium " >Password</span>
+                        <div className=" w-full flex gap-1 rounded-sm  py-3 px-5 border border-gray-700" >
+                            <input type={showPassword ? "text" : "password"} id="password" name="password" onChange={handleChange} value={formValues.password} placeholder="Enter Password" className="w-full  outline-none focus:outline-none text-sm  " />
+                            <button type="button" className="cursor-pointer" onClick={() => setShowPassword((prev) => !prev)} > {showPassword ? <EyeOff size={20} /> : <Eye size={20} />} </button>
                         </div>
                     </label>
-                ) : null}
+
+
+                    {/* confirm password Input  */}
+                    {authState === "Sign Up" ? (
+                        <label htmlFor="confirmPassword" className=" w-full flex flex-col items-start gap-1  " >
+                            <span className="text-base font-medium " >Confirm Password</span>
+                            <div className=" w-full flex gap-1 rounded-sm  py-3 px-5 border border-gray-700" >
+                                <input type={showPassword ? "text" : "password"} id="confirmPassword" name="confirmPassword" onChange={handleChange} value={formValues.confirmPassword} placeholder="Enter Password" className="w-full  outline-none focus:outline-none text-sm  " />
+                            </div>
+                        </label>
+                    ) : null}
+
+                </div>
 
                 <Link href={"/reset-password"} className="ml-auto text-gray-700 text-sm font-medium outline-none " > Forgot Password? </Link>
 
@@ -272,17 +276,13 @@ export default function UserAuthModal() {
 
             </div>
 
-            <button disabled={loading} className="font-syne bg-gray-700 w-full max-w-xs text-white hover:bg-transparent hover:text-gray-700 mb-5  px-6 py-3  flex items-center justify-center font-medium  focus:outline-none cursor-pointer text-base md:text-lg  border-[1px]  transition-all duration-300 ease-in-out border-gray-700 rounded-sm  " > {loading ? <Spinner /> : authState === "Sign In" ? "Sign In" : "Create Account"} </button>
+            <button disabled={loading} className="font-syne bg-gray-700 w-full max-w-xs text-white hover:bg-transparent hover:text-gray-700 mb-5  px-6 py-3  flex items-center justify-center font-medium  focus:outline-none cursor-pointer text-base md:text-lg  border-[1px]  transition-all duration-300 ease-in-out border-gray-700 rounded-sm group  " > {loading ? <Spinner  /> : authState === "Sign In" ? "Sign In" : "Create Account"} </button>
 
 
             {authState === "Sign In" ? <p className=" text-base font-medium text-black text-center " >Don&apos;t have an account? <button className=" text-gray-700 font-medium cursor-pointer outline-none border-none" type="button" onClick={() => setAuthState("Sign Up")}> Create Account</button></p> : (
                 <p className=" text-base font-medium text-black text-center " >Already have an account? <button type="button" className=" text-gray-700 font-medium cursor-pointer outline-none border-none " onClick={() => setAuthState("Sign In")}> Sign In</button></p>
             )}
 
-
-            {/* <div className=" flex items-center justify-center gap-3 " >
-                <button disabled={loading} type="button" onClick={handleGoogleLogin} aria-label="Login with google" className="cursor-pointer p-2 rounded-full h-10 w-10 overflow-hidden flex items-center justify-center " ><Image src={"/logos/google-logo.png"} alt="google logo" height={50} width={50} className="h-full w-full " /></button>
-            </div> */}
         </form>
     )
 }

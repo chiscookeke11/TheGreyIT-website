@@ -21,7 +21,7 @@ const Header = ({ user }: { user: User }) => {
     const { userData, certificatesData } = useAppContext()
 
     const profilePic = userData?.user_image ? userData.user_image : user.user_metadata.avatar_url
-    console.log(profilePic)
+
     return (
         <header className="w-full flex flex-col md:flex-row items-start md:items-center  justify-between gap-6 px-6 py-10 bg-gray-700 text-white rounded-2xl ">
             <div className="w-fit flex items-center gap-5 " >
@@ -138,8 +138,10 @@ export default function UserDashboardLayout({ children }: { children: React.Reac
 
 
     // show login modal if user is not logged in
-    if (!user) {
-        return <main className="w-full min-h-screen flex items-center justify-center py-4 px-6 bg-[#f2f5fc]" ><UserAuthModal /></main>
+    if (!user) {return <main className="w-full h-screen flex items-center justify-center bg-[#f2f5fc]" >
+            <Image src={"/user/auth-image.jpg"} alt="Image" height={1000} width={1000} className="w-full h-full object-center object-cover flex-1 " />
+            <UserAuthModal />
+            </main>
     }
 
 

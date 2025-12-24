@@ -22,11 +22,13 @@ export default function Page() {
     const [loading, setLoading] = useState(true)
     const { id } = useParams()
     const [currentCertificate, setCurrentCertificate] = useState<CertificatesDataType | null>(null)
-    const { certificatesData, allCoursesData } = useAppContext()
+    const { certificatesData, allCoursesData, userData } = useAppContext()
     const [theCourse, setTheCourse] = useState<CourseDataTypes | null>(null);
     const [showConfetti, setShowConfetti] = useState(true)
     const [width, height] = useWindowSize();
     const [hasDownloaded, setHasDownloaded] = useState<boolean | null>(false)
+    const [isDownloading, setIsDownloading] = useState(false)
+    const profilePic = userData?.user_image ? userData.user_image : user?.user_metadata.avatar_url
 
 
     // Fetching the user details
@@ -111,17 +113,19 @@ export default function Page() {
             return () => clearTimeout(timer);
         }
 
-    }, [theCourse]);
+    }, [theCourse, loading]);
 
 
 
     // Function to download certificate
     const downloadCertificate = async (pdfName: string) => {
+        setIsDownloading(true)
 
         const { error, data } = await supabase.storage.from("course_outline_pdf").download(pdfName)
 
         if (error) {
-            console.error("Error downlaoding file:", error.message)
+            console.error("Error downlaoding file:", error.message);
+            setIsDownloading(false)
         }
         else if (data) {
             // Create a url for the blob and trigger download
@@ -135,7 +139,7 @@ export default function Page() {
             URL.revokeObjectURL(url)
 
 
-            // then sign write hasDownloaded to true in the db
+            // then  write `hasDownloaded` to true in the db
             const { data: statusData, error: statusError } = await supabase
                 .from("certificates")
                 .update({ hasDownloaded: true })
@@ -146,6 +150,7 @@ export default function Page() {
                 console.error(statusError);
                 return;
             }
+            setIsDownloading(false)
         }
 
     }
@@ -155,7 +160,7 @@ export default function Page() {
         try {
             await navigator.share({
                 title: "My Certificate",
-                text: "Check out my certificate!",
+                text: `I just completed the ${theCourse?.title}  course`,
                 url: window.location.href,
             });
         } catch (error) {
@@ -176,8 +181,8 @@ export default function Page() {
 
 
     return (
-        <div className="flex flex-col items-start w-full gap-10 mt-5  " >
-            {showConfetti && !hasDownloaded && <Confetti width={width} height={height} />}
+        <div className="flex flex-col items-start w-full gap-10 mt-5 relative  " >
+            {showConfetti && !hasDownloaded && <Confetti width={width/2} height={height/1.7} className="mx-auto" />}
 
             <h1 className=" text-xl md:text-3xl font-semibold  " > {theCourse?.title} Certificate </h1>
 
@@ -192,13 +197,13 @@ export default function Page() {
                         <div className="mx-auto w-[120px] h-[120px] rounded-full bg-gray-400 flex items-center justify-center overflow-hidden " >
 
                             {
-                                user?.app_metadata.provider === "google" && user.user_metadata.avatar_url ?
-                                    <Image src={user.user_metadata.avatar_url} alt={user.app_metadata.email} width={1000} height={1000} className="w-full h-full rounded-full" />
-                                    :
-                                    <h2 className="text-black" >
-                                        {user?.user_metadata.first_name ? user.user_metadata.first_name.charAt(0) + user.user_metadata.last_name.charAt(0) : user?.user_metadata.full_name.charAt(0).toUpperCase() + user?.user_metadata.full_name.split(" ")[1].charAt(0).toUpperCase()}
-                                    </h2>
-                            }
+                                                     userData?.user_image || (user?.app_metadata.provider === "google" && user.user_metadata.avatar_url) ?
+                                                         <Image src={profilePic} alt={"Profile pic"} width={1000} height={1000} className="w-full h-full rounded-full object-center object-cover " />
+                                                         :
+                                                         <h2 className="text-black" >
+                                                             {user?.user_metadata.first_name ? user.user_metadata.first_name.charAt(0) + user.user_metadata.last_name.charAt(0) : user?.user_metadata.full_name.charAt(0).toUpperCase() + user?.user_metadata.full_name.split(" ")[1].charAt(0).toUpperCase()}
+                                                         </h2>
+                                                 }
                         </div>
 
 
@@ -247,7 +252,8 @@ export default function Page() {
                             downloadCertificate("software_engineering.pdf")
                             // else console.warn("PDF not available")
                         }}
-                        className="w-full rounded-none!" >Download Certificate</Button>
+                        disabled={isDownloading}
+                        className="w-full rounded-none!" > {isDownloading ? "Downloading ..." : "Download Certificate"} </Button>
                 </div>
             </div>
         </div>

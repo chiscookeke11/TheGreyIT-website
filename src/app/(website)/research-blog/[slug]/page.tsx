@@ -80,7 +80,7 @@ export default function Page({ params }: PageProps) {
                         </section>
 
 
-                        <div className="w-full py-16 px-[5%] md:px-[7%] lg:px-[15%]  font-poppins font-medium text-base bg-[#f2f5fc]  " dangerouslySetInnerHTML={{ __html: currentBlog.content }} />
+                        <div className="w-full py-16 px-[7%] lg:px-[15%]  font-poppins font-medium text-base bg-[#f2f5fc]  " dangerouslySetInnerHTML={{ __html: currentBlog.content }} />
 
 
 
