@@ -1,4 +1,4 @@
-import Spinner from "@/components/UI/Spinner";
+import {Spinner} from "@/components/UI/Spinner";
 import VerifyEmail from "@/components/verify-email-component/verify-email";
 import { Suspense } from "react";
 

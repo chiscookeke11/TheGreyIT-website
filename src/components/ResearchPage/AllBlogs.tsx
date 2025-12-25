@@ -2,9 +2,8 @@
 
 import RecentBlogCard from "./RecentBlogCard"
 import { useEffect, useRef, useState } from "react"
-// import { useInView } from "framer-motion"
 import { ResearchBlogType } from "@/types/types"
-import Spinner from "../UI/Spinner"
+import {Spinner} from "../UI/Spinner"
 import { supabase } from "@/lib/supabaseClient"
 
 export default function AllBlogs() {

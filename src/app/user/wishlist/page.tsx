@@ -5,7 +5,7 @@ import { CourseDataTypes } from "@/types/types";
 import { useEffect, useState } from "react"
 import Image from "next/image";
 import { useAppContext } from "@/context/AppContext";
-import Spinner from "@/components/UI/Spinner";
+import {Spinner} from "@/components/UI/Spinner";
 import UserCourseCard from "@/components/user/UserCourseCard";
 import Link from "next/link";
 

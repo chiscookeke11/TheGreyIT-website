@@ -2,8 +2,7 @@
 
 import CurriculumModal from "@/components/courses-page/CurriculumModal"
 import Button from "@/components/UI/Button"
-import Spinner from "@/components/UI/Spinner"
-import { CourseOverview } from "@/data/CourseData"
+import {Spinner} from "@/components/UI/Spinner"
 import { supabase } from "@/lib/supabaseClient"
 import { CourseDataTypes } from "@/types/types"
 import { Download, } from "lucide-react"

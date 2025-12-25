@@ -3,7 +3,7 @@
 import type React from "react"
 import { useEditor, EditorContent } from "@tiptap/react"
 import StarterKit from "@tiptap/starter-kit"
-import Spinner from "../UI/Spinner"
+import {Spinner} from "../UI/Spinner"
 
 
 interface TiptapEditorProps {

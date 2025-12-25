@@ -4,7 +4,7 @@
 
 "use client"
 
-import Spinner from "@/components/UI/Spinner"
+import {Spinner} from "@/components/UI/Spinner"
 import { supabase } from "@/lib/supabaseClient"
 import { ResearchBlogType } from "@/types/types"
 import React, { useEffect, useState } from "react"

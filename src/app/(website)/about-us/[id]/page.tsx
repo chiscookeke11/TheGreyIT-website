@@ -1,6 +1,6 @@
 "use client"
 
-import Spinner from "@/components/UI/Spinner";
+import {Spinner} from "@/components/UI/Spinner";
 import { teams } from "@/data/LeadershipData";
 import { TeamMemberDataType } from "@/types/types";
 import { Linkedin, Twitter } from "lucide-react";

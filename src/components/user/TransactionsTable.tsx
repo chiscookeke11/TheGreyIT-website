@@ -1,8 +1,8 @@
 "use client"
 
 import { useAppContext } from "@/context/AppContext";
-import Spinner from "../UI/Spinner";
 import Image from "next/image";
+import { Spinner } from "../UI/Spinner";
 
 
 export default function TransactionsTable() {

@@ -2,7 +2,7 @@
 
 import Button from "@/components/UI/Button"
 import ReviewModal from "@/components/UI/ReviewModal"
-import Spinner from "@/components/UI/Spinner"
+import {Spinner} from "@/components/UI/Spinner"
 import ReviewCard from "@/components/user/ReviewCard"
 import RatingStars from "@/components/user/ReviewStarsComponent"
 import { useAppContext } from "@/context/AppContext"

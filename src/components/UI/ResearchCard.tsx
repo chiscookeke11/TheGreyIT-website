@@ -29,7 +29,7 @@ export default function ResearchCard({ blog }: ResearchCardProps) {
           <h1 className="text-xl font-semibold " >{blog.title} </h1>
 
           <div className="text-base font-medium " dangerouslySetInnerHTML={{__html: blog.content.trim().slice(0, 77) + "..." }} />
-          <CustomLink href={`/research-blog/${blog.id}`} >
+          <CustomLink href={`/research-blog/${encodeURIComponent(blog.slug)}`} >
             <Button variant="default" className="!text-sm !px-4 !py-3 mt-2"  >
               Read more
             </Button>

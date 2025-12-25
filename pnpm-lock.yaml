@@ -53,6 +53,9 @@ importers:
       animate.css:
         specifier: ^4.1.1
         version: 4.1.1
+      clsx:
+        specifier: ^2.1.1
+        version: 2.1.1
       dockerode:
         specifier: ^4.0.9
         version: 4.0.9
@@ -110,6 +113,9 @@ importers:
       swiper:
         specifier: ^11.2.10
         version: 11.2.10
+      tailwind-merge:
+        specifier: ^3.4.0
+        version: 3.4.0
     devDependencies:
       '@eslint/eslintrc':
         specifier: ^3
@@ -2831,6 +2837,9 @@ packages:
   swiper@11.2.10:
     resolution: {integrity: sha512-RMeVUUjTQH+6N3ckimK93oxz6Sn5la4aDlgPzB+rBrG/smPdCTicXyhxa+woIpopz+jewEloiEE3lKo1h9w2YQ==}
     engines: {node: '>= 4.7.0'}
+
+  tailwind-merge@3.4.0:
+    resolution: {integrity: sha512-uSaO4gnW+b3Y2aWoWfFpX62vn2sR3skfhbjsEnaBI81WD1wBLlHZe5sWf0AqjksNdYTbGBEd0UasQMT3SNV15g==}
 
   tailwindcss@4.1.13:
     resolution: {integrity: sha512-i+zidfmTqtwquj4hMEwdjshYYgMbOrPzb9a0M3ZgNa0JMoZeFC6bxZvO8yr8ozS6ix2SDz0+mvryPeBs2TFE+w==}
@@ -5983,6 +5992,8 @@ snapshots:
   supports-preserve-symlinks-flag@1.0.0: {}
 
   swiper@11.2.10: {}
+
+  tailwind-merge@3.4.0: {}
 
   tailwindcss@4.1.13: {}
 

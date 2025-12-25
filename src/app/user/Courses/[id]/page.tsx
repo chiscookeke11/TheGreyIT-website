@@ -1,7 +1,7 @@
 "use client"
 
 import Button from "@/components/UI/Button";
-import Spinner from "@/components/UI/Spinner";
+import {Spinner} from "@/components/UI/Spinner";
 import { useAppContext } from "@/context/AppContext";
 import { sendPaymentConfirmationEmail } from "@/lib/appActions";
 import { supabase } from "@/lib/supabaseClient";
