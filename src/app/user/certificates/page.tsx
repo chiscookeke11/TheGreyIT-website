@@ -1,6 +1,6 @@
 "use client"
 
-import Spinner from "@/components/UI/Spinner";
+import {Spinner} from "@/components/UI/Spinner";
 import { useAppContext } from "@/context/AppContext";
 import { supabase } from "@/lib/supabaseClient";
 import Image from "next/image";

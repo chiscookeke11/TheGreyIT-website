@@ -5,7 +5,9 @@ import { useEffect, useRef, useState } from "react";
 import ResearchCard from "../UI/ResearchCard";
 import { useScroll, useTransform, motion } from "framer-motion";
 import { ResearchBlogType } from "@/types/types";
-import Spinner from "../UI/Spinner";
+import { Spinner } from "../UI/Spinner";
+import { supabase } from "@/lib/supabaseClient";
+
 
 
 
@@ -20,11 +22,28 @@ export default function ResearchSection() {
 
     const x = useTransform(scrollYProgress, [0, 1], ["10%", "-50%"])
 
-    useEffect(() => {
-        fetch("/api/blogs")
-            .then((res) => res.json())
-            .then((data) => setRecentBlogsData(data))
-    }, [])
+
+
+        useEffect(() => {
+
+            const fetchRecentBlogs = async () => {
+
+                const { data, error } = await supabase.from("blog").select("*").order("publicationDate", { ascending: false }).limit(4)
+
+                if (error) {
+                    console.error("Error fetching recent blogs:", error)
+                    setRecentBlogsData([])
+                }
+                else if (data) {
+                    setRecentBlogsData(data)
+                    console.log(data)
+                }
+
+            }
+
+            fetchRecentBlogs()
+
+        }, [])
 
 
 

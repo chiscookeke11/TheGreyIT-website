@@ -2,7 +2,7 @@
 
 import Button from "@/components/UI/Button"
 import Navbar from "@/components/UI/Navbar"
-import Spinner from "@/components/UI/Spinner"
+import { Spinner } from "@/components/UI/Spinner"
 import SideNav from "@/components/user/SideNav"
 import UserAuthModal from "@/components/user/UserAuthModal"
 import { useAppContext } from "@/context/AppContext"

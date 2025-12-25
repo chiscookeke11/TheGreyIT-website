@@ -3,7 +3,7 @@
 
 
 import Button from "@/components/UI/Button";
-import Spinner from "@/components/UI/Spinner";
+import {Spinner} from "@/components/UI/Spinner";
 import { useAppContext } from "@/context/AppContext";
 import { supabase } from "@/lib/supabaseClient";
 import { CertificatesDataType, CourseDataTypes } from "@/types/types";

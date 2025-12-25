@@ -25,6 +25,7 @@
     "@tiptap/react": "^3.6.5",
     "@tiptap/starter-kit": "^3.6.5",
     "animate.css": "^4.1.1",
+    "clsx": "^2.1.1",
     "dockerode": "^4.0.9",
     "emailjs-com": "^3.2.0",
     "framer-motion": "^12.23.16",
@@ -43,7 +44,8 @@
     "react-rating": "^2.0.5",
     "react-rating-stars-component": "^2.2.0",
     "react-simple-star-rating": "^5.1.7",
-    "swiper": "^11.2.10"
+    "swiper": "^11.2.10",
+    "tailwind-merge": "^3.4.0"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",

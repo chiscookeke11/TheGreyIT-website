@@ -3,7 +3,7 @@
 import RecentBlogCard from "./RecentBlogCard";
 import { useEffect, useState } from "react";
 import { ResearchBlogType } from "@/types/types";
-import Spinner from "../UI/Spinner";
+import {Spinner} from "../UI/Spinner";
 import { supabase } from "@/lib/supabaseClient";
 
 

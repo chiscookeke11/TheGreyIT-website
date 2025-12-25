@@ -7,7 +7,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import { Autoplay } from 'swiper/modules';
-import Spinner from "../UI/Spinner";
+import {Spinner} from "../UI/Spinner";
 import { supabase } from "@/lib/supabaseClient";
 
 

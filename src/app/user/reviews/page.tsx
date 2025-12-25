@@ -1,6 +1,6 @@
 "use client";
 
-import Spinner from "@/components/UI/Spinner";
+import {Spinner} from "@/components/UI/Spinner";
 import UserCourseCard from "@/components/user/UserCourseCard";
 import { useAppContext } from "@/context/AppContext";
 import { supabase } from "@/lib/supabaseClient";

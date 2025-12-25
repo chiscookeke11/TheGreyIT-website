@@ -1,5 +1,5 @@
 import PasswordResetLink from "@/components/password_reset_link/password_reset_link";
-import Spinner from "@/components/UI/Spinner";
+import {Spinner} from "@/components/UI/Spinner";
 import { Suspense } from "react";
 
 
