@@ -19,14 +19,12 @@ export const fetchAllCourses = async () => {
 
 
 
-// getting a user Id
-const { data: { user }, error,} = await supabase.auth.getUser();
 
 
 // function to fetch user data
-export const fetchUserData = async () => {
+export const fetchUserData = async (userId: string) => {
 
-    const { data, error } = await supabase.from("user_data").select("*").eq('user_id', user?.id)
+    const { data, error } = await supabase.from("user_data").select("*").eq('user_id', userId)
 
     if (error) {
         console.error("Error fetching user data:", error)
@@ -39,8 +37,8 @@ export const fetchUserData = async () => {
 
 
 // Function to fetch user transactions
-export const fetchUserTransactions = async () => {
-    const { data, error } = await supabase.from("transactions").select("*").eq('user_id', user?.id);
+export const fetchUserTransactions = async (userId: string) => {
+    const { data, error } = await supabase.from("transactions").select("*").eq('user_id', userId);
 
     if (error) {
         console.error("Error fetching transactions:", error);
@@ -53,11 +51,11 @@ export const fetchUserTransactions = async () => {
 
 
 // Function fetch user certificates
-export const fetchUserCertificates = async (certifiedCourses: number[]) => {
+export const fetchUserCertificates = async (certifiedCourses: number[], userId: string) => {
     const { data, error } = await supabase
         .from("certificates")
         .select("*")
-        .in("course_id", certifiedCourses).eq("user_id", user?.id);
+        .in("course_id", certifiedCourses).eq("user_id", userId);
 
     if (error) {
         console.error("Error fetching certificates:", error);

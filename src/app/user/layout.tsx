@@ -77,8 +77,6 @@ export default function UserDashboardLayout({ children }: { children: React.Reac
 
 
 
-
-
     useEffect(() => {
         // check is the user is login in
         const getUser = async () => {
@@ -108,11 +106,6 @@ export default function UserDashboardLayout({ children }: { children: React.Reac
 
 
 
-    useEffect(() => {
-        reloadUserData()
-    }, [user])
-
-
     // Fetching the data from the db once the user has been loaded
     useEffect(() => {
         reloadCertificates()
@@ -138,10 +131,11 @@ export default function UserDashboardLayout({ children }: { children: React.Reac
 
 
     // show login modal if user is not logged in
-    if (!user) {return <main className="w-full h-screen flex items-center flex-col md:flex-row justify-center  bg-[#f2f5fc]" >
+    if (!user) {
+        return <main className="w-full h-screen flex items-center flex-col md:flex-row justify-center  bg-[#f2f5fc]" >
             <Image src={"/user/auth-image.jpg"} alt="Image" height={1000} width={1000} className="w-full h-full max-h-[200px] md:max-h-none object-center object-cover md:max-w-[350px] lg:max-w-none lg:flex-1 " />
             <UserAuthModal />
-            </main>
+        </main>
     }
 
 
