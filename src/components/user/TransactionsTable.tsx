@@ -3,10 +3,16 @@
 import { useAppContext } from "@/context/AppContext";
 import Image from "next/image";
 import { Spinner } from "../UI/Spinner";
+import { useEffect } from "react";
 
 
 export default function TransactionsTable() {
-    const { transactionData } = useAppContext()
+    const { transactionData, reloadTransactions, userData } = useAppContext()
+
+    useEffect(() => {
+        reloadTransactions()
+    }, [userData])
+
 
     return (
         <>

@@ -1,6 +1,8 @@
 "use client";
 import { fetchAllCourses, fetchUserCertificates, fetchUserData, fetchUserTransactions } from "@/lib/appActions";
+import { supabase } from "@/lib/supabaseClient";
 import { CertificatesDataType, CourseDataTypes, TransactionType, UserData } from "@/types/types";
+import { User } from "@supabase/supabase-js";
 import React, { createContext, useContext, useState, ReactNode, useEffect } from "react";
 
 
@@ -31,6 +33,7 @@ type AppContextType = {
   reloadCertificates: () => Promise<void>;
 
   reloadCourses: () => Promise<void>;
+
 };
 
 
@@ -49,18 +52,50 @@ export function AppProvider({ children }: { children: ReactNode }) {
   const [transactionData, setTransactionData] = useState<TransactionType[] | null>(null)
   const [certificatesData, setCertificatesData] = useState<CertificatesDataType[] | null>(null)
   const [allCoursesData, setAllCoursesData] = useState<CourseDataTypes[] | null>(null)
+  const [user, setUser] = useState<User | null>(null)
 
+
+
+
+  useEffect(() => {
+    // check is the user is login in
+    const getUser = async () => {
+
+      const { data, error } = await supabase.auth.getUser()
+      if (error) {
+        console.error("Auth check failed:", error.message)
+      }
+
+      setUser(data.user ?? null)
+    }
+    getUser()
+
+    // listen for state changes in the layout
+    const { data: authListener } = supabase.auth.onAuthStateChange((_event, session) => {
+      setUser(session?.user ?? null)
+    })
+
+    return () => {
+      authListener.subscription.unsubscribe()
+    }
+
+  }, [])
 
 
 
   const reloadUserData = async () => {
-    const result = await fetchUserData();
-    setUserData(result);
+
+    if (user) {
+      const result = await fetchUserData(user.id);
+      setUserData(result);
+    }
   };
 
   const reloadTransactions = async () => {
-    const result = await fetchUserTransactions();
-    setTransactionData(result);
+    if (user) {
+      const result = await fetchUserTransactions(userData?.user_id ?? "");
+      setTransactionData(result);
+    }
   };
 
   const reloadCourses = async () => {
@@ -69,15 +104,21 @@ export function AppProvider({ children }: { children: ReactNode }) {
   };
 
   const reloadCertificates = async () => {
-    if (!userData?.list_completed_courses) return;
-    const result = await fetchUserCertificates(userData.list_completed_courses);
-    setCertificatesData(result);
+
+    if (user) {
+      if (!userData?.list_completed_courses) return;
+
+      const result = await fetchUserCertificates(userData.list_completed_courses, user.id);
+      setCertificatesData(result);
+    }
   };
 
 
   useEffect(() => {
-    reloadUserData()
-  }, [])
+    if (!user) return;
+    reloadUserData();
+  }, [user?.id]);
+
 
   // auto-run when user changes
   useEffect(() => {
@@ -108,6 +149,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
         reloadCourses,
         reloadTransactions,
         reloadUserData,
+
       }}>
 
       {children}
