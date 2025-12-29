@@ -10,7 +10,10 @@ export const teams: TeamMemberDataType[] = [
       linkedIn: "https://www.linkedin.com/in/chidera-e-abel-gicbc-cert-bc-176639155/",
       twitter: "https://x.com/Abel_C_emmanuel"
     },
-    description: ""
+    description: `
+
+    `,
+    slug: "abel-chidera-emmanuel"
   },
 
 
@@ -45,7 +48,8 @@ Augustine has built his career as a technologist, researcher, instructor, and cy
       "Development & Engineering Tools: Flutter, Visual Studio Code, Android Studio, Firebase, GitHub, Docker, Postman, REST API tools, MATLAB, Python, ESP32/NodeMCU, HTML/CSS/Java frameworks, virtualization platforms, and network administration utilities."
     ],
 
-    motivation: "To advance digital technology in Nigeria and globally, ensuring that the digital environment remains safe, secure, and accessible for all users."
+    motivation: "To advance digital technology in Nigeria and globally, ensuring that the digital environment remains safe, secure, and accessible for all users.",
+    slug: "ezekwueme-augustine"
   },
 
 
@@ -98,7 +102,8 @@ He is currently pursuing a Bachelor of Science in Chemistry Education (B.Sc.) at
       "Speaking & Presenting – Coursera",
       "ASLA Fellowship (2024)",
       "Aspire Leadership Program – Cohort 3"
-    ]
+    ],
+    slug: "okeke-chinedu-emmanuel"
   },
 
 
@@ -138,8 +143,8 @@ Always eager to grow, Chikamso is steadily expanding his expertise in full-stack
     ],
 
     certifications: [
-    ]
-
+    ],
+    slug: "chikamso-fedrick"
   },
 
 
@@ -178,25 +183,10 @@ Always eager to grow, Chikamso is steadily expanding his expertise in full-stack
     certifications: [
       "Creative Writing & Research Fundamentals: Competency in producing structured research and creative outputs",
       "Graphic Design Basics: Foundational training in visual communication and design tools"
-    ]
-
+    ],
+    slug: "mbaeze-olivia-chimuanya"
 
   },
-
-
-  {
-    id: 6,
-    name: "Chinaza Kenechukwu",
-    title: "Data Analyst",
-    image: "/Team/chinaza_kenechukwu.jpg",
-    socials: {
-      linkedIn: "https://www.linkedin.com/in/chinaza-kenechukwu-a58078253/",
-      twitter: "",
-    },
-    description: ""
-  },
-
-
 
   {
     id: 7,
@@ -230,7 +220,8 @@ Currently serving as a Research Specialist at ThegreyIT, I thrive in environment
       "Bachelor of Science in Business Management",
       "Business Analysis Basic",
       "Change Management Foundations",
-    ]
+    ],
+    slug: "ozoezi-kelechi-victor"
   },
 
 
@@ -275,6 +266,7 @@ As part of his long-term aspirations, Wisdom is expanding his skills in data ana
     certifications: [
       "Certified Higher National Diploma in Biochemistry",
       "Institute of Management and Technology Enugu (IMT)"
-    ]
+    ],
+    slug: "unaji-akachukwu-wisdom"
   },
 ];
