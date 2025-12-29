@@ -1,9 +1,10 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono, Poppins, Syne } from "next/font/google";
 import "./globals.css";
 import { AppProvider } from "@/context/AppContext";
 import { Toaster } from "react-hot-toast";
 import Image from "next/image";
+import { seoKeywords } from "@/data/SEOKeywords";
 
 
 
@@ -32,10 +33,58 @@ const syne = Syne({
 
 
 
+
+
 export const metadata: Metadata = {
   title: "TheGreyIT | Learn. Build. Advance",
   description: "Learn. Build. Advance",
+  keywords: seoKeywords,
+  applicationName: "TheGreyIT",
+  authors: [{ name: "TheGreyIT Team", url: "https://www.thegreyit.org" }],
+  creator: "TheGreyIT Team",
+  publisher: "TheGreyIT Team",
+  generator: "Next.js",
+  referrer: "origin-when-cross-origin",
+  robots: "index, follow",
+  viewport: "width=device-width, initial-scale=1",
+  icons: {
+    icon: "./favicon.ico",
+    shortcut: "./favicon.ico",
+    apple: "./favicon.ico",
+  },
+  openGraph: {
+    title: "TheGreyIT Team",
+    description:
+      "Build | Learn | Advance",
+    url: "https://www.thegreyit.org",
+    siteName: "TheGreyIT",
+    images: [
+      {
+        url: "./favicon.ico",
+        width: 1200,
+        height: 630,
+        alt: "TheGreyIT",
+      },
+    ],
+    locale: "en_NG",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "TheGreyIT",
+    description:
+      "We help students and professionals learn the basics, build strong technical skills, and advance to higher levels of expertise.",
+    site: "@thegreyit",
+    creator: "@thegreyit",
+    images: ["./favicon.ico"],
+  },
+  metadataBase: new URL("https://www.thegreyit.org"),
 };
+
+export const viewport: Viewport = {
+  themeColor: "#ffffff",
+  colorScheme: "light",
+}
 
 export default function RootLayout({
   children,
@@ -44,6 +93,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <meta name="google-site-verification" content="Nv5M-GPzypWQTbwEYS96n1qQAIEElpScWowb-gpM-j0" />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${poppins.variable} ${syne.variable} antialiased`}
       >
