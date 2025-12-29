@@ -5,25 +5,31 @@ import { teams } from "@/data/LeadershipData";
 import { TeamMemberDataType } from "@/types/types";
 import { Linkedin, Twitter } from "lucide-react";
 import Image from "next/image";
-import { useParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 
 
+interface PageProps {
+  params: {
+    slug: string
+  }
+}
 
 
-
-export default function Page() {
-    const { id } = useParams()
+export default function Page({params}: PageProps) {
+   const {slug } = params;
     const [currentMember, setCurrentMember] = useState<TeamMemberDataType | null>(null)
 
 
 
     useEffect(() => {
-        if (!id) return;
+        if (!slug) return;
+        if (Array.isArray(slug)) return;
 
-        const member = teams.find((member) => String(member.id) === id)
+         const trimmedSlug = slug.trim()
+
+        const member = teams.find((member) => member.slug.trim() === trimmedSlug)
         setCurrentMember(member || null)
-    }, [id])
+    }, [slug])
 
 
 

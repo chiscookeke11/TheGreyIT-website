@@ -15,7 +15,7 @@ export default function Leadership() {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3  gap-14 md:gap-16 place-items-center justify-items-center ">
         {teams.map((member, index) => (
 
-       <Link key={index} href={`/about-us/${member.id} `} className="w-full h-full"  >
+       <Link key={index} href={`/about-us/${member.slug}`} className="w-full h-full"  >
           <div  className=" w-full h-full bg-white  rounded-md px-6 py-8 flex items-center flex-col gap-3 lg:gap-6 min-w-xs max-w-xs " >
 
             <div className=" w-[180px] h-[230px] md:w-[230px] md:h-[300px] flex items-center justify-center p-1  bg-gray-700  " >

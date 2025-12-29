@@ -23,7 +23,7 @@ import { PaystackButton } from 'react-paystack';
 const Requirementsection = () => {
     return (
         <div className="space-y-5" >
-            <h4 className=" text-lg md:text-2xl font-semibold  " >Requirements</h4>
+            <h4 className=" text-lg md:text-xl font-semibold  " >Requirements</h4>
 
             <ul className=" flex items-center flex-col gap-3 w-full max-w-3xl pl-5 list-disc  " >
                 <li className="text-sm font-medium  text-gray-900 " > Basic programming experience (Python or JavaScript preferred)</li>
@@ -41,8 +41,8 @@ const Requirementsection = () => {
 const CourseContentSection = () => {
     return (
         <div className="space-y-5" >
-            <h4 className=" text-lg md:text-2xl font-semibold  " >Course content</h4>
-            <Button variant="default" >Click to download course content</Button>
+            <h4 className=" text-lg md:text-xl font-semibold  " >Course content</h4>
+            <Button variant="default" className="py-3! text-sm! " >Download course content</Button>
 
 
         </div>
@@ -57,12 +57,12 @@ const DescriptionSection = () => {
         <>
             {/* What you will learn section  */}
             <div className="space-y-5" >
-                <h4 className=" text-lg md:text-2xl font-semibold  " >What you will learn</h4>
+                <h4 className=" text-lg md:text-xl font-semibold  " >What you will learn</h4>
 
                 <ul className=" grid grid-cols-1 md:grid-cols-2 place-items-center gap-6 " >
-                    <li className="flex items-start gap-4 text-sm md:text-base " > <Check size={35} /> How to build and deploy intelligent AI agents using Python, tools, memory, and reasoning.</li>
-                    <li className="flex items-start gap-4 text-sm md:text-base"> <Check size={35} /> How to design trustworthy, responsible AI systems aligned with best practices.</li>
-                    <li className="flex items-start gap-4 text-sm md:text-base"> <Check size={35} /> How to create custom GPTs and apply prompt engineering techniques for real-world tasks.</li>
+                    <li className="flex items-start gap-4 text-sm  " > <Check size={30} /> How to build and deploy intelligent AI agents using Python, tools, memory, and reasoning.</li>
+                    <li className="flex items-start gap-4 text-sm "> <Check size={30} /> How to design trustworthy, responsible AI systems aligned with best practices.</li>
+                    <li className="flex items-start gap-4 text-sm "> <Check size={30} /> How to create custom GPTs and apply prompt engineering techniques for real-world tasks.</li>
                 </ul>
             </div>
 
@@ -70,15 +70,15 @@ const DescriptionSection = () => {
 
             {/* skills you will gain section  */}
             <div className="space-y-5" >
-                <h4 className=" text-lg md:text-2xl font-semibold  " >Skills you&apos;ll gain</h4>
+                <h4 className=" text-lg md:text-xl font-semibold  " >Skills you&apos;ll gain</h4>
 
                 <ul className=" flex items-center flex-wrap gap-4 w-full max-w-3xl   " >
-                    <li className="flex items-center justify-center bg-[#f2f5fc] px-3 py-2 text-xs md:text-sm font-medium rounded-4xl text-gray-900 " > Artificial Intelligence</li>
-                    <li className="flex items-center justify-center bg-[#f2f5fc] px-3 py-2 text-xs md:text-sm font-medium rounded-4xl " > Artificial Intelligence</li>
-                    <li className="flex items-center justify-center bg-[#f2f5fc] px-3 py-2 text-xs md:text-sm font-medium rounded-4xl " > Artificial Intelligence</li>
-                    <li className="flex items-center justify-center bg-[#f2f5fc] px-3 py-2 text-xs md:text-sm font-medium rounded-4xl " > Artificial Intelligence</li>
-                    <li className="flex items-center justify-center bg-[#f2f5fc] px-3 py-2 text-xs md:text-sm font-medium rounded-4xl " > Artificial Intelligence</li>
-                    <li className="flex items-center justify-center bg-[#f2f5fc] px-3 py-2 text-xs md:text-sm font-medium rounded-4xl " > Artificial Intelligence</li>
+                    <li className="flex items-center justify-center bg-[#f2f5fc] px-3 py-2 text-xs  font-medium rounded-4xl text-gray-900 " > Artificial Intelligence</li>
+                    <li className="flex items-center justify-center bg-[#f2f5fc] px-3 py-2 text-xs  font-medium rounded-4xl " > Artificial Intelligence</li>
+                    <li className="flex items-center justify-center bg-[#f2f5fc] px-3 py-2 text-xs  font-medium rounded-4xl " > Artificial Intelligence</li>
+                    <li className="flex items-center justify-center bg-[#f2f5fc] px-3 py-2 text-xs  font-medium rounded-4xl " > Artificial Intelligence</li>
+                    <li className="flex items-center justify-center bg-[#f2f5fc] px-3 py-2 text-xs  font-medium rounded-4xl " > Artificial Intelligence</li>
+                    <li className="flex items-center justify-center bg-[#f2f5fc] px-3 py-2 text-xs  font-medium rounded-4xl " > Artificial Intelligence</li>
                 </ul>
             </div>
 
@@ -86,23 +86,23 @@ const DescriptionSection = () => {
 
             {/* Details to know section  */}
             <div className="space-y-5" >
-                <h4 className=" text-lg md:text-2xl font-semibold  " >Details to know</h4>
+                <h4 className=" text-lg md:text-xl font-semibold  " >Details to know</h4>
 
                 <div className="w-fit flex items-center gap-12 " >
 
                     <div className="flex items-start flex-col gap-1 " >
-                        <Image src={"/logos/linkedin.png"} height={1000} width={1000} alt="LinkedIn logo" className=" w-8 h-8 " />
-                        <h5 className=" text-sm md:text-base font-semibold mt-4" >Shareable certificate</h5>
-                        <p className="text-gray-500 text-xs md:text-sm" >Add to your LinkedIn profile</p>
+                        <Image src={"/logos/linkedin.png"} height={1000} width={1000} alt="LinkedIn logo" className=" w-6 h-6 " />
+                        <h5 className=" text-sm  font-semibold mt-4" >Shareable certificate</h5>
+                        <p className="text-gray-500 text-xs " >Add to your LinkedIn profile</p>
 
                     </div>
 
 
 
                     <div className="flex items-start flex-col gap-1 " >
-                        <Languages size={35} />
-                        <h5 className="text-sm md:text-base font-semibold  mt-4">Taught in English</h5>
-                        <p className="text-gray-500 text-xs md:text-sm">26 languages available</p>
+                        <Languages size={27} />
+                        <h5 className="text-sm  font-semibold  mt-4">Taught in English</h5>
+                        <p className="text-gray-500 text-xs ">26 languages available</p>
 
                     </div>
 
@@ -372,37 +372,37 @@ export default function Page() {
                     gap-6
                     shadow-xl rounded-xl py-8 px-2.5 md:px-5
                     bg-white
-                    mt-[-35%] sm:mt-[-27%] lg:mt-[-12%]
+                    mt-[-32%] sm:mt-[-24%] lg:mt-[-9%]
                     text-sm
                 " >
                     <div className="flex w-fit flex-col items-start gap-0.5" >
-                        <h6 className="font-semibold text-sm md:text-base" >Skill Level</h6>
-                        <p className="text-xs md:text-base text-gray-600" >intermediate</p>
+                        <h6 className="font-semibold text-sm " >Skill Level</h6>
+                        <p className="text-xs  text-gray-600" >intermediate</p>
                     </div>
 
                     <div className="flex w-fit flex-col items-start gap-0.5">
-                        <h6 className="font-semibold text-sm md:text-base">Duration</h6>
-                        <p className="text-xs md:text-base text-gray-600" >  {currentCourse?.duration} </p>
+                        <h6 className="font-semibold text-sm ">Duration</h6>
+                        <p className="text-xs  text-gray-600" >  {currentCourse?.duration} </p>
                     </div>
 
                     <div className="flex w-fit flex-col items-start gap-0.5">
-                        <h6 className="font-semibold text-sm md:text-base"> Learning Mode</h6>
-                        <p className="text-xs md:text-base text-gray-600" >Online</p>
+                        <h6 className="font-semibold text-sm "> Learning Mode</h6>
+                        <p className="text-xs  text-gray-600" >Online</p>
                     </div>
 
                     <div className="flex w-fit flex-col items-start gap-0.5">
-                        <h6 className="font-semibold text-sm md:text-base">Hours</h6>
-                        <p className="text-xs md:text-base text-gray-600" >15 hours per week</p>
+                        <h6 className="font-semibold text-sm ">Hours</h6>
+                        <p className="text-xs  text-gray-600" >15 hours per week</p>
                     </div>
 
                     <div className="flex w-fit flex-col items-start gap-0.5">
-                        <h6 className="font-semibold text-sm md:text-base">Certificate</h6>
-                        <p className="text-xs md:text-base text-gray-600" >Yes</p>
+                        <h6 className="font-semibold text-sm ">Certificate</h6>
+                        <p className="text-xs  text-gray-600" >Yes</p>
                     </div>
 
                     <div className="flex w-fit flex-col items-start gap-0.5">
-                        <h6 className="font-semibold text-sm md:text-base">4.8</h6>
-                        <p className="text-xs md:text-base text-gray-600" >(521 reviews)</p>
+                        <h6 className="font-semibold text-sm ">4.8</h6>
+                        <p className="text-xs  text-gray-600" >(521 reviews)</p>
                     </div>
 
                 </div>
@@ -419,7 +419,7 @@ export default function Page() {
                 <div className="w-full flex items-center gap-4 md:gap-10 flex-wrap " >
                     <button
                         onClick={() => setCurrentTab("description")}
-                        className={` text-sm md:text-lg font-semibold py-2 cursor-pointer ${currentTab === "description" ? "border-b-2 border-b-gray-700" : ""
+                        className={` text-sm md:text-base font-semibold py-2 cursor-pointer ${currentTab === "description" ? "border-b-2 border-b-gray-700" : ""
                             }`}
                     >
                         Description
@@ -427,7 +427,7 @@ export default function Page() {
 
                     <button
                         onClick={() => setCurrentTab("requirements")}
-                        className={` text-sm md:text-lg  font-semibold py-2 cursor-pointer ${currentTab === "requirements" ? "border-b-2 border-b-gray-700" : ""
+                        className={` text-sm md:text-base  font-semibold py-2 cursor-pointer ${currentTab === "requirements" ? "border-b-2 border-b-gray-700" : ""
                             }`}
                     >
                         Requirements
@@ -435,7 +435,7 @@ export default function Page() {
 
                     <button
                         onClick={() => setCurrentTab("content")}
-                        className={` text-sm md:text-lg  font-semibold py-2 cursor-pointer ${currentTab === "content" ? "border-b-2 border-b-gray-700" : ""
+                        className={` text-sm md:text-base  font-semibold py-2 cursor-pointer ${currentTab === "content" ? "border-b-2 border-b-gray-700" : ""
                             }`}
                     >
                         Course Content
