@@ -62,7 +62,7 @@ export default function Page({params}: PageProps) {
 
                 {/* core skills if any  */}
                 {currentMember.coreSkills && currentMember.coreSkills.length > 0 && (
-                    <ul className=" flex flex-col items-start gap-2 list-disc my-10" >
+                    <ul className=" flex flex-col items-start gap-2 list-disc my-10 px-4  " >
                         <p className="text-gray-900 font-semibold text-base md:text-lg" >Core Skills</p>
                         {
                             currentMember?.coreSkills?.map((skill, index) => (
@@ -76,7 +76,7 @@ export default function Page({params}: PageProps) {
 
                 {/* Tools/Software if any  */}
                 {currentMember.tools && currentMember.tools.length > 0 && (
-                    <ul className=" flex flex-col items-start gap-2 list-disc my-10" >
+                    <ul className=" flex flex-col items-start gap-2 list-disc my-10 px-4" >
                         <p className="text-gray-900 font-semibold text-base md:text-lg" >Tools/Software</p>
                         {
                             currentMember?.tools?.map((tools, index) => (
@@ -90,7 +90,7 @@ export default function Page({params}: PageProps) {
 
                 {/* Tools/Software if any  */}
                 {currentMember.certifications && currentMember.certifications.length > 0 && (
-                    <ul className=" flex flex-col items-start gap-2 list-disc my-10" >
+                    <ul className=" flex flex-col items-start gap-2 list-disc my-10 px-4" >
                         <p className="text-gray-900 font-semibold text-base md:text-lg" >Certifications</p>
                         {
                             currentMember?.certifications?.map((cert, index) => (
