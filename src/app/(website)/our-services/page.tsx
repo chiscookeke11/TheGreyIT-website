@@ -2,6 +2,7 @@
 
 import ServiceForm from "@/components/services/ServiceForm";
 import { ServicesData } from "@/data/ServicesData";
+import { ChevronRight } from "lucide-react";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 
@@ -57,7 +58,10 @@ export default function Page() {
                                     setSelectedSubject(service.title)
                                     setShowForm(true)
                                 }}
-                                className="font-syne bg-gray-700 text-white hover:bg-transparent hover:text-gray-700   px-6 py-3  flex items-center justify-center font-medium  focus:outline-none cursor-pointer text-base md:text-lg  border-[1px]  transition-all duration-300 ease-in-out border-gray-700 rounded-sm  " >{service.buttonText}</button>
+                                className="font-syne bg-gray-700 text-white hover:bg-transparent hover:text-gray-700   px-6 py-3  flex items-center justify-center gap-3 font-medium  focus:outline-none cursor-pointer text-base md:text-lg  border-[1px]  transition-all duration-300 ease-in-out border-gray-700 rounded-sm  " >
+                                    {service.buttonText}
+                                    <ChevronRight/>
+                                    </button>
                         </div>
 
                     </div>

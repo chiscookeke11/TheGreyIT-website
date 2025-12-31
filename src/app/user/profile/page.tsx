@@ -52,29 +52,35 @@ export default function Page() {
 
     // Function for uploading image to  supabase storage
     const uploadImage = async () => {
-        if (!file) return toast.error("Please select an image")
-
-
-        const filename = `${Date.now()}-${file.name}`
-
-        const { error } = await supabase.storage
-            .from("profile_image")
-            .upload(filename, file)
-
-
-        if (error) {
-            console.error("Upload error", error.message)
-            toast.error(`Upload failed: ${error.message}`)
-            return
+        if (!file && !previewUrl && !userData?.user_image) {
+            return toast.error("Please select an image")
         }
 
-        const { data: publicUrl } = supabase.storage
-            .from("profile_image")
-            .getPublicUrl(filename)
+
+        else if (file) {
+
+
+            const filename = `${Date.now()}-${file.name}`
+
+            const { error } = await supabase.storage
+                .from("profile_image")
+                .upload(filename, file)
+
+
+            if (error) {
+                console.error("Upload error", error.message)
+                toast.error(`Upload failed: ${error.message}`)
+                return
+            }
+
+            const { data: publicUrl } = supabase.storage
+                .from("profile_image")
+                .getPublicUrl(filename)
 
 
 
-        return publicUrl.publicUrl
+            return publicUrl.publicUrl
+        }
     }
 
 
@@ -176,7 +182,7 @@ export default function Page() {
                 first_name: formValues.firstName,
                 last_name: formValues.lastName,
                 phoneNumber: formValues.phoneNumber,
-                imageUrl: imageUrl
+                imageUrl: file ? imageUrl : userData?.user_image
             }
         })
 
@@ -188,7 +194,7 @@ export default function Page() {
         else {
 
             const { error: updateError } = await supabase.from("user_data").update({
-                user_image: imageUrl
+                user_image: file ? imageUrl : userData?.user_image
             }).eq("user_id", user?.id)
 
             if (updateError) {
@@ -338,7 +344,7 @@ export default function Page() {
                         <div className="w-full grid-cols-1 grid md:grid-cols-2 gap-8 place-items-center justify-items-center " >
                             {/* first name */}
                             <label htmlFor="firstName" className=" w-full flex flex-col items-start gap-1  " >
-                                <span className="text-lg font-medium " >First Name</span>
+                                <span className="text-base font-medium " >First Name</span>
                                 <input
                                     type="text"
                                     id="firstName"
@@ -353,7 +359,7 @@ export default function Page() {
 
                             {/* last name  */}
                             <label htmlFor="lastName" className=" w-full flex flex-col items-start gap-1  " >
-                                <span className="text-lg font-medium " >Last Name</span>
+                                <span className="text-base font-medium " >Last Name</span>
                                 <input
                                     type="text"
                                     id="lastName"
@@ -370,7 +376,7 @@ export default function Page() {
 
                             {/* Phone number */}
                             <label htmlFor="phoneNumber" className=" w-full flex flex-col items-start gap-1  " >
-                                <span className="text-lg font-medium " >Phone Number</span>
+                                <span className="text-base font-medium " >Phone Number</span>
                                 <input
                                     type="tel"
                                     id="phoneNumber"
@@ -385,7 +391,7 @@ export default function Page() {
 
                             {/* Referral code  */}
                             <label htmlFor="referralCode" className=" w-full flex flex-col items-start gap-1  " >
-                                <span className="text-lg font-medium " >Referral Code</span>
+                                <span className="text-base font-medium " >Referral Code</span>
                                 <input
                                     type="text"
                                     id="referralCode"
@@ -398,7 +404,7 @@ export default function Page() {
 
 
 
-                        <button disabled={loading} className={`bg-gray-700 w-fit text-white px-5 py-4 text-xl lg:text-start rounded-md hover:bg-gray-600 transition-all duration-300 ease-in-out cursor-pointer  block mr-auto `}
+                        <button disabled={loading} className={`bg-gray-700 w-fit text-white px-4 py-2 text-base lg:text-start rounded-md hover:bg-gray-600 transition-all duration-300 ease-in-out cursor-pointer  block mr-auto `}
                         >
                             {loading ? <Spinner /> : "Update Info"}
                         </button>
@@ -417,7 +423,7 @@ export default function Page() {
 
                                 {/* Old Password Input  */}
                                 <label htmlFor="oldPassword" className=" w-full flex flex-col items-start gap-1  " >
-                                    <span className="text-xl font-medium " >Old Password</span>
+                                    <span className="text-base font-medium " >Old Password</span>
                                     <div className=" w-full flex gap-1 rounded-sm  py-4 px-5 border border-gray-700" >
                                         <input type={showPassword ? "text" : "password"} id="oldPassword" name="oldPassword" onChange={handlePasswordChange} value={passwordValues.oldPassword} placeholder="Enter Old Password" className="w-full  outline-none focus:outline-none text-base  " />
                                         <button type="button" className="cursor-pointer" onClick={() => setShowPassword((prev) => !prev)} > {showPassword ? <EyeOff /> : <Eye />} </button>
@@ -427,7 +433,7 @@ export default function Page() {
 
                                 {/* New Password Input  */}
                                 <label htmlFor="newPassword" className=" w-full flex flex-col items-start gap-1  " >
-                                    <span className="text-xl font-medium " >Password</span>
+                                    <span className="text-base font-medium " >Password</span>
                                     <div className=" w-full flex gap-1 rounded-sm  py-4 px-5 border border-gray-700" >
                                         <input type={showPassword ? "text" : "password"} id="newPassword" name="newPassword" onChange={handlePasswordChange} value={passwordValues.newPassword} placeholder="Enter New Password" className="w-full  outline-none focus:outline-none text-base  " />
                                     </div>
@@ -437,7 +443,7 @@ export default function Page() {
                                 {/* confirm password Input  */}
 
                                 <label htmlFor="confirmNewPassword" className=" w-full flex flex-col items-start gap-1  " >
-                                    <span className="text-xl font-medium " >Confirm Password</span>
+                                    <span className="text-base font-medium " >Confirm Password</span>
                                     <div className=" w-full flex gap-1 rounded-sm  py-4 px-5 border border-gray-700" >
                                         <input type={showPassword ? "text" : "password"} id="confirmNewPassword" name="confirmNewPassword" onChange={handlePasswordChange} value={passwordValues.confirmNewPassword} placeholder="Confirm New Password" className="w-full  outline-none focus:outline-none text-base  " />
                                     </div>
