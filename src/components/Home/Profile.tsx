@@ -12,7 +12,7 @@ interface ProfileCardProps {
 
 const ProfileCard = ({ data }: ProfileCardProps) => {
     return (
-        <Link href={`/profile/${data.id}`} className="w-full group" >
+        <Link href={`/profile/${data.slug}`} className="w-full group" >
             <div className="w-full max-w-lg flex items-end bg-gray-400 px-4 py-4 rounded-xl h-[350px]  md:h-[505px] lg:h-[510px] relative overflow-hidden shadow-2xl " >
 
                 <div className=" bg-black/30 absolute inset-0 h-full w-full z-10 " />

@@ -20,7 +20,8 @@ export const ProfileData: ProfileDataType[] = [
     Lesson for TheGreyIT: Empowering others multiplies impact.
 
     True innovation creates space for everyone to grow.
-    `
+    `,
+    slug: "rebecca-enonchong"
   },
   {
     id: 2,
@@ -38,7 +39,8 @@ export const ProfileData: ProfileDataType[] = [
     and ethical leadership can redefine African technology.
 
     Lesson for TheGreyIT: Build solutions that last, impact is the real legacy.
-    `
+    `,
+    slug: "olugbenga-gb-agboola"
   },
   {
     id: 3,
@@ -55,7 +57,8 @@ export const ProfileData: ProfileDataType[] = [
     Her story shows that innovation can be African-made, African-owned, and globally recognised.
 
     Lesson for TheGreyIT: Innovation thrives where inclusion begins.
-    `
+    `,
+    slug: "charlette-nguessan"
   },
   {
     id: 4,
@@ -69,7 +72,8 @@ export const ProfileData: ProfileDataType[] = [
 
     Beyond fintech, she co-founded the Feminist Coalition, championing gender inclusion and financial empowerment.
     Her journey reminds students that impact often begins with a small idea and consistent effort.
-    `
+    `,
+    slug: "odunayo-eweniyi"
   },
   {
     id: 5,
@@ -85,7 +89,8 @@ export const ProfileData: ProfileDataType[] = [
     For TheGreyIT learners, she embodies the fusion of research and practical innovation.
 
     Lesson for TheGreyIT: Coding alone isn’t enough, understanding the human behind the interface matters.
-    `
+    `,
+    slug: "shikoh-gitau"
   },
   {
     id: 6,
@@ -101,7 +106,8 @@ export const ProfileData: ProfileDataType[] = [
     Beyond fintech, his creation of Sporting Lagos FC reflects his belief in empowering communities.
 
     Lesson for TheGreyIT: Stay humble, build local, think global.
-    `
+    `,
+    slug: "shola-akinlade"
   },
   {
     id: 7,
@@ -116,7 +122,8 @@ export const ProfileData: ProfileDataType[] = [
     His work bridges academia and industry, showing students that research and innovation thrive together.
 
     Lesson for TheGreyIT: Leadership is measured by how many others you help rise.
-    `
+    `,
+    slug: "olubayo-adekanmbi"
   },
   {
     id: 8,
@@ -131,7 +138,8 @@ export const ProfileData: ProfileDataType[] = [
     His journey teaches that curiosity and perseverance, not privilege, are the true keys to discovery.
 
     Lesson for TheGreyIT: Knowledge becomes power only when paired with determination.
-    `
+    `,
+    slug: "philip-emeagwali"
   },
   {
     id: 9,
@@ -147,6 +155,7 @@ export const ProfileData: ProfileDataType[] = [
     His story reminds TheGreyIT learners that small prototypes can change systems when built with intention.
 
     Lesson for TheGreyIT: Build technology that heals, not harms.
-    `
+    `,
+    slug: "joseph-nguthiru"
   }
 ];

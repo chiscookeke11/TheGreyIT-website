@@ -40,7 +40,8 @@ export interface ProfileDataType {
   position: string,
   linkedInUrl: string,
   imageUrl: string,
-  about: string
+  about: string,
+  slug: string
 }
 
 
