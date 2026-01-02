@@ -98,12 +98,12 @@ export default function Page() {
 
                 <div className=" w-full h-full absolute inset-0 flex items-center justify-center flex-col gap-5 z-20 text-center p-4 " >
                     <div className="w-full max-w-5xl text-center space-y-6 " >
-                        <h1 className="text-2xl md:text-4xl font-bold" >Master in-demand tech skills in 9 months with hands-on training and expert mentorship.</h1>
+                        <h1 className="text-2xl md:text-4xl font-bold" >Master in-demand tech skills in 2 to 12 months with hands-on training and expert mentorship.</h1>
                         <p className="text-lg text-center font-medium text-white " >Gain real-world experience, mentorship, and become a master of your craft.</p>
                     </div>
 
 
-                    <Link href={"/courses#courseTracks"} > <Button>Register Now</Button></Link>
+                    <Link href={"/user/Courses"} > <Button>Register Now</Button></Link>
                 </div>
 
             </div>
@@ -142,7 +142,7 @@ export default function Page() {
                     )
                     :
                     (
-                        <section className=" w-full h-fit py-14 md:py-28 px-[4%]  grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 place-items-center justify-items-center gap-10 font-poppins " >
+                        <section id="courseTracks" className=" w-full h-fit py-14 md:py-28 px-[4%]  grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 place-items-center justify-items-center gap-10 font-poppins " >
 
                             {coursesData?.map((track, index) => (
                                 <div key={index} className=" w-full bg-[#f2f5fc] h-full py-6 px-5 flex flex-col items-start gap-4 rounded-lg shadow-sm relative" >
@@ -152,7 +152,7 @@ export default function Page() {
 
 
                                     <div className="w-full flex flex-col md:flex-row items-center gap-4  mt-auto " >
-                                        <Link href={"/user"} className="w-full basis-1/2 " ><Button variant="default" className=" w-full !rounded-[100px] text-sm! lg:text-sm " >Register</Button></Link>
+                                        <Link href={"/user/Courses"} className="w-full basis-1/2 " ><Button variant="default" className=" w-full !rounded-[100px] text-sm! lg:text-sm " >Register</Button></Link>
                                         <Button
                                             onClick={() => {
                                                 if (track.pdfName) downloadPdf(track.pdfName)

@@ -28,7 +28,7 @@ const Header = ({ user }: { user: User }) => {
 
 
                 <div className=" w-[100px] h-[100px] flex items-center justify-center rounded-full border  border-white " >
-                    <div className="w-[90px] h-[90px] bg-[#f2f5fc] rounded-full flex items-center text-center justify-center " >
+                    <div className="w-[95%] h-[95%] bg-[#f2f5fc] rounded-full flex items-center text-center justify-center " >
 
                         {
                             userData?.user_image || (user.app_metadata.provider === "google" && user.user_metadata.avatar_url) ?
