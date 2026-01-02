@@ -8,29 +8,35 @@ import { useParams } from "next/navigation"
 import { useEffect, useState } from "react"
 
 
+interface PageProps {
+  params: {
+    slug: string
+  }
+}
 
-export default function Page() {
+export default function Page({params}: PageProps) {
 
-    const { id } = useParams()
+    const { slug } = useParams()
     const [currentProfile, setCurrentProfile] = useState<ProfileDataType | null>(null)
 
 
 
     useEffect(() => {
-        if (!id) return;
+        if (!slug) return;
+                if (Array.isArray(slug)) return;
 
 
-        const profile = ProfileData.find((profile) => String(profile.id) === id)
+        const profile = ProfileData.find((profile) => String(profile.slug) === slug)
         setCurrentProfile(profile || null)
 
-    }, [id])
+    }, [slug])
 
 
 
     return (
         <div className="w-full min-h-[80vh] py-32 flex items-center flex-col md:flex-row  px-[5%] gap-16 md:gap-10 justify-center font-poppins bg-[#f2f5fc] " >
             <div className=" w-full max-w-xs lg:max-w-[400px] h-[350px] md:h-[500px] lg:h-[510px] bg-gray-700 relative  " >
-                <Image src={currentProfile?.imageUrl ?? ""} height={500} width={500} alt={`${currentProfile?.name}-image`} className=" w-full h-full absolute top-3 right-3 object-cover object-center rounded-sm " />
+                <Image src={currentProfile?.imageUrl ?? "/user/user-placeholder.png"} height={500} width={500} alt={`${currentProfile?.name}-image`} className=" w-full h-full absolute top-3 right-3 object-cover object-center rounded-sm " />
             </div>
 
 
