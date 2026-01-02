@@ -1,20 +1,28 @@
-import { number } from "framer-motion";
 
 
 
 export interface CourseDataTypes {
   title: string,
   description: string,
+  shorter_Description?: string,
   imageUrl: string,
   bgColor: string,
-  duration: string,
+  duration?: string[],
   price: number,
   rating: number,
   id?: string,
   pdfName?: string,
   skills?: string[],
   tutor: string,
-  enrolled_students: string[] | null
+  enrolled_students: string[] | null,
+  what_you_will_learn?: string[],
+  Who_Should_Enrol?: string[],
+  courseFormat?: string[],
+  projects?: string[],
+  post_graduation?: string[],
+  learning_mode?: string,
+  onlineFee?: number,
+  inhouseFee?: number,
 }
 
 
