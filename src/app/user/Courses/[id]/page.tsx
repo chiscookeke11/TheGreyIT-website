@@ -1,13 +1,12 @@
 "use client"
 
-import Button from "@/components/UI/Button";
-import {Spinner} from "@/components/UI/Spinner";
+import { Spinner } from "@/components/UI/Spinner";
 import { useAppContext } from "@/context/AppContext";
 import { sendPaymentConfirmationEmail } from "@/lib/appActions";
 import { supabase } from "@/lib/supabaseClient";
 import { CourseDataTypes, PaystackReference } from "@/types/types";
 import { User } from "@supabase/supabase-js";
-import { Check, Languages } from "lucide-react";
+import { Check, Dot, Languages } from "lucide-react";
 import Image from "next/image";
 import { useParams } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
@@ -18,17 +17,21 @@ import { PaystackButton } from 'react-paystack';
 
 
 
+interface Who_Should_EnrolProps {
+    currentCourse: CourseDataTypes | null
+}
 
-
-const Requirementsection = () => {
+const Who_Should_Enrol = ({ currentCourse }: Who_Should_EnrolProps) => {
     return (
         <div className="space-y-5" >
-            <h4 className=" text-lg md:text-xl font-semibold  " >Requirements</h4>
+            <h4 className=" text-lg md:text-xl font-semibold  " >Who Should Enrol</h4>
 
-            <ul className=" flex items-center flex-col gap-3 w-full max-w-3xl pl-5 list-disc  " >
-                <li className="text-sm font-medium  text-gray-900 " > Basic programming experience (Python or JavaScript preferred)</li>
-                <li className="text-sm font-medium  text-gray-900 " > Basic programming experience (Python or JavaScript preferred)</li>
-                <li className="text-sm font-medium  text-gray-900 " > Basic programming experience (Python or JavaScript preferred)</li>
+            <ul className=" flex items-start flex-col gap-3 w-full max-w-3xl pl-5  " >
+                {
+                    currentCourse?.Who_Should_Enrol?.map((data, index) => (
+                        <li key={index} className="text-sm font-medium  text-gray-900 flex items-start gap-4 " ><Dot size={20} /> {data}</li>
+                    ))
+                }
             </ul>
 
         </div>
@@ -37,14 +40,22 @@ const Requirementsection = () => {
 
 
 
+interface Course_FormatProps {
+    currentCourse: CourseDataTypes | null
+}
 
-const CourseContentSection = () => {
+const Course_Format = ({ currentCourse }: Course_FormatProps) => {
     return (
         <div className="space-y-5" >
-            <h4 className=" text-lg md:text-xl font-semibold  " >Course content</h4>
-            <Button variant="default" className="py-3! text-sm! " >Download course content</Button>
-
-
+            <h4 className=" text-lg md:text-xl font-semibold  " >Course Format</h4>
+            <ul className=" grid grid-cols-1 md:grid-cols-2 justify-end justify-items-start place-items-center gap-6 gap-x-10 " >
+                {currentCourse?.courseFormat?.map((data, index) => (
+                    <li key={index} className="flex items-start gap-4 text-sm  " >
+                        <Dot size={20} />
+                        {data}
+                    </li>
+                ))}
+            </ul>
         </div>
     )
 }
@@ -52,17 +63,24 @@ const CourseContentSection = () => {
 
 
 
-const DescriptionSection = () => {
+interface DescriptionSectionProps {
+    currentCourse: CourseDataTypes | null
+}
+
+const DescriptionSection = ({ currentCourse }: DescriptionSectionProps) => {
     return (
         <>
             {/* What you will learn section  */}
             <div className="space-y-5" >
                 <h4 className=" text-lg md:text-xl font-semibold  " >What you will learn</h4>
 
-                <ul className=" grid grid-cols-1 md:grid-cols-2 place-items-center gap-6 " >
-                    <li className="flex items-start gap-4 text-sm  " > <Check size={30} /> How to build and deploy intelligent AI agents using Python, tools, memory, and reasoning.</li>
-                    <li className="flex items-start gap-4 text-sm "> <Check size={30} /> How to design trustworthy, responsible AI systems aligned with best practices.</li>
-                    <li className="flex items-start gap-4 text-sm "> <Check size={30} /> How to create custom GPTs and apply prompt engineering techniques for real-world tasks.</li>
+                <ul className=" grid grid-cols-1 md:grid-cols-2 justify-end justify-items-start place-items-center gap-6 gap-x-10 " >
+                    {currentCourse?.what_you_will_learn?.map((data, index) => (
+                        <li key={index} className="flex items-start gap-4 text-sm  " >
+                            <Dot size={20} />
+                            {data}
+                        </li>
+                    ))}
                 </ul>
             </div>
 
@@ -73,12 +91,9 @@ const DescriptionSection = () => {
                 <h4 className=" text-lg md:text-xl font-semibold  " >Skills you&apos;ll gain</h4>
 
                 <ul className=" flex items-center flex-wrap gap-4 w-full max-w-3xl   " >
-                    <li className="flex items-center justify-center bg-[#f2f5fc] px-3 py-2 text-xs  font-medium rounded-4xl text-gray-900 " > Artificial Intelligence</li>
-                    <li className="flex items-center justify-center bg-[#f2f5fc] px-3 py-2 text-xs  font-medium rounded-4xl " > Artificial Intelligence</li>
-                    <li className="flex items-center justify-center bg-[#f2f5fc] px-3 py-2 text-xs  font-medium rounded-4xl " > Artificial Intelligence</li>
-                    <li className="flex items-center justify-center bg-[#f2f5fc] px-3 py-2 text-xs  font-medium rounded-4xl " > Artificial Intelligence</li>
-                    <li className="flex items-center justify-center bg-[#f2f5fc] px-3 py-2 text-xs  font-medium rounded-4xl " > Artificial Intelligence</li>
-                    <li className="flex items-center justify-center bg-[#f2f5fc] px-3 py-2 text-xs  font-medium rounded-4xl " > Artificial Intelligence</li>
+                    {currentCourse?.skills?.map((skill, index) => (
+                        <li key={index} className="flex items-center justify-center bg-[#f2f5fc] px-3 py-2 text-xs  font-medium rounded-4xl text-gray-900 " >  {skill}</li>
+                    ))}
                 </ul>
             </div>
 
@@ -114,6 +129,50 @@ const DescriptionSection = () => {
     )
 }
 
+
+
+interface ProjectsProps {
+    currentCourse: CourseDataTypes | null
+}
+
+const Projects = ({ currentCourse }: ProjectsProps) => {
+    return (
+        <div className="space-y-5" >
+            <h4 className=" text-lg md:text-xl font-semibold  " >Projects You’ll Build</h4>
+            <ul className=" grid grid-cols-1 md:grid-cols-2 justify-end justify-items-start place-items-center gap-6 gap-x-10 " >
+                {currentCourse?.projects?.map((data, index) => (
+                    <li key={index} className="flex items-start gap-4 text-sm  " >
+                        <Dot size={20} />
+                        {data}
+                    </li>
+                ))}
+            </ul>
+        </div>
+    )
+}
+
+
+
+
+interface PostGraduationProps {
+    currentCourse: CourseDataTypes | null
+}
+
+const PostGraduation = ({ currentCourse }: PostGraduationProps) => {
+    return (
+        <div className="space-y-5" >
+            <h4 className=" text-lg md:text-xl font-semibold  " >Post Graduation</h4>
+            <ul className=" grid grid-cols-1 md:grid-cols-2 justify-end justify-items-start place-items-center gap-6 gap-x-10 " >
+                {currentCourse?.post_graduation?.map((data, index) => (
+                    <li key={index} className="flex items-start gap-4 text-sm  " >
+                        <Dot size={20} />
+                        {data}
+                    </li>
+                ))}
+            </ul>
+        </div>
+    )
+}
 
 
 
@@ -376,24 +435,40 @@ export default function Page() {
                     text-sm
                 " >
                     <div className="flex w-fit flex-col items-start gap-0.5" >
+                        <h6 className="font-semibold text-sm " >Course Fees</h6>
+                        <ul className="mt-1 flex items-start gap-1 flex-col " >
+                            {
+                                currentCourse?.onlineFee && (
+                                    <li className="text-xs  text-gray-600"><span className="font-bold" >Online Fee:</span> ₦{currentCourse?.onlineFee?.toLocaleString()} </li>
+                                )
+                            }
+                            {
+                                currentCourse?.inhouseFee && (
+                                    <li className="text-xs  text-gray-600"><span className="font-bold" >Inhouse Fee</span>: ₦{currentCourse?.inhouseFee?.toLocaleString()} </li>
+                                )
+                            }
+                        </ul>
+                    </div>
+
+                    <div className="flex w-fit flex-col items-start gap-0.5" >
                         <h6 className="font-semibold text-sm " >Skill Level</h6>
                         <p className="text-xs  text-gray-600" >intermediate</p>
                     </div>
 
                     <div className="flex w-fit flex-col items-start gap-0.5">
                         <h6 className="font-semibold text-sm ">Duration</h6>
-                        <p className="text-xs  text-gray-600" >  {currentCourse?.duration} </p>
+                        <ul>
+                            {currentCourse?.duration?.map((duration, index) => (
+                                <li key={index} className="text-xs  text-gray-600"  > {duration} </li>
+                            ))}
+                        </ul>
                     </div>
 
                     <div className="flex w-fit flex-col items-start gap-0.5">
                         <h6 className="font-semibold text-sm "> Learning Mode</h6>
-                        <p className="text-xs  text-gray-600" >Online</p>
+                        <p className="text-xs  text-gray-600" >{currentCourse?.learning_mode}</p>
                     </div>
 
-                    <div className="flex w-fit flex-col items-start gap-0.5">
-                        <h6 className="font-semibold text-sm ">Hours</h6>
-                        <p className="text-xs  text-gray-600" >15 hours per week</p>
-                    </div>
 
                     <div className="flex w-fit flex-col items-start gap-0.5">
                         <h6 className="font-semibold text-sm ">Certificate</h6>
@@ -426,27 +501,47 @@ export default function Page() {
                     </button>
 
                     <button
-                        onClick={() => setCurrentTab("requirements")}
-                        className={` text-sm md:text-base  font-semibold py-2 cursor-pointer ${currentTab === "requirements" ? "border-b-2 border-b-gray-700" : ""
+                        onClick={() => setCurrentTab("Who_Should_Enrol")}
+                        className={` text-sm md:text-base  font-semibold py-2 cursor-pointer ${currentTab === "Who_Should_Enrol" ? "border-b-2 border-b-gray-700" : ""
                             }`}
                     >
-                        Requirements
+                        Who Should Enrol
                     </button>
 
                     <button
-                        onClick={() => setCurrentTab("content")}
-                        className={` text-sm md:text-base  font-semibold py-2 cursor-pointer ${currentTab === "content" ? "border-b-2 border-b-gray-700" : ""
+                        onClick={() => setCurrentTab("Course_Format")}
+                        className={` text-sm md:text-base  font-semibold py-2 cursor-pointer ${currentTab === "Course_Format" ? "border-b-2 border-b-gray-700" : ""
                             }`}
                     >
-                        Course Content
+                        Course Format
+                    </button>
+
+
+                    <button
+                        onClick={() => setCurrentTab("Projects")}
+                        className={` text-sm md:text-base  font-semibold py-2 cursor-pointer ${currentTab === "Projects" ? "border-b-2 border-b-gray-700" : ""
+                            }`}
+                    >
+                        Projects You’ll Build
+                    </button>
+
+
+                    <button
+                        onClick={() => setCurrentTab("post_graduation")}
+                        className={` text-sm md:text-base  font-semibold py-2 cursor-pointer ${currentTab === "post_graduation" ? "border-b-2 border-b-gray-700" : ""
+                            }`}
+                    >
+                        Post Graduation
                     </button>
 
                 </div>
 
 
-                {currentTab === "description" && <DescriptionSection />}
-                {currentTab === "requirements" && <Requirementsection />}
-                {currentTab === "content" && <CourseContentSection />}
+                {currentTab === "description" && <DescriptionSection currentCourse={currentCourse} />}
+                {currentTab === "Who_Should_Enrol" && <Who_Should_Enrol currentCourse={currentCourse} />}
+                {currentTab === "Course_Format" && <Course_Format currentCourse={currentCourse} />}
+                {currentTab === "Projects" && <Projects currentCourse={currentCourse} />}
+                {currentTab === "post_graduation" && <PostGraduation currentCourse={currentCourse} />}
 
 
             </section>

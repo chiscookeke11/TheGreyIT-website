@@ -148,7 +148,7 @@ export default function Page() {
                                 <div key={index} className=" w-full bg-[#f2f5fc] h-full py-6 px-5 flex flex-col items-start gap-4 rounded-lg shadow-sm relative" >
                                     <span className=" h-10 w-10 md:h-14 md:w-14 flex items-center justify-center bg-gray-700 text-white rounded-sm font-medium text-lg md:text-xl text-left shadow-xl " >{index + 1} </span>
                                     <h3 className=" font-syne font-bold text-xl mt-3  " > {track.title} </h3>
-                                    <p className=" font-normal text-base   md:mt-1 " >{track.description} </p>
+                                    <p className=" font-normal text-base   md:mt-1 " >{track.shorter_Description} </p>
 
 
                                     <div className="w-full flex flex-col md:flex-row items-center gap-4  mt-auto " >
