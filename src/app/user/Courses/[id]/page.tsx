@@ -1,180 +1,21 @@
 "use client"
 
+import Course_Format from "@/components/UI/Course_Format";
+import DescriptionSection from "@/components/UI/DescriptionSection";
+import PostGraduation from "@/components/UI/PostGraduation";
+import Projects from "@/components/UI/Projects";
 import { Spinner } from "@/components/UI/Spinner";
+import Who_Should_Enrol from "@/components/UI/Who_Should_Enrol";
 import { useAppContext } from "@/context/AppContext";
 import { sendPaymentConfirmationEmail } from "@/lib/appActions";
 import { supabase } from "@/lib/supabaseClient";
 import { CourseDataTypes, PaystackReference } from "@/types/types";
 import { User } from "@supabase/supabase-js";
-import { Check, Dot, Languages } from "lucide-react";
 import Image from "next/image";
 import { useParams } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import toast from "react-hot-toast";
 import { PaystackButton } from 'react-paystack';
-
-
-
-
-
-interface Who_Should_EnrolProps {
-    currentCourse: CourseDataTypes | null
-}
-
-const Who_Should_Enrol = ({ currentCourse }: Who_Should_EnrolProps) => {
-    return (
-        <div className="space-y-5" >
-            <h4 className=" text-lg md:text-xl font-semibold  " >Who Should Enrol</h4>
-
-            <ul className=" flex items-start flex-col gap-3 w-full max-w-3xl pl-5  " >
-                {
-                    currentCourse?.Who_Should_Enrol?.map((data, index) => (
-                        <li key={index} className="text-sm font-medium  text-gray-900 flex items-start gap-4 " ><Dot size={20} /> {data}</li>
-                    ))
-                }
-            </ul>
-
-        </div>
-    )
-}
-
-
-
-interface Course_FormatProps {
-    currentCourse: CourseDataTypes | null
-}
-
-const Course_Format = ({ currentCourse }: Course_FormatProps) => {
-    return (
-        <div className="space-y-5" >
-            <h4 className=" text-lg md:text-xl font-semibold  " >Course Format</h4>
-            <ul className=" grid grid-cols-1 md:grid-cols-2 justify-end justify-items-start place-items-center gap-6 gap-x-10 " >
-                {currentCourse?.courseFormat?.map((data, index) => (
-                    <li key={index} className="flex items-start gap-4 text-sm  " >
-                        <Dot size={20} />
-                        {data}
-                    </li>
-                ))}
-            </ul>
-        </div>
-    )
-}
-
-
-
-
-interface DescriptionSectionProps {
-    currentCourse: CourseDataTypes | null
-}
-
-const DescriptionSection = ({ currentCourse }: DescriptionSectionProps) => {
-    return (
-        <>
-            {/* What you will learn section  */}
-            <div className="space-y-5" >
-                <h4 className=" text-lg md:text-xl font-semibold  " >What you will learn</h4>
-
-                <ul className=" grid grid-cols-1 md:grid-cols-2 justify-end justify-items-start place-items-center gap-6 gap-x-10 " >
-                    {currentCourse?.what_you_will_learn?.map((data, index) => (
-                        <li key={index} className="flex items-start gap-4 text-sm  " >
-                            <Dot size={20} />
-                            {data}
-                        </li>
-                    ))}
-                </ul>
-            </div>
-
-
-
-            {/* skills you will gain section  */}
-            <div className="space-y-5" >
-                <h4 className=" text-lg md:text-xl font-semibold  " >Skills you&apos;ll gain</h4>
-
-                <ul className=" flex items-center flex-wrap gap-4 w-full max-w-3xl   " >
-                    {currentCourse?.skills?.map((skill, index) => (
-                        <li key={index} className="flex items-center justify-center bg-[#f2f5fc] px-3 py-2 text-xs  font-medium rounded-4xl text-gray-900 " >  {skill}</li>
-                    ))}
-                </ul>
-            </div>
-
-
-
-            {/* Details to know section  */}
-            <div className="space-y-5" >
-                <h4 className=" text-lg md:text-xl font-semibold  " >Details to know</h4>
-
-                <div className="w-fit flex items-center gap-12 " >
-
-                    <div className="flex items-start flex-col gap-1 " >
-                        <Image src={"/logos/linkedin.png"} height={1000} width={1000} alt="LinkedIn logo" className=" w-6 h-6 " />
-                        <h5 className=" text-sm  font-semibold mt-4" >Shareable certificate</h5>
-                        <p className="text-gray-500 text-xs " >Add to your LinkedIn profile</p>
-
-                    </div>
-
-
-
-                    <div className="flex items-start flex-col gap-1 " >
-                        <Languages size={27} />
-                        <h5 className="text-sm  font-semibold  mt-4">Taught in English</h5>
-                        <p className="text-gray-500 text-xs ">26 languages available</p>
-
-                    </div>
-
-
-
-                </div>
-            </div>
-        </>
-    )
-}
-
-
-
-interface ProjectsProps {
-    currentCourse: CourseDataTypes | null
-}
-
-const Projects = ({ currentCourse }: ProjectsProps) => {
-    return (
-        <div className="space-y-5" >
-            <h4 className=" text-lg md:text-xl font-semibold  " >Projects You’ll Build</h4>
-            <ul className=" grid grid-cols-1 md:grid-cols-2 justify-end justify-items-start place-items-center gap-6 gap-x-10 " >
-                {currentCourse?.projects?.map((data, index) => (
-                    <li key={index} className="flex items-start gap-4 text-sm  " >
-                        <Dot size={20} />
-                        {data}
-                    </li>
-                ))}
-            </ul>
-        </div>
-    )
-}
-
-
-
-
-interface PostGraduationProps {
-    currentCourse: CourseDataTypes | null
-}
-
-const PostGraduation = ({ currentCourse }: PostGraduationProps) => {
-    return (
-        <div className="space-y-5" >
-            <h4 className=" text-lg md:text-xl font-semibold  " >Post Graduation</h4>
-            <ul className=" grid grid-cols-1 md:grid-cols-2 justify-end justify-items-start place-items-center gap-6 gap-x-10 " >
-                {currentCourse?.post_graduation?.map((data, index) => (
-                    <li key={index} className="flex items-start gap-4 text-sm  " >
-                        <Dot size={20} />
-                        {data}
-                    </li>
-                ))}
-            </ul>
-        </div>
-    )
-}
-
-
 
 
 
@@ -237,11 +78,6 @@ export default function Page() {
 
         fetchCourseDetails()
     }, [id])
-
-
-
-
-
 
 
     // the paystack config
@@ -405,16 +241,7 @@ export default function Page() {
                         <Image src={currentCourse?.imageUrl} alt={`${currentCourse?.title}-image`} height={1000} width={1000} className="w-full h-full object-cover object-center " />
                     </div>
                 )}
-
-
-
-
             </section>
-
-
-
-
-
 
 
             {/* section two  */}
@@ -481,13 +308,6 @@ export default function Page() {
                     </div>
 
                 </div>
-
-
-
-
-
-
-
 
 
                 {/* the section tab  */}
