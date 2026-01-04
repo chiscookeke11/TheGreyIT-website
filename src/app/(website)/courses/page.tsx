@@ -2,13 +2,14 @@
 
 import CurriculumModal from "@/components/courses-page/CurriculumModal"
 import Button from "@/components/UI/Button"
-import {Spinner} from "@/components/UI/Spinner"
+import { Spinner } from "@/components/UI/Spinner"
 import { supabase } from "@/lib/supabaseClient"
 import { CourseDataTypes } from "@/types/types"
 import { Download, } from "lucide-react"
 import Link from "next/link"
 import React, { useEffect, useState } from "react"
 import Marquee from "react-fast-marquee";
+import toast from "react-hot-toast"
 
 
 
@@ -26,33 +27,47 @@ const highlights = [
 ]
 
 
-const downloadPdf = async (pdfName: string) => {
-
-    const { error, data } = await supabase.storage.from("course_outline_pdf").download(pdfName)
-
-    if (error) {
-        console.error("Error downlaoding file:", error.message)
-    }
-    else if (data) {
-        // Create a url for the blob and trigger download
-        const url = URL.createObjectURL(data);
-        const link = document.createElement("a")
-        link.href = url
-        link.download = `${pdfName}`
-        document.body.appendChild(link)
-        link.click()
-        link.remove()
-        URL.revokeObjectURL(url)
-    }
-
-}
-
 
 
 export default function Page() {
     const [coursesData, setCoursesData] = useState<CourseDataTypes[] | null>(null)
     const [showModal, setShowModal] = useState(false)
     const [selectedCourse, setSelectedCourse] = useState<string | undefined>("")
+    const [downloadingPdf, setDownloadingPdf] = useState<string | null>(null)
+
+
+
+    const downloadPdf = async (pdfName: string) => {
+
+            setDownloadingPdf(pdfName)
+
+
+        const { error, data } = await supabase.storage.from("course_outline_pdf").download(pdfName)
+
+        if (error) {
+            console.error("Error downlaoding file:", error.message)
+            toast.error("Failed to download PDF")
+               setDownloadingPdf(null)
+
+        }
+        else if (data) {
+            // Create a url for the blob and trigger download
+            const url = URL.createObjectURL(data);
+            const link = document.createElement("a")
+            link.href = url
+            link.download = `${pdfName}`
+            document.body.appendChild(link)
+            link.click()
+            link.remove()
+            URL.revokeObjectURL(url)
+
+                setDownloadingPdf(null)
+
+        }
+
+    }
+
+
 
     useEffect(() => {
         document.body.style.overflowY = showModal ? "hidden" : "auto"
@@ -154,11 +169,14 @@ export default function Page() {
                                     <div className="w-full flex flex-col md:flex-row items-center gap-4  mt-auto " >
                                         <Link href={"/user/Courses"} className="w-full basis-1/2 " ><Button variant="default" className=" w-full !rounded-[100px] text-sm! lg:text-sm " >Register</Button></Link>
                                         <Button
+                                            disabled={downloadingPdf === track.pdfName}
                                             onClick={() => {
                                                 if (track.pdfName) downloadPdf(track.pdfName)
                                                 else console.warn("PDF not available")
                                             }}
-                                            variant="default" className="w-full basis-1/2 !rounded-[100px] !bg-gray-700 !text-white text-sm! !lg:text-sm hover:bg-transparent! hover:text-gray-700! flex items-center gap-3 whitespace-nowrap " >View Curriculum <Download size={15} /> </Button>
+                                            variant="default" className="w-full basis-1/2 !rounded-[100px] !bg-gray-700 !text-white text-sm! !lg:text-sm hover:bg-transparent! hover:text-gray-700! flex items-center gap-3 whitespace-nowrap " >
+                                            {downloadingPdf === track.pdfName ? "Downloading ..." : <>View Curriculum <Download size={15} /></>}
+                                        </Button>
                                     </div>
 
                                     <div className="absolute right-0 top-0 bg-red-500 font-medium text-white py-1 px-3 w-fit text-base rounded-xs  " >
