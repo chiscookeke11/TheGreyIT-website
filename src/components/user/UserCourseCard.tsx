@@ -3,7 +3,7 @@
 import { useAppContext } from "@/context/AppContext";
 import { toggleBookmark } from "@/lib/appActions";
 import { CourseDataTypes } from "@/types/types";
-import { Clock, Heart, Radio } from "lucide-react";
+import { BookOpenCheck, Clock, Heart, Radio } from "lucide-react";
 import Image from "next/image";
 import React, { SetStateAction } from "react";
 import toast from "react-hot-toast";
@@ -58,17 +58,53 @@ export default function UserCourseCard({ track, bookmarks, setbookmarks, isBookm
 
             {/* Course description */}
             <div className="w-full flex flex-col gap-3 items-start p-3 " >
-                <div className="w-full flex items-center gap-[40%] text-sm " >
-                    <small className=" flex items-center gap-2 text-red-600 " ><Radio size={20} /> Live</small>
-                    <small className=" flex items-center gap-2 text-gray-600"><Clock size={20} /> 1 week</small>
+                <div className="w-full flex items-center justify-between text-sm  " >
+                    {
+                        track.is_active ? (
+                            <small className=" flex items-center gap-2 text-red-600 " ><Radio size={20} /> Live</small>
+                        )
+                            :
+                            (
+                                <small className=" flex items-center gap-2 text-green-500 " ><BookOpenCheck size={20} /> Completed</small>
+                            )
+                    }
+
+                    <small className=" flex shrink-0 items-center justify-end gap-2 text-gray-600"><Clock size={18} />
+                        <ul>
+                            {track?.duration?.map((duration, index) => (
+                                <li key={index} > {duration} </li>
+                            ))}
+                        </ul>
+                    </small>
                 </div>
 
                 <h3 className="text-base font-semibold  " >{track.title} </h3>
-                <h4 className=" text-base font-semibold text-red-600  " >&#8358; {track.price} </h4>
+
+
+                <div className="flex flex-col items-start gap-2" >
+                    {
+                        !track.onlineFee || track.onlineFee < 0 ?
+                            null :
+                            (
+                                <h4 className=" text-xs font-medium text-red-600  " ><span className="text-black" >Online(Live):</span> &#8358;{track.onlineFee.toLocaleString()} </h4>
+                            )
+                    }
+
+
+                    {
+                        track.inhouseFee && (
+                            <h4 className=" text-xs font-medium text-red-600  " > <span className="text-black" >In-House(Classroom):</span> &#8358;{track.inhouseFee.toLocaleString()} </h4>
+                        )
+                    }
+
+
+                </div>
+
+
                 <hr className="w-full border-t border-gray-400  " />
                 <div className="w-full flex items-center justify-between text-sm " >
-                    <p> {"Tutor"} </p>
-                   {no_of_reviews || no_of_reviews === 0 ? (<p>Total reviews: <span className="font-semibold" >{no_of_reviews}</span></p>) : ( <RatingStars ratingValue={track.rating} size={20} readonly={true} />)}
+                    <p> {track.tutor} </p>
+                    {no_of_reviews || no_of_reviews === 0 ? (<p>Total reviews: <span className="font-semibold" >{no_of_reviews}</span></p>) : (<RatingStars ratingValue={track.rating} size={20} readonly={true} />)}
 
                 </div>
 
