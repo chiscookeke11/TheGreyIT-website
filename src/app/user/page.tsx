@@ -2,8 +2,10 @@
 
 import TransactionsTable from "@/components/user/TransactionsTable"
 import { useAppContext } from "@/context/AppContext"
+import { CourseDataTypes } from "@/types/types"
 import { BookOpen, CircleCheckBig, GraduationCap } from "lucide-react"
 import Link from "next/link"
+import { useEffect, useState } from "react"
 
 
 
@@ -11,6 +13,22 @@ import Link from "next/link"
 
 export default function Page() {
     const { userData, allCoursesData } = useAppContext()
+    const [activeCourses, setActiveCourses] = useState<CourseDataTypes[] | null>(null)
+
+
+    useEffect(() => {
+
+        const filterForActiveCourses = () => {
+     const  activeCourse = allCoursesData?.filter((course) => course.is_active === true)
+        setActiveCourses(activeCourse ?? null)
+    }
+
+    filterForActiveCourses()
+
+    }, [allCoursesData])
+
+
+
 
     return (
         <div className="w-full h-full flex flex-col gap-7 items-center justify-center font-poppins" >
@@ -35,7 +53,10 @@ export default function Page() {
 
                     <button className="w-full whitespace-nowrap lg:max-w-[350px] h-full flex flex-row items-center justify-start gap-5 py-8 px-5 rounded-sm bg-white border border-gray-300 " >
                         <GraduationCap size={35} />
-                        <h3 className="text-start text-base md:text-xl font-medium " > <span className="text-xl font-semibold" > {allCoursesData?.length ?? 0}+</span><br /> Active Courses</h3>
+                        <h3 className="text-start text-base md:text-xl font-medium " > <span className="text-xl font-semibold" >
+                             {activeCourses?.length ?? 0}+</span><br />
+                             Active Courses
+                             </h3>
 
                     </button>
 
