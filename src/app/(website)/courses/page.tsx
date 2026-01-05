@@ -179,8 +179,21 @@ export default function Page() {
                                         </Button>
                                     </div>
 
-                                    <div className="absolute right-0 top-0 bg-red-500 font-medium text-white py-1 px-3 w-fit text-base rounded-xs  " >
-                                        ₦ {track.price.toLocaleString()}
+                                    <div className="absolute right-0 top-0 bg-red-500 font-medium text-white py-1 px-1 w-fit text-sm rounded-xs flex flex-col items-start gap-1.5  " >
+                                       {
+                                        !track.onlineFee || track.onlineFee < 0 ?
+                                        null:
+                                        (
+                                            <span>Online: ₦{track?.onlineFee?.toLocaleString()}</span>
+                                        )
+                                       }
+
+
+                                       {
+                                        track.inhouseFee && (
+                                            <span>In-house: ₦{track?.inhouseFee?.toLocaleString()}</span>
+                                        )
+                                       }
                                     </div>
                                 </div>
                             ))}

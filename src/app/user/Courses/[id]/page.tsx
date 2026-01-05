@@ -279,7 +279,7 @@ export default function Page() {
 
                     <div className="flex w-fit flex-col items-start gap-0.5" >
                         <h6 className="font-semibold text-sm " >Skill Level</h6>
-                        <p className="text-xs  text-gray-600" >intermediate</p>
+                        <p className="text-xs  text-gray-600" > {currentCourse?.skill_level} </p>
                     </div>
 
                     <div className="flex w-fit flex-col items-start gap-0.5">
@@ -303,7 +303,7 @@ export default function Page() {
                     </div>
 
                     <div className="flex w-fit flex-col items-start gap-0.5">
-                        <h6 className="font-semibold text-sm ">4.8</h6>
+                        <h6 className="font-semibold text-sm ">{currentCourse?.rating} </h6>
                         <p className="text-xs  text-gray-600" >(521 reviews)</p>
                     </div>
 

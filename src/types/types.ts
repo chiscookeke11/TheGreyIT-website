@@ -23,6 +23,8 @@ export interface CourseDataTypes {
   learning_mode?: string,
   onlineFee?: number,
   inhouseFee?: number,
+  is_active?: boolean,
+  skill_level?: string,
 }
 
 
