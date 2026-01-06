@@ -121,7 +121,7 @@ export default function UserDashboardLayout({ children }: { children: React.Reac
     if (loading || checkingUser) {
         return (
             <div className="w-full h-screen flex flex-col gap-3 items-center justify-center bg-white">
-                <p className="text-xl font-poppins font-semibold">Checking authentication...</p>
+                <p className="text-xl font-poppins font-semibold">Checking authentication</p>
                 <Spinner />
             </div>
         )
