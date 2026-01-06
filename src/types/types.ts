@@ -25,6 +25,7 @@ export interface CourseDataTypes {
   inhouseFee?: number,
   is_active?: boolean,
   skill_level?: string,
+  total_reviews?: number,
 }
 
 

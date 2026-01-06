@@ -304,7 +304,7 @@ export default function Page() {
 
                     <div className="flex w-fit flex-col items-start gap-0.5">
                         <h6 className="font-semibold text-sm ">{currentCourse?.rating} </h6>
-                        <p className="text-xs  text-gray-600" >(521 reviews)</p>
+                        <p className="text-xs  text-gray-600" >({currentCourse?.total_reviews} reviews)</p>
                     </div>
 
                 </div>
