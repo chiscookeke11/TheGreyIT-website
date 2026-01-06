@@ -39,7 +39,7 @@ export default function Page() {
 
     const downloadPdf = async (pdfName: string) => {
 
-            setDownloadingPdf(pdfName)
+        setDownloadingPdf(pdfName)
 
 
         const { error, data } = await supabase.storage.from("course_outline_pdf").download(pdfName)
@@ -47,7 +47,7 @@ export default function Page() {
         if (error) {
             console.error("Error downlaoding file:", error.message)
             toast.error("Failed to download PDF")
-               setDownloadingPdf(null)
+            setDownloadingPdf(null)
 
         }
         else if (data) {
@@ -61,7 +61,7 @@ export default function Page() {
             link.remove()
             URL.revokeObjectURL(url)
 
-                setDownloadingPdf(null)
+            setDownloadingPdf(null)
 
         }
 
@@ -160,14 +160,26 @@ export default function Page() {
                         <section id="courseTracks" className=" w-full h-fit py-14 md:py-28 px-[4%]  grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 place-items-center justify-items-center gap-10 font-poppins " >
 
                             {coursesData?.map((track, index) => (
-                                <div key={index} className=" w-full bg-[#f2f5fc] h-full py-6 px-5 flex flex-col items-start gap-4 rounded-lg shadow-sm relative" >
+                                <div
+                                    key={index}
+                                    onClick={() => {
+                                        if (track.pdfName) downloadPdf(track.pdfName)
+                                        else console.warn("PDF not available")
+                                    }}
+                                    className=" w-full bg-[#f2f5fc] h-full py-6 px-5 flex flex-col items-start gap-4 rounded-lg shadow-sm relative" >
                                     <span className=" h-10 w-10 md:h-14 md:w-14 flex items-center justify-center bg-gray-700 text-white rounded-sm font-medium text-lg md:text-xl text-left shadow-xl " >{index + 1} </span>
                                     <h3 className=" font-syne font-bold text-xl mt-3  " > {track.title} </h3>
                                     <p className=" font-normal text-base   md:mt-1 " >{track.shorter_Description} </p>
 
 
                                     <div className="w-full flex flex-col md:flex-row items-center gap-4  mt-auto " >
-                                        <Link href={"/user/Courses"} className="w-full basis-1/2 " ><Button variant="default" className=" w-full !rounded-[100px] text-sm! lg:text-sm " >Register</Button></Link>
+                                        <Link href={`/user/Courses/${track.id}`} onClick={(e) => {
+                                            e.stopPropagation()
+                                        }}
+                                            className="w-full basis-1/2 " >
+                                            <Button variant="default" className=" w-full !rounded-[100px] text-sm! lg:text-sm " >Register</Button>
+                                        </Link>
+
                                         <Button
                                             disabled={downloadingPdf === track.pdfName}
                                             onClick={() => {
@@ -179,21 +191,21 @@ export default function Page() {
                                         </Button>
                                     </div>
 
-                                    <div className="absolute right-0 top-0 bg-red-500 font-medium text-white py-1 px-1 w-fit text-sm rounded-xs flex flex-col items-start gap-1.5  " >
-                                       {
-                                        !track.onlineFee || track.onlineFee < 0 ?
-                                        null:
-                                        (
-                                            <span>Online: ₦{track?.onlineFee?.toLocaleString()}</span>
-                                        )
-                                       }
+                                    <div className="absolute right-0 top-0 bg-red-500 font-medium text-white py-1 pl-4 pr-1 w-fit text-sm rounded-xs flex flex-col items-start gap-1.5  " >
+                                        {
+                                            !track.onlineFee || track.onlineFee < 0 ?
+                                                null :
+                                                (
+                                                    <span>Online: ₦{track?.onlineFee?.toLocaleString()}</span>
+                                                )
+                                        }
 
 
-                                       {
-                                        track.inhouseFee && (
-                                            <span>In-house: ₦{track?.inhouseFee?.toLocaleString()}</span>
-                                        )
-                                       }
+                                        {
+                                            track.inhouseFee && (
+                                                <span>In-house: ₦{track?.inhouseFee?.toLocaleString()}</span>
+                                            )
+                                        }
                                     </div>
                                 </div>
                             ))}
