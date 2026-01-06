@@ -59,8 +59,6 @@ export default function DescriptionSection({ currentCourse }: DescriptionSection
                     <div className="flex items-start flex-col gap-1 " >
                         <Languages size={27} />
                         <h5 className="text-sm  font-semibold  mt-4">Taught in English</h5>
-                        <p className="text-gray-500 text-xs ">26 languages available</p>
-
                     </div>
 
 
