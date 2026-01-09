@@ -214,7 +214,6 @@ export default function Page() {
                     <h1 className=" text-2xl md:text-3xl font-semibold text-gray-700 "  > {currentCourse?.title} </h1>
                     <p className=" lg:w-[75%] text-sm md:text-base text-gray-600 " > {currentCourse?.description} </p>
 
-                    <div className=" text-sm md:text-sm" > Instructor: {currentCourse?.tutor}   </div>
 
 
 

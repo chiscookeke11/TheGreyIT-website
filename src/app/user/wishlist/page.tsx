@@ -9,10 +9,6 @@ import {Spinner} from "@/components/UI/Spinner";
 import UserCourseCard from "@/components/user/UserCourseCard";
 import Link from "next/link";
 
-type Bookmark = {
-  course_id: number;
-  course: CourseDataTypes;
-};
 
 export default function Page() {
   const { userData } = useAppContext()

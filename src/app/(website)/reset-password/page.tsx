@@ -63,7 +63,7 @@ export default function Page() {
 
         setLoading(true)
 
-        const { data, error } = await supabase.auth.resetPasswordForEmail(email, {
+        const { error } = await supabase.auth.resetPasswordForEmail(email, {
             redirectTo: "https://the-grey-it-website.vercel.app/update_password"
         })
 

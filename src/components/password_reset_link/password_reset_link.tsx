@@ -3,11 +3,9 @@
 "use client"
 
 
-import Image from "next/image";
+
 import { MailCheck } from "lucide-react";
 import { useSearchParams } from "next/navigation";
-import { supabase } from "@/lib/supabaseClient";
-import toast from "react-hot-toast";
 import { useState } from "react";
 import Link from "next/link";
 

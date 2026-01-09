@@ -222,7 +222,7 @@ export default function Page() {
         setLoading(true)
 
         // First we reauthenticate
-        const { data: loginData, error: loginError } = await supabase.auth.signInWithPassword({
+        const { error: loginError } = await supabase.auth.signInWithPassword({
             email: email,
             password: passwordValues.oldPassword
 

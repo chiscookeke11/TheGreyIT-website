@@ -140,7 +140,7 @@ export default function Page() {
 
 
             // then  write `hasDownloaded` to true in the db
-            const { data: statusData, error: statusError } = await supabase
+            const {error: statusError } = await supabase
                 .from("certificates")
                 .update({ hasDownloaded: true })
                 .eq("id", currentCertificate?.id)
