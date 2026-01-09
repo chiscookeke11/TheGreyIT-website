@@ -13,7 +13,6 @@ export interface CourseDataTypes {
   id?: string,
   pdfName?: string,
   skills?: string[],
-  enrolled_students: string[] | null,
   what_you_will_learn?: string[],
   Who_Should_Enrol?: string[],
   courseFormat?: string[],

@@ -7,10 +7,10 @@ import Projects from "@/components/UI/Projects";
 import { Spinner } from "@/components/UI/Spinner";
 import Who_Should_Enrol from "@/components/UI/Who_Should_Enrol";
 import { useAppContext } from "@/context/AppContext";
+import { useAuthUser } from "@/hooks/useAuthUser";
 import { sendPaymentConfirmationEmail } from "@/lib/appActions";
 import { supabase } from "@/lib/supabaseClient";
 import { CourseDataTypes, PaystackReference } from "@/types/types";
-import { User } from "@supabase/supabase-js";
 import Image from "next/image";
 import { useParams } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
@@ -19,39 +19,73 @@ import { PaystackButton } from 'react-paystack';
 
 
 
+
 export default function Page() {
     const [currentTab, setCurrentTab] = useState("description")
     const { id } = useParams()
     const [currentCourse, setCurrentCourse] = useState<CourseDataTypes | null>(null)
-    const [user, setUser] = useState<User | null>(null)
-    const cachedUser = useRef<User | null>(null)
     const public_key = process.env.NEXT_PUBLIC_PAYSTACK_PUBLIC_KEY!
     const { userData } = useAppContext()
     const [loading, setLoading] = useState(false)
+    const [isEnrolled, setIsEnrolled] = useState(false)
+    const [enrolledNumber, setEnrolledNumber] = useState<number | null>(null)
+    const { user, loading: authLoading } = useAuthUser()
+
+
+
+    // function to check enrollment status
+    const checkEnrollmentStatus = async () => {
+        if (!user || !currentCourse) return;
+
+        const { data } = await supabase
+            .from("course_enrollments")
+            .select("id")
+            .eq("user_id", user.id)
+            .eq("course_id", currentCourse.id)
+            .single();
+
+        setIsEnrolled(!!data);
+    };
+
+
+
+    // function to enroll a user
+    const enrollUser = async (transactionId?: string) => {
+        if (!user || !currentCourse) return;
+
+        const { error } = await supabase.from("course_enrollments").insert({
+            user_id: user.id,
+            course_id: currentCourse.id,
+            transaction_id: transactionId,
+        });
+
+        if (!error) {
+            setIsEnrolled(true);
+            setEnrolledNumber((prev) => (prev ?? 0) + 1);
+        }
+    };
+
+
+    // function to count enrolled users
+
+    const countEnrolledUsers = async () => {
+        if (!currentCourse) return;
+
+        const { count } = await supabase
+            .from("course_enrollments")
+            .select("*", { count: "exact", head: true })
+            .eq("course_id", currentCourse.id);
+
+        setEnrolledNumber(count ?? 0);
+    };
+
+
 
 
     useEffect(() => {
-        const initAuth = async () => {
-            const { data: { session } } = await supabase.auth.getSession()
-            const currentUser = session?.user ?? null
-            cachedUser.current = currentUser
-            setUser(currentUser)
-
-
-            // listen for auth changes
-            const { data: listener } = supabase.auth.onAuthStateChange((_event, session) => {
-                const updatedUser = session?.user ?? null
-                cachedUser.current = updatedUser
-                setUser(updatedUser)
-            })
-
-            return () => {
-                listener.subscription.unsubscribe()
-            }
-        }
-
-        initAuth()
-    }, [])
+        checkEnrollmentStatus()
+        countEnrolledUsers()
+    }, [currentCourse, user])
 
 
 
@@ -64,9 +98,8 @@ export default function Page() {
         const fetchCourseDetails = async () => {
             const { data, error } = await supabase.from("course").select("*").eq("id", id).single()
 
-
             if (error) {
-                console.error(error)
+                // console.error(error)
                 setLoading(false)
             }
 
@@ -84,90 +117,58 @@ export default function Page() {
     const config = {
         reference: (new Date()).getTime().toString(),
         email: user?.email ?? "",
-        amount: currentCourse?.price ? currentCourse.price * 100 : 0,
+        amount: currentCourse?.inhouseFee ? currentCourse?.inhouseFee * 100 : 0,
         publicKey: public_key,
     };
 
 
 
     const handlePaystackSuccessAction = async (reference: PaystackReference) => {
-        console.log(reference);
+        try {
+            await supabase.from("transactions").insert({
+                reference: reference.reference,
+                status: reference.status,
+                date: new Date().toISOString(),
+                user_id: user?.id,
+                course: currentCourse?.title,
+                course_id: currentCourse?.id,
+            });
 
-        // store this transaction in the transaction table
-        const { data, error } = await supabase.from("transactions").insert({
-            reference: reference.reference,
-            status: reference.status,
-            date: new Date().toISOString(),
-            user_id: user?.id,
-            course: currentCourse?.title,
-            course_id: currentCourse?.id,
-        })
+            await enrollUser(reference.trxref);
 
-        if (error) {
-            toast.error("Failed!")
-            console.error(error)
-        }
-        else {
-            console.log(data)
-            toast.success("Payment successful!")
+            await supabase
+                .from("user_data")
+                .update({
+                    list_enrolled_courses: [
+                        ...(userData?.list_enrolled_courses || []),
+                        currentCourse?.id,
+                    ],
+                })
+                .eq("user_id", user?.id);
 
+            await sendPaymentConfirmationEmail({
+                name: user?.user_metadata?.full_name ?? user?.email ?? "Learner",
+                email: user?.email ?? "",
+                course_title: currentCourse?.title ?? "",
+                reference: reference.reference,
+                status: reference.status,
+                date: new Date().toLocaleString(),
+                dashboard_link: `${process.env.NEXT_PUBLIC_APP_URL}/user/courses/${id}`,
+            });
 
-            // add the student email to the course table
-            // 1. Fetch existing array
-            const { data: oldData } = await supabase.from("course").select("enrolled_students").eq("id", currentCourse?.id).single();
-
-            // 2. Append new email
-            const updatedArray = [...(oldData?.enrolled_students || []), user?.email];
-
-            // 3. Update
-            await supabase.from("course").update({ enrolled_students: updatedArray }).eq("id", currentCourse?.id);
-
-
-
-            // add the course id to the users enrolled courses array
-            const updatedList = [
-                ...(userData?.list_enrolled_courses || []),
-                currentCourse?.id
-            ]
-
-            const { data: updateData, error: updateError } = await supabase.from("user_data").update({
-                list_enrolled_courses: updatedList
-            }).eq("user_id", user?.id)
-
-            if (updateError) {
-                console.error(updateError)
-            }
-
-            else {
-                console.log(updateData)
-
-
-                // Then finally send the confirmation email
-
-                try {
-                    await sendPaymentConfirmationEmail({
-                        name: user?.user_metadata?.full_name ?? user?.email ?? "Learner",
-                        email: user?.email ?? "",
-                        course_title: currentCourse?.title ?? "",
-                        reference: reference.reference,
-                        status: reference.status,
-                        date: new Date().toLocaleString(),
-                        dashboard_link: `${process.env.NEXT_PUBLIC_APP_URL}/user/courses/${id}`
-                    });
-                } catch (err) {
-                    console.error("Failed to send confirmation email", err);
-                }
-
-                window.location.reload();
-            }
+            toast.success("Payment successful!");
+        } catch (err) {
+            console.error(err);
+            toast.error("Payment failed");
         }
     };
+
 
 
     // you can call this function anything
     const handlePaystackCloseAction = () => {
         // implementation for  whatever you want to do when the Paystack dialog closed.
-        console.log('closed')
+        // console.log('closed')
     }
 
 
@@ -179,7 +180,7 @@ export default function Page() {
     };
 
 
-    if (loading) {
+    if (authLoading || loading) {
         return (
             <>
                 <div className="w-full h-screen flex flex-col gap-8 items-center justify-center py-10 px-5" >
@@ -217,19 +218,27 @@ export default function Page() {
 
 
 
-                    {currentCourse?.id && userData?.list_enrolled_courses.includes(Number(currentCourse?.id)) ? ""
-                        :
-                        <PaystackButton {...componentProps} className=" font-syne py-2! px-10 my-1 mt-5 rounded-[100px]! border border-gray-700 cursor-pointer hover:bg-gray-700 hover:text-white transition-all duration-300 ease-in-out " />
-                    }
-                    {currentCourse?.enrolled_students && (
+                    {!isEnrolled && (
+                        <PaystackButton
+                            {...componentProps}
+                            className="font-syne py-2 px-10 mt-5 rounded-[100px] border border-gray-700
+               hover:bg-gray-700 hover:text-white transition"
+                        />
+                    )}
+
+
+
+                    {enrolledNumber && enrolledNumber > 0 ? (
                         <p className="text-sm">
                             <span className="font-bold">
-                                {currentCourse.enrolled_students.length}
+                                {enrolledNumber}
                             </span>{" "}
                             already enrolled
                         </p>
-                    )}
-
+                    )
+                        :
+                        null
+                    }
                 </div>
 
 
@@ -264,20 +273,20 @@ export default function Page() {
                         <h6 className="font-semibold text-sm " >Course Fees</h6>
                         <ul className="mt-1 flex items-start gap-1 flex-col " >
                             {
-                                currentCourse?.onlineFee && currentCourse.onlineFee > 0?
-                                (
-                                    <li className="text-xs  text-gray-600"><span className="font-bold" >Online Fee:</span> ₦{currentCourse?.onlineFee?.toLocaleString()} </li>
-                                )
-                                :
-                                null
+                                currentCourse?.onlineFee && currentCourse.onlineFee > 0 ?
+                                    (
+                                        <li className="text-xs  text-gray-600"><span className="font-bold" >Online Fee:</span> ₦{currentCourse?.onlineFee?.toLocaleString()} </li>
+                                    )
+                                    :
+                                    null
                             }
                             {
-                                currentCourse?.inhouseFee && currentCourse.inhouseFee > 0?
-                                (
-                                    <li className="text-xs  text-gray-600"><span className="font-bold" >Inhouse Fee</span>: ₦{currentCourse?.inhouseFee?.toLocaleString()} </li>
-                                )
-                                :
-                                null
+                                currentCourse?.inhouseFee && currentCourse.inhouseFee > 0 ?
+                                    (
+                                        <li className="text-xs  text-gray-600"><span className="font-bold" >Inhouse Fee</span>: ₦{currentCourse?.inhouseFee?.toLocaleString()} </li>
+                                    )
+                                    :
+                                    null
                             }
                         </ul>
                     </div>
