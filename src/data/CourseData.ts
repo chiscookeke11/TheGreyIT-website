@@ -10,7 +10,6 @@ export const CourseOverview: CourseDataTypes[] = [
     price: 0,
     rating: 0,
     pdfName: "software_engineering.pdf",
-    enrolled_students: [""],
     id: "",
     skills: []
   },
@@ -23,7 +22,6 @@ export const CourseOverview: CourseDataTypes[] = [
     price: 0,
     rating: 0,
     pdfName: "software_engineering.pdf",
-    enrolled_students: [""],
     id: "",
     skills: []
   },
@@ -37,7 +35,6 @@ export const CourseOverview: CourseDataTypes[] = [
     price: 0,
     rating: 0,
     pdfName: "software_engineering.pdf",
-    enrolled_students: [""],
     id: "",
     skills: []
   },
@@ -51,7 +48,6 @@ export const CourseOverview: CourseDataTypes[] = [
     price: 0,
     rating: 0,
     pdfName: "data_science.pdf",
-    enrolled_students: [""],
     id: "",
     skills: []
   },
@@ -64,7 +60,6 @@ export const CourseOverview: CourseDataTypes[] = [
     price: 0,
     rating: 0,
     pdfName: "data_science.pdf",
-    enrolled_students: [""],
     id: "",
     skills: []
   },
@@ -77,7 +72,6 @@ export const CourseOverview: CourseDataTypes[] = [
     price: 0,
     rating: 0,
     pdfName: "data_science.pdf",
-    enrolled_students: [""],
     id: "",
     skills: []
   },
@@ -90,7 +84,6 @@ export const CourseOverview: CourseDataTypes[] = [
     price: 0,
     rating: 0,
     pdfName: "data_science.pdf",
-    enrolled_students: [""],
     id: "",
     skills: []
   },
@@ -103,7 +96,6 @@ export const CourseOverview: CourseDataTypes[] = [
     price: 0,
     rating: 0,
     pdfName: "data_science.pdf",
-    enrolled_students: [""],
     id: "",
     skills: []
   },
