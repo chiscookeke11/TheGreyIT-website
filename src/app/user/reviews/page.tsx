@@ -9,7 +9,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 
 export default function Page() {
-  const { userData, allCoursesData } = useAppContext();
+  const { allCoursesData } = useAppContext();
 
   // Store review counts per courseId
   const [reviewCounts, setReviewCounts] = useState<{ [key: number]: number }>({});

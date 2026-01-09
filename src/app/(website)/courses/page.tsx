@@ -1,6 +1,5 @@
 "use client"
 
-import CurriculumModal from "@/components/courses-page/CurriculumModal"
 import Button from "@/components/UI/Button"
 import { Spinner } from "@/components/UI/Spinner"
 import { supabase } from "@/lib/supabaseClient"
@@ -31,8 +30,6 @@ const highlights = [
 
 export default function Page() {
     const [coursesData, setCoursesData] = useState<CourseDataTypes[] | null>(null)
-    const [showModal, setShowModal] = useState(false)
-    const [selectedCourse, setSelectedCourse] = useState<string | undefined>("")
     const [downloadingPdf, setDownloadingPdf] = useState<string | null>(null)
 
 
@@ -69,9 +66,7 @@ export default function Page() {
 
 
 
-    useEffect(() => {
-        document.body.style.overflowY = showModal ? "hidden" : "auto"
-    }, [showModal])
+
 
 
 
@@ -217,7 +212,7 @@ export default function Page() {
 
 
 
-            {showModal && <CurriculumModal setShowModal={setShowModal} selectedCourse={selectedCourse} />}
+
         </div>
     )
 }

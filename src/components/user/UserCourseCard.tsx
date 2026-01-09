@@ -103,7 +103,6 @@ export default function UserCourseCard({ track, bookmarks, setbookmarks, isBookm
 
                 <hr className="w-full border-t border-gray-400  " />
                 <div className="w-full flex items-center justify-between text-sm " >
-                    <p> {track.tutor} </p>
                     {no_of_reviews || no_of_reviews === 0 ? (<p>Total reviews: <span className="font-semibold" >{no_of_reviews}</span></p>) : (<RatingStars ratingValue={track.rating} size={20} readonly={true} />)}
 
                 </div>

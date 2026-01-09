@@ -8,13 +8,9 @@ import { useParams } from "next/navigation"
 import { useEffect, useState } from "react"
 
 
-interface PageProps {
-  params: {
-    slug: string
-  }
-}
 
-export default function Page({params}: PageProps) {
+
+export default function Page() {
 
     const { slug } = useParams()
     const [currentProfile, setCurrentProfile] = useState<ProfileDataType | null>(null)

@@ -25,10 +25,7 @@ export default function Page() {
 
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const { name, value } = e.target
-
             setCertNumber(e.target.value)
-
     }
 
 
