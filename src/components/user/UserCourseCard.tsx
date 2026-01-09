@@ -86,14 +86,14 @@ export default function UserCourseCard({ track, bookmarks, setbookmarks, isBookm
                         !track.onlineFee || track.onlineFee < 0 ?
                             null :
                             (
-                                <h4 className=" text-xs font-medium text-red-600  " ><span className="text-black" >Online(Live):</span> &#8358;{track.onlineFee.toLocaleString()} </h4>
+                                <h4 className=" text-xs font-medium text-red-600  " ><span className="text-black" >Online(Live):</span> &#8358; {track.onlineFee.toLocaleString()} </h4>
                             )
                     }
 
 
                     {
                         track.inhouseFee && (
-                            <h4 className=" text-xs font-medium text-red-600  " > <span className="text-black" >In-House(Classroom):</span> &#8358;{track.inhouseFee.toLocaleString()} </h4>
+                            <h4 className=" text-xs font-medium text-red-600  " > <span className="text-black" >In-House(Classroom):</span> &#8358; {track.inhouseFee.toLocaleString()} </h4>
                         )
                     }
 

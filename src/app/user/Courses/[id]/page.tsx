@@ -265,14 +265,20 @@ export default function Page() {
                         <h6 className="font-semibold text-sm " >Course Fees</h6>
                         <ul className="mt-1 flex items-start gap-1 flex-col " >
                             {
-                                currentCourse?.onlineFee && (
+                                currentCourse?.onlineFee && currentCourse.onlineFee > 0?
+                                (
                                     <li className="text-xs  text-gray-600"><span className="font-bold" >Online Fee:</span> ₦{currentCourse?.onlineFee?.toLocaleString()} </li>
                                 )
+                                :
+                                null
                             }
                             {
-                                currentCourse?.inhouseFee && (
+                                currentCourse?.inhouseFee && currentCourse.inhouseFee > 0?
+                                (
                                     <li className="text-xs  text-gray-600"><span className="font-bold" >Inhouse Fee</span>: ₦{currentCourse?.inhouseFee?.toLocaleString()} </li>
                                 )
+                                :
+                                null
                             }
                         </ul>
                     </div>
