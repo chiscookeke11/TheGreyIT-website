@@ -26,6 +26,18 @@ type AppContextType = {
   allCoursesData: CourseDataTypes[] | null;
   setAllCoursesData: React.Dispatch<React.SetStateAction<CourseDataTypes[] | null>>
 
+  showPaymentModal: boolean;
+  setShowPaymentModal: React.Dispatch<React.SetStateAction<boolean>>
+
+  selectedCourse: CourseDataTypes | null
+  setSelectedCourse: React.Dispatch<React.SetStateAction<CourseDataTypes | null>>
+
+  isEnrolled: boolean;
+  setIsEnrolled: React.Dispatch<React.SetStateAction<boolean>>
+
+  enrolledNumber: number | null
+  setEnrolledNumber: React.Dispatch<React.SetStateAction<number | null>>
+
   reloadUserData: () => Promise<void>;
 
   reloadTransactions: () => Promise<void>;
@@ -53,8 +65,10 @@ export function AppProvider({ children }: { children: ReactNode }) {
   const [certificatesData, setCertificatesData] = useState<CertificatesDataType[] | null>(null)
   const [allCoursesData, setAllCoursesData] = useState<CourseDataTypes[] | null>(null)
   const [user, setUser] = useState<User | null>(null)
-
-
+  const [showPaymentModal, setShowPaymentModal] = useState<boolean>(false)
+  const [selectedCourse, setSelectedCourse] = useState<CourseDataTypes | null>(null)
+  const [isEnrolled, setIsEnrolled] = useState(false)
+  const [enrolledNumber, setEnrolledNumber] = useState<number | null>(null)
 
 
   useEffect(() => {
@@ -149,7 +163,14 @@ export function AppProvider({ children }: { children: ReactNode }) {
         reloadCourses,
         reloadTransactions,
         reloadUserData,
-
+        setShowPaymentModal,
+        showPaymentModal,
+        selectedCourse,
+        setSelectedCourse,
+        isEnrolled,
+        setIsEnrolled,
+        enrolledNumber,
+        setEnrolledNumber
       }}>
 
       {children}

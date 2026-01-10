@@ -3,6 +3,7 @@
 import Button from "@/components/UI/Button"
 import Navbar from "@/components/UI/Navbar"
 import { Spinner } from "@/components/UI/Spinner"
+import SelectPaymentModal from "@/components/user/selectPaymentModal"
 import SideNav from "@/components/user/SideNav"
 import UserAuthModal from "@/components/user/UserAuthModal"
 import { useAppContext } from "@/context/AppContext"
@@ -72,8 +73,8 @@ const Header = ({ user }: { user: User }) => {
 export default function UserDashboardLayout({ children }: { children: React.ReactNode }) {
     const [user, setUser] = useState<User | null>(null)
     const [loading, setLoading] = useState(true)
-    const [checkingUser, setCheckingUser] = useState(false)
-    const { reloadUserData, reloadCertificates, reloadTransactions } = useAppContext()
+
+    const { reloadUserData, reloadCertificates, reloadTransactions, showPaymentModal, selectedCourse } = useAppContext()
 
 
 
@@ -118,7 +119,7 @@ export default function UserDashboardLayout({ children }: { children: React.Reac
 
 
 
-    if (loading || checkingUser) {
+    if (loading) {
         return (
             <div className="w-full h-screen flex flex-col gap-3 items-center justify-center bg-white">
                 <p className="text-xl font-poppins font-semibold">Checking authentication</p>
@@ -159,6 +160,7 @@ export default function UserDashboardLayout({ children }: { children: React.Reac
                 </div>
             </main>
 
+            {showPaymentModal && <SelectPaymentModal />}
         </div>
 
     )

@@ -8,14 +8,12 @@ import { Spinner } from "@/components/UI/Spinner";
 import Who_Should_Enrol from "@/components/UI/Who_Should_Enrol";
 import { useAppContext } from "@/context/AppContext";
 import { useAuthUser } from "@/hooks/useAuthUser";
-import { sendPaymentConfirmationEmail } from "@/lib/appActions";
 import { supabase } from "@/lib/supabaseClient";
-import { CourseDataTypes, PaystackReference } from "@/types/types";
+import { CourseDataTypes } from "@/types/types";
 import Image from "next/image";
 import { useParams } from "next/navigation";
-import { useEffect, useRef, useState } from "react";
-import toast from "react-hot-toast";
-import { PaystackButton } from 'react-paystack';
+import { useEffect, useState } from "react";
+
 
 
 
@@ -24,11 +22,8 @@ export default function Page() {
     const [currentTab, setCurrentTab] = useState("description")
     const { id } = useParams()
     const [currentCourse, setCurrentCourse] = useState<CourseDataTypes | null>(null)
-    const public_key = process.env.NEXT_PUBLIC_PAYSTACK_PUBLIC_KEY!
-    const { userData } = useAppContext()
+    const { setShowPaymentModal, showPaymentModal, setSelectedCourse, isEnrolled, setIsEnrolled, setEnrolledNumber, enrolledNumber } = useAppContext()
     const [loading, setLoading] = useState(false)
-    const [isEnrolled, setIsEnrolled] = useState(false)
-    const [enrolledNumber, setEnrolledNumber] = useState<number | null>(null)
     const { user, loading: authLoading } = useAuthUser()
 
 
@@ -49,23 +44,6 @@ export default function Page() {
 
 
 
-    // function to enroll a user
-    const enrollUser = async (transactionId?: string) => {
-        if (!user || !currentCourse) return;
-
-        const { error } = await supabase.from("course_enrollments").insert({
-            user_id: user.id,
-            course_id: currentCourse.id,
-            transaction_id: transactionId,
-        });
-
-        if (!error) {
-            setIsEnrolled(true);
-            setEnrolledNumber((prev) => (prev ?? 0) + 1);
-        }
-    };
-
-
     // function to count enrolled users
 
     const countEnrolledUsers = async () => {
@@ -78,7 +56,6 @@ export default function Page() {
 
         setEnrolledNumber(count ?? 0);
     };
-
 
 
 
@@ -112,72 +89,18 @@ export default function Page() {
         fetchCourseDetails()
     }, [id])
 
+      useEffect(() => {
 
-    // the paystack config
-    const config = {
-        reference: (new Date()).getTime().toString(),
-        email: user?.email ?? "",
-        amount: currentCourse?.inhouseFee ? currentCourse?.inhouseFee * 100 : 0,
-        publicKey: public_key,
-    };
+        document.body.style.overflowY = showPaymentModal ? "hidden" : "auto"
 
-
-
-    const handlePaystackSuccessAction = async (reference: PaystackReference) => {
-        try {
-            await supabase.from("transactions").insert({
-                reference: reference.reference,
-                status: reference.status,
-                date: new Date().toISOString(),
-                user_id: user?.id,
-                course: currentCourse?.title,
-                course_id: currentCourse?.id,
-            });
-
-            await enrollUser(reference.trxref);
-
-            await supabase
-                .from("user_data")
-                .update({
-                    list_enrolled_courses: [
-                        ...(userData?.list_enrolled_courses || []),
-                        currentCourse?.id,
-                    ],
-                })
-                .eq("user_id", user?.id);
-
-            await sendPaymentConfirmationEmail({
-                name: user?.user_metadata?.full_name ?? user?.email ?? "Learner",
-                email: user?.email ?? "",
-                course_title: currentCourse?.title ?? "",
-                reference: reference.reference,
-                status: reference.status,
-                date: new Date().toLocaleString(),
-                dashboard_link: `${process.env.NEXT_PUBLIC_APP_URL}/user/courses/${id}`,
-            });
-
-            toast.success("Payment successful!");
-        } catch (err) {
-            console.error(err);
-            toast.error("Payment failed");
+        return () => {
+            document.body.style.overflowY = "auto"
         }
-    };
+
+    }, [showPaymentModal])
 
 
 
-    // you can call this function anything
-    const handlePaystackCloseAction = () => {
-        // implementation for  whatever you want to do when the Paystack dialog closed.
-        // console.log('closed')
-    }
-
-
-    const componentProps = {
-        ...config,
-        text: 'Enroll',
-        onSuccess: (reference: PaystackReference) => handlePaystackSuccessAction(reference),
-        onClose: handlePaystackCloseAction,
-    };
 
 
     if (authLoading || loading) {
@@ -217,14 +140,26 @@ export default function Page() {
 
 
 
-
-                    {!isEnrolled && (
-                        <PaystackButton
-                            {...componentProps}
-                            className="font-syne py-2 px-10 mt-5 rounded-[100px] border border-gray-700
+                    {
+                        isEnrolled ? (
+                            <button
+                                className="font-syne py-2 px-10 mt-5 rounded-md border border-gray-700 cursor-pointer
                hover:bg-gray-700 hover:text-white transition"
-                        />
-                    )}
+                            >
+                                Access Course Resources
+                            </button>) :
+                            (
+                                <button onClick={() => {
+                                    setShowPaymentModal(true)
+                                    setSelectedCourse(currentCourse)
+                                }}
+                                    className="font-syne py-2 px-10 mt-5 rounded-[100px] border border-gray-700 cursor-pointer
+               hover:bg-gray-700 hover:text-white transition"
+                                >
+                                    Enrol
+                                </button>
+                            )
+                    }
 
 
 
