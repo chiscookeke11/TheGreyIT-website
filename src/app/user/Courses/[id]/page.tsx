@@ -25,7 +25,7 @@ export default function Page() {
     const { id } = useParams()
     const [currentCourse, setCurrentCourse] = useState<CourseDataTypes | null>(null)
     const public_key = process.env.NEXT_PUBLIC_PAYSTACK_PUBLIC_KEY!
-    const { userData } = useAppContext()
+    const { userData, setShowPaymentModal, setSelectedCourse } = useAppContext()
     const [loading, setLoading] = useState(false)
     const [isEnrolled, setIsEnrolled] = useState(false)
     const [enrolledNumber, setEnrolledNumber] = useState<number | null>(null)
@@ -168,7 +168,7 @@ export default function Page() {
     // you can call this function anything
     const handlePaystackCloseAction = () => {
         // implementation for  whatever you want to do when the Paystack dialog closed.
-        // console.log('closed')
+        setShowPaymentModal(false)
     }
 
 
@@ -218,13 +218,23 @@ export default function Page() {
 
 
 
-                    {!isEnrolled && (
+                    {/* {!isEnrolled && (
                         <PaystackButton
                             {...componentProps}
                             className="font-syne py-2 px-10 mt-5 rounded-[100px] border border-gray-700
                hover:bg-gray-700 hover:text-white transition"
                         />
-                    )}
+                    )} */}
+
+                    <button onClick={() => {
+                        setShowPaymentModal(true)
+                        setSelectedCourse(currentCourse)
+                    }}
+                      className="font-syne py-2 px-10 mt-5 rounded-[100px] border border-gray-700
+               hover:bg-gray-700 hover:text-white transition"
+                    >
+                        Enrol
+                    </button>
 
 
 

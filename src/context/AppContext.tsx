@@ -26,6 +26,12 @@ type AppContextType = {
   allCoursesData: CourseDataTypes[] | null;
   setAllCoursesData: React.Dispatch<React.SetStateAction<CourseDataTypes[] | null>>
 
+  showPaymentModal: boolean;
+  setShowPaymentModal: React.Dispatch<React.SetStateAction<boolean>>
+
+  selectedCourse: CourseDataTypes | null
+  setSelectedCourse: React.Dispatch<React.SetStateAction<CourseDataTypes | null>>
+
   reloadUserData: () => Promise<void>;
 
   reloadTransactions: () => Promise<void>;
@@ -53,7 +59,8 @@ export function AppProvider({ children }: { children: ReactNode }) {
   const [certificatesData, setCertificatesData] = useState<CertificatesDataType[] | null>(null)
   const [allCoursesData, setAllCoursesData] = useState<CourseDataTypes[] | null>(null)
   const [user, setUser] = useState<User | null>(null)
-
+  const [showPaymentModal, setShowPaymentModal] = useState<boolean>(false)
+const [ selectedCourse, setSelectedCourse ] = useState<CourseDataTypes | null>(null)
 
 
 
@@ -149,7 +156,10 @@ export function AppProvider({ children }: { children: ReactNode }) {
         reloadCourses,
         reloadTransactions,
         reloadUserData,
-
+        setShowPaymentModal,
+        showPaymentModal,
+        selectedCourse,
+        setSelectedCourse
       }}>
 
       {children}
