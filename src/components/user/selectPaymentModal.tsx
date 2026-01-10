@@ -9,11 +9,12 @@ import { ArrowLeft } from "lucide-react";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import dynamic from "next/dynamic";
+import { Spinner } from "../UI/Spinner";
 
 
 const PaystackButton = dynamic(
-  () => import("react-paystack").then((mod) => mod.PaystackButton),
-  { ssr: false }
+    () => import("react-paystack").then((mod) => mod.PaystackButton),
+    { ssr: false }
 );
 
 
@@ -27,6 +28,7 @@ export default function SelectPaymentModal() {
     const [selectedPaymentMethod, setSelectedPaymentMethod] = useState<string | null>(null)
     const public_key = process.env.NEXT_PUBLIC_PAYSTACK_PUBLIC_KEY!
     const { user } = useAuthUser()
+    const [processingPayment, setProcessingPayMent] = useState(false)
 
 
 
@@ -142,6 +144,8 @@ export default function SelectPaymentModal() {
 
 
     const handlePaystackSuccessAction = async (reference: PaystackReference) => {
+        setProcessingPayMent(true)
+
         try {
             await supabase.from("transactions").insert({
                 reference: reference.reference,
@@ -176,6 +180,7 @@ export default function SelectPaymentModal() {
 
             toast.success("Payment successful!");
             setShowPaymentModal(false);
+            setProcessingPayMent(false)
         } catch (err) {
             console.error(err);
             toast.error("Payment failed");
@@ -188,6 +193,7 @@ export default function SelectPaymentModal() {
     const handlePaystackCloseAction = () => {
         // implementation for  whatever you want to do when the Paystack dialog closed.
         setShowPaymentModal(false)
+        setProcessingPayMent(false);
     }
 
 
@@ -201,6 +207,14 @@ export default function SelectPaymentModal() {
 
 
 
+    if (processingPayment) {
+        return (
+            <div className="fixed inset-0 bg-gray-200 z-50 flex justify-center items-center gap-3 flex-col "  >
+                <h4 className="text-xl font-semibold text-gray-700 " >Processing Payment</h4>
+                <Spinner />
+            </div>
+        )
+    }
 
 
 
