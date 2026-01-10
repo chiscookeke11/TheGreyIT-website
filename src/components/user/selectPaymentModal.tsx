@@ -6,10 +6,15 @@ import { sendPaymentConfirmationEmail } from "@/lib/appActions";
 import { supabase } from "@/lib/supabaseClient";
 import { PaystackReference } from "@/types/types";
 import { ArrowLeft } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import toast from "react-hot-toast";
-import { PaystackButton } from 'react-paystack';
+import dynamic from "next/dynamic";
 
+
+const PaystackButton = dynamic(
+  () => import("react-paystack").then((mod) => mod.PaystackButton),
+  { ssr: false }
+);
 
 
 
