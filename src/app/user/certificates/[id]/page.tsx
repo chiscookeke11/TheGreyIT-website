@@ -157,11 +157,14 @@ export default function Page() {
 
 
     const shareCertificate = async () => {
+
+        const currentUrl = typeof window !== "undefined" ? window.location.href : "";
+
         try {
             await navigator.share({
                 title: "My Certificate",
                 text: `I just completed the ${theCourse?.title}  course`,
-                url: window.location.href,
+                url: currentUrl,
             });
         } catch (error) {
             console.error("Failed to share certificate", error)

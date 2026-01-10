@@ -160,7 +160,7 @@ export default function UserDashboardLayout({ children }: { children: React.Reac
                 </div>
             </main>
 
-            {showPaymentModal && <SelectPaymentModal/>}
+            {showPaymentModal && <SelectPaymentModal />}
         </div>
 
     )
