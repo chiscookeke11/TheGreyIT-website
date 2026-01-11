@@ -109,7 +109,7 @@ export default function UserAuthModal() {
                     last_name: formValues.lastName,
                     phoneNumber: formValues.phoneNumber
                 },
-                emailRedirectTo: "/users"
+                emailRedirectTo: "https://www.thegreyit.org/user"
             }
         })
 
