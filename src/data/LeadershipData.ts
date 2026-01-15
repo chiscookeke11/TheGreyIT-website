@@ -11,8 +11,28 @@ export const teams: TeamMemberDataType[] = [
       twitter: "https://x.com/Abel_C_emmanuel"
     },
     description: `
+Chidera Emmanuel Abel is the Founder and Managing Director of The Grey IT & Educational Consults Ltd, where he leads strategy, digital skills training, research support, and product development across TheGreyIT ecosystem. With 5+ years’ experience, he supports organisations, entrepreneurs, and learners to streamline operations, strengthen brands, and build practical digital capability for measurable, sustainable outcomes.
 
+As a Certified Business Consultant (USA/Nigeria) and Licensed Educator (Nigeria), he combines business advisory practice with technical delivery in full-stack development, business intelligence, and applied research. He also drives start-up brand consulting and product brand design, aligning innovation, market positioning, and execution to help clients move from ideas to viable solutions.
+
+Beyond his company leadership, Chidera serves as Regional Head (South-East) for the Institute of Certified Business Consultants (ICBC) Nigeria & Namibia, coordinating engagement, partnerships, and regional professional development initiatives. He also contributes to governance work as Secretary, Governance Committee at the Network for Educational Advancement and Development (NEAD), supporting policy documentation and committee coordination.
     `,
+    coreSkills: [
+      "Business consulting, strategy, and organisational analysis",
+      "Start-up brand consulting and product brand design",
+      "Full-stack web development and UI/UX delivery",
+      "Academic and market research, research design, and reporting",
+      "Data analysis and business intelligence (dashboarding and insights)",
+      "Stakeholder communication, mentoring, and programme coordination",
+      "Computer hardware support and technical troubleshooting",
+    ],
+
+    tools: [
+      "Programming & Data: Python (pandas, NumPy, scikit-learn, FastAPI), Power BI, IBM SPSS, R, NVivo",
+      "Dev & Ops: PyCharm, Git, Docker, Django/Flask, React/Next.js, Node.js/Express, PostgreSQL, MongoDB, REST/GraphQL",
+      "Design & Media: Adobe Photoshop, CorelDRAW, Adobe Premiere"
+    ],
+    motivation: "To build reliable digital capability across Nigeria and beyond by combining practical training, research excellence, and technology-driven solutions that improve outcomes for individuals, institutions, and growing businesses.",
     slug: "abel-chidera-emmanuel"
   },
 
