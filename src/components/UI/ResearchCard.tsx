@@ -19,7 +19,7 @@ export default function ResearchCard({ blog }: ResearchCardProps) {
 
   return (
     <>
-      <div onClick={() => setActiveNav(5)} className=" w-full min-w-xs flex flex-col items-start h-fit   bg-white rounded-md overflow-hidden relative shadow-lg " >
+      <div onClick={() => setActiveNav(5)} className=" w-full h-full min-w-xs flex flex-col items-start    bg-white rounded-md overflow-hidden relative shadow-lg " >
         <div className="  w-full h-[250px] " >
           <Image src={blog.image} alt={`${blog.title}-image `} width={500} height={500} className="h-full w-full object-cover object-center " />
         </div>

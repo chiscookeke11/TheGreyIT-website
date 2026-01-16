@@ -344,14 +344,14 @@ export default function Page() {
                         <div className="w-full grid-cols-1 grid md:grid-cols-2 gap-8 place-items-center justify-items-center " >
                             {/* first name */}
                             <label htmlFor="firstName" className=" w-full flex flex-col items-start gap-1  " >
-                                <span className="text-base font-medium " >First Name</span>
+                                <span className="text-sm font-medium " >First Name</span>
                                 <input
                                     type="text"
                                     id="firstName"
                                     name="firstName"
                                     value={formValues.firstName}
                                     onChange={handleChange}
-                                    className="w-full py-4 px-5 border border-gray-700 outline-none focus:outline-none text-base rounded-sm " />
+                                    className="w-full py-2 px-5 border border-gray-700 outline-none focus:outline-none text-sm rounded-sm " />
                             </label>
 
 
@@ -359,14 +359,14 @@ export default function Page() {
 
                             {/* last name  */}
                             <label htmlFor="lastName" className=" w-full flex flex-col items-start gap-1  " >
-                                <span className="text-base font-medium " >Last Name</span>
+                                <span className="text-sm font-medium " >Last Name</span>
                                 <input
                                     type="text"
                                     id="lastName"
                                     name="lastName"
                                     value={formValues.lastName}
                                     onChange={handleChange}
-                                    className="w-full py-4 px-5 border border-gray-700 outline-none focus:outline-none text-base rounded-sm " />
+                                    className="w-full py-2 px-5 border border-gray-700 outline-none focus:outline-none text-sm rounded-sm " />
                             </label>
 
 
@@ -376,14 +376,14 @@ export default function Page() {
 
                             {/* Phone number */}
                             <label htmlFor="phoneNumber" className=" w-full flex flex-col items-start gap-1  " >
-                                <span className="text-base font-medium " >Phone Number</span>
+                                <span className="text-sm font-medium " >Phone Number</span>
                                 <input
                                     type="tel"
                                     id="phoneNumber"
                                     name="phoneNumber"
                                     value={formValues.phoneNumber}
                                     onChange={handleChange}
-                                    className="w-full py-4 px-5 border border-gray-700 outline-none focus:outline-none text-base rounded-sm " />
+                                    className="w-full py-2 px-5 border border-gray-700 outline-none focus:outline-none text-sm rounded-sm " />
                             </label>
 
 
@@ -391,20 +391,20 @@ export default function Page() {
 
                             {/* Referral code  */}
                             <label htmlFor="referralCode" className=" w-full flex flex-col items-start gap-1  " >
-                                <span className="text-base font-medium " >Referral Code</span>
+                                <span className="text-sm font-medium " >Referral Code</span>
                                 <input
                                     type="text"
                                     id="referralCode"
                                     name="referralCode"
                                     value={formValues.referralCode}
                                     readOnly
-                                    className="w-full py-4 px-5 border border-gray-700 outline-none focus:outline-none text-base rounded-sm " />
+                                    className="w-full py-2 px-5 border border-gray-700 outline-none focus:outline-none text-sm rounded-sm " />
                             </label>
                         </div>
 
 
 
-                        <button disabled={loading} className={`bg-gray-700 w-fit text-white px-4 py-2 text-base lg:text-start rounded-md hover:bg-gray-600 transition-all duration-300 ease-in-out cursor-pointer  block mr-auto `}
+                        <button disabled={loading} className={`bg-gray-700 w-fit text-white px-4 py-2 text-sm lg:text-start rounded-md hover:bg-gray-600 transition-all duration-300 ease-in-out cursor-pointer  block mr-auto `}
                         >
                             {loading ? <Spinner /> : "Update Info"}
                         </button>
@@ -423,9 +423,9 @@ export default function Page() {
 
                                 {/* Old Password Input  */}
                                 <label htmlFor="oldPassword" className=" w-full flex flex-col items-start gap-1  " >
-                                    <span className="text-base font-medium " >Old Password</span>
-                                    <div className=" w-full flex gap-1 rounded-sm  py-4 px-5 border border-gray-700" >
-                                        <input type={showPassword ? "text" : "password"} id="oldPassword" name="oldPassword" onChange={handlePasswordChange} value={passwordValues.oldPassword} placeholder="Enter Old Password" className="w-full  outline-none focus:outline-none text-base  " />
+                                    <span className="text-sm font-medium " >Old Password</span>
+                                    <div className=" w-full flex gap-1 rounded-sm  py-2 px-5 border border-gray-700" >
+                                        <input type={showPassword ? "text" : "password"} id="oldPassword" name="oldPassword" onChange={handlePasswordChange} value={passwordValues.oldPassword} placeholder="Enter Old Password" className="w-full  outline-none focus:outline-none text-sm  " />
                                         <button type="button" className="cursor-pointer" onClick={() => setShowPassword((prev) => !prev)} > {showPassword ? <EyeOff /> : <Eye />} </button>
                                     </div>
                                 </label>
@@ -433,9 +433,9 @@ export default function Page() {
 
                                 {/* New Password Input  */}
                                 <label htmlFor="newPassword" className=" w-full flex flex-col items-start gap-1  " >
-                                    <span className="text-base font-medium " >Password</span>
-                                    <div className=" w-full flex gap-1 rounded-sm  py-4 px-5 border border-gray-700" >
-                                        <input type={showPassword ? "text" : "password"} id="newPassword" name="newPassword" onChange={handlePasswordChange} value={passwordValues.newPassword} placeholder="Enter New Password" className="w-full  outline-none focus:outline-none text-base  " />
+                                    <span className="text-sm font-medium " >Password</span>
+                                    <div className=" w-full flex gap-1 rounded-sm  py-2 px-5 border border-gray-700" >
+                                        <input type={showPassword ? "text" : "password"} id="newPassword" name="newPassword" onChange={handlePasswordChange} value={passwordValues.newPassword} placeholder="Enter New Password" className="w-full  outline-none focus:outline-none text-sm  " />
                                     </div>
                                 </label>
 
@@ -443,9 +443,9 @@ export default function Page() {
                                 {/* confirm password Input  */}
 
                                 <label htmlFor="confirmNewPassword" className=" w-full flex flex-col items-start gap-1  " >
-                                    <span className="text-base font-medium " >Confirm Password</span>
-                                    <div className=" w-full flex gap-1 rounded-sm  py-4 px-5 border border-gray-700" >
-                                        <input type={showPassword ? "text" : "password"} id="confirmNewPassword" name="confirmNewPassword" onChange={handlePasswordChange} value={passwordValues.confirmNewPassword} placeholder="Confirm New Password" className="w-full  outline-none focus:outline-none text-base  " />
+                                    <span className="text-sm font-medium " >Confirm Password</span>
+                                    <div className=" w-full flex gap-1 rounded-sm  py-2 px-5 border border-gray-700" >
+                                        <input type={showPassword ? "text" : "password"} id="confirmNewPassword" name="confirmNewPassword" onChange={handlePasswordChange} value={passwordValues.confirmNewPassword} placeholder="Confirm New Password" className="w-full  outline-none focus:outline-none text-sm  " />
                                     </div>
                                 </label>
 
@@ -454,7 +454,7 @@ export default function Page() {
                             </div>
 
 
-                            <button disabled={loading} className={`bg-gray-700 w-fit text-white px-5 py-4 text-xl lg:text-start rounded-md hover:bg-gray-600 transition-all duration-300 ease-in-out cursor-pointer  block mr-auto `}
+                            <button disabled={loading} className={`bg-gray-700 w-fit text-white px-5 py-2 lg:text-start rounded-md hover:bg-gray-600 transition-all duration-300 ease-in-out cursor-pointer  block mr-auto text-sm `}
                             >
                                 {loading ? <Spinner /> : "Update Password"}
                             </button>
