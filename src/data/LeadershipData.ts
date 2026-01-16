@@ -5,7 +5,7 @@ export const teams: TeamMemberDataType[] = [
     id: 1,
     name: "Abel Chidera Emmanuel",
     title: "Founder & Managing Director",
-    image: "/Team/Abel.jpg",
+    image: "/Team/mr-chidera.webp",
     socials: {
       linkedIn: "https://www.linkedin.com/in/chidera-e-abel-gicbc-cert-bc-176639155/",
       twitter: "https://x.com/Abel_C_emmanuel"
@@ -41,7 +41,7 @@ Beyond his company leadership, Chidera serves as Regional Head (South-East) for 
     id: 2,
     name: "Ezekwueme Augustine,",
     title: "Co-founder & Operations Manager",
-    image: "/Team/Austin_Portrait.jpg",
+    image: "/Team/Austin_Photo.webp",
     socials: {
       linkedIn: "https://www.linkedin.com/in/ezekwueme-augustine-aislt-8abb97252/",
       twitter: "https://x.com/AustinEze19"
