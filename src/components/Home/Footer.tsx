@@ -34,7 +34,7 @@ export default function Footer() {
                         {navLinksData.map((navlink, index) => (
                             <li key={index} className=" text-sm   text-gray-400 hover:text-gray-200 transition-all duration-150" ><CustomLink href={navlink.url} > {navlink.label}</CustomLink> </li>
                         ))}
-                          <li className=" text-sm   text-gray-400 hover:text-gray-200 transition-all duration-150" ><CustomLink href={"/admin"} >Admin </CustomLink> </li>
+                          {/* <li className=" text-sm   text-gray-400 hover:text-gray-200 transition-all duration-150" ><CustomLink href={"/admin"} >Admin </CustomLink> </li> */}
                     </ul>
                 </div>
 

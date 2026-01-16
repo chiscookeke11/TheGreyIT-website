@@ -11,6 +11,7 @@ interface PageProps {
 export async function generateMetadata(
   { params }: PageProps
 ): Promise<Metadata> {
+
   const { data } = await supabase
     .from("blog")
     .select("title, excerpt, image, slug")
@@ -19,7 +20,7 @@ export async function generateMetadata(
 
   if (!data) {
     return {
-      title: "Article not found | TheGreyIT",
+      title: "TheGreyIT",
       robots: { index: false },
     };
   }
