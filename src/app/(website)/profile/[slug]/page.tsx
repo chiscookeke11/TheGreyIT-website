@@ -2,11 +2,8 @@ import ProfileClient from "@/components/Home/ProfileClient";
 import { ProfileData } from "@/data/profileData";
 
 
-export async function generateMetadata({
-  params,
-}: {
-  params: { slug: string };
-}) {
+export async function generateMetadata({params,}: {params: { slug: string };}) {
+
   const profile = ProfileData.find(
     (p) => String(p.slug) === params.slug
   );
