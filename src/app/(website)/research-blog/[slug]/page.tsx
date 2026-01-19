@@ -21,7 +21,7 @@ export async function generateMetadata(
 
   if (!data) {
     return {
-      title: "TheGreyIT",
+      title: "Not found | TheGreyIT",
       robots: { index: false },
     };
   }
