@@ -58,8 +58,36 @@ export default function BlogPageComponent({ slug }: BlogPageComponentProps) {
 
 
 
+    const structuredData = {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "headline": currentBlog.title,
+        "description": currentBlog.content || currentBlog.title,
+        "image": currentBlog.image,
+        "author": {
+            "@type": "Person",
+            "name": currentBlog.author
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": "TheGreyIT",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https://www.thegreyit.com/logo.png"
+            }
+        },
+        "datePublished": currentBlog.createdAt,
+        "dateModified": currentBlog.createdAt,
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": `https://www.thegreyit.com/blog/${currentBlog.slug}`
+        }
+    };
+
+
+
     return (
-        <div className="bg-white text-black font-poppins ">
+        <article className="bg-white text-black font-poppins ">
             <section
                 className="w-full h-screen relative"
                 style={{
@@ -87,6 +115,6 @@ export default function BlogPageComponent({ slug }: BlogPageComponentProps) {
                 className="px-[7%] lg:px-[15%] py-16 bg-[#f2f5fc]"
                 dangerouslySetInnerHTML={{ __html: currentBlog.content }}
             />
-        </div>
+        </article>
     )
 }

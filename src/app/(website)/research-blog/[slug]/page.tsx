@@ -22,6 +22,7 @@ export async function generateMetadata(
   if (!data) {
     return {
       title: "Not found | TheGreyIT",
+      description: "Blog not found",
       robots: { index: false },
     };
   }
@@ -29,15 +30,25 @@ export async function generateMetadata(
   return {
     title: `${data.title} | TheGreyIT`,
     description: data.excerpt,
+    keywords: [data.title],
     alternates: {
-      canonical: `https://www.thegreyit.org/research-blog/${data.slug}`,
+      canonical: `https://www.thegreyit.org/research-blog/${(await params).slug}`,
     },
     openGraph: {
       title: data.title,
-      description: data.excerpt,
+      description: data.content,
       images: [{ url: data.image }],
       type: "article",
     },
+    robots: {
+      index: true,
+      follow: true,
+      nocache: false,
+      googleBot: {
+        index: true,
+        follow: true
+      }
+    }
   };
 }
 
