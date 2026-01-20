@@ -53,7 +53,7 @@ export const metadata: Metadata = {
     apple: "./favicon.ico",
   },
   openGraph: {
-    title: "TheGreyIT Team",
+    title: "TheGreyIT",
     description:
       "Build | Learn | Advance",
     url: "https://www.thegreyit.org",
