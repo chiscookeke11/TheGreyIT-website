@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://www.thegreyit.org
+
+# Sitemaps
+Sitemap: https://www.thegreyit.org/sitemap.xml
