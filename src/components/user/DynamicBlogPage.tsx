@@ -20,9 +20,8 @@ interface BlogPageComponentProps {
 }
 
 
-export default function DynamicBlogPage({slug}: BlogPageComponentProps) {
+export default function DynamicBlogPage({ slug }: BlogPageComponentProps) {
     const [currentTab, setCurrentTab] = useState("description")
-    const { id } = useParams()
     const [currentCourse, setCurrentCourse] = useState<CourseDataTypes | null>(null)
     const { setShowPaymentModal, showPaymentModal, setSelectedCourse, isEnrolled, setIsEnrolled, setEnrolledNumber, enrolledNumber } = useAppContext()
     const [loading, setLoading] = useState(false)
@@ -89,9 +88,9 @@ export default function DynamicBlogPage({slug}: BlogPageComponentProps) {
         }
 
         fetchCourseDetails()
-    }, [id])
+    }, [slug])
 
-      useEffect(() => {
+    useEffect(() => {
 
         document.body.style.overflowY = showPaymentModal ? "hidden" : "auto"
 

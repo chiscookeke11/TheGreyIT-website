@@ -174,7 +174,7 @@ export default function UserAuthModal() {
 
         else {
             toast.success("Success! You are now signed in")
-            console.log(data)
+            router.push("/user")
             setLoading(false)
             setFormValues({
                 email: "",
