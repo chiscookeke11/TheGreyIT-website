@@ -24,6 +24,7 @@ export interface CourseDataTypes {
   is_active?: boolean,
   skill_level?: string,
   total_reviews?: number,
+  slug: string
 }
 
 
