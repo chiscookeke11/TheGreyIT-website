@@ -117,7 +117,7 @@ export default function CoursesPageComponent() {
 
                                     {courseType?.map((track, index) => (
                                         // Course card
-                                        <Link href={` /user/Courses/${track.id} `} className="w-full h-full"           key={index} >
+                                        <Link href={` /user/Courses/${track.slug} `} className="w-full h-full"           key={index} >
                                             <UserCourseCard
                                                 track={track}
                                                 bookmarks={bookmarks}

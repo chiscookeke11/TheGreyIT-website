@@ -15,10 +15,12 @@ import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
 
+interface BlogPageComponentProps {
+    slug: string
+}
 
 
-
-export default function Page() {
+export default function DynamicBlogPage({slug}: BlogPageComponentProps) {
     const [currentTab, setCurrentTab] = useState("description")
     const { id } = useParams()
     const [currentCourse, setCurrentCourse] = useState<CourseDataTypes | null>(null)
@@ -73,7 +75,7 @@ export default function Page() {
         setLoading(true)
 
         const fetchCourseDetails = async () => {
-            const { data, error } = await supabase.from("course").select("*").eq("id", id).single()
+            const { data, error } = await supabase.from("course").select("*").eq("slug", slug).single()
 
             if (error) {
                 // console.error(error)

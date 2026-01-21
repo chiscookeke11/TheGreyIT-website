@@ -37,7 +37,7 @@ export default function CoursePageComponent() {
         const { error, data } = await supabase.storage.from("course_outline_pdf").download(pdfName)
 
         if (error) {
-            console.error("Error downlaoding file:", error.message)
+            console.error("Error downlaoding file:")
             toast.error("Failed to download PDF")
             setDownloadingPdf(null)
 
@@ -70,12 +70,12 @@ export default function CoursePageComponent() {
         const { data, error } = await supabase.from("course").select("*")
 
         if (error) {
-            console.log("Failed to fetch course:", error)
+            console.log("Failed to fetch course:")
         }
 
 
         {
-            console.log("Fetch complete", data)
+            console.log("Fetch complete")
             setCoursesData(data)
         }
     }
@@ -162,7 +162,7 @@ export default function CoursePageComponent() {
 
 
                                     <div className="w-full flex flex-col md:flex-row items-center gap-4  mt-auto " >
-                                        <Link href={`/user/Courses/${track.id}`} onClick={(e) => {
+                                        <Link href={`/user/Courses/${track.slug}`} onClick={(e) => {
                                             e.stopPropagation()
                                         }}
                                             className="w-full basis-1/2 " >

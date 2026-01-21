@@ -120,7 +120,8 @@ export interface reviewDataType {
   userReviewDate: Date;
   courseId: number;
   userEmail: string;
-  user_id: string
+  user_id: string;
+  slug?: string
 }
 
 

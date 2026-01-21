@@ -10,8 +10,8 @@ export const metadata: Metadata = {
     description:
         "Access your TheGreyIT user dashboard to manage courses, certificates, transactions, and account settings securely.",
     robots: {
-        index: false,
-        follow: false,
+        index: true,
+        follow: true,
     },
 };
 
