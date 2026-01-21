@@ -41,7 +41,12 @@ export const metadata: Metadata = {
     title: "About Us | TheGreyIT",
     description: "Discover TheGreyIT's story, mission, leadership, and career opportunities. Learn how we deliver innovative IT solutions that empower businesses.",
     images: ["https://www.thegreyit.org/about-us/about-us-hero.avif"]
-  }
+  },
+    icons: {
+    icon: "./favicon.ico",
+    shortcut: "./favicon.ico",
+    apple: "./favicon.ico",
+  },
 };
 
 

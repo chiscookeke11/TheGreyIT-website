@@ -45,7 +45,12 @@ export const metadata: Metadata = {
         title: "Courses | TheGreyIT",
         description: "Browse TheGreyIT's professional IT courses, from software development, cybersecurity, AI, data analysis, digital marketing, UI/UX, and mobile app development to academic skills. Advance your career today.",
         images: ["https://www.thegreyit.org/courses-page/hero-img-2.webp"]
-    }
+    },
+    icons: {
+        icon: "./favicon.ico",
+        shortcut: "./favicon.ico",
+        apple: "./favicon.ico",
+    },
 };
 
 

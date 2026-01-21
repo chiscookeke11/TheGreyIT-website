@@ -49,6 +49,11 @@ export const metadata: Metadata = {
             "Sign in to your TheGreyIT account to access courses, certificates, transactions, and dashboard features securely.",
         images: ["/user/auth-image.jpg"],
     },
+    icons: {
+        icon: "./favicon.ico",
+        shortcut: "./favicon.ico",
+        apple: "./favicon.ico",
+    },
 };
 
 export default function Page() {
@@ -59,7 +64,7 @@ export default function Page() {
                 alt="Auth"
                 height={1000}
                 width={1000}
-                className="w-full h-full max-h-[200px] md:max-h-none object-cover md:max-w-[350px] lg:flex-1"
+                className="w-full h-full max-h-[200px] md:max-h-none object-cover md:max-w-[450px] lg:max-w-none lg:flex-1"
             />
             <UserAuthModal />
         </main>
