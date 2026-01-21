@@ -15,12 +15,13 @@ import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
 
+interface BlogPageComponentProps {
+    slug: string
+}
 
 
-
-export default function Page() {
+export default function DynamicBlogPage({ slug }: BlogPageComponentProps) {
     const [currentTab, setCurrentTab] = useState("description")
-    const { id } = useParams()
     const [currentCourse, setCurrentCourse] = useState<CourseDataTypes | null>(null)
     const { setShowPaymentModal, showPaymentModal, setSelectedCourse, isEnrolled, setIsEnrolled, setEnrolledNumber, enrolledNumber } = useAppContext()
     const [loading, setLoading] = useState(false)
@@ -73,7 +74,7 @@ export default function Page() {
         setLoading(true)
 
         const fetchCourseDetails = async () => {
-            const { data, error } = await supabase.from("course").select("*").eq("id", id).single()
+            const { data, error } = await supabase.from("course").select("*").eq("slug", slug).single()
 
             if (error) {
                 // console.error(error)
@@ -87,9 +88,9 @@ export default function Page() {
         }
 
         fetchCourseDetails()
-    }, [id])
+    }, [slug])
 
-      useEffect(() => {
+    useEffect(() => {
 
         document.body.style.overflowY = showPaymentModal ? "hidden" : "auto"
 
