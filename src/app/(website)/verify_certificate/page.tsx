@@ -31,7 +31,12 @@ export const metadata: Metadata = {
         title: "Verify Certificate | TheGreyIT",
         description:
             "Verify TheGreyIT certificates instantly and confirm their authenticity."
-    }
+    },
+    icons: {
+        icon: "./favicon.ico",
+        shortcut: "./favicon.ico",
+        apple: "./favicon.ico",
+    },
 };
 
 

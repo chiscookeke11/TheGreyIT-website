@@ -2,7 +2,7 @@ import ProfileClient from "@/components/Home/ProfileClient";
 import { ProfileData } from "@/data/profileData";
 
 
-export async function generateMetadata({params,}: {params: { slug: string };}) {
+export async function generateMetadata({ params }: { params: { slug: string }; }) {
 
   const profile = ProfileData.find(
     (p) => String(p.slug) === params.slug
@@ -19,6 +19,11 @@ export async function generateMetadata({params,}: {params: { slug: string };}) {
     title: `${profile.name} | TheGreyIT`,
     alternates: {
       canonical: `https://www.thegreyit.org/profile/${params.slug}`,
+    },
+    icons: {
+      icon: "./favicon.ico",
+      shortcut: "./favicon.ico",
+      apple: "./favicon.ico",
     },
   };
 }

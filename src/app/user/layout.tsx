@@ -6,12 +6,17 @@ import { ReactNode } from "react";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-    title: "Dashboard | TheGreyIT",
+    title: "Portal | TheGreyIT",
     description:
         "Access your TheGreyIT user dashboard to manage courses, certificates, transactions, and account settings securely.",
     robots: {
         index: true,
         follow: true,
+    },
+    icons: {
+        icon: "./favicon.ico",
+        shortcut: "./favicon.ico",
+        apple: "./favicon.ico",
     },
 };
 

@@ -31,7 +31,12 @@ export const metadata: Metadata = {
         title: "Contact Us | TheGreyIT",
         description:
             "Get in touch with TheGreyIT for IT services, training, partnerships, or general inquiries."
-    }
+    },
+    icons: {
+        icon: "./favicon.ico",
+        shortcut: "./favicon.ico",
+        apple: "./favicon.ico",
+    },
 };
 
 

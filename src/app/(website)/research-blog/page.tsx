@@ -44,7 +44,12 @@ export const metadata: Metadata = {
     description:
       "Explore TheGreyIT’s research blog featuring insights on technology, cybersecurity, software development, AI, data analysis, and digital innovation.",
     images: ["https://www.thegreyit.org/HomeHeroSection/HeroBg.png"]
-  }
+  },
+  icons: {
+    icon: "./favicon.ico",
+    shortcut: "./favicon.ico",
+    apple: "./favicon.ico",
+  },
 };
 
 

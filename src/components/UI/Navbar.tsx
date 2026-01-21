@@ -129,7 +129,7 @@ export default function Navbar() {
                         <li key={index} onClick={() => setShowMenu(false)} className=" text-base font-poppins text-white " ><CustomLink href={navlink.url} > {navlink.label}</CustomLink> </li>
                     ))}
 
-                    <Link href={"/user"} className={`text-base font-semibold font-poppins bg-white text-gray-700 py-2 px-4 rounded-sm    `} >{user ? "Dashboard" : "Sign In"}</Link>
+                    <Link href={"/user"} onClick={() => setShowMenu(false)} className={`text-base font-semibold font-poppins bg-white text-gray-700 py-2 px-4 rounded-sm    `} >{user ? "Dashboard" : "Sign In"}</Link>
                 </ul>
 
             </div>

@@ -48,7 +48,12 @@ export async function generateMetadata(
         index: true,
         follow: true
       }
-    }
+    },
+    icons: {
+      icon: "./favicon.ico",
+      shortcut: "./favicon.ico",
+      apple: "./favicon.ico",
+    },
   };
 }
 
