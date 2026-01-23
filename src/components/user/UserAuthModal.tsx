@@ -278,7 +278,13 @@ export default function UserAuthModal() {
                 {authState === "Sign Up" && (
                     <label htmlFor="referredBy" className=" w-full flex flex-col items-start gap-1  " >
                         <span className="text-base font-medium " >Referral Code (Optional)</span>
-                        <input type="text" id="referredBy" name="referredBy" onChange={handleChange} value={formValues.referredBy} placeholder="Optional" className="w-full py-3 px-5 border border-gray-700 outline-none focus:outline-none text-sm rounded-sm" />
+                        <input
+                            type="text"
+                            id="referredBy"
+                            name="referredBy"
+                            onChange={handleChange}
+                            value={formValues.referredBy}
+                            placeholder="Optional" className="w-full py-3 px-5 border border-gray-700 outline-none focus:outline-none text-sm rounded-sm" />
                     </label>
                 )}
 
