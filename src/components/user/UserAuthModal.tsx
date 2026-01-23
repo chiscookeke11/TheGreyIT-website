@@ -28,7 +28,8 @@ export default function UserAuthModal() {
         email: "",
         phoneNumber: "",
         password: "",
-        confirmPassword: ""
+        confirmPassword: "",
+        referredBy: "",
     })
 
 
@@ -76,7 +77,6 @@ export default function UserAuthModal() {
 
             exists = (data?.length ?? 0) > 0
         }
-        console.log(code)
         return code
     }
 
@@ -126,7 +126,8 @@ export default function UserAuthModal() {
                 firstName: "",
                 lastName: "",
                 password: "",
-                phoneNumber: ""
+                phoneNumber: "",
+                referredBy: "",
             })
 
 
@@ -134,7 +135,8 @@ export default function UserAuthModal() {
             const referralCode = await generateUniqueReferral()
             const { error } = await supabase.from('user_data').insert({
                 referral_code: referralCode,
-                user_id: signupData.user?.id
+                user_id: signupData.user?.id,
+                referred_by: referralCode
             })
 
             if (error) {
@@ -182,7 +184,8 @@ export default function UserAuthModal() {
                 firstName: "",
                 lastName: "",
                 password: "",
-                phoneNumber: ""
+                phoneNumber: "",
+                referredBy: "",
             })
         }
 
@@ -270,13 +273,22 @@ export default function UserAuthModal() {
 
                 </div>
 
+
+                {/* Referral code  */}
+                {authState === "Sign Up" && (
+                    <label htmlFor="referredBy" className=" w-full flex flex-col items-start gap-1  " >
+                        <span className="text-base font-medium " >Referral Code (Optional)</span>
+                        <input type="text" id="referredBy" name="referredBy" onChange={handleChange} value={formValues.referredBy} placeholder="Optional" className="w-full py-3 px-5 border border-gray-700 outline-none focus:outline-none text-sm rounded-sm" />
+                    </label>
+                )}
+
                 <Link href={"/reset-password"} className="ml-auto text-gray-700 text-sm font-medium outline-none " > Forgot Password? </Link>
 
 
 
             </div>
 
-            <button disabled={loading} className="font-syne bg-gray-700 w-full max-w-xs text-white hover:bg-transparent hover:text-gray-700 mb-5  px-6 py-3  flex items-center justify-center font-medium  focus:outline-none cursor-pointer text-base md:text-lg  border-[1px]  transition-all duration-300 ease-in-out border-gray-700 rounded-sm group  " > {loading ? <Spinner  /> : authState === "Sign In" ? "Sign In" : "Create Account"} </button>
+            <button disabled={loading} className="font-syne bg-gray-700 w-full max-w-xs text-white hover:bg-transparent hover:text-gray-700 mb-5  px-6 py-3  flex items-center justify-center font-medium  focus:outline-none cursor-pointer text-base md:text-lg  border-[1px]  transition-all duration-300 ease-in-out border-gray-700 rounded-sm group  " > {loading ? <Spinner /> : authState === "Sign In" ? "Sign In" : "Create Account"} </button>
 
 
             {authState === "Sign In" ? <p className=" text-base font-medium text-black text-center " >Don&apos;t have an account? <button className=" text-gray-700 font-medium cursor-pointer outline-none border-none" type="button" onClick={() => setAuthState("Sign Up")}> Create Account</button></p> : (
