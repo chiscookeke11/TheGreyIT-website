@@ -136,7 +136,8 @@ export default function UserAuthModal() {
             const { error } = await supabase.from('user_data').insert({
                 referral_code: referralCode,
                 user_id: signupData.user?.id,
-                referred_by: referralCode
+                referred_by: formValues.referredBy,
+                email: formValues.email,
             })
 
             if (error) {

@@ -2,8 +2,9 @@
 
 import TransactionsTable from "@/components/user/TransactionsTable"
 import { useAppContext } from "@/context/AppContext"
+import { supabase } from "@/lib/supabaseClient"
 import { CourseDataTypes } from "@/types/types"
-import { BookOpen, CircleCheckBig, GraduationCap } from "lucide-react"
+import { BookOpen, CircleCheckBig, GraduationCap, UsersRound } from "lucide-react"
 import Link from "next/link"
 import { useEffect, useState } from "react"
 
@@ -13,8 +14,11 @@ export default function DashboardPage() {
 
     const { userData, allCoursesData } = useAppContext()
     const [activeCourses, setActiveCourses] = useState<CourseDataTypes[] | null>(null)
+    const [numOfReferrals, setNumOfReferrals] = useState<number | null>(null)
 
 
+
+    // filter active course
     useEffect(() => {
 
         const filterForActiveCourses = () => {
@@ -25,6 +29,29 @@ export default function DashboardPage() {
         filterForActiveCourses()
 
     }, [allCoursesData])
+
+
+    // Track total number of referred users
+    useEffect(() => {
+
+        const fetchReferrals = async () => {
+            const { data, error } = await supabase.from("user_data").select("email").eq("referred_by", userData?.referral_code)
+
+            if (error) {
+                console.log("Error fetching referrals", error)
+            }
+
+            setNumOfReferrals(data?.length ?? null)
+        }
+
+        fetchReferrals()
+
+
+    }, [userData?.referral_code])
+
+
+
+
 
 
     return (
@@ -41,14 +68,14 @@ export default function DashboardPage() {
 
                 <div className=" overflow-x-auto h-full min-h-[150px] w-full flex flex-row items-center justify-evenly gap-5 md:gap-10 p-2 " >
 
-                    <button className="w-full whitespace-nowrap lg:max-w-[350px] h-full flex flex-row items-center justify-start gap-5 py-8 px-5 rounded-sm bg-white border border-gray-300 " >
+                    <button className="w-full shrink-0 whitespace-nowrap lg:max-w-[350px] h-full flex flex-row items-center justify-start gap-5 py-8 px-5 rounded-sm bg-white border border-gray-300 " >
                         <BookOpen size={35} />
                         <h3 className="text-start text-base md:text-xl font-medium " > <span className="text-xl font-semibold" > {userData?.list_enrolled_courses.length ?? "0"}</span><br /> Enrolled Courses</h3>
 
                     </button>
 
 
-                    <button className="w-full whitespace-nowrap lg:max-w-[350px] h-full flex flex-row items-center justify-start gap-5 py-8 px-5 rounded-sm bg-white border border-gray-300 " >
+                    <button className="w-full shrink-0 whitespace-nowrap lg:max-w-[350px] h-full flex flex-row items-center justify-start gap-5 py-8 px-5 rounded-sm bg-white border border-gray-300 " >
                         <GraduationCap size={35} />
                         <h3 className="text-start text-base md:text-xl font-medium " > <span className="text-xl font-semibold" >
                             {activeCourses?.length ?? 0}+</span><br />
@@ -58,9 +85,17 @@ export default function DashboardPage() {
                     </button>
 
 
-                    <button className="w-full whitespace-nowrap lg:max-w-[350px] h-full flex flex-row items-center justify-start gap-5 py-8 px-5 rounded-sm bg-white border border-gray-300 " >
+                    <button className="w-full shrink-0 whitespace-nowrap lg:max-w-[350px] h-full flex flex-row items-center justify-start gap-5 py-8 px-5 rounded-sm bg-white border border-gray-300 " >
                         <CircleCheckBig size={35} />
                         <h3 className="text-start text-base md:text-xl font-medium " > <span className="text-xl font-semibold " >{userData?.list_completed_courses?.length ?? 0}</span> <br /> Completed Courses</h3>
+
+                    </button>
+
+
+
+                    <button className="w-full shrink-0 whitespace-nowrap lg:max-w-[350px] h-full flex flex-row items-center justify-start gap-5 py-8 px-5 rounded-sm bg-white border border-gray-300 " >
+                        <UsersRound size={35} />
+                        <h3 className="text-start text-base md:text-xl font-medium " > <span className="text-xl font-semibold " >{numOfReferrals}</span> <br /> Referrals</h3>
 
                     </button>
 
