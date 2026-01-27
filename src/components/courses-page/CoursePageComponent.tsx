@@ -142,7 +142,7 @@ export default function CoursePageComponent() {
             </div>
 
 
-            <label className="w-full max-w-xs flex-col md:flex-row  flex gap-1 rounded-sm  py-2 px-3 border border-gray-700 text-gray-800  mt-8 ml-auto mr-10 " htmlFor="search" >
+            <label className="w-full max-w-xs flex gap-1 rounded-sm  py-2 px-3 border border-gray-700 text-gray-800  mt-8 mb-3 ml-auto mr-10 " htmlFor="search" >
                 <input
                     type="search"
                     name="search"
@@ -167,7 +167,7 @@ export default function CoursePageComponent() {
                 :
                 coursesData.length < 1 ?
                     (
-                        <div className="w-full h-screen flex items-center justify-center bg-[#f2f5fc] " >
+                        <div className="w-full h-screen flex items-center justify-center bg-white " >
                             <p className="font-medium text-lg text-gray-700 " >No courses found!</p>
 
                         </div>
