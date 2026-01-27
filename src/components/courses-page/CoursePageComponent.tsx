@@ -5,7 +5,7 @@ import Button from "@/components/UI/Button"
 import { Spinner } from "@/components/UI/Spinner"
 import { supabase } from "@/lib/supabaseClient"
 import { CourseDataTypes } from "@/types/types"
-import { Download, } from "lucide-react"
+import { Download, Search, } from "lucide-react"
 import Link from "next/link"
 import React, { useEffect, useState } from "react"
 import Marquee from "react-fast-marquee";
@@ -26,6 +26,7 @@ export default function CoursePageComponent() {
 
     const [coursesData, setCoursesData] = useState<CourseDataTypes[] | null>(null)
     const [downloadingPdf, setDownloadingPdf] = useState<string | null>(null)
+    const [search, setSearch] = useState("")
 
 
 
@@ -87,6 +88,22 @@ export default function CoursePageComponent() {
     }, [])
 
 
+    // function to filter courses based on search query
+    const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setSearch(e.target.value)
+        const query = e.target.value
+
+        if (query.trim() === "") {
+            supabaseFetch()
+            return
+        }
+        const filtered = coursesData?.filter(course =>
+            course.title.toLowerCase().includes(query.trim().toLowerCase())
+        )
+        setCoursesData(filtered || null)
+    }
+
+
 
 
     return (
@@ -125,7 +142,18 @@ export default function CoursePageComponent() {
             </div>
 
 
-
+            <label className="w-full max-w-xs flex-col md:flex-row  flex gap-1 rounded-sm  py-2 px-3 border border-gray-700 text-gray-800  mt-8 ml-auto mr-10 " htmlFor="search" >
+                <input
+                    type="search"
+                    name="search"
+                    id="search"
+                    value={search}
+                    onChange={handleSearch}
+                    className="w-full  outline-none focus:outline-none text-xs  "
+                    placeholder="Search"
+                />
+                <button type="button" className="cursor-pointer" > <Search size={15} /> </button>
+            </label>
 
 
             {/* Course description section  */}
@@ -146,7 +174,7 @@ export default function CoursePageComponent() {
                     )
                     :
                     (
-                        <section id="courseTracks" className=" w-full h-fit py-14 md:py-28 px-[4%]  grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 place-items-center justify-items-center gap-10 font-poppins " >
+                        <section id="courseTracks" className=" w-full h-fit py-8 md:py-16 px-[4%]  grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 place-items-center justify-items-center gap-10 font-poppins " >
 
                             {coursesData?.map((track, index) => (
                                 <div

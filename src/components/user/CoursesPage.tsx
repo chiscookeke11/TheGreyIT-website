@@ -1,14 +1,15 @@
 "use client"
 
 
-import {Spinner} from "@/components/UI/Spinner"
+import { Spinner } from "@/components/UI/Spinner"
 import UserCourseCard from "@/components/user/UserCourseCard"
 import { useAppContext } from "@/context/AppContext"
 import { supabase } from "@/lib/supabaseClient"
 import { CourseDataTypes } from "@/types/types"
+import { Search } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
-import { useEffect, useState } from "react"
+import React, { useEffect, useState } from "react"
 
 
 
@@ -19,6 +20,9 @@ export default function CoursesPageComponent() {
     const [completedCourses, setCompletedCourses] = useState<CourseDataTypes[] | null>(null)
     const [courseType, setCourseType] = useState(allCoursesData)
     const [bookmarks, setbookmarks] = useState<number[] | null>(null)
+    const [search, setSearch] = useState("")
+    const [filteredCourses, setFilteredCourses] = useState<CourseDataTypes[] | null>(null)
+
 
 
 
@@ -27,6 +31,14 @@ export default function CoursesPageComponent() {
     useEffect(() => {
         setCourseType(allCoursesData)
     }, [allCoursesData])
+
+
+
+    // Keep filteredCourses in sync when courseType changes
+    useEffect(() => {
+        setFilteredCourses(courseType)
+    }, [courseType])
+
 
 
 
@@ -76,6 +88,35 @@ export default function CoursesPageComponent() {
 
 
 
+
+    // function to search for a course
+    const searchCourse = (query: string) => {
+        if (!courseType) return
+
+        if (query.trim() === "") {
+            setFilteredCourses(courseType)
+            return
+        }
+
+        const matches = courseType.filter(course =>
+            course.title.toLowerCase().includes(query.trim().toLowerCase())
+        )
+
+        setFilteredCourses(matches)
+    }
+
+
+
+    // handle change function for the search input
+    const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const value = e.target.value
+        setSearch(value)
+        searchCourse(value)
+    }
+
+
+
+
     return (
         <div className="w-full h-full flex flex-col gap-7 items-center justify-center font-poppins" >
             {/* Courses Tab */}
@@ -84,21 +125,40 @@ export default function CoursesPageComponent() {
 
                 <hr className="w-full border-t border-gray-400 " />
 
-                <div className=" w-full flex items-center gap-6 flex-wrap " >
+                <div className="w-full flex items-center justify-between gap-10 " >
 
-                    <button onClick={() => setCourseType(allCoursesData)}
-                        className={`font-syne   hover:bg-transparent hover:text-gray-700   px-6 py-2  flex items-center justify-center font-medium  focus:outline-none cursor-pointer text-sm   border-[1px]  transition-all duration-300 ease-in-out border-gray-700 rounded-sm ${courseType === allCoursesData ? "bg-transparent text-gray-700 " : "bg-gray-700 text-white"} `} >ACTIVE COURSES</button>
+                    <div className=" w-full flex items-center gap-5 flex-wrap flex-1 " >
 
-                    <button
-                        onClick={() => setCourseType(enrolledCourses)}
-                        className={`font-syne   hover:bg-transparent hover:text-gray-700   px-6 py-2  flex items-center justify-center font-medium  focus:outline-none cursor-pointer text-sm   border-[1px]  transition-all duration-300 ease-in-out border-gray-700 rounded-sm ${courseType === enrolledCourses ? "bg-transparent text-gray-700" : "bg-gray-700 text-white"} `} >ENROLLED COURSES</button>
+                        <button onClick={() => setCourseType(allCoursesData)}
+                            className={`font-syne   hover:bg-transparent hover:text-gray-700   px-6 py-2  flex items-center justify-center font-medium  focus:outline-none cursor-pointer text-sm   border-[1px]  transition-all duration-300 ease-in-out border-gray-700 rounded-sm ${courseType === allCoursesData ? "bg-transparent text-gray-700 " : "bg-gray-700 text-white"} `} >ACTIVE COURSES</button>
+
+                        <button
+                            onClick={() => setCourseType(enrolledCourses)}
+                            className={`font-syne   hover:bg-transparent hover:text-gray-700   px-6 py-2  flex items-center justify-center font-medium  focus:outline-none cursor-pointer text-sm   border-[1px]  transition-all duration-300 ease-in-out border-gray-700 rounded-sm ${courseType === enrolledCourses ? "bg-transparent text-gray-700" : "bg-gray-700 text-white"} `} >ENROLLED COURSES</button>
 
 
-                    <button
-                        onClick={() => setCourseType(completedCourses)}
-                        className={`font-syne  hover:bg-transparent hover:text-gray-700   px-6 py-2  flex items-center justify-center font-medium  focus:outline-none cursor-pointer text-sm   border-[1px]  transition-all duration-300 ease-in-out border-gray-700 rounded-sm ${courseType === completedCourses ? "bg-transparent text-gray-700" : "bg-gray-700 text-white"} `} >COMPLETED COURSES</button>
+                        <button
+                            onClick={() => setCourseType(completedCourses)}
+                            className={`font-syne  hover:bg-transparent hover:text-gray-700   px-6 py-2  flex items-center justify-center font-medium  focus:outline-none cursor-pointer text-sm   border-[1px]  transition-all duration-300 ease-in-out border-gray-700 rounded-sm ${courseType === completedCourses ? "bg-transparent text-gray-700" : "bg-gray-700 text-white"} `} >COMPLETED COURSES</button>
 
+                    </div>
+
+                    <label className="w-full max-w-xs flex-col md:flex-row  flex gap-1 rounded-sm  py-2 px-3 border border-gray-700 text-gray-800 " htmlFor="search" >
+                        <input
+                            type="search"
+                            name="search"
+                            id="search"
+                            value={search}
+                            onChange={handleSearch}
+                            className="w-full  outline-none focus:outline-none text-xs  "
+                            placeholder="Search"
+                        />
+                        <button type="button" className="cursor-pointer" > <Search size={15} /> </button>
+                    </label>
                 </div>
+
+
+
 
 
                 {
@@ -107,7 +167,7 @@ export default function CoursesPageComponent() {
                             <Spinner />
                         </div>
                         :
-                        courseType && courseType.length < 1 ?
+                        filteredCourses && filteredCourses.length < 1 ?
                             <div className="w-full flex flex-col gap-7 items-center justify-center h-[50vh] " >
                                 <Image src={"/user/not-found-error-alert-svgrepo-com.svg"} alt="icon" height={500} width={500} className=" w-[250px] h-[250px] object-center " priority />
                                 No course found </div>
@@ -115,9 +175,9 @@ export default function CoursesPageComponent() {
                             (
                                 <section className=" w-full mt-5  grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 place-items-center justify-items-center gap-5 gap-y-9 font-poppins " >
 
-                                    {courseType?.map((track, index) => (
+                                    {filteredCourses?.map((track, index) => (
                                         // Course card
-                                        <Link href={` /user/Courses/${track.slug} `} className="w-full h-full"           key={index} >
+                                        <Link href={` /user/Courses/${track.slug} `} className="w-full h-full" key={index} >
                                             <UserCourseCard
                                                 track={track}
                                                 bookmarks={bookmarks}
