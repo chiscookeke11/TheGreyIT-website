@@ -143,7 +143,7 @@ export default function CoursesPageComponent() {
 
                     </div>
 
-                    <label className="w-full max-w-xs   flex gap-1 rounded-sm  py-2 px-3 border border-gray-700 text-gray-800 " htmlFor="search" >
+                    <label className="w-full max-w-xs flex-col md:flex-row  flex gap-1 rounded-sm  py-2 px-3 border border-gray-700 text-gray-800 " htmlFor="search" >
                         <input
                             type="search"
                             name="search"
@@ -153,7 +153,7 @@ export default function CoursesPageComponent() {
                             className="w-full  outline-none focus:outline-none text-xs  "
                             placeholder="Search"
                         />
-                         <button type="button" className="cursor-pointer" > <Search size={15} /> </button>
+                        <button type="button" className="cursor-pointer" > <Search size={15} /> </button>
                     </label>
                 </div>
 
