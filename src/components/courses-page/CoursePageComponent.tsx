@@ -208,7 +208,7 @@ export default function CoursePageComponent() {
                                         </Button>
                                     </div>
 
-                                    <div className="absolute right-0 top-0 bg-red-500 font-medium text-white py-1 pl-4 pr-1 w-fit text-sm rounded-xs flex flex-col items-start gap-1.5  " >
+                                    <div className="absolute right-0 top-0 bg-red-500 font-medium text-white py-0.5 pl-4 pr-1 w-fit text-xs rounded-xs flex flex-col items-start gap-1  " >
                                         {
                                             !track.onlineFee || track.onlineFee < 0 ?
                                                 null :

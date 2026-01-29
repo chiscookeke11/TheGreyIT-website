@@ -18,6 +18,7 @@
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
+
   }
 }
 * {
@@ -65,7 +66,6 @@ body {
       transform: rotate(360deg);
     }
   }
-
 
 
 
