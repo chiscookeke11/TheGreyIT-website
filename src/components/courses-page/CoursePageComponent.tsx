@@ -142,7 +142,7 @@ export default function CoursePageComponent() {
             </div>
 
 
-            <label className="w-full max-w-xs flex-col md:flex-row  flex gap-1 rounded-sm  py-2 px-3 border border-gray-700 text-gray-800  mt-8 ml-auto mr-10 " htmlFor="search" >
+            <label className="w-full max-w-xs flex gap-1 rounded-sm  py-2 px-3 border border-gray-700 text-gray-800  mt-8 mb-3 ml-auto mr-10 " htmlFor="search" >
                 <input
                     type="search"
                     name="search"
@@ -167,7 +167,7 @@ export default function CoursePageComponent() {
                 :
                 coursesData.length < 1 ?
                     (
-                        <div className="w-full h-screen flex items-center justify-center bg-[#f2f5fc] " >
+                        <div className="w-full h-screen flex items-center justify-center bg-white " >
                             <p className="font-medium text-lg text-gray-700 " >No courses found!</p>
 
                         </div>
@@ -208,7 +208,7 @@ export default function CoursePageComponent() {
                                         </Button>
                                     </div>
 
-                                    <div className="absolute right-0 top-0 bg-red-500 font-medium text-white py-1 pl-4 pr-1 w-fit text-sm rounded-xs flex flex-col items-start gap-1.5  " >
+                                    <div className="absolute right-0 top-0 bg-red-500 font-medium text-white py-0.5 pl-4 pr-1 w-fit text-xs rounded-xs flex flex-col items-start gap-1  " >
                                         {
                                             !track.onlineFee || track.onlineFee < 0 ?
                                                 null :

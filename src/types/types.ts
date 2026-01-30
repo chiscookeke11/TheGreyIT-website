@@ -153,3 +153,44 @@ export interface TeamMemberDataType {
   motivation?: string;
   slug: string;
 }
+
+
+
+export interface VolunteerFormDataType {
+  firstName: string;
+  lastName: string;
+  phoneNumber: string;
+  email: string;
+  city: string;
+  state: string;
+  school: string;
+  department: string;
+  levelOfStudy: string;
+  educationStatus: "Student" | "Graduate" | "";
+  preferredRole: "Student Volunteer" | "Graduate Ambassador" | "";
+  interests: string[];
+  howCanYouHelp: "Social media posting"
+  | "Sharing opportunities in groups (WhatsApp, Telegram, campus)"
+  | "Content writing or captions"
+  | "Event promotion (online/offline)"
+  | "Referrals & word-of-mouth"
+  | "";
+  availability: "2-4 hours" | "5-8 hours" | "Flexible" | "",
+  startOptions: "Immediately" | "Within 1-2 weeks" | "",
+  benefits: string[],
+  otherBenefit: string,
+  motivation: string,
+  socialMedia: "LinkedIn" | "Instagram" | "X" | "Tiktok" | "",
+  consent:
+  " I agree to represent TheGreyIT professionally"
+  | "I consent to my information being used for programme coordination"
+  | "I confirm the information provided is correct"
+  | ""
+}
+
+
+
+export interface customSelectTypes {
+  label: string;
+  value: string
+}

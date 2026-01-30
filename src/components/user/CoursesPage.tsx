@@ -125,7 +125,7 @@ export default function CoursesPageComponent() {
 
                 <hr className="w-full border-t border-gray-400 " />
 
-                <div className="w-full flex items-center justify-between gap-10 " >
+                <div className="w-full flex flex-col md:flex-row items-center justify-between gap-10 " >
 
                     <div className=" w-full flex items-center gap-5 flex-wrap flex-1 " >
 
@@ -143,7 +143,7 @@ export default function CoursesPageComponent() {
 
                     </div>
 
-                    <label className="w-full max-w-xs flex-col md:flex-row  flex gap-1 rounded-sm  py-2 px-3 border border-gray-700 text-gray-800 " htmlFor="search" >
+                    <label className="w-full max-w-xs ml-auto md:ml-0   flex gap-1 rounded-sm  py-2 px-3 border border-gray-700 text-gray-800 " htmlFor="search" >
                         <input
                             type="search"
                             name="search"
