@@ -49,7 +49,6 @@ export default function VolunteerPageComponent() {
         benefits: [],
         otherBenefit: "",
         motivation: "",
-        socialMedia: "",
         consent: ""
     })
 
@@ -234,7 +233,6 @@ export default function VolunteerPageComponent() {
             benefits: [],
             otherBenefit: "",
             motivation: "",
-            socialMedia: "",
             consent: ""
         })
         setLoading(false)
@@ -252,7 +250,7 @@ export default function VolunteerPageComponent() {
 
 
                 {/* The left side  */}
-                <div className="w-full lg:w-1/2 h-full  flex items-center justify-center px-[3%] py-12 " >
+                <div className="w-full lg:w-1/2 h-full  flex items-center justify-center px-[3%] py-12 relative " >
                     <form onSubmit={handleSubmit} className="w-full px-1  flex flex-col items-start gap-9 " >
                         <div>
                             <h1 className="text-gray-500 font-bold text-xl md:text-3xl  mb-3  " >Turn Your Tech Interest into <span className="text-gray-800">Opportunity volunteer!</span></h1>
@@ -321,6 +319,16 @@ export default function VolunteerPageComponent() {
                         }
 
                     </form>
+
+
+
+                    {/* progress bar  */}
+                    <div
+                        className="h-1.5  transition-all ease-in-out duration-200 absolute bottom-0 left-0 bg-green-500 "
+                        style={{
+                            width: `${(currentStep / 4) * 100}%`
+                        }}
+                    />
                 </div>
 
 

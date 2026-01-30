@@ -15,12 +15,7 @@ interface StepFourProps {
 export default function StepFour({ formValues, setFormValues }: StepFourProps) {
 
 
-    const socialMediaOptions: VolunteerFormDataType["socialMedia"][] = [
-        "Instagram",
-        "LinkedIn",
-        "Tiktok",
-        "X"
-    ]
+
 
 
     const consentOptions: VolunteerFormDataType["consent"][] = [
@@ -54,36 +49,6 @@ export default function StepFour({ formValues, setFormValues }: StepFourProps) {
                         className="w-full py-2 px-3 border border-gray-700 outline-none focus:outline-none text-sm rounded-sm " />
                 </label>
 
-
-
-
-                {/* Social media   */}
-                <div className="w-full flex flex-col items-start gap-2 " >
-                    <h1 className="text-[#000000] font-medium text-sm font-lato flex items-start gap-1" >Social Media (Optional):   <div className=" text-red-600" >*</div></h1>
-
-
-                    <div className=" grid grid-cols-2 md:grid-cols-4 gap-2 justify-items-stretch  "  >
-                        {socialMediaOptions.map((option) => {
-                            const isChecked = formValues.socialMedia === option
-                            return (
-                                <CustomCheckBox
-                                    key={option}
-                                    checked={isChecked}
-                                    label={option}
-                                    id={option.toLowerCase()}
-                                    onCheckedChange={(checked) => {
-                                        if (checked) {
-                                            setFormValues((prev) => ({
-                                                ...prev,
-                                                socialMedia: option,
-                                            }))
-                                        }
-                                    }}
-                                />
-                            )
-                        })}
-                    </div>
-                </div>
 
 
 

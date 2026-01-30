@@ -167,7 +167,7 @@ export interface VolunteerFormDataType {
   department: string;
   levelOfStudy: string;
   educationStatus: "Student" | "Graduate" | "";
-  preferredRole: "Student Volunteer" | "Graduate Ambassador" | "";
+  preferredRole: "Student Ambassador" | "Graduate Ambassador" | "";
   interests: string[];
   howCanYouHelp: "Social media posting"
   | "Sharing opportunities in groups (WhatsApp, Telegram, campus)"
@@ -180,7 +180,6 @@ export interface VolunteerFormDataType {
   benefits: string[],
   otherBenefit: string,
   motivation: string,
-  socialMedia: "LinkedIn" | "Instagram" | "X" | "Tiktok" | "",
   consent:
   " I agree to represent TheGreyIT professionally"
   | "I consent to my information being used for programme coordination"
