@@ -19,7 +19,7 @@ export default function StepTwo({ formValues, setFormValues }: StepTwoProps) {
 
 
     const preferredRoleOptions: VolunteerFormDataType["preferredRole"][] = [
-        "Student Volunteer",
+        "Student Ambassador",
         "Graduate Ambassador"
     ]
 
