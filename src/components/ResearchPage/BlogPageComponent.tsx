@@ -31,8 +31,6 @@ export default function BlogPageComponent({ slug }: BlogPageComponentProps) {
             setLoading(false);
             return;
         }
-        console.log(slug)
-        console.log(data)
         setCurrentBlog(data[0]);
         setLoading(false);
     };

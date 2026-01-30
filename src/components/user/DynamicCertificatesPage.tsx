@@ -94,7 +94,6 @@ export default function DynamicCertificatesPage() {
                 return;
             }
             setHasDownloaded(data?.hasDownloaded ?? false)
-            console.log(data)
 
         }
         fetchCertificateState()

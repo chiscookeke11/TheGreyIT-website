@@ -26,7 +26,7 @@ export default function CertificatesPageComponent() {
         }
 
         else {
-            console.log("certified courses:", data)
+            console.log("")
         }
     }
 

@@ -38,7 +38,7 @@ export default function DashboardPage() {
             const { data, error } = await supabase.from("user_data").select("email").eq("referred_by", userData?.referral_code)
 
             if (error) {
-                console.log("Error fetching referrals", error)
+                console.error("Error fetching referrals", error)
             }
 
             setNumOfReferrals(data?.length ?? null)

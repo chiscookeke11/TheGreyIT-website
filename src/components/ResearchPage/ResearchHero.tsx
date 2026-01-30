@@ -30,7 +30,6 @@ export default function ResearchHero() {
                 }
                 else if (data) {
                     setTrendingBlog(data)
-                    console.log(data)
                 }
 
             }
