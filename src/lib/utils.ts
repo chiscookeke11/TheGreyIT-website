@@ -1,6 +1,9 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import { clsx, type ClassValue } from "clsx";
 import React from "react";
 import { twMerge } from "tailwind-merge";
+
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -53,7 +56,7 @@ export const handleCheckboxChange = <
 ) => {
   setFormValues((prev) => {
     const fieldValue = prev[name];
-    let updated: any = { ...prev };
+    const updated: any  = { ...prev };
 
     if (Array.isArray(fieldValue) && value) {
       if (value === "Other") {
