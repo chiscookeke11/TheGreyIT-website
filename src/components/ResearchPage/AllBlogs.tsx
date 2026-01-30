@@ -28,7 +28,6 @@ export default function AllBlogs() {
       }
       else if (data) {
         setBlogs(data)
-        console.log(data)
       }
     }
 

@@ -87,7 +87,6 @@ export default function ContactForm({ showForm, setShowForm, subject }: ContactF
         )
             .then(
                 (result) => {
-                    console.log(result.text)
                     toast.success("Message sent successfully!")
                     setLoading(false)
                     setFormValues({

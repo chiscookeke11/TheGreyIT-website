@@ -30,7 +30,6 @@ export default function WishlistPageComponent() {
             }
 
             else {
-                console.log("The bookmarkrd courses:", data, userData?.list_enrolled_courses)
                 setBookmarkedCourses(data)
             }
         }

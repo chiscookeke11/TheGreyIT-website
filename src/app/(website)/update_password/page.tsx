@@ -67,7 +67,6 @@ export default function Page() {
 
     if (error) {
       toast.error(`Failed: ${error.message}`)
-      console.error(error)
       setLoading(false)
     }
 

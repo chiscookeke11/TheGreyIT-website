@@ -144,7 +144,6 @@ export default function AuthModal() {
 
         else {
             toast.success("Success! You are now signed in")
-            console.log(data)
             setLoading(false)
             setFormValues({
                 email: "",
