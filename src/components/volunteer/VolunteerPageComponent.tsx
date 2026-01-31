@@ -193,6 +193,8 @@ export default function VolunteerPageComponent() {
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
 
+        if (currentStep !== 4) return;
+
         if (!isComplete(formValues)) {
             return toast.error("Please fill in all required fields")
         }
@@ -200,7 +202,7 @@ export default function VolunteerPageComponent() {
 
         setLoading(true)
 
-        const { data, error } = await supabase.from("ambassadors_application").insert({
+        const { error } = await supabase.from("ambassadors_application").insert({
             ...formValues
         })
 

@@ -29,7 +29,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
 
     return {
-        title: `${data.title} | TheGreyIT`,
+        title: `Course: ${data.title} | TheGreyIT`,
         description: data.excerpt,
         keywords: [data.title],
         alternates: {
