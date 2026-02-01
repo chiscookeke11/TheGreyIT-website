@@ -157,6 +157,7 @@ export interface TeamMemberDataType {
 
 
 export interface VolunteerFormDataType {
+  id?: string;
   firstName: string;
   lastName: string;
   phoneNumber: string;
