@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
+import { CourseDataTypes } from "@/types/types";
 import { clsx, type ClassValue } from "clsx";
 import React from "react";
 import { twMerge } from "tailwind-merge";
@@ -56,7 +57,7 @@ export const handleCheckboxChange = <
 ) => {
   setFormValues((prev) => {
     const fieldValue = prev[name];
-    const updated: any  = { ...prev };
+    const updated: any = { ...prev };
 
     if (Array.isArray(fieldValue) && value) {
       if (value === "Other") {
@@ -77,6 +78,32 @@ export const handleCheckboxChange = <
 
 
 
+// Function to get course from cache
+export const getCoursesFromCache = (KEY: string) => {
+  const cached = localStorage.getItem(KEY)
+  if (!cached) return null
+
+  try {
+    return JSON.parse(cached) as {
+      data: CourseDataTypes[],
+      timeStamp: number
+    }
+  }
+  catch {
+    return null
+  }
+}
 
 
 
+
+
+    // this function saves course data to local storage
+    export const saveCoursesToCache = (courses: CourseDataTypes[], KEY: string) => {
+        const payload = {
+            data: courses,
+            timeStamp: Date.now()
+        }
+
+        localStorage.setItem(KEY, JSON.stringify(payload))
+    }

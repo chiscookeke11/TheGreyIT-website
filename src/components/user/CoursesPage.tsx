@@ -22,7 +22,8 @@ export default function CoursesPageComponent() {
     const [bookmarks, setbookmarks] = useState<number[] | null>(null)
     const [search, setSearch] = useState("")
     const [filteredCourses, setFilteredCourses] = useState<CourseDataTypes[] | null>(null)
-
+    const KEY = "COURSE_KEY"
+    const CACHE_DURATION = 10 * 60 * 1000
 
 
 
@@ -90,29 +91,26 @@ export default function CoursesPageComponent() {
 
 
     // function to search for a course
-    const searchCourse = (query: string) => {
-        if (!courseType) return
+    useEffect(() => {
+        if (!courseType) {
+            setFilteredCourses(null)
+            return
+        }
 
-        if (query.trim() === "") {
+        const query = search.trim().toLowerCase()
+
+        if (!query) {
             setFilteredCourses(courseType)
             return
         }
 
-        const matches = courseType.filter(course =>
-            course.title.toLowerCase().includes(query.trim().toLowerCase())
+        const filtered = courseType.filter(course =>
+            course.title.toLowerCase().includes(query)
         )
 
-        setFilteredCourses(matches)
-    }
+        setFilteredCourses(filtered)
+    }, [search, courseType])
 
-
-
-    // handle change function for the search input
-    const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const value = e.target.value
-        setSearch(value)
-        searchCourse(value)
-    }
 
 
 
@@ -125,7 +123,7 @@ export default function CoursesPageComponent() {
 
                 <hr className="w-full border-t border-gray-400 " />
 
-                <div className="w-full flex flex-col md:flex-row items-center justify-between gap-10 " >
+                <div className="w-full flex flex-col lg:flex-row items-center justify-between gap-10 " >
 
                     <div className=" w-full flex items-center gap-5 flex-wrap flex-1 " >
 
@@ -143,13 +141,13 @@ export default function CoursesPageComponent() {
 
                     </div>
 
-                    <label className="w-full max-w-xs ml-auto md:ml-0   flex gap-1 rounded-sm  py-2 px-3 border border-gray-700 text-gray-800 " htmlFor="search" >
+                    <label className="w-full max-w-xs ml-auto lg:ml-0   flex gap-1 rounded-sm  py-2 px-3 border border-gray-700 text-gray-800 " htmlFor="search" >
                         <input
                             type="search"
                             name="search"
                             id="search"
                             value={search}
-                            onChange={handleSearch}
+                            onChange={(e) => setSearch(e.target.value)}
                             className="w-full  outline-none focus:outline-none text-xs  "
                             placeholder="Search"
                         />
