@@ -4,6 +4,7 @@
 import Button from "@/components/UI/Button"
 import { Spinner } from "@/components/UI/Spinner"
 import { supabase } from "@/lib/supabaseClient"
+import { getCoursesFromCache, saveCoursesToCache } from "@/lib/utils"
 import { CourseDataTypes } from "@/types/types"
 import { Download, Search, } from "lucide-react"
 import Link from "next/link"
@@ -23,10 +24,13 @@ const highlights = [
 ]
 
 export default function CoursePageComponent() {
-
+    const [allCourses, setAllCourses] = useState<CourseDataTypes[]>([])
     const [coursesData, setCoursesData] = useState<CourseDataTypes[] | null>(null)
     const [downloadingPdf, setDownloadingPdf] = useState<string | null>(null)
     const [search, setSearch] = useState("")
+    const KEY = "COURSE_KEY"
+    const CACHE_DURATION = 10 * 60 * 1000
+
 
 
 
@@ -62,49 +66,52 @@ export default function CoursePageComponent() {
 
 
 
-
-
-
-
     // Function to fetch all Courses from the db
     const supabaseFetch = async () => {
+        const cached = getCoursesFromCache(KEY)
+
+        if (cached && Date.now() - cached.timeStamp < CACHE_DURATION) {
+            setAllCourses(cached.data)
+            setCoursesData(cached.data)
+            return;
+        }
+
+
+
         const { data, error } = await supabase.from("course").select("*")
 
         if (error) {
             console.log("Failed to fetch course:")
+            return
         }
 
-
-        {
-            console.log("Fetch complete")
-            setCoursesData(data)
-        }
+        setAllCourses(data)
+        setCoursesData(data)
+        saveCoursesToCache(data, KEY)
     }
 
 
-    useEffect(() => {
 
+    useEffect(() => {
         supabaseFetch()
     }, [])
 
 
     // function to filter courses based on search query
-    const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setSearch(e.target.value)
-        const query = e.target.value
+    useEffect(() => {
+        const query = search.trim().toLowerCase()
 
-        if (query.trim() === "") {
-            supabaseFetch()
+        if (!query) {
+            setCoursesData(allCourses)
             return
         }
-        const filtered = coursesData?.filter(course =>
-            course.title.toLowerCase().includes(query.trim().toLowerCase())
+
+        const filtered = allCourses.filter(course =>
+            course.title.toLowerCase().includes(query)
         )
-        setCoursesData(filtered || null)
-    }
 
-
-
+        setCoursesData(filtered)
+    }, [search, allCourses])
 
     return (
         <div className="h-full w-full text-black bg-white relative " >
@@ -148,7 +155,7 @@ export default function CoursePageComponent() {
                     name="search"
                     id="search"
                     value={search}
-                    onChange={handleSearch}
+                    onChange={(e) => setSearch(e.target.value)}
                     className="w-full  outline-none focus:outline-none text-xs  "
                     placeholder="Search"
                 />
@@ -231,9 +238,6 @@ export default function CoursePageComponent() {
                         </section>
                     )
             }
-
-
-
 
         </div>
     )

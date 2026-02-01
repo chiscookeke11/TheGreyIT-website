@@ -4,9 +4,7 @@ import { useEffect, useRef, useState } from "react"
 import { supabase } from "@/lib/supabaseClient"
 import NavigationMenu from "@/components/admin/NavigationMenu"
 import AuthModal from "@/components/UI/AuthModal"
-import {Spinner} from "@/components/UI/Spinner"
-import Image from "next/image"
-import Link from "next/link"
+import { Spinner } from "@/components/UI/Spinner"
 import { User } from "@supabase/supabase-js"
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
@@ -86,39 +84,17 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   }
 
   return (
-    <div className="min-h-screen bg-white flex flex-col font-poppins">
-      <nav className="p-5">
-        <Link href={"/"}>
-          <Image
-            src={"/logos/THEGREYAElogoBlack.png"}
-            width={180}
-            height={180}
-            alt="TheGreyIT-logo"
-            className="object-center w-[100px]"
-          />
-        </Link>
-      </nav>
 
-      <header className="w-full flex items-center justify-between px-6 py-4 bg-gray-100 border-b border-[#008CC1]/20">
-        <h2 className="text-lg font-semibold text-gray-700 flex-1">
-          Welcome, <span className="font-normal text-sm md:text-base">{user.email}</span>
-        </h2>
-
-        <button
-          onClick={async () => {
-            const { error } = await supabase.auth.signOut()
-            if (!error) setUser(null)
-          }}
-          className="bg-gray-700 text-white px-5 py-2 rounded-md hover:bg-gray-500 transition-all cursor-pointer"
-        >
-          Sign Out
-        </button>
-      </header>
-
-      <main className="flex-1">
+    <section className=" flex flex-row items-stretch h-screen font-poppins ">
+      <aside className="w-full max-w-64 " >
         <NavigationMenu />
+      </aside>
+
+
+      <main className="w-full flex-1  bg-[#f2f5fc] h-full overflow-y-auto  " >
         {children}
       </main>
-    </div>
+    </section>
+
   )
 }
