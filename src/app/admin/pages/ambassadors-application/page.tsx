@@ -37,7 +37,7 @@ export default function Page() {
 
                 {applications?.map((data, index) => (
                     <Link href={`/admin/pages/ambassadors-application/${data.id}`} key={index}
-                        className=" w-full cursor-pointer shadow-sm h-fit flex flex-col items-start gap-2 px-3 py-4 hover:scale-105 duration-200 ease-in-out transition-all " >
+                        className=" w-full cursor-pointer shadow-sm h-fit flex flex-col items-start gap-2 px-3 py-4 hover:scale-105 duration-200 ease-in-out transition-all border-[0.5px] border-gray-700 " >
                         <h2 className="text-sm font-medium  "><b>Name:</b> {data.firstName + " " + data.lastName} </h2>
                         <h3 className="text-sm font-medium  "><b>Email:</b> {data.email} </h3>
                         <p className="text-sm font-medium  "><b>Phone number:</b> {data.phoneNumber} </p>

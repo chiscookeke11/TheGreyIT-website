@@ -39,7 +39,7 @@ const NavigationMenuLinks = [
     },
     {
         label: "All Transactions",
-        url: "/#",
+        url: "/admin/pages/transactions",
         icon: <HandCoins size={14} />
     },
     {
