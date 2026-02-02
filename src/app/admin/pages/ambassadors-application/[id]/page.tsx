@@ -1,5 +1,6 @@
 "use client"
 
+import { Spinner } from "@/components/UI/Spinner"
 import { supabase } from "@/lib/supabaseClient"
 import { VolunteerFormDataType } from "@/types/types"
 import { useParams } from "next/navigation"
@@ -9,18 +10,22 @@ import { useEffect, useState } from "react"
 export default function Page() {
     const [userApplication, setUserApplication] = useState<VolunteerFormDataType | null>(null)
     const { id } = useParams()
+    const [loading, setLoading] = useState(true)
 
 
     const fetchUserApplication = async () => {
         if (!id) return;
+        setLoading(true)
 
 
         const { data, error } = await supabase.from("ambassadors_application").select("*").eq("id", id).maybeSingle()
 
         if (error) {
             console.error("Error fetching applications:", error)
+            setLoading(false)
         }
         setUserApplication(data)
+        setLoading(false)
     }
 
 
@@ -29,8 +34,15 @@ export default function Page() {
     }, [id])
 
 
+    if (loading) {
+        return (
+            <div className="w-full h-screen flex items-center justify-center" >
+                <Spinner />
+            </div>
+        )
+    }
 
-    if (!userApplication) {
+    if (!userApplication && !loading) {
         return (
             <div className="w-full h-screen flex items-center justify-center" >
                 <h1 className=" font-syne font-semibold text-2xl">User application not found</h1>
@@ -52,7 +64,7 @@ export default function Page() {
             <div className="w-full flex flex-col items-start gap-4 py-4 ">
                 <table className="w-full border border-gray-300 text-left">
                     {/* Table Header */}
-                    <thead className="bg-gray-100  ">
+                    <thead className="bg-gray-100 text-sm ">
                         <tr>
                             <th className="border px-4 py-2 max-w-[200px]!">Field</th>
                             <th className="border px-4 py-2">Value</th>
@@ -60,7 +72,7 @@ export default function Page() {
                     </thead>
 
                     {/* Table Body */}
-                    <tbody>
+                    <tbody className="font-normal text-sm " >
                         <tr>
                             <td className="border px-4 py-2">First Name</td>
                             <td className="border px-4 py-2">{userApplication?.firstName || "-"}</td>

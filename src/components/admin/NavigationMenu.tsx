@@ -77,7 +77,7 @@ export default function NavigationMenu() {
 
             <ul className="w-full flex flex-col items-start gap-6" >
                 {NavigationMenuLinks.map((link, i) => (
-                    <li key={i}><Link href={link.url} className="text-white hover:text-gray-300 duration-200 transition-all ease-in-out font-medium text-xs flex items-center justify-center gap-2 " >{link.icon} {link.label}</Link></li>
+                    <li key={i}><Link href={link.url} className="text-white hover:text-gray-300 duration-200 transition-all ease-in-out font-medium text-sm flex items-center justify-center gap-2 " >{link.icon} {link.label}</Link></li>
                 ))}
             </ul>
 

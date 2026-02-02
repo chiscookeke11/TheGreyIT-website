@@ -85,7 +85,7 @@ export default function Page() {
         setTransactionData(data)
         setHasMore(data.length === PAGE_SIZE)
 
-        // 2 Cache result
+        // 2. Cache result
         cacheTransactions(pageIndex, data)
     }
 
@@ -123,7 +123,7 @@ export default function Page() {
                             :
                             (
                                 <div className=" w-full overflow-x-auto " >
-                                    <table className="w-full whitespace-nowrap">
+                                    <table className="w-full whitespace-nowrap  ">
                                         <caption className="sr-only">
                                             Transaction table of payments
                                         </caption>
@@ -151,11 +151,11 @@ export default function Page() {
                                         <tbody className="w-full" >
                                             {transactionData?.map((t, index) => (
                                                 <tr key={t.id} className="border-b border-gray-600">
-                                                    <td className="text-center p-3 text-sm md:text-base">{index + 1}</td>
-                                                    <td className="text-center p-3 text-sm md:text-base">{t.course}</td>
-                                                    <td className="text-center p-3 text-sm md:text-base">{t.reference}</td>
+                                                    <td className="text-center p-3 text-sm ">{index + 1}</td>
+                                                    <td className="text-center p-3 text-sm ">{t.course}</td>
+                                                    <td className="text-center p-3 text-sm ">{t.reference}</td>
                                                     <td
-                                                        className={`text-center p-3 text-sm md:text-base font-semibold ${t.status === "success"
+                                                        className={`text-center p-3 text-sm  font-semibold ${t.status === "success"
                                                             ? "text-green-500"
                                                             : t.status === "pending"
                                                                 ? "text-yellow-400"
@@ -164,7 +164,7 @@ export default function Page() {
                                                     >
                                                         {t.status}
                                                     </td>
-                                                    <td className="text-center p-3 text-sm md:text-base">{new Date(t.date).toISOString().split("T")[0]}</td>
+                                                    <td className="text-center p-3 text-sm ">{new Date(t.date).toISOString().split("T")[0]}</td>
                                                 </tr>
                                             ))}
                                         </tbody>
