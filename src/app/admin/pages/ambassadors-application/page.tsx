@@ -38,7 +38,7 @@ export default function Page() {
 
 
     return (
-        <div className="w-full h-full  py-7 px-6 flex flex-col items-start justify-center gap-10 font-poppins" >
+        <div className="w-full h-full  py-7 px-6 flex flex-col items-start justify-start gap-10 font-poppins" >
             <h1 className=" font-syne font-semibold text-2xl   ">Ambassadors Application</h1>
 
 
@@ -51,7 +51,7 @@ export default function Page() {
                     No applications found
                 </div>
             ) : (
-                <div className=" w-full h-full grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 place-items-start justify-items-center justify-center " >
+                <div className=" w-full h-full grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 place-items-start justify-items-center justify-center gap-5 " >
                     {applications?.map((data, index) => (
                         <Link
                             href={`/admin/pages/ambassadors-application/${data.id}`}
