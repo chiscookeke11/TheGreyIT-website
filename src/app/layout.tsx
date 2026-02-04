@@ -5,6 +5,7 @@ import { AppProvider } from "@/context/AppContext";
 import { Toaster } from "react-hot-toast";
 import Image from "next/image";
 import { seoKeywords } from "@/data/SEOKeywords";
+import ScrollToTopBtn from "@/components/UI/ScrollToTopBtn";
 
 
 
@@ -108,6 +109,8 @@ export default function RootLayout({
           <Image src={"/logos/whatsapp-svgrepo-com.svg"} alt="whatsapp logo" height={1000} width={1000} className=" h-8 w-8 " />
        <span className=" font-semibold text-base " >   Chat us!</span>
             </a> */}
+
+          <ScrollToTopBtn />
         </AppProvider>
       </body>
     </html>

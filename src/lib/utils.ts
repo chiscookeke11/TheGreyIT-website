@@ -98,12 +98,23 @@ export const getCoursesFromCache = (KEY: string) => {
 
 
 
-    // this function saves course data to local storage
-    export const saveCoursesToCache = (courses: CourseDataTypes[], KEY: string) => {
-        const payload = {
-            data: courses,
-            timeStamp: Date.now()
-        }
+// this function saves course data to local storage
+export const saveCoursesToCache = (courses: CourseDataTypes[], KEY: string) => {
+  const payload = {
+    data: courses,
+    timeStamp: Date.now()
+  }
 
-        localStorage.setItem(KEY, JSON.stringify(payload))
-    }
+  localStorage.setItem(KEY, JSON.stringify(payload))
+}
+
+
+
+
+// This function scrolls the page to the top
+export const scrollToTop = () => {
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth'
+  });
+}
