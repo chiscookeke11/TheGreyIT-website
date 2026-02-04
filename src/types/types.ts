@@ -194,3 +194,16 @@ export interface customSelectTypes {
   label: string;
   value: string
 }
+
+
+
+export interface courseEnrollmentsDataType {
+  id: string,
+  user_id: string,
+  course_id: number,
+  created_at: string,
+  transaction_id: number,
+  payment_method: string,
+  learning_mode: string,
+  amount: number
+}
