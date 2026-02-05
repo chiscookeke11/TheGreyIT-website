@@ -193,7 +193,6 @@ export default function VolunteerPageComponent() {
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
 
-        if (currentStep !== 4) return;
 
         if (!isComplete(formValues)) {
             return toast.error("Please fill in all required fields")
@@ -293,29 +292,46 @@ export default function VolunteerPageComponent() {
                                 :
                                 <>
                                     {/* The navigation buttons  */}
-                                    <div className="w-full flex items-center gap-4" >
+                                    <div className="w-full flex items-center gap-4">
                                         {currentStep !== 1 && (
                                             <Button
                                                 type="button"
                                                 ariaLabel="Previous"
                                                 variant="default"
-                                                className="w-full py-2! text-base! "
+                                                className="w-full py-2! text-base!"
                                                 onClick={handlePrev}
-                                            >Prev</Button>
+                                            >
+                                                Prev
+                                            </Button>
                                         )}
 
 
-                                        <Button
-                                            type={isComplete(formValues) ? "submit" : "button"}
-                                            ariaLabel={isComplete(formValues) ? "submit" : "next"}
-                                            variant="default"
-                                            className="w-full py-2! text-base! "
-                                            disabled={loading}
-                                            onClick={handleNext}
-                                        >{isComplete(formValues) ? "Join TheGreyIT" : "Next"}</Button>
+                                            <Button
+                                                type="button"
+                                                ariaLabel="Next"
+                                                variant="default"
+                                                disabled = {currentStep === 4}
+                                                className="w-full py-2! text-base! disabled:cursor-not-allowed "
+                                                onClick={handleNext}
+                                            >
+                                                Next
+                                            </Button>
+
 
 
                                     </div>
+
+                                    {currentStep === 4 && (
+                                            <Button
+                                                type="submit"
+                                                ariaLabel="Submit"
+                                                variant="default"
+                                                className="w-full py-2! text-base!"
+                                                disabled={loading}
+                                            >
+                                                Join TheGreyIT
+                                            </Button>
+                                    )}
 
                                 </>
                         }

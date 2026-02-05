@@ -15,15 +15,9 @@ interface StepFourProps {
 export default function StepFour({ formValues, setFormValues }: StepFourProps) {
 
 
-
-
-
     const consentOptions: VolunteerFormDataType["consent"][] = [
-        " I agree to represent TheGreyIT professionally",
-        "I confirm the information provided is correct",
-        "I consent to my information being used for programme coordination"
+        "Yes, I consent",
     ]
-
 
 
     return (
@@ -55,7 +49,15 @@ export default function StepFour({ formValues, setFormValues }: StepFourProps) {
 
                 {/* Consent & declaration   */}
                 <div className="w-full flex flex-col items-start gap-2 " >
-                    <h1 className="text-[#000000] font-medium text-sm font-lato flex items-start gap-1" >Consent & Declaration   <div className=" text-red-600" >*</div></h1>
+                    <h1 className="text-black font-medium text-sm font-lato flex items-start gap-1">
+                        By ticking "Yes", I consent to this <span className="text-red-600">*</span>
+                    </h1>
+
+                    <ul className="list-disc list-inside ml-2 mt-2 text-sm text-gray-700">
+                        <li>I agree to represent TheGreyIT professionally.</li>
+                        <li>I confirm that the information I provided is accurate.</li>
+                        <li>I acknowledge that the information submitted is truthful and complete.</li>
+                    </ul>
 
 
                     <div className=" grid grid-cols-1 gap-2 justify-items-stretch  "  >

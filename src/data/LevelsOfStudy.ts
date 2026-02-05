@@ -28,4 +28,8 @@ export const levelsOfStudy: customSelectTypes[] = [
         label: "600 Level",
         value: "600 Level"
     },
+      {
+        label: "GRADUATE",
+        value: "Graduate"
+    },
 ]

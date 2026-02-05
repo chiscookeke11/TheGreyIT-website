@@ -182,9 +182,7 @@ export interface VolunteerFormDataType {
   otherBenefit: string,
   motivation: string,
   consent:
-  " I agree to represent TheGreyIT professionally"
-  | "I consent to my information being used for programme coordination"
-  | "I confirm the information provided is correct"
+  "Yes, I consent"
   | ""
 }
 
