@@ -34,7 +34,7 @@ const NavigationMenuLinks = [
     },
     {
         label: "Course Enrollment",
-        url: "/#",
+        url: "/admin/pages/course-enrollments",
         icon: <School size={14} />
     },
     {

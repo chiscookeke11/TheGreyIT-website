@@ -129,3 +129,16 @@ export const sendPaymentConfirmationEmail = (data: {
     process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!
   );
 };
+
+
+
+// This function fetches the all the course enrollments
+export const fetchAllEnrollments = async () => {
+    const {data, error} = await supabase.from("course_enrollments").select("*")
+
+    if (error) {
+        console.error("Error fetching enrollments:", error.message)
+    }
+
+    return data
+}
