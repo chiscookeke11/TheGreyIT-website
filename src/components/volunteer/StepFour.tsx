@@ -50,7 +50,7 @@ export default function StepFour({ formValues, setFormValues }: StepFourProps) {
                 {/* Consent & declaration   */}
                 <div className="w-full flex flex-col items-start gap-2 " >
                     <h1 className="text-black font-medium text-sm font-lato flex items-start gap-1">
-                        By ticking "Yes", I consent to this <span className="text-red-600">*</span>
+                        By ticking {"Yes"}, I consent to this <span className="text-red-600">*</span>
                     </h1>
 
                     <ul className="list-disc list-inside ml-2 mt-2 text-sm text-gray-700">
