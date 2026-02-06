@@ -251,7 +251,7 @@ export default function VolunteerPageComponent() {
 
 
                 {/* The left side  */}
-                <div className="w-full lg:w-1/2 h-full  flex items-center justify-center px-[3%] py-12 relative " >
+                <div className="w-full lg:w-1/2 h-full  flex items-center justify-center px-[3%] py-12 relative text-[#3a3a3a] " >
                     <form onSubmit={handleSubmit} className="w-full px-1  flex flex-col items-start gap-9 " >
                         <div>
                             <h1 className="text-gray-500 font-bold text-xl md:text-3xl  mb-3  " >Turn Your Tech Interest into <span className="text-gray-800">Opportunity volunteer!</span></h1>
