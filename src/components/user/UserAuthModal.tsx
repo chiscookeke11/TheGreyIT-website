@@ -201,7 +201,7 @@ export default function UserAuthModal() {
         <form onSubmit={authState === "Sign Up" ? handleSignup : handleSignIn} className=" w-full  h-full md:max-w-2xl bg-white flex items-center justify-center flex-col gap-7 px-8 py-4 rounded-lg font-poppins " >
             <h1 className="text-gray-700 font-bold font-poppins text-xl md:text-3xl  " >{authState === "Sign In" ? "Sign In" : "Create an Account"} </h1>
 
-            <div className="w-full flex flex-col gap-6 items-center justify-center " >
+            <div className="w-full flex flex-col gap-6 items-center justify-center text-[#3a3a3a] " >
 
 
                 {/* Name Section */}
