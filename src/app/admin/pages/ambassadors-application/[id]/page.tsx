@@ -127,7 +127,7 @@ export default function Page() {
 
                         <tr>
                             <td className="border px-4 py-2">Interests</td>
-                            <td className="border px-4 py-2">{userApplication?.interests || "-"}</td>
+                            <td className="border px-4 py-2">{userApplication?.interests.join(',  ') || "-"}</td>
                         </tr>
 
                         <tr>
