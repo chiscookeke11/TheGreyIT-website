@@ -38,7 +38,7 @@ export default function Page() {
 
 
     return (
-        <div className="w-full h-full  py-7 px-6 flex flex-col items-start justify-start gap-10 font-poppins" >
+        <div className="w-full h-fit  py-7 px-6 flex flex-col items-start justify-start gap-10 font-poppins" >
             <h1 className=" font-syne font-semibold text-2xl   ">Ambassadors Application</h1>
 
 
@@ -70,7 +70,7 @@ export default function Page() {
                             <p className="text-sm font-medium">
                                 <b>Preferred role:</b> {data.preferredRole}
                             </p>
-                            <small className="mx-auto">Click to see more details</small>
+                            <small className="mx-auto font-semibold text-xs mt-2 ">Click to see more details</small>
                         </Link>
                     ))}
                 </div>

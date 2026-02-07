@@ -85,6 +85,8 @@ export interface Bookmark {
 export interface UserData {
   id: number;
   user_id: string;
+  first_name: string;
+  last_name: string;
   active_courses: number;
   referral_code: string;
   created_at: string;
@@ -92,6 +94,7 @@ export interface UserData {
   list_completed_courses: number[]
   bookmarks: number[];
   user_image: string;
+  email: string;
 }
 
 export interface CertificatesDataType {
@@ -199,9 +202,9 @@ export interface courseEnrollmentsDataType {
   id: string,
   user_id: string,
   course_id: number,
-  created_at: string,
+  created_at: Date,
   transaction_id: number,
-  payment_method: string,
-  learning_mode: string,
+  payment_Method: string,
+  learning_Mode: string,
   amount: number
 }
