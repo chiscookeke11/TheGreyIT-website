@@ -138,6 +138,8 @@ export default function UserAuthModal() {
                 user_id: signupData.user?.id,
                 referred_by: formValues.referredBy,
                 email: formValues.email,
+                first_name: formValues.firstName,
+                lastName: formValues.lastName
             })
 
             if (error) {

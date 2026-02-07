@@ -73,9 +73,9 @@ export default function Page() {
                 </div>
             ) : (
                 <div className=" w-full h-full grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 place-items-start justify-items-center justify-center gap-7 gap-y-12 " >
-                    {allCoursesData?.map((data, index) => (
+                    {allCoursesData?.map((data) => (
                         <Link
-                            href={`/admin/pages/ambassadors-application/${data.id}`}
+                            href={`/admin/pages/course-enrollments/${data.id}`}
                             key={data.id}
                             className=" w-full h-full "
                         >
