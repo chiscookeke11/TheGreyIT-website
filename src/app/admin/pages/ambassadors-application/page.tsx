@@ -39,7 +39,10 @@ export default function Page() {
 
     return (
         <div className="w-full h-fit  py-7 px-6 flex flex-col items-start justify-start gap-10 font-poppins" >
-            <h1 className=" font-syne font-semibold text-2xl   ">Ambassadors Application</h1>
+            <div className="flex flex-col items-start gap-3 " >
+                <h1 className=" font-syne font-semibold text-2xl   ">Ambassadors Application</h1>
+                {applications && <h1 className=" font-syne font-medium text-base   ">You’re in good company, <b>{applications.length}</b> applications so far</h1>}
+            </div>
 
 
             {loading ? (
