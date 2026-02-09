@@ -52,7 +52,7 @@ export default function Page() {
 
 
     return (
-        <div className="w-full h-full  py-7 px-6 flex flex-col items-start justify-start gap-10 font-poppins " >
+        <div className="w-full h-fit  py-7 px-6 flex flex-col items-start justify-start gap-10 font-poppins " >
 
             <h1 className="font-syne font-semibold text-2xl">
                 {userApplication?.firstName
