@@ -49,7 +49,7 @@ const NavigationMenuLinks = [
     },
     {
         label: "Reviews",
-        url: "#",
+        url: "/admin/pages/reviews",
         icon: <UserStar size={14} />
     },
     {
