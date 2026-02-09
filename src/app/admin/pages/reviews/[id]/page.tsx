@@ -19,14 +19,11 @@ export default function Page() {
     const { allCoursesData } = useAppContext()
     const [courseReviews, setCourseReviews] = useState<reviewDataType[] | null>(null)
     const [currentCourse, setCurrentCourse] = useState<CourseDataTypes | null>(null)
-    const [showReviewModal, setShowReviewModal] = useState(false)
 
 
 
-    useEffect(() => {
-        document.body.style.overflowY = showReviewModal ? "hidden" : "auto"
 
-    }, [showReviewModal])
+
 
 
     const totalRating = courseReviews?.reduce((sum, review) => {
