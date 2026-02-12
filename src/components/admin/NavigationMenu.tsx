@@ -54,7 +54,7 @@ const NavigationMenuLinks = [
     },
     {
         label: "Send Newsletter",
-        url: "#",
+        url: "/admin/pages/send-newsletter",
         icon: <Mails size={14} />
     },
 ]
