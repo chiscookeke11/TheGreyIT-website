@@ -119,13 +119,13 @@ export default function ContactForm({ showForm, setShowForm, subject }: ContactF
 
                 <label htmlFor="firstName" className=" flex flex-col gap-1 items-start font-medium text-sm text-[#8D8D8D]  " >
                     <span>First Name</span>
-                    <input name="firstName" id="firstName" onChange={handleChange} value={formValues.firstName} placeholder="John" type="text" className=" w-full py-2 px-3 border-b-2 border-b-gray-600 text-base font-medium text-black focus:outline-none" />
+                    <input name="firstName" id="firstName" onChange={handleChange} value={formValues.firstName} placeholder="Chinedu" type="text" className=" w-full py-2 px-3 border-b-2 border-b-gray-600 text-base font-medium text-black focus:outline-none" />
                 </label>
 
 
                 <label htmlFor="lastName" className=" flex flex-col gap-1 items-start font-medium text-sm text-black ">
                     <span>Last Name</span>
-                    <input name="lastName" id="lastName" value={formValues.lastName} onChange={handleChange} placeholder="Doe" type="text" className=" w-full py-2 px-3 border-b-2 border-b-gray-600 text-base font-medium text-black focus:outline-none" />
+                    <input name="lastName" id="lastName" value={formValues.lastName} onChange={handleChange} placeholder="Okeke" type="text" className=" w-full py-2 px-3 border-b-2 border-b-gray-600 text-base font-medium text-black focus:outline-none" />
                 </label>
 
 
@@ -133,7 +133,7 @@ export default function ContactForm({ showForm, setShowForm, subject }: ContactF
 
                 <label htmlFor="email" className=" flex flex-col gap-1 items-start font-medium text-sm text-[#8D8D8D]">
                     <span>Email</span>
-                    <input name="email" id="email" value={formValues.email} onChange={handleChange} placeholder="johndoe@gmail.com" type="email" className=" w-full py-2 px-3 border-b-2 border-b-gray-600 text-base font-medium text-black focus:outline-none" />
+                    <input name="email" id="email" value={formValues.email} onChange={handleChange} placeholder="chiscookeke@gmail.com" type="email" className=" w-full py-2 px-3 border-b-2 border-b-gray-600 text-base font-medium text-black focus:outline-none" />
                 </label>
 
 

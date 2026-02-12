@@ -5,6 +5,7 @@ import { useEffect, useRef, useState } from "react"
 import { ResearchBlogType } from "@/types/types"
 import { Spinner } from "../UI/Spinner"
 import { supabase } from "@/lib/supabaseClient"
+import RecentBlogCardSkeleton from "./RecentBlogCardSkeleton"
 
 export default function AllBlogs() {
   const ref = useRef(null)
@@ -45,7 +46,12 @@ export default function AllBlogs() {
       </h5>
 
       {!blogs ? (
-        <Spinner />
+        <div className="w-full h-fit grid grid-cols-1 md:grid-cols-2   gap-14 place-items-center justify-items-center  " >
+          {Array.from({ length: 4 }).map((_, index) => (
+            <RecentBlogCardSkeleton key={index} />
+          ))}
+
+        </div>
       ) : blogs.length < 1 ? (
         "No blogs available"
       ) : (
