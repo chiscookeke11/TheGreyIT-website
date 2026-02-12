@@ -45,7 +45,7 @@ export default function RecentBlogs() {
                     <RecentBlogCardSkeleton key={index} />
                    ))
                 ) :
-                    recentBlogsData.length < 1 ? (<p className="mx-auto" > No blog found </p>) :
+                    recentBlogsData.length < 1 ? (<p className="mx-auto" > No recent blog found </p>) :
                         (
                             <div className="w-full grid grid-cols-${}  min-h-[65vh] gap-5  place-items-center justify-items-center " >
                                 {
