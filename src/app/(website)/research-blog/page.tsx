@@ -55,20 +55,39 @@ export const metadata: Metadata = {
 
 export default function Page() {
   return (
-    <div className=" w-full h-full  bg-white text-[var(--background)]  pt-20  " >
-      <ErrorBoundary>
-        <ResearchHero />
-      </ErrorBoundary>
+    <div className=" w-full h-full  bg-white text-[var(--background)] py-20 md:py-32 px-[3%] md:px-[5%] flex flex-row justify-between items-start gap-6  " >
 
 
-      <ErrorBoundary>
-        <RecentBlogs />
-      </ErrorBoundary>
+
+      {/* The main news section  */}
+      <div className=" w-full lg:basis-3/4  h-full flex flex-col gap-7 lg:gap-16 py-4 " >
+        <ErrorBoundary>
+          <ResearchHero />
+        </ErrorBoundary>
 
 
-      <ErrorBoundary>
-        <AllBlogs />
-      </ErrorBoundary>
+        <hr className="w-[95%] mx-auto hidden md:block border-[0.5px] border-gray-700 " />
+
+        {/* All blogs  */}
+        <ErrorBoundary>
+          <AllBlogs />
+        </ErrorBoundary>
+      </div>
+
+
+
+
+
+      {/* The recent section  */}
+      <div className="hidden lg:block w-full basis-1/4  h-[80vh] overflow-y-auto scrollbar-hide px-2 " >
+        <ErrorBoundary>
+          <RecentBlogs />
+        </ErrorBoundary>
+      </div>
+
+
+
+
     </div>
   )
 }

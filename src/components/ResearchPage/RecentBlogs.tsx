@@ -38,13 +38,12 @@ export default function RecentBlogs() {
 
 
     return (
-        <section className="w-full flex items-center justify-center flex-col gap-10 md:gap-16 px-[4%]  py-20 " >
-            <div className="text-black text-2xl lg:text-3xl font-extrabold font-poppins" >Recent Blogs</div>
+        <section className="w-full h-fit flex items-center justify-center flex-col gap-10 md:gap-16  py-4" >
             {
                 !recentBlogsData ? (<Spinner />) :
                     recentBlogsData.length < 1 ? (<p className="mx-auto" > No blog found </p>) :
                         (
-                            <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 min-h-[65vh] gap-14 px-[4%] place-items-center justify-items-center " >
+                            <div className="w-full grid grid-cols-1  min-h-[65vh] gap-5  place-items-center justify-items-center " >
                                 {
                                     recentBlogsData.slice(0, 4).map((blog, index) => (
                                         <RecentBlogCard key={index} data={blog} />

@@ -3,7 +3,7 @@
 import RecentBlogCard from "./RecentBlogCard"
 import { useEffect, useRef, useState } from "react"
 import { ResearchBlogType } from "@/types/types"
-import {Spinner} from "../UI/Spinner"
+import { Spinner } from "../UI/Spinner"
 import { supabase } from "@/lib/supabaseClient"
 
 export default function AllBlogs() {
@@ -39,8 +39,8 @@ export default function AllBlogs() {
 
 
   return (
-    <section className="bg-[#f2f5fc] w-full py-20 px-[4%] text-black flex flex-col items-center justify-center gap-16 relative">
-      <h5 className="text-black text-2xl lg:text-3xl font-extrabold font-poppins">
+    <section className=" w-full py-4 px-[1%] text-black flex flex-col items-start justify-center gap-4 relative ">
+      <h5 className="text-black text-base lg:text-[24px] font-semibold font-poppins">
         All Blogs
       </h5>
 
@@ -49,7 +49,7 @@ export default function AllBlogs() {
       ) : blogs.length < 1 ? (
         "No blogs available"
       ) : (
-        <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 min-h-[65vh] gap-14 px-[4%] place-items-center justify-items-center">
+        <div className="w-full h-fit grid grid-cols-1 md:grid-cols-2   gap-14 place-items-center justify-items-center">
           {blogs.map((blog, index) => (
             <RecentBlogCard key={index} data={blog} />
           ))}

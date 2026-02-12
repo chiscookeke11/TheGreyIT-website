@@ -18,7 +18,6 @@
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
-
   }
 }
 * {
@@ -41,31 +40,36 @@ body {
   filter: blur(12px);
 }
 @font-face {
-  font-family: 'Proxima Nova';
-  src: url('/fonts/proximanova_regular.ttf') format('truetype');
+  font-family: "Proxima Nova";
+  src: url("/fonts/proximanova_regular.ttf") format("truetype");
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'Proxima Nova';
-  src: url('/fonts/proximanova_regular.ttf') format('truetype');
+  font-family: "Proxima Nova";
+  src: url("/fonts/proximanova_regular.ttf") format("truetype");
   font-style: normal;
   font-display: swap;
 }
 
-
- @keyframes loader-rotate {
-    0% {
-      transform: rotate(0deg);
-    }
-    50% {
-      transform: rotate(180deg);
-    }
-    100% {
-      transform: rotate(360deg);
-    }
+@keyframes loader-rotate {
+  0% {
+    transform: rotate(0deg);
   }
+  50% {
+    transform: rotate(180deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
 
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
 
-
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
