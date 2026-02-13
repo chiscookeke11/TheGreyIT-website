@@ -87,7 +87,7 @@ Augustine has built his career as a technologist, researcher, instructor, and cy
 
     As a Software Developer at TheGreyIT, Chinedu contributes to the design, development, and optimization of responsive web applications. He works across core engineering areas, including interface development, component architecture, debugging, code reviews, and performance tuning, ensuring that products meet usability and scalability standards.
 
-Chinedu is an active Open-Source Contributor at OnlyDust, with over 200 commits and contributions to 30+ repositories, helping to refine codebases, fix critical bugs, and enhance developer workflows across the ecosystem. His involvement reflects a strong commitment to open collaboration and growth within the global engineering community.
+Chinedu is an active Open-Source Contributor, across multiple repositories, helping to refine codebases, fix critical bugs, and enhance developer workflows across the ecosystem. His involvement reflects a strong commitment to open collaboration and growth within the global engineering community.
 
 He is currently pursuing a Bachelor of Science in Chemistry Education (B.Sc.) at the University of Nigeria, Nsukka, where he complements his academic training with practical experience in software development, digital systems, and applied technology.
     `,
