@@ -139,7 +139,7 @@ export default function UserAuthModal() {
                 referred_by: formValues.referredBy,
                 email: formValues.email,
                 first_name: formValues.firstName,
-                lastName: formValues.lastName
+                last_name: formValues.lastName
             })
 
             if (error) {

@@ -30,7 +30,7 @@ export default function Navbar() {
     useEffect(() => {
         const getUser = async () => {
             const { data, error } = await supabase.auth.getUser()
-            if (error) console.error("Auth check failed:", error.message)
+            if (error && error.message !== "Auth session missing!") console.error("Auth check failed:", error.message)
             setUser(data.user ?? null)
         }
 
