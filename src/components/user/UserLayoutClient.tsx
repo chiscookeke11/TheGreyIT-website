@@ -22,7 +22,7 @@ export default function UserLayoutClient({ children }: { children: React.ReactNo
         const getUser = async () => {
             setLoading(true);
             const { data, error } = await supabase.auth.getUser();
-            if (error) console.error(error);
+            if (error && error.message !== "Auth session missing!") console.error(error);
             setUser(data.user ?? null);
             setLoading(false);
         };
