@@ -73,6 +73,7 @@ export interface TransactionType {
   reference: string;
   status: "success" | "pending" | "failed";
   date: Date;
+  amount: number
 }
 
 
