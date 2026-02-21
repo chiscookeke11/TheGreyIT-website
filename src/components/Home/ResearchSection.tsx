@@ -36,7 +36,6 @@ export default function ResearchSection() {
                 }
                 else if (data) {
                     setRecentBlogsData(data)
-                    console.log(data)
                 }
 
             }
