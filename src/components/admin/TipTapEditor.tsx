@@ -30,7 +30,7 @@ const TiptapEditor: React.FC<TiptapEditorProps> = ({ content, onChange }) => {
     }
 
     return (
-        <div className="border border-white rounded-md overflow-hidden flex flex-col">
+        <div className="border border-white rounded-md overflow-hidden flex flex-col bg-white ">
             <div className="p-4 min-h-[200px] max-h-[300px] flex-1 overflow-y-auto flex flex-col">
                 <EditorContent
                     editor={editor}
