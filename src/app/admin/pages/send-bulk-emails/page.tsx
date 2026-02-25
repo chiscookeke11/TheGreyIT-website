@@ -32,7 +32,6 @@ export default function Page() {
 
         setEmailsList(emails)
         setEmailOptions(emails)
-        console.log(emails)
     }
 
 
@@ -135,7 +134,7 @@ export default function Page() {
 
     return (
         <div className="w-full h-fit  py-7 px-6 flex flex-col items-start justify-start gap-10 font-poppins" >
-            <h1 className=" font-syne font-semibold text-2xl   ">Send Newsletter</h1>
+            <h1 className=" font-syne font-semibold text-2xl   ">Send Bulk Email</h1>
 
 
             <div className=" w-full flex flex-col items-start gap-7 " >
