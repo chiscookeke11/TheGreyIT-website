@@ -1,5 +1,5 @@
 import { supabase } from "@/lib/supabaseClient"
-import { GraduationCap, HandCoins, Home, Mails, Megaphone, MessageSquareText, School, SquareLibrary, UserStar } from "lucide-react"
+import { GraduationCap, HandCoins, Home, Mails, Megaphone, MessageSquareShare, MessageSquareText, School, SquareLibrary, UserStar } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
 
@@ -56,6 +56,12 @@ const NavigationMenuLinks = [
         label: "Send Newsletter",
         url: "/admin/pages/send-newsletter",
         icon: <Mails size={14} />
+    },
+
+    {
+        label: "Send Bulk Email",
+        url: "/admin/pages/send-bulk-emails",
+        icon: <MessageSquareShare size={14} />
     },
 ]
 
