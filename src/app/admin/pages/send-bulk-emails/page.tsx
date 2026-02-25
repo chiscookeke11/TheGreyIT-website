@@ -62,14 +62,14 @@ export default function Page() {
             await Promise.all(
                 recipients.map((email) =>
                     emailjs.send(
-                        "service_47ew3kc",
-                        "template_x36zt28",
+                        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
+                        process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID_BULK_EMAIL!,
                         {
                             to_email: email,
                             subject: formValues.subject,
                             message: formValues.message,
                         },
-                        "-AXyifNYWMRF-f1jt"
+                        process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!
                     )
                 )
             )
