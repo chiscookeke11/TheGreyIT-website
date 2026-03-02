@@ -4,7 +4,6 @@ import Link from "next/link"
 
 
 
-
 interface RecentBlogCardProps {
     data: ResearchBlogType
 }
