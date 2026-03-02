@@ -100,7 +100,7 @@ function Stat({
     loading: boolean
 }) {
     return (
-        <li className="flex items-center gap-3 bg-gray-600 text-white rounded-full py-2 px-8 text-sm cursor-pointer hover:translate-y-[-3px] duration-200 ease-in-out ">
+        <li className="flex items-center gap-3 bg-gray-700 text-white rounded-full py-2 px-8 text-sm cursor-pointer hover:translate-y-[-3px] duration-200 ease-in-out ">
             {loading ? "-" : value} {label}
         </li>
     )

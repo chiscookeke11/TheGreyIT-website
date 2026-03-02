@@ -1,15 +1,12 @@
 "use client"
 
 import RecentBlogCard from "./RecentBlogCard"
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useState } from "react"
 import { ResearchBlogType } from "@/types/types"
-import { Spinner } from "../UI/Spinner"
 import { supabase } from "@/lib/supabaseClient"
 import RecentBlogCardSkeleton from "./RecentBlogCardSkeleton"
 
 export default function AllBlogs() {
-  const ref = useRef(null)
-  // const isInView = useInView(ref)
   const [blogs, setBlogs] = useState<ResearchBlogType[] | null>(null)
   const [loading, setLoading] = useState(false)
 
@@ -45,7 +42,7 @@ export default function AllBlogs() {
         All Blogs
       </h5>
 
-      {!blogs ? (
+      {!blogs || loading ? (
         <div className="w-full h-fit grid grid-cols-1 md:grid-cols-2   gap-14 place-items-center justify-items-center  " >
           {Array.from({ length: 4 }).map((_, index) => (
             <RecentBlogCardSkeleton key={index} />
@@ -63,7 +60,7 @@ export default function AllBlogs() {
       )}
 
 
-      <div ref={ref} className="w-10 h-10 absolute right-0 bottom-0" />
+
     </section>
   )
 }
