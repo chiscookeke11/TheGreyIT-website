@@ -3,8 +3,8 @@
 import type React from "react"
 import { useEditor, EditorContent } from "@tiptap/react"
 import StarterKit from "@tiptap/starter-kit"
-import {Spinner} from "../UI/Spinner"
-
+import { Spinner } from "../UI/Spinner"
+import { useEffect } from "react"
 
 interface TiptapEditorProps {
     content: string
@@ -18,19 +18,23 @@ const TiptapEditor: React.FC<TiptapEditorProps> = ({ content, onChange }) => {
         immediatelyRender: false,
         shouldRerenderOnTransaction: false,
         onUpdate: ({ editor }) => {
-            const html = editor.getHTML()
-            onChange(html)
+            onChange(editor.getHTML())
         },
     })
 
+    // Sync external content changes (like reset after submit)
+    useEffect(() => {
+        if (editor && content !== editor.getHTML()) {
+            editor.commands.setContent(content || "")
+        }
+    }, [content, editor])
+
     if (!editor) {
-        return (
-         <Spinner/>
-        )
+        return <Spinner />
     }
 
     return (
-        <div className="border border-white rounded-md overflow-hidden flex flex-col bg-white ">
+        <div className="border border-white rounded-md overflow-hidden flex flex-col bg-white">
             <div className="p-4 min-h-[200px] max-h-[300px] flex-1 overflow-y-auto flex flex-col">
                 <EditorContent
                     editor={editor}

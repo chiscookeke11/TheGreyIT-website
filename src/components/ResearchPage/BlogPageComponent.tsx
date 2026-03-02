@@ -74,7 +74,7 @@ export default function BlogPageComponent({ slug }: BlogPageComponentProps) {
 
 
     if (loading) {
-        return <div className="p-10 text-center font-poppins h-[50vh] flex items-center justify-center "> <Spinner /> </div>;
+        return <div className="p-10 text-center font-poppins h-[90vh] flex items-center justify-center "> <Spinner /> </div>;
     }
 
     if (!currentBlog) {

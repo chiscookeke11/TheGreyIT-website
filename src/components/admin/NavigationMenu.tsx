@@ -15,13 +15,9 @@ const NavigationMenuLinks = [
     },
     {
         label: "Blogs",
-        url: "#",
+        url: "/admin/pages/blog",
         icon: <MessageSquareText size={14} />
     },
-    // {
-    //     label: "Add Blog",
-    //     url: "/admin/Add-blog"
-    // },
     {
         label: "Ambassador Application",
         url: "/admin/pages/ambassadors-application",
