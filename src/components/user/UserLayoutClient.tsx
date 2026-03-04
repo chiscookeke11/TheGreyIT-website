@@ -68,7 +68,7 @@ export default function UserLayoutClient({ children }: { children: React.ReactNo
             <Navbar />
             <LayoutHeader user={user} />
             <main className="w-full h-full lg:h-screen flex flex-col md:flex-row gap-10 flex-1">
-                <SideNav user={user} setUser={setUser} />
+                <SideNav setUser={setUser} />
                 <div className="w-full h-full overflow-y-auto">{children}</div>
             </main>
             {showPaymentModal && <SelectPaymentModal />}
