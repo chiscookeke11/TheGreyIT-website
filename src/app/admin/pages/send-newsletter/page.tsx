@@ -21,7 +21,6 @@ export default function Page() {
         const emails = data?.map((row: {email: string}) => row.email) || []
 
         setEmailsList(emails)
-        console.log(emails)
     }
 
 

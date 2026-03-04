@@ -25,7 +25,6 @@ export default function Page() {
             const result = await fetchAllEnrollments()
             setCourseEnrollmentsData(result)
             setLoading(false)
-            console.log(result)
         }
 
         fetchEnrollments()

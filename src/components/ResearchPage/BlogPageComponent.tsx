@@ -39,7 +39,6 @@ export default function BlogPageComponent({ slug }: BlogPageComponentProps) {
             }
             else if (data) {
                 setRecentBlogsData(data)
-                console.log(data)
             }
 
         }
