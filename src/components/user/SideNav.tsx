@@ -7,7 +7,6 @@ import { sideNavLinks } from "@/data/SideNavData";
 
 interface SideNavProps {
     setUser: React.Dispatch<SetStateAction<User | null>>
-    user: User
 }
 
 
@@ -15,7 +14,7 @@ interface SideNavProps {
 
 
 
-export default function SideNav({ setUser, user }: SideNavProps) {
+export default function SideNav({ setUser }: SideNavProps) {
     const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
 
@@ -32,8 +31,6 @@ export default function SideNav({ setUser, user }: SideNavProps) {
 
 
             <ul className={`w-full  flex-col gap-4 justify-between md:pl-3 lg:pl-6 py-2 flex `} >
-
-                <p className="text-xl font-medium text-gray-700 font-serif mb-6 " >Welcome, {user.user_metadata.first_name ? user.user_metadata.first_name.charAt(0).toUpperCase() + user.user_metadata.first_name.slice(1).toLowerCase() + " " + user.user_metadata.last_name.charAt(0).toUpperCase() + user.user_metadata.last_name.slice(1).toLowerCase() : user.email}</p>
 
 
                 {sideNavLinks.map((navlink, index) => (
