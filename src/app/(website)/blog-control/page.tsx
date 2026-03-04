@@ -2,6 +2,7 @@
 
 import ConfirmDelete from "@/components/UI/ConfirmDelete";
 import { Spinner } from "@/components/UI/Spinner";
+import UpdateBlog from "@/components/UI/UpdateBlog";
 import { supabase } from "@/lib/supabaseClient";
 import { ResearchBlogType } from "@/types/types";
 import Image from "next/image";
@@ -15,6 +16,7 @@ export default function Page() {
     const [loading, setLoading] = useState(false)
     const [selectedIndex, setSelectedIndex] = useState<string>("")
     const [showDeleteModal, setShowDeleteModal] = useState(false)
+    const [showEditModal, setShowEditModal] = useState(false)
 
 
 
@@ -47,6 +49,21 @@ export default function Page() {
     }
 
 
+    const updateBlogInUI = (updatedBlog: ResearchBlogType) => {
+        if (!updatedBlog) return;
+
+
+        setBlogs((prevBlogs) =>
+            prevBlogs ?
+                prevBlogs.map((blog) =>
+                    blog.id === updatedBlog.id ? updatedBlog : blog
+                )
+                : [updatedBlog]
+        )
+
+    }
+
+
 
     return (
         <div className="relative w-full h-fit  py-36 px-6 flex flex-col items-start justify-start gap-10 font-poppins bg-white " >
@@ -65,7 +82,12 @@ export default function Page() {
                 <div className="w-full h-fit grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4  gap-14 place-items-start justify-items-start">
 
                     {blogs.map((blog, i) => (
-                        <AdminBlogCard setSelectedIndex={setSelectedIndex} setShowDeleteModal={setShowDeleteModal} key={i} blog={blog} />
+                        <AdminBlogCard
+                            setShowEditModal={setShowEditModal}
+                            setSelectedIndex={setSelectedIndex}
+                            setShowDeleteModal={setShowDeleteModal}
+                            key={i}
+                            blog={blog} />
                     ))}
 
                 </div>
@@ -78,6 +100,15 @@ export default function Page() {
                 onDelete={removeBlogFromUI}
                 setConfirmDeleteModal={setShowDeleteModal}
             />}
+
+
+            {showEditModal && <UpdateBlog
+                selectedIndex={selectedIndex}
+                showEditModal={setShowEditModal}
+                updateBlogInUI={updateBlogInUI}
+            />
+            }
+
         </div>
     )
 }
@@ -89,10 +120,11 @@ interface AdminBlogCardProps {
     blog: ResearchBlogType;
     setShowDeleteModal: React.Dispatch<SetStateAction<boolean>>
     setSelectedIndex: React.Dispatch<SetStateAction<string>>
+    setShowEditModal: React.Dispatch<SetStateAction<boolean>>
 }
 
 
-const AdminBlogCard = ({ blog, setShowDeleteModal, setSelectedIndex }: AdminBlogCardProps) => {
+const AdminBlogCard = ({ blog, setShowDeleteModal, setSelectedIndex, setShowEditModal }: AdminBlogCardProps) => {
     return (
         <div className="py-3 px-1 w-full h-full flex flex-col items-center justify-start gap-3">
 
@@ -130,8 +162,11 @@ const AdminBlogCard = ({ blog, setShowDeleteModal, setSelectedIndex }: AdminBlog
                 </button>
 
                 <button
-
-                className="bg-gray-700 text-white rounded-lg py-2 px-5 text-[8px] md:text-xs cursor-pointer hover:rounded-[100px] transition-all duration-300 ease-in-out">
+                    onClick={() => {
+                        setShowEditModal(true)
+                        setSelectedIndex(String(blog.id))
+                    }}
+                    className="bg-gray-700 text-white rounded-lg py-2 px-5 text-[8px] md:text-xs cursor-pointer hover:rounded-[100px] transition-all duration-300 ease-in-out">
                     Update
                 </button>
             </div>

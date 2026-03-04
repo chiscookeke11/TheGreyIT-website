@@ -31,7 +31,6 @@ export default function ConfirmDelete({
   const handleDelete = async (id: string) => {
     const toastId = toast.loading("Deleting...");
 
-    console.log(id, typeof(id))
 
     try {
       await deleteItem(id, collectionName);
