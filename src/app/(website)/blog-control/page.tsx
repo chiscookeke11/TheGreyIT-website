@@ -38,10 +38,10 @@ export default function Page() {
     }, [])
 
     return (
-        <div className="w-full h-fit  py-7 px-6 flex flex-col items-start justify-start gap-10 font-poppins" >
-            <h1 className=" font-syne font-semibold text-2xl   ">Blogs</h1>
+        <div className="w-full h-fit  py-36 px-6 flex flex-col items-start justify-start gap-10 font-poppins bg-white " >
+            <h1 className=" font-syne font-semibold text-2xl   ">Blog Control Panel</h1>
 
-            <Link href={"/admin/pages/blog/Add-blog"} className="bg-gray-700 text-white rounded-lg border border-gray-700 py-2 px-5 text-xs md:text-sm ml-auto hover:rounded-[100px] transition-all duration-200 ease-in-out  " >Add Blog</Link>
+            <Link href={"/blog-control/add-blog"} className="bg-gray-700 text-white rounded-lg border border-gray-700 py-2 px-5 text-xs md:text-sm ml-auto hover:rounded-[100px] transition-all duration-200 ease-in-out  " >Add Blog</Link>
 
 
 
@@ -85,9 +85,9 @@ const AdminBlogCard = ({ blog }: AdminBlogCardProps) => {
             <div className=" w-full flex flex-col items-start gap-2 " >
 
                 <h1 className="text-gray-700 font-medium text-sm " > {blog.title} </h1>
-                <div className="text-xs font-normal text-gray-600 " dangerouslySetInnerHTML={{__html: blog.content.trim().slice(0, 50) + "..."}} />
-                <div  className="text-xs font-normal text-gray-600 "><b>Author:</b> {blog.author} </div>
-                <div  className="text-xs font-normal text-gray-600 ">Published on:  {new Date(blog.publicationDate).toDateString()} </div>
+                <div className="text-xs font-normal text-gray-600 " dangerouslySetInnerHTML={{ __html: blog.content.trim().slice(0, 50) + "..." }} />
+                <div className="text-xs font-normal text-gray-600 "><b>Author:</b> {blog.author} </div>
+                <div className="text-xs font-normal text-gray-600 ">Published on:  {new Date(blog.publicationDate).toDateString()} </div>
             </div>
 
         </Link>
