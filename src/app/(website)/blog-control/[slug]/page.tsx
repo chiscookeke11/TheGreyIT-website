@@ -27,7 +27,6 @@ export default function Page({ params }: PageProps) {
 
 
             const { data, error } = await supabase.from("blog").select("*").eq("slug", trimmedSlug).maybeSingle()
-            console.log(slug)
             if (error) {
                 console.error("Failed to fetch", error)
                 return;
