@@ -15,7 +15,7 @@ const NavigationMenuLinks = [
     },
     {
         label: "Blogs",
-        url: "/admin/pages/blog",
+        url: "/blog-control",
         icon: <MessageSquareText size={14} />
     },
     {

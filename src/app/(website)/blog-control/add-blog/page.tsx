@@ -117,10 +117,12 @@ export default function Page() {
     }
 
     return (
-        <div className="w-full min-h-screen flex items-start justify-start py-10 px-[3%] bg-white">
+        <div className="w-full min-h-screen flex items-start justify-start py-36 px-[3%] bg-white">
 
-            <Link href={"/"} className="bg-gray-700 text-white size-10 rounded-full flex items-center justify-center cursor-pointer hover:scale-[110%] duration-300 ease-in-out transition-all">
-                <ChevronLeft />
+            <Link href={"/blog-control"} >
+                <button className="bg-gray-700 text-white size-10 rounded-full flex items-center justify-center cursor-pointer hover:scale-[110%] duration-300 ease-in-out transition-all">
+                    <ChevronLeft />
+                </button>
             </Link>
 
             <form onSubmit={handleSubmit} className="w-full max-w-lg mx-auto flex flex-col gap-10 items-center px-5 py-8 bg-gray-700 h-fit rounded-md text-white font-poppins">
