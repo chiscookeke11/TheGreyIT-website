@@ -9,7 +9,8 @@ import TiptapEditor from "../admin/TipTapEditor"
 import { Spinner } from "./Spinner"
 
 interface UpdateBlogProps {
-    showEditModal: React.Dispatch<React.SetStateAction<boolean>>
+    showEditModal: boolean;
+    setShowEditModal: React.Dispatch<React.SetStateAction<boolean>>;
     selectedIndex: string
     updateBlogInUI: (blog: ResearchBlogType) => void
 }
@@ -26,11 +27,13 @@ export default function UpdateBlog({
     selectedIndex,
     showEditModal,
     updateBlogInUI,
+    setShowEditModal,
 }: UpdateBlogProps) {
 
     const [loading, setLoading] = useState(false)
     const [selectedBlog, setSelectedBlog] = useState<updateBlogType | null>(null)
     const [file, setFile] = useState<File | null>(null)
+    const modalRef = useRef<HTMLFormElement | null>(null)
 
     const [formValues, setFormValues] = useState<updateBlogType>({
         title: "",
@@ -41,6 +44,26 @@ export default function UpdateBlog({
     })
 
     const fileInputRef = useRef<HTMLInputElement | null>(null)
+
+
+    //  this function closes the modal on click outside
+    useEffect(() => {
+        const handleClickOutside = (e: MouseEvent) => {
+            if (modalRef.current && !modalRef.current.contains(e.target as Node)) {
+                setShowEditModal(false)
+            }
+        }
+
+        document.addEventListener("mousedown", handleClickOutside)
+        document.body.style.overflowY = "hidden"
+
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside)
+            document.body.style.overflowY = "auto"
+        }
+    }, [])
+
+
 
     /* ---------------- FETCH BLOG ---------------- */
     useEffect(() => {
@@ -62,7 +85,7 @@ export default function UpdateBlog({
                     author: data.author,
                     content: data.content,
                     image: data.image,
-                    publicationDate: data.publicationDate,
+                    publicationDate: data.publicationDate?.split("T")[0] || "",
                     title: data.title
                 })
             }
@@ -143,7 +166,7 @@ export default function UpdateBlog({
             updateBlogInUI(updatedBlog)
 
             toast.success("Blog updated successfully")
-            showEditModal(false)
+            setShowEditModal(false)
         } catch (err) {
             console.error(err)
             toast.error("Failed to update blog")
@@ -161,18 +184,22 @@ export default function UpdateBlog({
         )
     }
 
+
+
+
     return (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/55 backdrop-blur-sm p-4">
 
             <form
+                ref={modalRef}
                 onSubmit={handleSubmit}
                 className="w-full max-w-2xl max-h-[95vh] overflow-y-auto bg-[#F7FCFE] shadow-md rounded-md p-8 flex flex-col gap-6"
             >
 
                 <button
                     type="button"
-                    onClick={() => showEditModal(false)}
-                    className="ml-auto text-red-600 cursor-pointers"
+                    onClick={() => setShowEditModal(false)}
+                    className="ml-auto text-red-600 cursor-pointer"
                 >
                     <X size={28} />
                 </button>
@@ -227,7 +254,7 @@ export default function UpdateBlog({
 
                 {/* IMAGE */}
                 <label className="w-full flex flex-col gap-1">
-                    <span className="text-lg font-semibold text-white">Upload Image</span>
+                    <span className="text-lg font-semibold text-gray-700">Upload Image</span>
                     <input
                         ref={fileInputRef}
                         type="file"
@@ -239,6 +266,14 @@ export default function UpdateBlog({
                         }}
                         className="file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:text-white file:bg-gray-700 hover:file:bg-gray-400 file:cursor-pointer"
                     />
+
+                    {formValues.image && (
+                        <img
+                            src={formValues.image}
+                            alt="Blog image"
+                            className="w-full h-48 object-cover rounded-md"
+                        />
+                    )}
                 </label>
 
                 {/* BUTTONS */}

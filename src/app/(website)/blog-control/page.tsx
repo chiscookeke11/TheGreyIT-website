@@ -104,7 +104,8 @@ export default function Page() {
 
             {showEditModal && <UpdateBlog
                 selectedIndex={selectedIndex}
-                showEditModal={setShowEditModal}
+                showEditModal={showEditModal}
+                setShowEditModal={setShowEditModal}
                 updateBlogInUI={updateBlogInUI}
             />
             }
