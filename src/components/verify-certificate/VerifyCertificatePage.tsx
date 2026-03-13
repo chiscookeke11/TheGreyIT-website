@@ -7,7 +7,8 @@ import { CertificatesDataType } from "@/types/types";
 import Image from "next/image";
 import React, { useState } from "react";
 import toast from "react-hot-toast";
-import { Spinner } from "../UI/Spinner";
+import Loading from "../UI/Loading";
+
 
 export default function VerifyCertificatePage() {
 
@@ -92,7 +93,7 @@ export default function VerifyCertificatePage() {
                             placeholder="Enter Cert No."
                             className="w-[70%] flex-1 outline-none border border-gray-700 h-full py-4 px-4 rounded-sm"
                         />
-                        <Button variant="default">{loading ? <Spinner /> : "Verify"}</Button>
+                        <Button variant="default">{loading ? <Loading/> : "Verify"}</Button>
                     </div>
 
                     {notFound && (
