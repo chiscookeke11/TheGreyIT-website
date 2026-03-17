@@ -9,7 +9,6 @@ import TiptapEditor from "../admin/TipTapEditor"
 import { Spinner } from "./Spinner"
 
 
-
 export default function UpdateBlog({
     selectedIndex,
     showEditModal,
@@ -24,8 +23,8 @@ export default function UpdateBlog({
 
     const [formValues, setFormValues] = useState<updateBlogType>({
         title: "",
-        tagline: "",
         content: "",
+        tagline: "",
         author: "",
         image: "",
         publicationDate: "",
@@ -73,9 +72,9 @@ export default function UpdateBlog({
                     author: data.author,
                     content: data.content,
                     image: data.image,
-                    tagline: data.tagline,
                     publicationDate: data.publicationDate?.split("T")[0] || "",
-                    title: data.title
+                    title: data.title,
+                    tagline: data.tagline ?? ""
                 })
             }
 
@@ -138,14 +137,16 @@ export default function UpdateBlog({
                 .from("blog")
                 .update({
                     title: formValues.title,
-                    tagline: formValues.tagline,
                     content: formValues.content,
                     author: formValues.author,
+                    tagline: formValues.tagline,
                     publicationDate: formValues.publicationDate,
                     image: imageUrl,
                 })
                 .eq("id", selectedIndex)
                 .select()
+
+                console.log("Update response:", data, error)
 
             if (error) {
                 toast.error(error.message)
@@ -210,20 +211,17 @@ export default function UpdateBlog({
                     />
                 </label>
 
-
-                   {/* Tagline */}
+                  {/* TITLE */}
                 <label className="flex flex-col gap-1">
                     <span>Tagline *</span>
                     <input
-                        name="Tagline"
+                        name="tagline"
                         value={formValues.tagline}
                         onChange={handleChange}
                         className="border px-4 py-2 rounded-md"
                         required
                     />
                 </label>
-
-
 
                 {/* AUTHOR */}
                 <label className="flex flex-col gap-1">
