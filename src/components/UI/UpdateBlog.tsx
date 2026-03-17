@@ -1,27 +1,14 @@
 'use client'
 
 import { useEffect, useRef, useState } from "react"
-import { ResearchBlogType } from "@/types/types"
+import { ResearchBlogType, UpdateBlogProps, updateBlogType } from "@/types/types"
 import { supabase } from "@/lib/supabaseClient"
 import toast from "react-hot-toast"
 import { X } from "lucide-react"
 import TiptapEditor from "../admin/TipTapEditor"
 import { Spinner } from "./Spinner"
 
-interface UpdateBlogProps {
-    showEditModal: boolean;
-    setShowEditModal: React.Dispatch<React.SetStateAction<boolean>>;
-    selectedIndex: string
-    updateBlogInUI: (blog: ResearchBlogType) => void
-}
 
-interface updateBlogType {
-    title: string,
-    content: string,
-    author: string,
-    image: string,
-    publicationDate: string
-}
 
 export default function UpdateBlog({
     selectedIndex,
@@ -37,6 +24,7 @@ export default function UpdateBlog({
 
     const [formValues, setFormValues] = useState<updateBlogType>({
         title: "",
+        tagline: "",
         content: "",
         author: "",
         image: "",
@@ -85,6 +73,7 @@ export default function UpdateBlog({
                     author: data.author,
                     content: data.content,
                     image: data.image,
+                    tagline: data.tagline,
                     publicationDate: data.publicationDate?.split("T")[0] || "",
                     title: data.title
                 })
@@ -149,6 +138,7 @@ export default function UpdateBlog({
                 .from("blog")
                 .update({
                     title: formValues.title,
+                    tagline: formValues.tagline,
                     content: formValues.content,
                     author: formValues.author,
                     publicationDate: formValues.publicationDate,
@@ -219,6 +209,21 @@ export default function UpdateBlog({
                         required
                     />
                 </label>
+
+
+                   {/* Tagline */}
+                <label className="flex flex-col gap-1">
+                    <span>Tagline *</span>
+                    <input
+                        name="Tagline"
+                        value={formValues.tagline}
+                        onChange={handleChange}
+                        className="border px-4 py-2 rounded-md"
+                        required
+                    />
+                </label>
+
+
 
                 {/* AUTHOR */}
                 <label className="flex flex-col gap-1">

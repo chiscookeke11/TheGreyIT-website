@@ -261,8 +261,6 @@ At TheGreyIT, he serves as a Research and Office Assistant, where he manages doc
 
 Wisdom also writes actively on LinkedIn, sharing research-backed thoughts that help businesses and young professionals understand industry trends and competitive behaviour. His experience covers academic writing, market analysis for small businesses, consulting support, instructional assistance, and editorial work for research-focused projects.
 
-Wisdom also writes actively on LinkedIn, sharing research-backed thoughts that help businesses and young professionals understand industry trends and competitive behaviour. His experience covers academic writing, market analysis for small businesses, consulting support, instructional assistance, and editorial work for research-focused projects.
-
 As part of his long-term aspirations, Wisdom is expanding his skills in data analysis and cybersecurity. He aims to integrate these fields into his research and consulting work, aligning business insight generation with data-driven decision-making, digital safety, and organizational resilience. His goal is to evolve into a multidisciplinary professional capable of supporting businesses across research, analysis, and digital transformation.
     `,
     coreSkills: [

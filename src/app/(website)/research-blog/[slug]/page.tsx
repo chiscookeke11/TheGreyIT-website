@@ -29,14 +29,14 @@ export async function generateMetadata(
 
   return {
     title: `${data.title} | TheGreyIT`,
-    description: data.excerpt,
+    description: data.tagline,
     keywords: [data.title],
     alternates: {
       canonical: `https://www.thegreyit.org/research-blog/${(await params).slug}`,
     },
     openGraph: {
       title: data.title,
-      description: data.content,
+      description: data.tagline,
       images: [{ url: data.image }],
       type: "article",
     },
