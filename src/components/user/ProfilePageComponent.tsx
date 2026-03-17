@@ -230,6 +230,7 @@ export default function ProfilePageComponent() {
 
         if (loginError) {
             setLoading(false)
+            toast.error("Old password is incorrect")
             return {
                 error: "Old Password is incorrect"
             }

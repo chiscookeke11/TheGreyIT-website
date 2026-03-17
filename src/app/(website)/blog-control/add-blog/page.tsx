@@ -11,6 +11,7 @@ import Link from "next/link";
 export default function Page() {
     const [formValues, setFormValues] = useState({
         title: "",
+        tagline: "",
         content: "",
         author: "",
         image: "",
@@ -78,6 +79,7 @@ export default function Page() {
 
         const { error } = await supabase.from("blog").insert({
             title: formValues.title,
+            tagline: formValues.tagline,
             author: formValues.author,
             content: formValues.content,
             image: imageUrl || "",
@@ -100,6 +102,7 @@ export default function Page() {
         //  Reset form state
         setFormValues({
             title: "",
+            tagline: "",
             content: "",
             image: "",
             author: "",
@@ -137,6 +140,19 @@ export default function Page() {
                             type="text"
                             id="title"
                             name="title"
+                            onChange={handleInputChange}
+                            className="w-full py-2 px-5 border border-white outline-none text-base rounded-sm"
+                        />
+                    </label>
+
+
+                    <label htmlFor="title" className="w-full flex flex-col items-start gap-1">
+                        <span>Tagline</span>
+                        <input
+                            value={formValues.tagline}
+                            type="text"
+                            id="tagline"
+                            name="tagline"
                             onChange={handleInputChange}
                             className="w-full py-2 px-5 border border-white outline-none text-base rounded-sm"
                         />

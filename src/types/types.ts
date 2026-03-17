@@ -41,6 +41,7 @@ export interface ResearchBlogType {
   content: string
   publicationDate: Date;
   slug: string;
+  tagline?: string
 };
 
 
@@ -208,4 +209,21 @@ export interface courseEnrollmentsDataType {
   payment_Method: string,
   learning_Mode: string,
   amount: number
+}
+
+
+export interface UpdateBlogProps {
+    showEditModal: boolean;
+    setShowEditModal: React.Dispatch<React.SetStateAction<boolean>>;
+    selectedIndex: string
+    updateBlogInUI: (blog: ResearchBlogType) => void
+}
+
+export interface updateBlogType {
+    title: string,
+    content: string,
+    author: string,
+    image: string,
+    tagline: string,
+    publicationDate: string
 }
