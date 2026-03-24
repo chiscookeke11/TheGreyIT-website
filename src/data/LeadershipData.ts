@@ -255,13 +255,16 @@ Currently serving as a Research Specialist at ThegreyIT, I thrive in environment
       linkedIn: "https://www.linkedin.com/in/unaji-wisdom",
       twitter: "https//x.com/unaji_wisdom?s=09"
     },
-    description: `Unaji Akachukwu Wisdom is a Certified Manager, Research Specialist, and Writer with a strong passion for helping businesses and learners make better decisions through clear, practical, and well-structured research. He works across market research, academic support, and insight development for Start-Ups and SMEs, ensuring that organisations understand their markets, customers, and competitive landscape.
+    description: `UUnaji Akachukwu Wisdom is a Certified Manager, Research Specialist, and Writer with a strong passion for helping businesses and learners make better decisions through clear, practical, and well-structured research. He works across market research, academic support, and insight development for Start-Ups and SMEs, ensuring that organisations understand their markets, customers, and competitive landscape.
 
-At TheGreyIT, he serves as a Research and Office Assistant, where he manages documentation, research structuring, administrative coordination, and client support. His work contributes to research training, academic writing guidance, digital capability development for entrepreneurs, and the generation of actionable business insights.
+    At TheGreyIT, he serves as a Research and Office Assistant, where he manages documentation, research structuring, administrative coordination, and client support. His work contributes to research training, academic writing guidance, digital capability development for entrepreneurs, and the generation of actionable business insights.
 
 Wisdom also writes actively on LinkedIn, sharing research-backed thoughts that help businesses and young professionals understand industry trends and competitive behaviour. His experience covers academic writing, market analysis for small businesses, consulting support, instructional assistance, and editorial work for research-focused projects.
 
+He holds a Bachelor of Science degree in Business Management from the University of Nigeria, Nsukka, where he served as President of his department. He continues to strengthen his expertise through professional certifications and hands-on research engagements.
+
 As part of his long-term aspirations, Wisdom is expanding his skills in data analysis and cybersecurity. He aims to integrate these fields into his research and consulting work, aligning business insight generation with data-driven decision-making, digital safety, and organizational resilience. His goal is to evolve into a multidisciplinary professional capable of supporting businesses across research, analysis, and digital transformation.
+
     `,
     coreSkills: [
       "Market and academic research",
@@ -275,15 +278,17 @@ As part of his long-term aspirations, Wisdom is expanding his skills in data ana
     ],
 
     tools: [
-      "Microsoft Office Suite (Word, Excel, PowerPoint)",
+      "Microsoft Office Suite",
       "Google Workspace",
-      "CorelDRAW",
-      "Adobe Photoshop"
+      "Google Scholar tools",
+      "Online survey tools",
+      "Web research tools"
     ],
 
     certifications: [
-      "Certified Higher National Diploma in Biochemistry",
-      "Institute of Management and Technology Enugu (IMT)"
+      "Bachelor of Science in Business Management",
+      "Business Analysis Basic",
+      "Change Management Foundations"
     ],
     slug: "unaji-akachukwu-wisdom"
   },
