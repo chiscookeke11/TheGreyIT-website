@@ -255,7 +255,7 @@ Currently serving as a Research Specialist at ThegreyIT, I thrive in environment
       linkedIn: "https://www.linkedin.com/in/unaji-wisdom",
       twitter: "https//x.com/unaji_wisdom?s=09"
     },
-    description: `UUnaji Akachukwu Wisdom is a Certified Manager, Research Specialist, and Writer with a strong passion for helping businesses and learners make better decisions through clear, practical, and well-structured research. He works across market research, academic support, and insight development for Start-Ups and SMEs, ensuring that organisations understand their markets, customers, and competitive landscape.
+    description: `Unaji Akachukwu Wisdom is a Certified Manager, Research Specialist, and Writer with a strong passion for helping businesses and learners make better decisions through clear, practical, and well-structured research. He works across market research, academic support, and insight development for Start-Ups and SMEs, ensuring that organisations understand their markets, customers, and competitive landscape.
 
     At TheGreyIT, he serves as a Research and Office Assistant, where he manages documentation, research structuring, administrative coordination, and client support. His work contributes to research training, academic writing guidance, digital capability development for entrepreneurs, and the generation of actionable business insights.
 
