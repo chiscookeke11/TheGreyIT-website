@@ -63,7 +63,7 @@ export default function TransactionsTable() {
                                             <tr key={t.id} className="border-b border-gray-600">
                                                 <td className="text-center p-3 text-sm md:text-base">{index + 1}</td>
                                                 <td className="text-center p-3 text-sm md:text-base">{t.course}</td>
-                                                <td className="text-center p-3 text-sm md:text-base">₦ {t.amount.toLocaleString()}</td>
+                                                <td className="text-center p-3 text-sm md:text-base">₦ {t.amount?.toLocaleString()}</td>
                                                 <td className="text-center p-3 text-sm md:text-base">{t.reference}</td>
                                                 <td
                                                     className={`text-center p-3 text-sm md:text-base font-semibold ${t.status === "success"

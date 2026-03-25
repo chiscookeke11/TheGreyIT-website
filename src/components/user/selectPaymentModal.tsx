@@ -147,7 +147,8 @@ export default function SelectPaymentModal() {
                 course: selectedCourse?.title,
                 course_id: selectedCourse?.id,
                 payment_plan: selectedPaymentMethod,
-                amount: paymentAmount
+                amount: paymentAmount,
+                user_email: userData?.email
             });
 
             await enrollUser(reference.trxref);
