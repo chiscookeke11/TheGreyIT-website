@@ -74,7 +74,9 @@ export interface TransactionType {
   reference: string;
   status: "success" | "pending" | "failed";
   date: Date;
-  amount: number
+  amount: number;
+  payment_plan?: string;
+  user_email: string;
 }
 
 
