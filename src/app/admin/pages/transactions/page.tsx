@@ -136,6 +136,9 @@ export default function Page() {
                                                 <th className="min-w-[110px] w-[150px] h-[72px] text-center bg-gray-700 p-[10px] text-xs md:text-base font-bold text-[#E1E1E1]">
                                                     Course
                                                 </th>
+                                                 <th className="min-w-[110px] w-[150px] h-[72px] text-center bg-gray-700 p-[10px] text-xs md:text-base font-bold text-[#E1E1E1]">
+                                                    Amount
+                                                </th>
                                                 <th className="min-w-[102px] w-[132px] h-[72px] text-center bg-gray-700 p-[10px] text-xs md:text-base font-bold text-[#E1E1E1]">
                                                     Reference
                                                 </th>
@@ -153,6 +156,7 @@ export default function Page() {
                                                 <tr key={t.id} className="border-b border-gray-600">
                                                     <td className="text-center p-3 text-sm ">{index + 1}</td>
                                                     <td className="text-center p-3 text-sm ">{t.course}</td>
+                                                    <td className="text-center p-3 text-sm ">₦ {t.amount?.toLocaleString()}</td>
                                                     <td className="text-center p-3 text-sm ">{t.reference}</td>
                                                     <td
                                                         className={`text-center p-3 text-sm  font-semibold ${t.status === "success"
