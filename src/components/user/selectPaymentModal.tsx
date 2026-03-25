@@ -30,17 +30,9 @@ export default function SelectPaymentModal() {
     const { user } = useAuthUser()
     const [processingPayment, setProcessingPayMent] = useState(false)
 
-
-
-
-
-
-
     const selectLearningMode = (mode: "Learn Online (Live)" | "Learn In-House (Classroom)" | null) => {
         setChosenLearningMode(mode)
     }
-
-
 
     // function to calculate learning fee and return in string
     const calcLearningFee = (learning_mode: string | null, paymentMode: string) => {
@@ -154,6 +146,8 @@ export default function SelectPaymentModal() {
                 user_id: user?.id,
                 course: selectedCourse?.title,
                 course_id: selectedCourse?.id,
+                payment_plan: selectedPaymentMethod,
+                amount: paymentAmount
             });
 
             await enrollUser(reference.trxref);

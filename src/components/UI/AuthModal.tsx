@@ -43,29 +43,6 @@ export default function AuthModal() {
     }
 
 
-
-    // google social login function
-    const handleGoogleLogin = async () => {
-        setLoading(true)
-        const currentOrigin = typeof window !== "undefined" ? window.location.origin : "";
-
-
-        const { error } = await supabase.auth.signInWithOAuth({
-            provider: "google",
-            options: {
-                redirectTo: `${currentOrigin}/user`
-            }
-        });
-
-
-        if (error) console.error("Google login failed:", error.message)
-
-
-        setLoading(false)
-    }
-
-
-
     // sign up function
     const handleSignup = async (e: React.FormEvent<HTMLFormElement>) => {
 
@@ -236,10 +213,6 @@ export default function AuthModal() {
                 <p className=" text-base font-medium text-black text-center " >Already have an account? <button type="button" className=" text-gray-700 font-medium cursor-pointer outline-none border-none " onClick={() => setAuthState("Sign In")}> Sign In</button></p>
             )}
 
-            {/*
-            <div className=" flex items-center justify-center gap-3 " >
-                <button disabled={loading} type="button" onClick={handleGoogleLogin} aria-label="Login with google" className="cursor-pointer p-2 rounded-full h-10 w-10 overflow-hidden flex items-center justify-center " ><Image src={"/logos/google-logo.png"} alt="google logo" height={50} width={50} className="h-full w-full " /></button>
-            </div> */}
         </form>
     )
 }
