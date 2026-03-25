@@ -126,7 +126,7 @@ export default function BlogPageComponent({ slug }: BlogPageComponentProps) {
                         <span>| </span>
                         <span>6 min read</span></p>
                     <h1 className=" text-xl md:text-3xl font-bold font-sans">{currentBlog.title}</h1>
-                    <div className="text-base font-medium " dangerouslySetInnerHTML={{ __html: currentBlog.content.trim().slice(0, 77) + "..." }} />
+                    <p className="text-base font-medium ">{currentBlog.tagline} </p>
                     <p className="text-sm " >BY <Link href={"https://www.linkedin.com/company/thegreyit/"} target="_blank" className="text-gray-600 " >{currentBlog.author.toUpperCase()}</Link></p>
                 </div>
 
