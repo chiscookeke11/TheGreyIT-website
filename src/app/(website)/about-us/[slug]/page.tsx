@@ -31,7 +31,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
         },
         openGraph: {
             title: member.name,
-            description: member.description.slice(0, 50),
+            description: member.description.slice(0, 200) + "....",
             images: member.image,
             type: "article",
         },
