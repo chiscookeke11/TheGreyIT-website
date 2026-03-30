@@ -151,9 +151,6 @@ export function formatReadableDate(
     year: 'numeric',
     month: 'long',
     day: 'numeric',
-    hour: 'numeric',
-    minute: 'numeric',
-    hour12: true
   };
 
   const date = new Date(isoString);
