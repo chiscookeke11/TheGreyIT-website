@@ -11,6 +11,7 @@ import ErrorBoundary from "../ErrorBoundary";
 import RecentBlogs from "./RecentBlogs";
 import RecentBlogCard from "./RecentBlogCard";
 import RecentBlogCardSkeleton from "./RecentBlogCardSkeleton";
+import { estimateReadTime } from "@/lib/utils";
 
 
 interface BlogPageComponentProps {
@@ -124,7 +125,7 @@ export default function BlogPageComponent({ slug }: BlogPageComponentProps) {
                         year: "numeric"
                     })}
                         <span>| </span>
-                        <span>6 min read</span></p>
+                        <span>{estimateReadTime(currentBlog.content)}</span></p>
                     <h1 className=" text-xl md:text-3xl font-bold font-sans">{currentBlog.title}</h1>
                     <p className="text-base font-medium ">{currentBlog.tagline} </p>
                     <p className="text-sm " >BY <Link href={"https://www.linkedin.com/company/thegreyit/"} target="_blank" className="text-gray-600 " >{currentBlog.author.toUpperCase()}</Link></p>

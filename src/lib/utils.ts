@@ -121,14 +121,22 @@ export const scrollToTop = () => {
 
 
 
-  // function for generating a random code
-   export const randomCode = (length: number): string => {
-        const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-        let result = '';
+// function for generating a random code
+export const randomCode = (length: number): string => {
+  const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  let result = '';
 
-        for (let i = 0; i < length; i++) {
-            result += chars.charAt(Math.floor(Math.random() * chars.length))
-        }
-        return result;
-    }
+  for (let i = 0; i < length; i++) {
+    result += chars.charAt(Math.floor(Math.random() * chars.length))
+  }
+  return result;
+}
 
+
+
+// Calculate read time
+export const estimateReadTime = (content: string) => {
+  const words = content?.trim().split(/\s+/).filter(Boolean).length || 0;
+  const minutes = Math.max(1, Math.ceil(words / 200));
+  return `${minutes} min read`;
+};
