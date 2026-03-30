@@ -25,8 +25,24 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     return {
         title: `${member.name} | TheGreyIT`,
         description: ` About ${member.name}`,
+        keywords: [member.name],
         alternates: {
             canonical: `https://www.thegreyit.org/about-us/${slug}`,
+        },
+        openGraph: {
+            title: member.name,
+            description: member.description.slice(0, 50),
+            images: member.image,
+            type: "article",
+        },
+        robots: {
+            index: true,
+            follow: true,
+            nocache: false,
+            googleBot: {
+                index: true,
+                follow: true
+            }
         },
         icons: {
             icon: "./favicon.ico",
