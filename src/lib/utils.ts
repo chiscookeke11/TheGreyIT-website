@@ -127,7 +127,7 @@ export const randomCode = (length: number): string => {
   let result = '';
 
   for (let i = 0; i < length; i++) {
-    result += chars.charAt(Math.floor(Math.random() * chars.length))
+  result += chars.charAt(Math.floor(Math.random() * chars.length))
   }
   return result;
 }
@@ -140,3 +140,22 @@ export const estimateReadTime = (content: string) => {
   const minutes = Math.max(1, Math.ceil(words / 200));
   return `${minutes} min read`;
 };
+
+
+export function formatReadableDate(
+  isoString: string,
+  options?: Intl.DateTimeFormatOptions
+): string {
+  // Default options for full readable date
+  const defaultOptions: Intl.DateTimeFormatOptions = {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+    hour: 'numeric',
+    minute: 'numeric',
+    hour12: true
+  };
+
+  const date = new Date(isoString);
+  return date.toLocaleString('en-US', { ...defaultOptions, ...options });
+}

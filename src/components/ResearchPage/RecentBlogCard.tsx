@@ -1,3 +1,4 @@
+import { formatReadableDate } from "@/lib/utils"
 import { ResearchBlogType } from "@/types/types"
 import Image from "next/image"
 import Link from "next/link"
@@ -21,7 +22,7 @@ export default function RecentBlogCard({ data }: RecentBlogCardProps) {
 
                 <h1 className="font-syne font-semibold text-[11px] md:text-sm " >{data.title} </h1>
                 <div dangerouslySetInnerHTML={{ __html: data.content.trim().slice(0, 60) + "..." }} className="flex items-center gap-1 text-[10px] md:text-sm font-normal " />
-                <div className="flex items-center gap-1 text-[8px] md:text-[10px] font-normal " ><p>By {data.author}</p> <span className="bg-gray-300 block h-5 w-[1px] mx-2 " /> <p>{new Date(data.publicationDate).toLocaleDateString()} </p></div>
+                <div className="flex items-center gap-1 text-[8px] md:text-[10px] font-normal " ><p>By {data.author}</p> <span className="bg-gray-300 block h-5 w-[1px] mx-2 " /> <p>{formatReadableDate(new Date(data.publicationDate).toLocaleDateString() ?? "")} </p></div>
             </div>
         </Link>
     )

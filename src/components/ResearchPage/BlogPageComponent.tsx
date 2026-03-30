@@ -11,7 +11,7 @@ import ErrorBoundary from "../ErrorBoundary";
 import RecentBlogs from "./RecentBlogs";
 import RecentBlogCard from "./RecentBlogCard";
 import RecentBlogCardSkeleton from "./RecentBlogCardSkeleton";
-import { estimateReadTime } from "@/lib/utils";
+import { estimateReadTime, formatReadableDate } from "@/lib/utils";
 
 
 interface BlogPageComponentProps {
@@ -119,11 +119,7 @@ export default function BlogPageComponent({ slug }: BlogPageComponentProps) {
         <article className="bg-white text-black font-poppins flex flex-col items-center  gap-9 ">
             <div className="w-full  flex flex-col items-center gap-3 pt-24 md:pt-36 pb-16 px-[3%]  bg-[#f2f5fc]" >
                 <div className="w-full max-w-2xl lg:max-w-4xl flex flex-col items-start gap-3 ">
-                    <p className="text-xs flex items-center gap-4 " > {new Date(currentBlog.createdAt).toLocaleDateString("en-us", {
-                        month: "long",
-                        day: "numeric",
-                        year: "numeric"
-                    })}
+                    <p className="text-xs flex items-center gap-4 " > {formatReadableDate(new Date(currentBlog.publicationDate).toLocaleDateString() ?? "" )}
                         <span>| </span>
                         <span>{estimateReadTime(currentBlog.content)}</span></p>
                     <h1 className=" text-xl md:text-3xl font-bold font-sans">{currentBlog.title}</h1>
