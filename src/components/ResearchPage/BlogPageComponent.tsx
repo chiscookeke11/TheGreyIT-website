@@ -7,8 +7,6 @@ import { useEffect, useState } from "react";
 import { Spinner } from "../UI/Spinner";
 import Link from "next/link";
 import Image from "next/image";
-import ErrorBoundary from "../ErrorBoundary";
-import RecentBlogs from "./RecentBlogs";
 import RecentBlogCard from "./RecentBlogCard";
 import RecentBlogCardSkeleton from "./RecentBlogCardSkeleton";
 import { estimateReadTime, formatReadableDate } from "@/lib/utils";
@@ -119,7 +117,7 @@ export default function BlogPageComponent({ slug }: BlogPageComponentProps) {
         <article className="bg-white text-black font-poppins flex flex-col items-center  gap-9 ">
             <div className="w-full  flex flex-col items-center gap-3 pt-24 md:pt-36 pb-16 px-[3%]  bg-[#f2f5fc]" >
                 <div className="w-full max-w-2xl lg:max-w-4xl flex flex-col items-start gap-3 ">
-                    <p className="text-xs flex items-center gap-4 " > {formatReadableDate(new Date(currentBlog.publicationDate).toLocaleDateString() ?? "" )}
+                    <p className="text-xs flex items-center gap-4 " > {formatReadableDate(new Date(currentBlog.publicationDate))}
                         <span>| </span>
                         <span>{estimateReadTime(currentBlog.content)}</span></p>
                     <h1 className=" text-xl md:text-3xl font-bold font-sans">{currentBlog.title}</h1>

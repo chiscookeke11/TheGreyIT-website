@@ -145,7 +145,7 @@ export const estimateReadTime = (content: string) => {
 
 // Function to format date presentation
 export function formatReadableDate(
-  isoString: string,
+  isoString: Date,
   options?: Intl.DateTimeFormatOptions
 ): string {
   // Default options for full readable date

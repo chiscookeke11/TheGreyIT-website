@@ -26,7 +26,7 @@ export const HeroCard = ({ data }: HeroCardProps) => {
 
                 <h1 className="font-syne font-bold text-lg md:text-xl  " >{data.title} </h1>
                 <div className="flex items-center gap-2 text-xs md:text-sm font-normal " ><p>By {data.author}</p> <span className="bg-gray-300 block h-5 w-[1px] mx-2 " />
-                    <p>{formatReadableDate(new Date(data.publicationDate).toLocaleDateString() ?? "")} </p></div>
+                    <p>{formatReadableDate(new Date(data.publicationDate))} </p></div>
             </div>
         </Link>
     )

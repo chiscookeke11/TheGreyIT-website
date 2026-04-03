@@ -25,7 +25,7 @@ export default function ResearchCard({ blog }: ResearchCardProps) {
           <Image src={blog.image} alt={`${blog.title}-image `} width={500} height={500} className="h-full w-full object-cover object-center " />
         </div>
         <div className="h-full w-full py-4 px-3 flex flex-col items-start gap-2  " >
-          <h3 className="text-sm" >By: {blog.author} <span className="ml-4 text-gray-500 " > {formatReadableDate(new Date(blog.publicationDate).toLocaleDateString() ?? "")} </span></h3>
+          <h3 className="text-sm" >By: {blog.author} <span className="ml-4 text-gray-500 " > {formatReadableDate(new Date(blog.publicationDate) )} </span></h3>
 
           <h1 className="text-xl font-semibold " >{blog.title} </h1>
 
