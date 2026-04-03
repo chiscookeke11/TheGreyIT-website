@@ -25,7 +25,7 @@ export default function Page() {
 
         const fetchBlogs = async () => {
 
-            const { data, error } = await supabase.from("blog").select("*")
+            const { data, error } = await supabase.from("blog").select("*").order("createdAt", {ascending: false})
 
             if (error) {
                 setLoading(false)
