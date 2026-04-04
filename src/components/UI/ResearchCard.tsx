@@ -7,9 +7,6 @@ import { formatReadableDate } from "@/lib/utils"
 
 
 
-
-
-
 interface ResearchCardProps {
   blog: ResearchBlogType
 }
