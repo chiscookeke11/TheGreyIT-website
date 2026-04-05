@@ -106,14 +106,9 @@ export default function BlogPageComponent({ slug }: BlogPageComponentProps) {
 
             </div>
 
-            <div
-                className="px-[7%] lg:px-[15%] py-16 bg-white"
-                dangerouslySetInnerHTML={{ __html: currentBlog.content }}
-            />
-
-
-Here I am
-                  <PortableTextRenderer value={currentBlog.content} />
+            <div className="px-[7%] lg:px-[15%] py-16 bg-white">
+                <PortableTextRenderer value={currentBlog.content} />
+            </div>
 
 
             {/* The recent section  */}
