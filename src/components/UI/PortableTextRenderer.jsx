@@ -1,5 +1,4 @@
-// /components/PortableTextRenderer.jsx
-// npm install @portabletext/react @sanity/image-url
+"use client";
 
 import { PortableText } from '@portabletext/react'
 import imageUrlBuilder from '@sanity/image-url'

@@ -1,9 +1,8 @@
 import type { Metadata, Viewport } from "next";
-import { Geist, Geist_Mono, Poppins, Syne } from "next/font/google";
+import { DM_Sans, Geist, Geist_Mono, Lora, Poppins, Syne } from "next/font/google";
 import "./globals.css";
 import { AppProvider } from "@/context/AppContext";
 import { Toaster } from "react-hot-toast";
-import Image from "next/image";
 import { seoKeywords } from "@/data/SEOKeywords";
 import ScrollToTopBtn from "@/components/UI/ScrollToTopBtn";
 
@@ -31,6 +30,15 @@ const syne = Syne({
   weight: ["600", "700", "400"],
 })
 
+const lora = Lora({
+  subsets: ['latin'],
+  variable: '--font-lora'
+})
+
+const dm = DM_Sans({
+  subsets: ['latin'],
+  variable: '--font-dm'
+})
 
 
 
@@ -96,7 +104,7 @@ export default function RootLayout({
         <meta name="google-site-verification" content="Nv5M-GPzypWQTbwEYS96n1qQAIEElpScWowb-gpM-j0" />
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${poppins.variable} ${syne.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} ${poppins.variable} ${syne.variable} ${lora.variable} ${dm.variable} antialiased`}
       >
 
         <AppProvider>

@@ -26,9 +26,7 @@ export default function RecentBlogs() {
             }
             else if (data) {
                 setRecentBlogsData(data)
-                console.log(data)
             }
-
         }
 
         fetchRecentBlogs()
