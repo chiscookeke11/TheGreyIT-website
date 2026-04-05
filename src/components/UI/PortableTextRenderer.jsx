@@ -54,6 +54,11 @@ const components = {
 
 export default function PortableTextRenderer({ value }) {
   if (!value) return null
+
+  if (typeof value === 'string') {
+    return <div className="prose" dangerouslySetInnerHTML={{ __html: value }} />
+  }
+
   return (
     <div className="prose">
       <PortableText value={value} components={components} />
