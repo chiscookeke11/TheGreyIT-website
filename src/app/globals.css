@@ -1,8 +1,8 @@
 @import "tailwindcss";
+@import './styles/article.css';
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #ffffff;  --foreground: #171717;
 }
 
 @theme inline {
@@ -12,6 +12,8 @@
   --font-mono: var(--font-geist-mono);
   --font-poppins: var(--font-poppins);
   --font-syne: var(--font-poppins);
+  --font-dm: var(--font-dm);
+  --font-lora: var(--font-lora)
 }
 
 @media (prefers-color-scheme: dark) {

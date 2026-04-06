@@ -1,5 +1,4 @@
-// /components/PortableTextRenderer.jsx
-// npm install @portabletext/react @sanity/image-url
+"use client";
 
 import { PortableText } from '@portabletext/react'
 import imageUrlBuilder from '@sanity/image-url'
@@ -55,8 +54,13 @@ const components = {
 
 export default function PortableTextRenderer({ value }) {
   if (!value) return null
+
+  if (typeof value === 'string') {
+    return <div className="prose" dangerouslySetInnerHTML={{ __html: value }} />
+  }
+
   return (
-    <div className="prose">
+    <div className="prose text-black ">
       <PortableText value={value} components={components} />
     </div>
   )

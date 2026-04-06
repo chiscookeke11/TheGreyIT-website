@@ -9,8 +9,6 @@ import { useParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
 
-
-
 export default function TeamMember() {
     const { slug } = useParams();
     const [currentMember, setCurrentMember] = useState<TeamMemberDataType | null>(null)
@@ -26,9 +24,6 @@ export default function TeamMember() {
         const member = teams.find((member) => member.slug.trim() === trimmedSlug)
         setCurrentMember(member || null)
     }, [slug])
-
-
-
 
     if (!currentMember) return (
 

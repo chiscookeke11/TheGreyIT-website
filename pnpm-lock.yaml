@@ -20,6 +20,9 @@ importers:
       '@paystack/inline-js':
         specifier: ^2.22.7
         version: 2.22.7
+      '@portabletext/react':
+        specifier: ^6.0.3
+        version: 6.0.3(react@19.1.0)
       '@prisma/client':
         specifier: ^6.16.2
         version: 6.16.2(prisma@6.16.2(typescript@5.9.2))(typescript@5.9.2)
@@ -41,6 +44,9 @@ importers:
       '@react-pdf-viewer/default-layout':
         specifier: ^3.12.0
         version: 3.12.0(pdfjs-dist@5.4.296)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+      '@sanity/client':
+        specifier: ^7.20.0
+        version: 7.20.0(debug@4.4.3)
       '@sanity/icons':
         specifier: ^3.7.4
         version: 3.7.4(react@19.1.0)

@@ -10,6 +10,7 @@ import Image from "next/image";
 import RecentBlogCard from "./RecentBlogCard";
 import RecentBlogCardSkeleton from "./RecentBlogCardSkeleton";
 import { estimateReadTime, formatReadableDate } from "@/lib/utils";
+import PortableTextRenderer from '@/components/UI/PortableTextRenderer'
 
 
 interface BlogPageComponentProps {
@@ -84,35 +85,6 @@ export default function BlogPageComponent({ slug }: BlogPageComponentProps) {
     }
 
 
-
-    const structuredData = {
-        "@context": "https://schema.org",
-        "@type": "BlogPosting",
-        "headline": currentBlog.title,
-        "description": currentBlog.content || currentBlog.title,
-        "image": currentBlog.image,
-        "author": {
-            "@type": "Person",
-            "name": currentBlog.author
-        },
-        "publisher": {
-            "@type": "Organization",
-            "name": "TheGreyIT",
-            "logo": {
-                "@type": "ImageObject",
-                "url": "https://www.thegreyit.com/logo.png"
-            }
-        },
-        "datePublished": currentBlog.createdAt,
-        "dateModified": currentBlog.createdAt,
-        "mainEntityOfPage": {
-            "@type": "WebPage",
-            "@id": `https://www.thegreyit.com/blog/${currentBlog.slug}`
-        }
-    };
-
-
-
     return (
         <article className="bg-white text-black font-poppins flex flex-col items-center  gap-9 ">
             <div className="w-full  flex flex-col items-center gap-3 pt-24 md:pt-36 pb-16 px-[3%]  bg-[#f2f5fc]" >
@@ -134,10 +106,9 @@ export default function BlogPageComponent({ slug }: BlogPageComponentProps) {
 
             </div>
 
-            <div
-                className="px-[7%] lg:px-[15%] py-16 bg-white"
-                dangerouslySetInnerHTML={{ __html: currentBlog.content }}
-            />
+            <div className="px-[7%] lg:px-[15%] py-16 bg-white">
+                <PortableTextRenderer value={currentBlog.content} />
+            </div>
 
 
             {/* The recent section  */}
