@@ -60,7 +60,7 @@ export default function PortableTextRenderer({ value }) {
   }
 
   return (
-    <div className="prose">
+    <div className="prose text-black ">
       <PortableText value={value} components={components} />
     </div>
   )

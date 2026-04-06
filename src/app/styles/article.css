@@ -7,15 +7,10 @@
 /* ── Base ─────────────────────────────────────────────────── */
 
 .prose {
-  --text: #1c1c1c;
-  --muted: #6b6b6b;
-  --accent: #c8a96e;       /* warm gold — feels editorial, not tech */
-  --border: #e8e3dc;
-
-  max-width: 680px;
+width: 100%;
   margin: 0 auto;
   padding: 0 1.5rem;
-  color: var(--text);
+  color: #000000;
   font-family: 'Lora', Georgia, serif;
   font-size: 1.125rem;
   line-height: 1.85;
@@ -42,12 +37,15 @@
 
 /* ── Body ─────────────────────────────────────────────────── */
 
-.prose p { margin: 0 0 1.5rem; }
+.prose p {
+  margin: 0 0 1.5rem;
+  color:  #000000;
+ }
 
 .prose a {
   color: inherit;
   text-decoration: underline;
-  text-decoration-color: var(--accent);
+  text-decoration-color: #000000;
   text-underline-offset: 3px;
 }
 
@@ -60,7 +58,7 @@
   border-left: 2px solid var(--border);
   padding-left: 1.5rem;
   margin: 2rem 0;
-  color: var(--muted);
+  color: var(--text);
   font-style: italic;
 }
 
