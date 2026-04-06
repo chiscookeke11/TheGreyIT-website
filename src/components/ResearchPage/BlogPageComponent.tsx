@@ -102,11 +102,9 @@ export default function BlogPageComponent({ slug }: BlogPageComponentProps) {
                     <Image src={currentBlog.image} alt={`${currentBlog.title}-image`} fill className="object-center object-cover " />
 
                 </div>
-
-
             </div>
 
-            <div className="px-[7%] lg:px-[15%] py-16 bg-white">
+            <div className="px-[2%] lg:px-[15%] py-16 bg-white">
                 <PortableTextRenderer value={currentBlog.content} />
             </div>
 

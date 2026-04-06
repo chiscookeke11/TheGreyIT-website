@@ -131,7 +131,7 @@ width: 100%;
 /* ── Mobile ───────────────────────────────────────────────── */
 
 @media (max-width: 640px) {
-  .prose { font-size: 1rem; padding: 0 1.25rem; }
+  .prose { font-size: 0.9rem; padding: 0 1rem; }
   .pull-quote { margin: 2rem 0; }
   .pull-quote p { font-size: 1.2rem; }
   .figure--wide { margin-left: -1.25rem; margin-right: -1.25rem; }
