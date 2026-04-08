@@ -37,7 +37,7 @@ export default function RegisterPageClient({ slug }: PageProps) {
         whatsapp_number: "",
         course: "",
         priceToPay: 0,
-        payment_plan: "full"
+        payment_plan: "full",
     })
 
 
@@ -123,6 +123,9 @@ export default function RegisterPageClient({ slug }: PageProps) {
 
 
     const saveEnrollment = async (reference: PaystackReference) => {
+
+        setLoading(true)
+
         try {
             const { error } = await supabase.from("cohort_enrollments").insert({
                 reference: reference.reference,
@@ -159,6 +162,9 @@ export default function RegisterPageClient({ slug }: PageProps) {
         } catch (error) {
             console.error(error);
             toast.error("Something went wrong");
+        }
+        finally {
+            setLoading(false)
         }
     };
 
@@ -257,10 +263,10 @@ export default function RegisterPageClient({ slug }: PageProps) {
     const handleProceedToPayment = () => {
         if (!validateForm()) return;
 
-        initializePayment(
-            (reference: PaystackReference) => handlePaystackSuccessAction(reference),
-            handlePaystackCloseAction
-        );
+        initializePayment({
+            onSuccess: (reference: PaystackReference) => handlePaystackSuccessAction(reference),
+            onClose: handlePaystackCloseAction,
+        });
     };
 
 
@@ -276,7 +282,7 @@ export default function RegisterPageClient({ slug }: PageProps) {
 
 
     return (
-        <div className=" w-full flex flex-col gap-10 items-center justify-start pt-24 md:pt-40 pb-16 px-[2%] md:px-[14%]  bg-white min-h-screen"  >
+        <div className="relative w-full flex flex-col gap-10 items-center justify-start pt-24 md:pt-40 pb-16 px-[2%] md:px-[14%]  bg-white min-h-screen"  >
 
             <div className=" w-full h-[50vh] relative overflow-hidden rounded-xl bg-gray-200 "  >
                 <Image src={currentCourse?.image || ""} alt={"image"} fill className="object-cover object-center " />
@@ -504,6 +510,14 @@ export default function RegisterPageClient({ slug }: PageProps) {
                 {formValues.payment_plan === "part" && " (Part Payment)"}
             </p>
 
+
+
+            {loading && (
+                <div className="fixed inset-0 h-screen w-full flex items-center justify-center " >
+
+                    <Spinner />
+                </div>
+            )}
         </div>
     )
 }
