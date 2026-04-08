@@ -215,17 +215,53 @@ export interface courseEnrollmentsDataType {
 
 
 export interface UpdateBlogProps {
-    showEditModal: boolean;
-    setShowEditModal: React.Dispatch<React.SetStateAction<boolean>>;
-    selectedIndex: string
-    updateBlogInUI: (blog: ResearchBlogType) => void
+  showEditModal: boolean;
+  setShowEditModal: React.Dispatch<React.SetStateAction<boolean>>;
+  selectedIndex: string
+  updateBlogInUI: (blog: ResearchBlogType) => void
 }
 
 export interface updateBlogType {
-    title: string,
-    content: string,
-    author: string,
-    image: string,
-    tagline: string,
-    publicationDate: string
+  title: string,
+  content: string,
+  author: string,
+  image: string,
+  tagline: string,
+  publicationDate: string
+}
+
+
+export interface CohortCourseTypes {
+  title: string;
+  id: string;
+  online_fee: number;
+  inhouse_fee: number;
+  image: string;
+  slug?: string;
+  duration: string;
+  description?: string;
+}
+
+
+
+export interface CohortStudentRegistrationTypes {
+  fullname: string;
+  email: string;
+  gender: "male" | "female" | "";
+  phone_number: string;
+  whatsapp_number: string;
+  city: string;
+  state: string;
+  country: string;
+  learning_mode: "Online" | "Inhouse",
+  course: string;
+  priceToPay: Number;
+  payment_plan: "full" | "part"
+}
+
+
+export interface CountryDataType {
+  label: string;
+  value: string;
+  iso: string
 }
