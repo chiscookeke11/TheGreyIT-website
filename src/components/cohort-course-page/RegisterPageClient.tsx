@@ -23,6 +23,7 @@ interface PageProps {
 export default function RegisterPageClient({ slug }: PageProps) {
     const [currentCourse, setCurrentCourse] = useState<CohortCourseTypes | null>(null)
     const [loading, setLoading] = useState(true);
+    const [showSuccessPopup, setShowSuccessPopup] = useState(false);
     const public_key = process.env.NEXT_PUBLIC_PAYSTACK_PUBLIC_KEY!
 
     const [formValues, setFormValues] = useState<CohortStudentRegistrationTypes>({
@@ -142,7 +143,7 @@ export default function RegisterPageClient({ slug }: PageProps) {
                 return;
             }
 
-            toast.success("Payment successful & registered!");
+            setShowSuccessPopup(true);
 
             setFormValues({
                 email: "",
@@ -516,6 +517,24 @@ export default function RegisterPageClient({ slug }: PageProps) {
                 <div className="fixed inset-0 h-screen w-full flex items-center justify-center " >
 
                     <Spinner />
+                </div>
+            )}
+
+            {showSuccessPopup && (
+                <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 px-4">
+                    <div className="w-full max-w-md rounded-xl bg-white p-6 text-center shadow-xl font-poppins">
+                        <h3 className="text-2xl font-semibold text-gray-900">Registration Successful!</h3>
+                        <p className="mt-3 text-sm text-gray-700">
+                            Your payment has been confirmed and your registration is complete.
+                        </p>
+                        <button
+                            type="button"
+                            onClick={() => setShowSuccessPopup(false)}
+                            className="mt-6 rounded-lg bg-gray-900 px-6 py-2 text-sm font-medium text-white hover:bg-gray-700 transition"
+                        >
+                            Close
+                        </button>
+                    </div>
                 </div>
             )}
         </div>

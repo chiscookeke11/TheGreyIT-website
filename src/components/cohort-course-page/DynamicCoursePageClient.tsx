@@ -2,10 +2,11 @@
 
 import { supabase } from "@/lib/supabaseClient"
 import { CohortCourseTypes } from "@/types/types"
-import { useEffect, useState } from "react"
+import { useCallback, useEffect, useState } from "react"
 import toast from "react-hot-toast"
 import { Spinner } from "../UI/Spinner"
 import Link from "next/link"
+import Image from "next/image"
 
 
 
@@ -18,14 +19,23 @@ export default function DynamicCoursePageClient({ slug }: CohortCoursePageProps)
     const [currentCourse, setCurrentCourse] = useState<CohortCourseTypes | null>(null)
     const [loading, setLoading] = useState(true);
 
+    const formatCurrency = (value: number) =>
+        new Intl.NumberFormat("en-NG", {
+            style: "currency",
+            currency: "NGN",
+            maximumFractionDigits: 0,
+        }).format(value)
+
 
     //   This function fetches the course details
-    const fetchCourseDetails = async () => {
+    const fetchCourseDetails = useCallback(async () => {
+        setLoading(true)
 
         const { data, error } = await supabase
             .from("cohort_2026_courses")
             .select("*")
             .eq("slug", slug)
+            .maybeSingle()
 
         if (error) {
             setCurrentCourse(null);
@@ -35,17 +45,20 @@ export default function DynamicCoursePageClient({ slug }: CohortCoursePageProps)
         }
 
         if (!data) {
+            setCurrentCourse(null)
             toast.error("Course data not found")
+            setLoading(false)
+            return
         }
 
-        setCurrentCourse(data[0])
+        setCurrentCourse(data)
         setLoading(false)
-    }
+    }, [slug])
 
 
     useEffect(() => {
         fetchCourseDetails()
-    }, [])
+    }, [fetchCourseDetails])
 
 
     if (loading) {
@@ -63,13 +76,52 @@ export default function DynamicCoursePageClient({ slug }: CohortCoursePageProps)
 
 
     return (
-        <div className=" w-full min-h-screen flex items-center justify-center flex-col gap-3  "  >
+        <div className="w-full min-h-screen bg-white pt-24 md:pt-40 pb-16 px-[2%] md:px-[14%] font-poppins">
+            <div className="w-full h-[48vh] relative overflow-hidden rounded-xl bg-gray-200">
+                <Image
+                    src={currentCourse.image || ""}
+                    alt={currentCourse.title}
+                    fill
+                    className="object-cover object-center"
+                />
+                <div className="absolute inset-0 bg-black/55" />
 
-            {currentCourse?.title}
+                <div className="absolute inset-0 z-10 flex flex-col gap-4 text-white px-[4%] items-start justify-center">
+                    <p className="font-medium text-sm md:text-base tracking-wide">TECHNICAL COHORT 2026</p>
+                    <h1 className="font-bold text-2xl md:text-5xl">{currentCourse.title}</h1>
+                    {currentCourse.duration && (
+                        <p className="text-sm md:text-base">Duration: {currentCourse.duration}</p>
+                    )}
+                </div>
+            </div>
 
-            <Link href={`/cohort2026/${currentCourse.slug}/register`} >
-                Purchase this course
-            </Link>
+            <div className="w-full grid grid-cols-1 lg:grid-cols-3 gap-6 mt-10">
+                <div className="lg:col-span-2 rounded-xl border border-gray-200 p-6 md:p-8">
+                    <h2 className="text-xl md:text-2xl font-semibold text-gray-900">About this course</h2>
+                    <p className="mt-4 text-sm md:text-base text-gray-700 leading-7">
+                        {currentCourse.description || "Course description will be shared soon. Register now to secure your slot."}
+                    </p>
+                </div>
+
+                <div className="rounded-xl border border-gray-200 p-6 md:p-8 h-fit">
+                    <h3 className="text-lg font-semibold text-gray-900">Fee breakdown</h3>
+                    <div className="mt-4 flex items-center justify-between text-sm text-gray-700">
+                        <span>In-house</span>
+                        <span className="font-medium text-gray-900">{formatCurrency(currentCourse.inhouse_fee)}</span>
+                    </div>
+                    <div className="mt-2 flex items-center justify-between text-sm text-gray-700">
+                        <span>Online</span>
+                        <span className="font-medium text-gray-900">{formatCurrency(currentCourse.online_fee)}</span>
+                    </div>
+
+                    <Link
+                        href={`/cohort2026/${currentCourse.slug}/register`}
+                        className="mt-6 inline-flex w-full items-center justify-center rounded-lg bg-gray-900 px-4 py-3 text-sm font-medium text-white hover:bg-gray-700 transition"
+                    >
+                        Register for this course
+                    </Link>
+                </div>
+            </div>
         </div>
     )
 }
