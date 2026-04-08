@@ -530,7 +530,7 @@ export default function RegisterPageClient({ slug }: PageProps) {
                         <button
                             type="button"
                             onClick={() => setShowSuccessPopup(false)}
-                            className="mt-6 rounded-lg bg-gray-900 px-6 py-2 text-sm font-medium text-white hover:bg-gray-700 transition"
+                            className="mt-6 rounded-lg bg-gray-900 px-6 py-2 text-sm font-medium text-white hover:bg-gray-700 transition cursor-pointer "
                         >
                             Close
                         </button>

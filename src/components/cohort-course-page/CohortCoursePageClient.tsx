@@ -51,11 +51,10 @@ export default function CohortCoursePageClient() {
 
 
 
-            <section className=" w-full h-full flex-1 grid grid-cols-1 md:grid-cols-5 place-items-start justify-items-start  py-4 px-3 "  >
+            <section className=" w-full h-full flex-1 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-5 gap-y-10 place-items-start justify-items-start  py-4 px-3 "  >
                 {courses?.map((course, index) => (
-                    <Link key={index} href={`/cohort2026/${course.slug}`} className=" w-full max-w-[350px] "   >
+                    <Link key={index} href={`/cohort2026/${course.slug}`} className=" w-full h-full max-w-[350px] "   >
                         <CohortCourseCard data={course} />
-
                     </Link>
                 ))}
             </section>
