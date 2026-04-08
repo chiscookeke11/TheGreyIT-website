@@ -1,12 +1,12 @@
 "use client"
 
 import CohortCourseCard from "@/components/UI/CohortCourseCard";
-import Loading from "@/components/UI/Loading";
 import { supabase } from "@/lib/supabaseClient";
 import { CohortCourseTypes } from "@/types/types";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
+import { Spinner } from "../UI/Spinner";
 
 export default function CohortCoursePageClient() {
     const [courses, setCourses] = useState<CohortCourseTypes[] | null>(null)
@@ -49,7 +49,7 @@ export default function CohortCoursePageClient() {
             <section className=" w-full h-full flex-1 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-5 gap-y-10 place-items-start justify-items-start  py-4 px-3 ">
                 {loading ? (
                     <div className="w-full h-full min-h-36 flex items-center justify-center md:col-span-3 lg:col-span-5">
-                        <Loading />
+                        <Spinner/>
                     </div>
                 ) : (
                     courses?.map((course, index) => (
