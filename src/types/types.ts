@@ -255,7 +255,7 @@ export interface CohortStudentRegistrationTypes {
   country: string;
   learning_mode: "Online" | "Inhouse",
   course: string;
-  priceToPay: Number;
+  priceToPay: number;
   payment_plan: "full" | "part" | ""
 }
 
