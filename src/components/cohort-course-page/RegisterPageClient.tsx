@@ -10,11 +10,7 @@ import { handleChange, handleSelectChange } from "@/lib/utils";
 import { CustomCheckBox } from "../UI/CustomCheckbox";
 import { CustomSelect } from "../UI/CustomSelect";
 import { countryOptions } from "@/data/CountryList";
-import dynamic from "next/dynamic";
-const PaystackButton = dynamic(
-    () => import("react-paystack").then((mod) => mod.PaystackButton),
-    { ssr: false }
-);
+import { usePaystackPayment } from "react-paystack";
 
 
 interface PageProps {
@@ -86,7 +82,7 @@ export default function RegisterPageClient({ slug }: PageProps) {
     useEffect(() => {
         if (!currentCourse) return;
 
-        let basePrice =
+        const basePrice =
             formValues.learning_mode === "Inhouse"
                 ? currentCourse.inhouse_fee
                 : currentCourse.online_fee;
@@ -256,12 +252,15 @@ export default function RegisterPageClient({ slug }: PageProps) {
         publicKey: public_key,
     };
 
-    const componentProps = {
-        ...config,
-        text: `Proceed`,
-        onSuccess: (reference: PaystackReference) => handlePaystackSuccessAction(reference),
-        onClose: handlePaystackCloseAction,
+    const initializePayment = usePaystackPayment(config);
 
+    const handleProceedToPayment = () => {
+        if (!validateForm()) return;
+
+        initializePayment(
+            (reference: PaystackReference) => handlePaystackSuccessAction(reference),
+            handlePaystackCloseAction
+        );
     };
 
 
@@ -489,11 +488,14 @@ export default function RegisterPageClient({ slug }: PageProps) {
 
 
                 {/* payment button  */}
-                <PaystackButton
-                    {...componentProps}
+                <button
+                    type="button"
+                    onClick={handleProceedToPayment}
                     className="w-full col-span-2 mx-auto max-w-xs md:max-w-xl font-syne py-2 px-10 mt-5 rounded-lg cursor-pointer border border-gray-700
                hover:bg-gray-700 hover:text-white transition ml-auto"
-                />
+                >
+                    Proceed
+                </button>
 
             </form>
 
