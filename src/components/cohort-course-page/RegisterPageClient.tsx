@@ -3,7 +3,7 @@
 import { supabase } from "@/lib/supabaseClient";
 import { CohortCourseTypes, CohortStudentRegistrationTypes, PaystackReference } from "@/types/types";
 import Image from "next/image"
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { Spinner } from "../UI/Spinner";
 import { handleChange, handleSelectChange } from "@/lib/utils";
@@ -15,12 +15,20 @@ import { usePaystackPayment } from "react-paystack";
 
 interface PageProps {
     slug: string
+    fixedFee?: number
+    pageTitle?: string
+    pageSubtitle?: string
 }
 
 
 
 
-export default function RegisterPageClient({ slug }: PageProps) {
+export default function RegisterPageClient({
+    slug,
+    fixedFee,
+    pageTitle = "Join the Technical Cohort",
+    pageSubtitle = "REGISTRATION OPEN",
+}: PageProps) {
     const [currentCourse, setCurrentCourse] = useState<CohortCourseTypes | null>(null)
     const [loading, setLoading] = useState(true);
     const [showSuccessPopup, setShowSuccessPopup] = useState(false);
@@ -43,7 +51,7 @@ export default function RegisterPageClient({ slug }: PageProps) {
 
 
     //   This function fetches the course details
-    const fetchCourseDetails = async () => {
+    const fetchCourseDetails = useCallback(async () => {
 
         const { data, error } = await supabase
             .from("cohort_2026_courses")
@@ -63,12 +71,12 @@ export default function RegisterPageClient({ slug }: PageProps) {
 
         setCurrentCourse(data[0])
         setLoading(false)
-    }
+    }, [slug])
 
 
     useEffect(() => {
         fetchCourseDetails()
-    }, [])
+    }, [fetchCourseDetails])
 
     useEffect(() => {
         if (currentCourse) {
@@ -82,6 +90,15 @@ export default function RegisterPageClient({ slug }: PageProps) {
 
     useEffect(() => {
         if (!currentCourse) return;
+
+        if (typeof fixedFee === "number") {
+            setFormValues(prev => ({
+                ...prev,
+                payment_plan: "full",
+                priceToPay: fixedFee,
+            }));
+            return;
+        }
 
         const basePrice =
             formValues.learning_mode === "Inhouse"
@@ -99,7 +116,7 @@ export default function RegisterPageClient({ slug }: PageProps) {
             priceToPay: finalPrice
         }));
 
-    }, [currentCourse, formValues.learning_mode, formValues.payment_plan]);
+    }, [currentCourse, fixedFee, formValues.learning_mode, formValues.payment_plan]);
 
 
     // These are the options for gender
@@ -286,12 +303,15 @@ export default function RegisterPageClient({ slug }: PageProps) {
         <div className="relative w-full flex flex-col gap-10 items-center justify-start pt-24 md:pt-40 pb-16 px-[2%] md:px-[14%]  bg-white min-h-screen"  >
 
             <div className=" w-full h-[50vh] relative overflow-hidden rounded-xl bg-gray-200 "  >
-                <Image src={currentCourse?.image || ""} alt={"image"} fill className="object-cover object-center " />
+                <Image src={currentCourse?.image || ""} alt={currentCourse?.title || "image"} fill className="object-cover object-center " />
                 <div className=" w-full h-full absolute inset-0 bg-black/57 " />
 
                 <div className="w-full h-full z-10  absolute inset-0 flex flex-col gap-5  text-white px-[4%] items-start justify-center font-poppins "  >
-                    <h4 className="font-sans  font-medium text-lg md:text-xl " >REGISTRATION OPEN</h4>
-                    <h2 className=" font-bold text-3xl md:text-5xl    "  >Join the Technical Cohort</h2>
+                    <h4 className="font-sans  font-medium text-lg md:text-xl " >{pageSubtitle}</h4>
+                    <h2 className=" font-bold text-3xl md:text-5xl    "  >{pageTitle}</h2>
+                    {currentCourse && (
+                        <p className="text-sm md:text-lg">{currentCourse.title}</p>
+                    )}
 
                 </div>
             </div>
@@ -462,34 +482,36 @@ export default function RegisterPageClient({ slug }: PageProps) {
                 </div>
 
 
-                <div className="w-full flex flex-col items-start gap-2 col-span-2 ">
-                    <h1 className="text-[#000000] font-medium text-sm font-lato">
-                        Payment Plan *
-                    </h1>
+                {typeof fixedFee !== "number" && (
+                    <div className="w-full flex flex-col items-start gap-2 col-span-2 ">
+                        <h1 className="text-[#000000] font-medium text-sm font-lato">
+                            Payment Plan *
+                        </h1>
 
-                    <div className="grid grid-cols-2 gap-4">
-                        {paymentPlanOptions.map((option) => {
-                            const isChecked = formValues.payment_plan === option;
+                        <div className="grid grid-cols-2 gap-4">
+                            {paymentPlanOptions.map((option) => {
+                                const isChecked = formValues.payment_plan === option;
 
-                            return (
-                                <CustomCheckBox
-                                    key={option}
-                                    checked={isChecked}
-                                    label={option === "full" ? "Full Payment" : "Part Payment"}
-                                    id={option}
-                                    onCheckedChange={(checked) => {
-                                        if (checked) {
-                                            setFormValues((prev) => ({
-                                                ...prev,
-                                                payment_plan: option,
-                                            }));
-                                        }
-                                    }}
-                                />
-                            );
-                        })}
+                                return (
+                                    <CustomCheckBox
+                                        key={option}
+                                        checked={isChecked}
+                                        label={option === "full" ? "Full Payment" : "Part Payment"}
+                                        id={option}
+                                        onCheckedChange={(checked) => {
+                                            if (checked) {
+                                                setFormValues((prev) => ({
+                                                    ...prev,
+                                                    payment_plan: option,
+                                                }));
+                                            }
+                                        }}
+                                    />
+                                );
+                            })}
+                        </div>
                     </div>
-                </div>
+                )}
 
 
 
@@ -508,7 +530,7 @@ export default function RegisterPageClient({ slug }: PageProps) {
 
             <p className="col-span-2 text-sm font-medium text-green-700 font-sans ">
                 You are paying: ₦{formValues.priceToPay.toLocaleString()}
-                {formValues.payment_plan === "part" && " (Part Payment)"}
+                {formValues.payment_plan === "part" && typeof fixedFee !== "number" && " (Part Payment)"}
             </p>
 
 
