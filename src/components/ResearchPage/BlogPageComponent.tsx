@@ -17,14 +17,10 @@ interface BlogPageComponentProps {
     slug: string
 }
 
-
-
 export default function BlogPageComponent({ slug }: BlogPageComponentProps) {
     const [currentBlog, setCurrentBlog] = useState<ResearchBlogType | null>(null)
     const [loading, setLoading] = useState(true);
     const [recentBlogsData, setRecentBlogsData] = useState<null | ResearchBlogType[]>(null)
-
-
 
 
     useEffect(() => {
@@ -93,8 +89,8 @@ export default function BlogPageComponent({ slug }: BlogPageComponentProps) {
                         <span>| </span>
                         <span>{estimateReadTime(currentBlog.content)}</span></p>
                     <h1 className=" text-xl md:text-3xl font-bold font-sans">{currentBlog.title}</h1>
-                    <p className="text-base font-medium ">{currentBlog.tagline} </p>
-                    <p className="text-sm " >BY <Link href={"https://www.linkedin.com/company/thegreyit/"} target="_blank" className="text-gray-600 " >{currentBlog.author.toUpperCase()}</Link></p>
+                    <p className="text-base font-medium font-lora ">{currentBlog.tagline} </p>
+                    <p className="text-sm font-lora " >BY <Link href={"https://www.linkedin.com/company/thegreyit/"} target="_blank" className="text-gray-600 " >{currentBlog.author.toUpperCase()}</Link></p>
                 </div>
 
 
