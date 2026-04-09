@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { Spinner } from "../UI/Spinner";
 
-const INTRO_FEE = 1000;
+const INTRO_FEE = 10000;
 
 export default function IntroCoursePageClient() {
     const [courses, setCourses] = useState<CohortCourseTypes[] | null>(null)
@@ -55,7 +55,7 @@ export default function IntroCoursePageClient() {
                     </div>
                 ) : (
                     courses?.map((course) => (
-                        <article key={course.id} className="w-full bg-white rounded-xl border border-gray-200 p-5 shadow-sm flex flex-col gap-4">
+                        <article key={course.id} className="w-full bg-white rounded-xl border border-gray-200 px-5 py-5 shadow-sm flex flex-col gap-4">
                             <h2 className="text-lg md:text-xl font-semibold text-gray-900">{course.title}</h2>
                             <p className="text-sm text-gray-700 line-clamp-3">{course.description || "Quick intro class for this course."}</p>
 

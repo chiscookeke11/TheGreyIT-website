@@ -6,7 +6,7 @@ interface PageProps {
   params: Promise<{ slug: string }>;
 }
 
-const INTRO_FEE = 1000;
+const INTRO_FEE = 15000;
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
