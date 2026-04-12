@@ -12,7 +12,7 @@ interface CohortCourseCardProps {
 export default function CohortCourseCard({ data }: CohortCourseCardProps) {
     return (
         <div className="w-full h-full flex flex-col items-start justify-start gap-4  overflow-hidden font-lora text-gray-700 bg-white "  >
-            <Image src={data.image} alt="the image " height={500} width={500} className=" w-full h-[260px] object-center object-cover " />
+            <Image src={data.imageUrl} alt="the image " height={1000} width={1000} className=" w-full h-[260px] object-center object-cover " />
 
 
 

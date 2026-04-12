@@ -7,6 +7,11 @@ import toast from "react-hot-toast"
 import { Spinner } from "../UI/Spinner"
 import Link from "next/link"
 import Image from "next/image"
+import DescriptionSection from "../UI/DescriptionSection"
+import Who_Should_Enrol from "../UI/Who_Should_Enrol"
+import Course_Format from "../UI/Course_Format"
+import Projects from "../UI/Projects"
+import PostGraduation from "../UI/PostGraduation"
 
 
 
@@ -18,6 +23,7 @@ interface CohortCoursePageProps {
 export default function DynamicCoursePageClient({ slug }: CohortCoursePageProps) {
     const [currentCourse, setCurrentCourse] = useState<CohortCourseTypes | null>(null)
     const [loading, setLoading] = useState(true);
+    const [currentTab, setCurrentTab] = useState("description")
 
     const formatCurrency = (value: number) =>
         new Intl.NumberFormat("en-NG", {
@@ -79,7 +85,7 @@ export default function DynamicCoursePageClient({ slug }: CohortCoursePageProps)
         <div className="w-full min-h-screen bg-white pt-24 md:pt-40 pb-16 px-[2%] md:px-[14%] font-poppins">
             <div className="w-full h-[48vh] relative overflow-hidden rounded-xl bg-gray-200">
                 <Image
-                    src={currentCourse.image || ""}
+                    src={currentCourse.imageUrl || ""}
                     alt={currentCourse.title}
                     fill
                     className="object-cover object-center"
@@ -122,6 +128,63 @@ export default function DynamicCoursePageClient({ slug }: CohortCoursePageProps)
                     </Link>
                 </div>
             </div>
+
+
+
+
+            {/* the section tab  */}
+            <div className="w-full flex items-center gap-4 md:gap-10 flex-wrap mt-20 mb-8 " >
+                <button
+                    onClick={() => setCurrentTab("description")}
+                    className={` text-sm md:text-base font-semibold py-2 cursor-pointer ${currentTab === "description" ? "border-b-2 border-b-gray-700" : ""
+                        }`}
+                >
+                    Description
+                </button>
+
+                <button
+                    onClick={() => setCurrentTab("Who_Should_Enrol")}
+                    className={` text-sm md:text-base  font-semibold py-2 cursor-pointer ${currentTab === "Who_Should_Enrol" ? "border-b-2 border-b-gray-700" : ""
+                        }`}
+                >
+                    Who Should Enrol
+                </button>
+
+                <button
+                    onClick={() => setCurrentTab("Course_Format")}
+                    className={` text-sm md:text-base  font-semibold py-2 cursor-pointer ${currentTab === "Course_Format" ? "border-b-2 border-b-gray-700" : ""
+                        }`}
+                >
+                    Course Format
+                </button>
+
+
+                <button
+                    onClick={() => setCurrentTab("Projects")}
+                    className={` text-sm md:text-base  font-semibold py-2 cursor-pointer ${currentTab === "Projects" ? "border-b-2 border-b-gray-700" : ""
+                        }`}
+                >
+                    Projects You’ll Build
+                </button>
+
+
+                <button
+                    onClick={() => setCurrentTab("post_graduation")}
+                    className={` text-sm md:text-base  font-semibold py-2 cursor-pointer ${currentTab === "post_graduation" ? "border-b-2 border-b-gray-700" : ""
+                        }`}
+                >
+                    Post Graduation
+                </button>
+
+            </div>
+
+
+            {currentTab === "description" && <DescriptionSection currentCourse={currentCourse} />}
+            {currentTab === "Who_Should_Enrol" && <Who_Should_Enrol currentCourse={currentCourse} />}
+            {currentTab === "Course_Format" && <Course_Format currentCourse={currentCourse} />}
+            {currentTab === "Projects" && <Projects currentCourse={currentCourse} />}
+            {currentTab === "post_graduation" && <PostGraduation currentCourse={currentCourse} />}
+
         </div>
     )
 }

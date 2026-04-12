@@ -1,16 +1,20 @@
+
+
+
+
 "use client"
 
-import { supabase } from "@/lib/supabaseClient";
-import { CohortCourseTypes, CohortStudentRegistrationTypes, PaystackReference } from "@/types/types";
+import { CohortStudentRegistrationTypes, IntroCourseStudentRegistrationType, PaystackReference, QuickIntroClass } from "@/types/types";
 import Image from "next/image"
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
-import { Spinner } from "../UI/Spinner";
 import { handleChange, handleSelectChange } from "@/lib/utils";
 import { CustomCheckBox } from "../UI/CustomCheckbox";
 import { CustomSelect } from "../UI/CustomSelect";
 import { countryOptions } from "@/data/CountryList";
 import { usePaystackPayment } from "react-paystack";
+import { quickIntroClasses } from "@/data/IntroCourse_data";
+import Loading from "../UI/Loading";
 
 
 interface PageProps {
@@ -23,100 +27,45 @@ interface PageProps {
 
 
 
-export default function RegisterPageClient({
+export default function RegisterIntro({
     slug,
-    fixedFee,
     pageTitle = "Join the Technical Cohort",
     pageSubtitle = "REGISTRATION OPEN",
 }: PageProps) {
-    const [currentCourse, setCurrentCourse] = useState<CohortCourseTypes | null>(null)
-    const [loading, setLoading] = useState(true);
+
+    const [currentCourse, setCurrentCourse] = useState<QuickIntroClass | null>(null)
+  const [isSubmitting, setIsSubmitting] = useState(false)
     const [showSuccessPopup, setShowSuccessPopup] = useState(false);
     const public_key = process.env.NEXT_PUBLIC_PAYSTACK_PUBLIC_KEY!
 
-    const [formValues, setFormValues] = useState<CohortStudentRegistrationTypes>({
+    const [formValues, setFormValues] = useState<IntroCourseStudentRegistrationType>({
         email: "",
         fullname: "",
         gender: "",
         city: "",
         state: "",
         country: "",
-        learning_mode: "Inhouse",
         phone_number: "",
         whatsapp_number: "",
         course: "",
-        priceToPay: 0,
-        payment_plan: "full",
+        priceToPay: 10000,
     })
 
 
     //   This function fetches the course details
-    const fetchCourseDetails = useCallback(async () => {
-
-        const { data, error } = await supabase
-            .from("cohort_2026_courses")
-            .select("*")
-            .eq("slug", slug)
-
-        if (error) {
-            setCurrentCourse(null);
-            toast.error("Failed to load course data")
-            setLoading(false)
-            return;
-        }
-
-        if (!data) {
-            toast.error("Course data not found")
-        }
-
-        setCurrentCourse(data[0])
-        setLoading(false)
+    useEffect(() => {
+        const course = quickIntroClasses.find((c) => c.slug === slug)
+        setCurrentCourse(course || null)
     }, [slug])
-
-
-    useEffect(() => {
-        fetchCourseDetails()
-    }, [fetchCourseDetails])
-
-    useEffect(() => {
-        if (currentCourse) {
-            setFormValues(prev => ({
-                ...prev,
-                course: currentCourse.title
-            }))
-        }
-    }, [currentCourse])
-
 
     useEffect(() => {
         if (!currentCourse) return;
 
-        if (typeof fixedFee === "number") {
-            setFormValues(prev => ({
-                ...prev,
-                payment_plan: "full",
-                priceToPay: fixedFee,
-            }));
-            return;
-        }
-
-        const basePrice =
-            formValues.learning_mode === "Inhouse"
-                ? currentCourse.inhouse_fee
-                : currentCourse.online_fee;
-
-        // 👇 adjust based on payment plan
-        const finalPrice =
-            formValues.payment_plan === "part"
-                ? basePrice * 0.5 // or any logic (e.g. fixed deposit)
-                : basePrice;
-
-        setFormValues(prev => ({
+        setFormValues((prev) => ({
             ...prev,
-            priceToPay: finalPrice
-        }));
-
-    }, [currentCourse, fixedFee, formValues.learning_mode, formValues.payment_plan]);
+            course: currentCourse.title,
+        }))
+    }, [currentCourse])
 
 
     // These are the options for gender
@@ -126,26 +75,12 @@ export default function RegisterPageClient({
     ]
 
 
-    // These are the options for learning mode
-    const learningModeOptions: CohortStudentRegistrationTypes["learning_mode"][] = [
-        "Inhouse",
-        "Online"
-    ]
-
-    // These are the payment options
-    const paymentPlanOptions: CohortStudentRegistrationTypes["payment_plan"][] = [
-        "full",
-        "part"
-    ]
-
-
-
     const saveEnrollment = async (reference: PaystackReference) => {
 
-        setLoading(true)
+        setIsSubmitting(true)
 
         try {
-            const response = await fetch("/api/payments/cohort", {
+            const response = await fetch("/api/payments/intro", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -154,9 +89,14 @@ export default function RegisterPageClient({
                     reference: reference.reference,
                     status: reference.status,
                     course: formValues.course,
-                    amount: formValues.priceToPay,
-                    user_email: formValues.email,
-                    payment_plan: formValues.payment_plan,
+                    email: formValues.email,
+                    gender: formValues.gender,
+                    phone_number: formValues.phone_number,
+                    city: formValues.city,
+                    state: formValues.state,
+                    country: formValues.country,
+                    priceToPay: formValues.priceToPay,
+                    fullname: formValues.fullname,
                 }),
             });
 
@@ -164,7 +104,7 @@ export default function RegisterPageClient({
 
             if (!response.ok) {
                 toast.error("Failed to submit");
-                console.error("Error submitting payment:", result.error);
+                console.error("Error submitting", result.error)
                 return;
             }
 
@@ -178,12 +118,10 @@ export default function RegisterPageClient({
                 city: "",
                 state: "",
                 country: "",
-                learning_mode: "Inhouse",
                 phone_number: "",
                 whatsapp_number: "",
                 course: "",
-                priceToPay: 0,
-                payment_plan: "full"
+                priceToPay: 10000,
             });
 
         } catch (error) {
@@ -191,7 +129,7 @@ export default function RegisterPageClient({
             toast.error("Something went wrong");
         }
         finally {
-            setLoading(false)
+            setIsSubmitting(false)
         }
     };
 
@@ -259,16 +197,6 @@ export default function RegisterPageClient({
             return false;
         }
 
-        if (!formValues.learning_mode) {
-            toast.error("Please select learning mode");
-            return false;
-        }
-
-        if (!formValues.payment_plan) {
-            toast.error("Please select payment plan");
-            return false;
-        }
-
         if (Number(formValues.priceToPay) <= 0) {
             toast.error("Invalid payment amount");
             return false;
@@ -302,17 +230,11 @@ export default function RegisterPageClient({
     }
 
 
-
-    if (loading) {
-        return <div className="p-10 text-center font-poppins h-[90vh] flex items-center justify-center bg-white "> <Spinner /> </div>;
-    }
-
-
     return (
         <div className="relative w-full flex flex-col gap-10 items-center justify-start pt-24 md:pt-40 pb-16 px-[2%] md:px-[14%]  bg-white min-h-screen"  >
 
             <div className=" w-full h-[50vh] relative overflow-hidden rounded-xl bg-gray-200 "  >
-                <Image src={currentCourse?.imageUrl || ""} alt={currentCourse?.title || "image"} fill className="object-cover object-center " />
+                <Image src={"/intro-courses-images/ivan-diaz-YOy-ek-aBR0-unsplash.jpg"} alt={currentCourse?.title || "image"} fill className="object-cover object-center " />
                 <div className=" w-full h-full absolute inset-0 bg-black/57 " />
 
                 <div className="w-full h-full z-10  absolute inset-0 flex flex-col gap-5  text-white px-[4%] items-start justify-center font-poppins "  >
@@ -421,7 +343,7 @@ export default function RegisterPageClient({
                         placeholder="Please select your country"
                         isRequired
                         onChange={(name, value) =>
-                            handleSelectChange<CohortStudentRegistrationTypes>(
+                            handleSelectChange<IntroCourseStudentRegistrationType>(
                                 "country",
                                 value,
                                 setFormValues
@@ -462,94 +384,23 @@ export default function RegisterPageClient({
                 </div>
 
 
-                {/* Learning mode  */}
-                <div className="w-full flex flex-col items-start gap-2 " >
-                    <h1 className="text-[#000000] font-medium text-sm font-lato flex items-start gap-1" >Learning mode *</h1>
-
-
-                    <div className=" grid grid-cols-2 gap-4 justify-items-stretch  "  >
-                        {learningModeOptions.map((option) => {
-                            const isChecked = formValues.learning_mode === option
-                            return (
-                                <CustomCheckBox
-                                    key={option}
-                                    checked={isChecked}
-                                    label={option}
-                                    id={option.toLowerCase()}
-                                    onCheckedChange={(checked) => {
-                                        if (checked) {
-                                            setFormValues((prev) => ({
-                                                ...prev,
-                                                learning_mode: option,
-                                            }))
-                                        }
-                                    }}
-                                />
-                            )
-                        })}
-                    </div>
-                </div>
-
-
-                {typeof fixedFee !== "number" && (
-                    <div className="w-full flex flex-col items-start gap-2 col-span-2 ">
-                        <h1 className="text-[#000000] font-medium text-sm font-lato">
-                            Payment Plan *
-                        </h1>
-
-                        <div className="grid grid-cols-2 gap-4">
-                            {paymentPlanOptions.map((option) => {
-                                const isChecked = formValues.payment_plan === option;
-
-                                return (
-                                    <CustomCheckBox
-                                        key={option}
-                                        checked={isChecked}
-                                        label={option === "full" ? "Full Payment" : "Part Payment"}
-                                        id={option}
-                                        onCheckedChange={(checked) => {
-                                            if (checked) {
-                                                setFormValues((prev) => ({
-                                                    ...prev,
-                                                    payment_plan: option,
-                                                }));
-                                            }
-                                        }}
-                                    />
-                                );
-                            })}
-                        </div>
-                    </div>
-                )}
-
-
-
-
                 {/* payment button  */}
                 <button
                     type="button"
                     onClick={handleProceedToPayment}
                     className="w-full col-span-2 mx-auto max-w-xs md:max-w-xl font-syne py-2 px-10 mt-5 rounded-lg cursor-pointer border border-gray-700
-               hover:bg-gray-700 hover:text-white transition ml-auto"
+               hover:bg-gray-700 hover:text-white transition ml-auto flex items-center justify-center "
                 >
-                    Proceed
+                    {isSubmitting ? <Loading /> : "Proceed"}
                 </button>
 
             </form>
 
             <p className="col-span-2 text-sm font-medium text-green-700 font-sans ">
                 You are paying: ₦{formValues.priceToPay.toLocaleString()}
-                {formValues.payment_plan === "part" && typeof fixedFee !== "number" && " (Part Payment)"}
             </p>
 
 
-
-            {loading && (
-                <div className="fixed inset-0 h-screen w-full flex items-center justify-center " >
-
-                    <Spinner />
-                </div>
-            )}
 
             {showSuccessPopup && (
                 <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 px-4">

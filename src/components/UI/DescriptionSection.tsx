@@ -29,20 +29,22 @@ export default function DescriptionSection({ currentCourse }: DescriptionSection
 
 
             {/* skills you will gain section  */}
-            <div className="space-y-5" >
-                <h4 className=" text-lg md:text-xl font-semibold  " >Skills you&apos;ll gain</h4>
+            {currentCourse?.skills && (
+                <div className="space-y-5" >
+                    <h4 className=" text-lg md:text-xl font-semibold  " >Skills you&apos;ll gain</h4>
 
-                <ul className=" flex items-center flex-wrap gap-4 w-full max-w-3xl   " >
-                    {currentCourse?.skills?.map((skill, index) => (
-                        <li key={index} className="flex items-center justify-center bg-[#f2f5fc] px-3 py-2 text-xs  font-medium rounded-4xl text-gray-900 " >  {skill}</li>
-                    ))}
-                </ul>
-            </div>
+                    <ul className=" flex items-center flex-wrap gap-4 w-full max-w-3xl   " >
+                        {currentCourse?.skills?.map((skill, index) => (
+                            <li key={index} className="flex items-center justify-center bg-[#f2f5fc] px-3 py-2 text-xs  font-medium rounded-4xl text-gray-900 " >  {skill}</li>
+                        ))}
+                    </ul>
+                </div>
+            )}
 
 
 
             {/* Details to know section  */}
-            <div className="space-y-5" >
+            <div className="space-y-5 mt-9 " >
                 <h4 className=" text-lg md:text-xl font-semibold  " >Details to know</h4>
 
                 <div className="w-fit flex items-center gap-12 " >

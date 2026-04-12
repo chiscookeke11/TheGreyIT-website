@@ -235,7 +235,7 @@ export default function DynamicBlogPage({ slug }: BlogPageComponentProps) {
                     <div className="flex w-fit flex-col items-start gap-0.5">
                         <h6 className="font-semibold text-sm ">Duration</h6>
                         <ul>
-                            {currentCourse?.duration?.map((duration, index) => (
+                            {Array.isArray(currentCourse?.duration) && currentCourse?.duration?.map((duration, index) => (
                                 <li key={index} className="text-xs  text-gray-600"  > {duration} </li>
                             ))}
                         </ul>
