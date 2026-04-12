@@ -9,7 +9,7 @@ interface PageProps {
 const INTRO_FEE = 10000;
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-  const { slug } = params;
+  const { slug } = await params;
 
   const data = quickIntroClasses.find((course) => course.slug === slug)
 
@@ -28,7 +28,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 }
 
 export default async function Page({ params }: PageProps) {
-  const { slug } = params;
+  const { slug } = await params;
 
   return (
     <RegisterIntro
