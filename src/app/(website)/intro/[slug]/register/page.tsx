@@ -1,21 +1,17 @@
 import RegisterPageClient from "@/components/cohort-course-page/RegisterPageClient";
-import { supabase } from "@/lib/supabaseClient";
+import { quickIntroClasses } from "@/data/IntroCourse_data";
 import { Metadata } from "next";
 
 interface PageProps {
-  params: Promise<{ slug: string }>;
+  params: { slug: string };
 }
 
-const INTRO_FEE = 15000;
+const INTRO_FEE = 10000;
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-  const { slug } = await params;
+  const { slug } = params;
 
-  const { data } = await supabase
-    .from("cohort_2026_courses")
-    .select("*")
-    .eq("slug", slug)
-    .single();
+  const data = quickIntroClasses.find((course) => course.slug === slug)
 
   if (!data) {
     return {
@@ -32,7 +28,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 }
 
 export default async function Page({ params }: PageProps) {
-  const { slug } = await params;
+  const { slug } = params;
 
   return (
     <RegisterPageClient

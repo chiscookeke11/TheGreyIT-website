@@ -241,8 +241,8 @@ export interface CohortCourseTypes {
   duration: string | string[];
   description: string;
   bgColor: string;
-rating: number;
-price: number
+  rating: number;
+  price: number
 }
 
 
@@ -267,4 +267,16 @@ export interface CountryDataType {
   label: string;
   value: string;
   iso: string
+}
+
+
+
+export type QuickIntroClass = {
+  slug: string;
+  title: string
+  subtitle: string
+  about: string
+  covers: string[]
+  whoShouldCome: string[]
+  format: string
 }
