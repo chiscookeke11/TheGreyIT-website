@@ -4,7 +4,6 @@
 
 "use client"
 
-import { supabase } from "@/lib/supabaseClient";
 import { CohortStudentRegistrationTypes, IntroCourseStudentRegistrationType, PaystackReference, QuickIntroClass } from "@/types/types";
 import Image from "next/image"
 import React, { useEffect, useState } from "react";
@@ -59,6 +58,15 @@ export default function RegisterIntro({
         setCurrentCourse(course || null)
     }, [slug])
 
+    useEffect(() => {
+        if (!currentCourse) return;
+
+        setFormValues((prev) => ({
+            ...prev,
+            course: currentCourse.title,
+        }))
+    }, [currentCourse])
+
 
     // These are the options for gender
     const genderOptions: CohortStudentRegistrationTypes["gender"][] = [
@@ -72,27 +80,35 @@ export default function RegisterIntro({
         setIsSubmitting(true)
 
         try {
-            const { error } = await supabase.from("intro_course_registrations").insert({
-                reference: reference.reference,
-                status: reference.status,
-                course: formValues.course,
-                email: formValues.email,
-                gender: formValues.gender,
-                phone_number: formValues.phone_number,
-                city: formValues.city,
-                state: formValues.state,
-                country: formValues.country,
-                priceToPay: formValues.priceToPay,
-                fullname: formValues.fullname,
-                date: Date.now()
+            const response = await fetch("/api/payments/intro", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    reference: reference.reference,
+                    status: reference.status,
+                    course: formValues.course,
+                    email: formValues.email,
+                    gender: formValues.gender,
+                    phone_number: formValues.phone_number,
+                    city: formValues.city,
+                    state: formValues.state,
+                    country: formValues.country,
+                    priceToPay: formValues.priceToPay,
+                    fullname: formValues.fullname,
+                }),
             });
 
-            if (error) {
+            const result = await response.json();
+
+            if (!response.ok) {
                 toast.error("Failed to submit");
-                console.error("Error submitting", error)
+                console.error("Error submitting", result.error)
                 return;
             }
 
+            console.log("Payment timestamp from reference:", result.paymentTimestamp);
             setShowSuccessPopup(true);
 
             setFormValues({
