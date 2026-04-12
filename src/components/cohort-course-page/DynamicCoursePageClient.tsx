@@ -205,7 +205,7 @@ export default function DynamicCoursePageClient({ slug }: CohortCoursePageProps)
 
                 {/* Content */}
                 <div className="relative z-20 text-white space-y-3 ">
-                    <h2 className="text-3xl font-bold">Not sure you're ready yet?</h2>
+                    <h2 className="text-3xl font-bold">Not sure you&apos;re ready yet?</h2>
                     <p className="mt-4">Explore our intro courses and build your confidence before diving in.</p>
                     <Link
                         className="mt-6 inline-flex w-full max-w-[200px] items-center justify-center rounded-lg bg-white px-4 py-3 text-base font-medium text-gray-900  transition hover:scale-90 "
