@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { Spinner } from "../UI/Spinner";
 import IntroCoursesSection from "./IntroCoursesSection";
+import IntroCourseCTASection from "./IntroCourseCTASection";
 
 
 
@@ -62,6 +63,9 @@ export default function CohortCoursePageClient() {
                     ))
                 )}
             </section>
+
+
+            <IntroCourseCTASection />
 
         </div>
     )
