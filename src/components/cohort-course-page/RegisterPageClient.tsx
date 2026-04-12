@@ -303,7 +303,7 @@ export default function RegisterPageClient({
         <div className="relative w-full flex flex-col gap-10 items-center justify-start pt-24 md:pt-40 pb-16 px-[2%] md:px-[14%]  bg-white min-h-screen"  >
 
             <div className=" w-full h-[50vh] relative overflow-hidden rounded-xl bg-gray-200 "  >
-                <Image src={currentCourse?.image || ""} alt={currentCourse?.title || "image"} fill className="object-cover object-center " />
+                <Image src={currentCourse?.imageUrl || ""} alt={currentCourse?.title || "image"} fill className="object-cover object-center " />
                 <div className=" w-full h-full absolute inset-0 bg-black/57 " />
 
                 <div className="w-full h-full z-10  absolute inset-0 flex flex-col gap-5  text-white px-[4%] items-start justify-center font-poppins "  >

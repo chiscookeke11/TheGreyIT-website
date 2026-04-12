@@ -40,7 +40,7 @@ export default function CohortCoursePageClient() {
     }, [])
 
     return (
-        <div className="w-full min-h-screen  flex flex-col items-start gap-8  pt-24 md:pt-40 pb-16 px-[2%]  bg-[#f2f5fc] ">
+        <div className="w-full min-h-screen  flex flex-col items-start gap-8  pt-24 md:pt-40 pb-16 px-[2%] lg:px-[4%]  bg-[#f2f5fc] ">
             <div className=" flex flex-col gap-1 font-poppins items-start  ">
                 <h1 className="  text-2xl   md:text-3xl font-semibold text-gray-900 ">Cohort 2026 </h1>
                 <p className="text-gray-600 font-medium text-sm md:text-lg   ">Available courses for this cohort</p>

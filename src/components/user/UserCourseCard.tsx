@@ -71,7 +71,7 @@ export default function UserCourseCard({ track, bookmarks, setbookmarks, isBookm
 
                     <small className=" flex shrink-0 items-center justify-end gap-2 text-gray-600"><Clock size={18} />
                         <ul>
-                            {track?.duration?.map((duration, index) => (
+                            {Array.isArray(track.duration) && track?.duration?.map((duration, index) => (
                                 <li key={index} > {duration} </li>
                             ))}
                         </ul>

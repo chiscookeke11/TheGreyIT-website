@@ -7,7 +7,7 @@ export interface CourseDataTypes {
   shorter_Description?: string,
   imageUrl: string,
   bgColor: string,
-  duration?: string[],
+  duration?: string[] | string,
   price: number,
   rating: number,
   id?: string,
@@ -236,10 +236,13 @@ export interface CohortCourseTypes {
   id: string;
   online_fee: number;
   inhouse_fee: number;
-  image: string;
+  imageUrl: string;
   slug?: string;
-  duration: string;
-  description?: string;
+  duration: string | string[];
+  description: string;
+  bgColor: string;
+rating: number;
+price: number
 }
 
 
