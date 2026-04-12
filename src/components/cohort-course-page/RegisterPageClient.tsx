@@ -145,21 +145,30 @@ export default function RegisterPageClient({
         setLoading(true)
 
         try {
-            const { error } = await supabase.from("cohort_enrollments").insert({
-                reference: reference.reference,
-                status: reference.status,
-                date: new Date().toISOString(),
-                course: formValues.course,
-                amount: formValues.priceToPay,
-                user_email: formValues.email,
-                payment_plan: formValues.payment_plan,
+            const response = await fetch("/api/payments/cohort", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    reference: reference.reference,
+                    status: reference.status,
+                    course: formValues.course,
+                    amount: formValues.priceToPay,
+                    user_email: formValues.email,
+                    payment_plan: formValues.payment_plan,
+                }),
             });
 
-            if (error) {
+            const result = await response.json();
+
+            if (!response.ok) {
                 toast.error("Failed to submit");
+                console.error("Error submitting payment:", result.error);
                 return;
             }
 
+            console.log("Payment timestamp from reference:", result.paymentTimestamp);
             setShowSuccessPopup(true);
 
             setFormValues({
