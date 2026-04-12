@@ -280,3 +280,18 @@ export type QuickIntroClass = {
   whoShouldCome: string[]
   format: string
 }
+
+
+
+export interface IntroCourseStudentRegistrationType {
+  fullname: string;
+  email: string;
+  gender: "male" | "female" | "";
+  phone_number: string;
+  whatsapp_number: string;
+  city: string;
+  state: string;
+  country: string;
+  course: string;
+  priceToPay: number;
+}

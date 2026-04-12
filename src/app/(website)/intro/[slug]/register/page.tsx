@@ -1,4 +1,4 @@
-import RegisterPageClient from "@/components/cohort-course-page/RegisterPageClient";
+import RegisterIntro from "@/components/cohort-course-page/Register-Intro";
 import { quickIntroClasses } from "@/data/IntroCourse_data";
 import { Metadata } from "next";
 
@@ -31,7 +31,7 @@ export default async function Page({ params }: PageProps) {
   const { slug } = params;
 
   return (
-    <RegisterPageClient
+    <RegisterIntro
       slug={slug}
       fixedFee={INTRO_FEE}
       pageSubtitle="QUICK INTRO REGISTRATION"

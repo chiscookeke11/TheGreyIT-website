@@ -2,17 +2,22 @@
 
 import { QuickIntroClass } from "@/types/types";
 import { quickIntroClasses } from "@/data/IntroCourse_data";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 
 
 const INTRO_FEE = 10000;
 
 export default function IntroCoursePageClient() {
-    const [loading, setLoading] = useState(true)
     const [selectedQuickIntro, setSelectedQuickIntro] = useState<QuickIntroClass | null>(null)
 
+    useEffect(() => {
+        document.body.style.overflow = selectedQuickIntro ? "hidden" : "auto"
 
+        return () => {
+            document.body.style.overflow = "auto"
+        }
+    }, [selectedQuickIntro])
 
     return (
         <div className="w-full min-h-screen flex flex-col items-start gap-14 pb-16  bg-[#f2f5fc] font-poppins">
@@ -20,9 +25,6 @@ export default function IntroCoursePageClient() {
             {/* hero section  */}
             <div className="w-full h-[95vh] flex items-center justify-center relative bg-no-repeat bg-cover bg-center text-white font-poppins  " style={{ backgroundImage: 'url("/courses-page/hero-img-2.webp")' }}  >
                 <div className="w-full h-full absolute inset-0 bg-gradient-to-b from-[rgba(4,9,30,0.5)] to-[rgba(4,9,30,0.5)] z-10 " />
-
-
-
 
                 <div className=" w-full h-full absolute inset-0 flex items-center justify-center flex-col gap-5 z-20 text-center p-4 " >
                     <div className="w-full max-w-5xl text-center space-y-6 " >
@@ -114,8 +116,6 @@ export default function IntroCoursePageClient() {
 
                         <Link
                             href={`/intro/${selectedQuickIntro.slug}/register`}
-                            target="_blank"
-                            rel="noreferrer"
                             className="inline-flex mt-6 rounded-md bg-[#19376d] px-4 py-2 text-sm font-medium text-white hover:bg-[#15305d]"
                         >
                             Register
