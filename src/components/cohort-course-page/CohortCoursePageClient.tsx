@@ -7,7 +7,6 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { Spinner } from "../UI/Spinner";
-import IntroCoursesSection from "./IntroCoursesSection";
 import IntroCourseCTASection from "./IntroCourseCTASection";
 
 
