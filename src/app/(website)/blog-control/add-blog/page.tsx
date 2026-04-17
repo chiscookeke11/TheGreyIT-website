@@ -5,7 +5,7 @@ import Button from "@/components/UI/Button";
 import React, { useState, useRef } from "react";
 import { supabase } from "@/lib/supabaseClient"
 import toast from "react-hot-toast";
-import { ChevronLeft } from "lucide-react";
+import { ArrowLeft, ChevronLeft } from "lucide-react";
 import Link from "next/link";
 
 export default function Page() {
@@ -120,96 +120,122 @@ export default function Page() {
     }
 
     return (
-        <div className="w-full min-h-screen flex items-start justify-start py-36 px-[3%] bg-white">
-
-            <Link href={"/blog-control"} >
-                <button className="bg-gray-700 text-white size-10 rounded-full flex items-center justify-center cursor-pointer hover:scale-[110%] duration-300 ease-in-out transition-all">
-                    <ChevronLeft />
-                </button>
-            </Link>
-
-            <form onSubmit={handleSubmit} className="w-full max-w-lg mx-auto flex flex-col gap-10 items-center px-5 py-8 bg-gray-700 h-fit rounded-md text-white font-poppins">
-                <h1>Add Research Blog</h1>
-
-                <div className="w-full flex flex-col items-start gap-7">
-
-                    <label htmlFor="title" className="w-full flex flex-col items-start gap-1">
-                        <span>Title</span>
-                        <input
-                            value={formValues.title}
-                            type="text"
-                            id="title"
-                            name="title"
-                            onChange={handleInputChange}
-                            className="w-full py-2 px-5 border border-white outline-none text-base rounded-sm"
-                        />
-                    </label>
+        <form className="w-full min-h-screen flex items-stretch justify-start pt-36 pb-10 px-[2%] bg-white gap-10 ">
 
 
-                    <label htmlFor="title" className="w-full flex flex-col items-start gap-1">
-                        <span>Tagline</span>
-                        <input
-                            value={formValues.tagline}
-                            type="text"
-                            id="tagline"
-                            name="tagline"
-                            onChange={handleInputChange}
-                            className="w-full py-2 px-5 border border-white outline-none text-base rounded-sm"
-                        />
-                    </label>
+            {/* Left side  */}
+            <div className="w-full flex-1  py-10 h-fit bg-[#f2f5fc] px-7 flex flex-col items-start gap-6 font-poppins font-medium text-lg text-gray-700  "  >
 
-                    <label htmlFor="author" className="w-full flex flex-col items-start gap-1">
-                        <span>Author</span>
-                        <input
-                            value={formValues.author}
-                            type="text"
-                            id="author"
-                            name="author"
-                            onChange={handleInputChange}
-                            className="w-full py-2 px-5 border border-white outline-none text-base rounded-sm"
-                        />
-                    </label>
+                <Link href={"/blog-control"} className="mb-3 " >
+                    <button className="bg-gray-700 text-white size-10 rounded-full flex items-center justify-center cursor-pointer hover:scale-[110%] duration-300 ease-in-out transition-all">
+                        <ArrowLeft />
+                    </button>
+                </Link>
 
-                    <label htmlFor="publicationDate" className="w-full flex flex-col items-start gap-1">
-                        <span>Publication Date</span>
-                        <input
-                            value={formValues.publicationDate}
-                            type="date"
-                            id="publicationDate"
-                            name="publicationDate"
-                            onChange={handleInputChange}
-                            className="w-full py-2 px-5 border border-white outline-none text-base rounded-sm"
-                        />
-                    </label>
 
-                    <div className="w-full flex flex-col gap-1 text-black">
-                        <span className="text-lg font-semibold text-white">Content</span>
-                        <TiptapEditor
-                            content={formValues.content}
-                            onChange={handleTipTapChange}
-                        />
-                    </div>
+                <h1 className="text-2xl font-semibold text-gray-700 "  >Add Research Blog</h1>
 
-                    <div className="w-full flex flex-col gap-1">
-                        <span className="text-lg font-semibold text-white">Upload Image</span>
-                        <input
-                            ref={fileInputRef}
-                            type="file"
-                            accept="image/*"
-                            onChange={(e) => {
-                                if (e.target.files && e.target.files[0]) {
-                                    setFile(e.target.files[0])
-                                }
-                            }}
-                            className="file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:text-gray-700 file:bg-white hover:file:bg-gray-300 file:cursor-pointer"
-                        />
-                    </div>
+
+                <label htmlFor="title" className="w-full flex flex-col items-start gap-1">
+                    <span>Title</span>
+                    <input
+                        value={formValues.title}
+                        type="text"
+                        id="title"
+                        name="title"
+                        onChange={handleInputChange}
+                        className="w-full py-2 px-5 border border-gray-700 outline-none text-base rounded-sm"
+                    />
+                </label>
+
+
+                <div className="w-full flex flex-col gap-1 text-black">
+                    <span className="text-lg font-medium text-gray-700">Content</span>
+                    <TiptapEditor
+                        content={formValues.content}
+                        onChange={handleTipTapChange}
+                    />
                 </div>
 
-                <Button variant="outline" disabled={loading}>
+
+                <Button
+                variant="outline"
+                disabled={loading}
+                className="bg-gray-700! hover:text-white w-full max-w-xs rounded-sm hover:rounded-[100px]  "
+                >
                     {loading ? "Loading..." : "Submit"}
                 </Button>
-            </form>
-        </div>
+
+
+            </div>
+
+
+            {/* right side  */}
+            <div className="w-full h-fit bg-gray-700 py-10 max-w-md flex flex-col items-start gap-6 text-white px-4 rounded-md  font-poppins font-medium text-lg "  >
+
+                {/* The tagline input */}
+                <label htmlFor="tagline" className="w-full flex flex-col items-start gap-1">
+                    <span>Tagline</span>
+                    <input
+                        value={formValues.tagline}
+                        type="text"
+                        id="tagline"
+                        name="tagline"
+                        onChange={handleInputChange}
+                        className="w-full py-2 px-5 border border-white outline-none text-base rounded-sm"
+                    />
+                </label>
+
+
+
+                {/* The author input  */}
+                <label htmlFor="author" className="w-full flex flex-col items-start gap-1">
+                    <span>Author</span>
+                    <input
+                        value={formValues.author}
+                        type="text"
+                        id="author"
+                        name="author"
+                        onChange={handleInputChange}
+                        className="w-full py-2 px-5 border border-white outline-none text-base rounded-sm"
+                    />
+                </label>
+
+
+                {/* The publication date input */}
+                <label htmlFor="publicationDate" className="w-full flex flex-col items-start gap-1">
+                    <span>Publication Date</span>
+                    <input
+                        value={formValues.publicationDate}
+                        type="date"
+                        id="publicationDate"
+                        name="publicationDate"
+                        onChange={handleInputChange}
+                        className="w-full py-2 px-5 border border-white outline-none text-base rounded-sm"
+                    />
+                </label>
+
+                <div className="w-full flex flex-col gap-1">
+                    <span className="text-lg font-semibold text-white">Upload Image</span>
+                    <input
+                        ref={fileInputRef}
+                        type="file"
+                        accept="image/*"
+                        onChange={(e) => {
+                            if (e.target.files && e.target.files[0]) {
+                                setFile(e.target.files[0])
+                            }
+                        }}
+                        className="file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:text-gray-700 file:bg-white hover:file:bg-gray-300 file:cursor-pointer"
+                    />
+                </div>
+
+
+
+            </div>
+
+
+
+        </form>
     )
 }
