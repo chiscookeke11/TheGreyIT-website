@@ -37,8 +37,8 @@ export default function TeamMember() {
 
     return (
         <div className="w-full min-h-[80vh] py-36 flex items-center md:items-start flex-col md:flex-row   px-[5%] gap-16 md:gap-10 justify-center font-poppins bg-[#f2f5fc] " >
-            <div className=" w-full max-w-xs md:max-w-md h-[350px] md:h-[500px] lg:h-[510px] bg-gray-700 relative  " >
-                <Image src={currentMember?.image ?? ""} height={500} width={500} alt={`${currentMember?.name}-image`} className=" w-full h-full absolute top-3 right-3 object-cover object-center rounded-sm " />
+            <div className=" w-full max-w-xs md:max-w-md h-[350px] md:h-[500px] lg:h-[510px] bg-gray-900 relative  " >
+                <Image src={currentMember?.image ?? ""} height={500} width={500} alt={`${currentMember?.name}-image`} className=" w-full h-full absolute top-3 right-3 object-cover object-center  " />
             </div>
 
 
