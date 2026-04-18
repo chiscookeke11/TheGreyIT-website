@@ -15,10 +15,16 @@ export const HeroCard = ({ data }: HeroCardProps) => {
 
 
     return (
-        <Link href={`/research-blog/${data.slug}`} className=" w-full h-full min-h-[300px]  text-gray-700 font-poppins flex flex-col items-start gap-4 overflow-hidden " >
-            <div className=" relative flex-1 w-full rounded-xs overflow-hidden " >
-                <Image src={data.image} alt={`${data.title}-image`} fill className="object-cover object-center " />
-                <div className=" absolute inset-0 bg-black/10 " />
+        <Link href={`/research-blog/${data.slug}`} className=" w-full h-fit  text-gray-700 font-poppins flex flex-col items-start gap-4 overflow-hidden " >
+
+            <div className="relative w-full h-[400px] rounded-xs overflow-hidden">
+                <Image
+                    src={data.image}
+                    alt={`${data.title}-image`}
+                    fill
+                    className="object-cover object-center"
+                />
+                <div className="absolute inset-0 bg-black/10" />
             </div>
 
 

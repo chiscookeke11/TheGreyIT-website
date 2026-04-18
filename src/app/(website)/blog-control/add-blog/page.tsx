@@ -120,20 +120,20 @@ export default function Page() {
     }
 
     return (
-        <form className="w-full min-h-screen flex items-stretch justify-start pt-36 pb-10 px-[2%] bg-white gap-10 ">
+        <form className="w-full min-h-screen flex flex-col-reverse md:flex-row items-center md:items-stretch justify-start pt-36 pb-10 px-[2%] bg-white gap-10  ">
 
 
             {/* Left side  */}
-            <div className="w-full flex-1  py-10 h-fit bg-[#f2f5fc] px-7 flex flex-col items-start gap-6 font-poppins font-medium text-lg text-gray-700  "  >
+            <div className="w-full flex-1  py-10 h-fit bg-gray-700 px-7 flex flex-col items-start gap-6 font-poppins font-medium text-lg text-white rounded-sm  "  >
 
                 <Link href={"/blog-control"} className="mb-3 " >
-                    <button className="bg-gray-700 text-white size-10 rounded-full flex items-center justify-center cursor-pointer hover:scale-[110%] duration-300 ease-in-out transition-all">
+                    <button className="bg-white text-gray-700 size-10 rounded-full flex items-center justify-center cursor-pointer hover:scale-[110%] duration-300 ease-in-out transition-all">
                         <ArrowLeft />
                     </button>
                 </Link>
 
 
-                <h1 className="text-2xl font-semibold text-gray-700 "  >Add Research Blog</h1>
+                <h1 className="text-2xl font-semibold "  >Add Research Blog</h1>
 
 
                 <label htmlFor="title" className="w-full flex flex-col items-start gap-1">
@@ -144,7 +144,7 @@ export default function Page() {
                         id="title"
                         name="title"
                         onChange={handleInputChange}
-                        className="w-full py-2 px-5 border border-gray-700 outline-none text-base rounded-sm"
+                        className="w-full py-2 px-5 border border-white outline-none text-base rounded-sm"
                     />
                 </label>
 
@@ -161,7 +161,7 @@ export default function Page() {
                 <Button
                 variant="outline"
                 disabled={loading}
-                className="bg-gray-700! hover:text-white w-full max-w-xs rounded-sm hover:rounded-[100px]  "
+                className=" w-full max-w-xs rounded-sm hover:rounded-[100px]  "
                 >
                     {loading ? "Loading..." : "Submit"}
                 </Button>

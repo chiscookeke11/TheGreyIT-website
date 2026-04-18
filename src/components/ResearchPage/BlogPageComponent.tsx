@@ -94,10 +94,15 @@ export default function BlogPageComponent({ slug }: BlogPageComponentProps) {
                 </div>
 
 
-                <div className="w-full max-w-5xl h-[40vh] md:h-[65vh] bg-gray-300 flex items-center justify-center overflow-hidden relative mt-5 " >
-                    <Image src={currentBlog.image} alt={`${currentBlog.title}-image`} fill className="object-center object-cover " />
+                <div className="w-full max-w-5xl h-[40vh] md:h-[65vh] bg-black p-4 flex items-center justify-center mt-5 "  >
 
+                    <div className="w-full h-full  bg-gray-300 flex items-center justify-center overflow-hidden relative border-[40px] border-white " >
+                        <Image src={currentBlog.image} alt={`${currentBlog.title}-image`} fill className="object-center object-cover  " />
+
+                    </div>
                 </div>
+
+
             </div>
 
             <div className="px-[2%] lg:px-[15%] py-16 bg-white">
