@@ -120,7 +120,9 @@ export default function Page() {
     }
 
     return (
-        <form className="w-full min-h-screen flex flex-col-reverse md:flex-row items-center md:items-stretch justify-start pt-36 pb-10 px-[2%] bg-white gap-10  ">
+        <form
+        onSubmit={handleSubmit}
+        className="w-full min-h-screen flex flex-col-reverse md:flex-row items-center md:items-stretch justify-start pt-36 pb-10 px-[2%] bg-white gap-10  ">
 
 
             {/* Left side  */}
