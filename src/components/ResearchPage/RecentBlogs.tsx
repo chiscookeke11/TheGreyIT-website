@@ -18,7 +18,10 @@ export default function RecentBlogs() {
 
         const fetchRecentBlogs = async () => {
 
-            const { data, error } = await supabase.from("blog").select("*").order("createdAt", { ascending: false }).limit(4)
+            const { data, error } = await supabase
+            .from("blog")
+            .select("*")
+            .order("createdAt", { ascending: false }).limit(4)
 
             if (error) {
                 console.error("Error fetching recent blogs:", error)

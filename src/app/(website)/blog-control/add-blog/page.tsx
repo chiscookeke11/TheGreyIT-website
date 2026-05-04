@@ -121,8 +121,8 @@ export default function Page() {
 
     return (
         <form
-        onSubmit={handleSubmit}
-        className="w-full min-h-screen flex flex-col-reverse md:flex-row items-center md:items-stretch justify-start pt-36 pb-10 px-[2%] bg-white gap-10  ">
+            onSubmit={handleSubmit}
+            className="w-full min-h-screen flex flex-col-reverse md:flex-row items-center md:items-stretch justify-start pt-36 pb-10 px-[2%] bg-white gap-10  ">
 
 
             {/* Left side  */}
@@ -161,9 +161,9 @@ export default function Page() {
 
 
                 <Button
-                variant="outline"
-                disabled={loading}
-                className=" w-full max-w-xs rounded-sm hover:rounded-[100px]  "
+                    variant="outline"
+                    disabled={loading}
+                    className=" w-full max-w-xs rounded-sm hover:rounded-[100px]  "
                 >
                     {loading ? "Loading..." : "Submit"}
                 </Button>
@@ -231,8 +231,6 @@ export default function Page() {
                         className="file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:text-gray-700 file:bg-white hover:file:bg-gray-300 file:cursor-pointer"
                     />
                 </div>
-
-
 
             </div>
 

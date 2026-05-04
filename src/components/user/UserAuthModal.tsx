@@ -9,8 +9,6 @@ import React, { useState } from "react";
 import toast from "react-hot-toast";
 
 
-
-
 const Spinner = () => {
     return (
         <div className="h-10 w-10 rounded-full border-4 border-white border-t-transparent animate-spin duration-150 ease-in-out transition-all group-hover:border-gray-700 group-hover:border-t-transparent " />
