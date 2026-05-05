@@ -5,7 +5,7 @@ import Button from "@/components/UI/Button";
 import React, { useState, useRef } from "react";
 import { supabase } from "@/lib/supabaseClient"
 import toast from "react-hot-toast";
-import { ArrowLeft, ChevronLeft } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 
 export default function Page() {
@@ -122,37 +122,39 @@ export default function Page() {
     return (
         <form
             onSubmit={handleSubmit}
-            className="w-full min-h-screen flex flex-col-reverse md:flex-row items-center md:items-stretch justify-start pt-36 pb-10 px-[2%] bg-white gap-10  ">
+            className="w-full min-h-screen flex flex-col-reverse md:flex-row items-center bg-gray-100
+            md:items-stretch justify-start gap-10 px-4 py-10 rounded-lg border border-gray-300 ">
 
 
             {/* Left side  */}
-            <div className="w-full flex-1  py-10 h-fit bg-gray-700 px-7 flex flex-col items-start gap-6 font-poppins font-medium text-lg text-white rounded-sm  "  >
+            <div className="w-full flex-1  py-10 h-fit bg-white px-7 flex flex-col items-start gap-6 font-poppins font-medium text-lg text-gray-700 rounded-sm border border-gray-300 "  >
 
                 <Link href={"/blog-control"} className="mb-3 " >
-                    <button className="bg-white text-gray-700 size-10 rounded-full flex items-center justify-center cursor-pointer hover:scale-[110%] duration-300 ease-in-out transition-all">
+                    <button className="bg-gray-700 text-white size-10 rounded-full flex items-center justify-center
+                     cursor-pointer hover:scale-[110%] duration-300 ease-in-out transition-all shadow-2xlss ">
                         <ArrowLeft />
                     </button>
                 </Link>
 
 
-                <h1 className="text-2xl font-semibold "  >Add Research Blog</h1>
+                <h1 className="text-2xl font-medium "  >Create New Blog</h1>
 
 
                 <label htmlFor="title" className="w-full flex flex-col items-start gap-1">
-                    <span>Title</span>
+                    <span className="text-base" >Title</span>
                     <input
                         value={formValues.title}
                         type="text"
                         id="title"
                         name="title"
                         onChange={handleInputChange}
-                        className="w-full py-2 px-5 border border-white outline-none text-base rounded-sm"
+                        className="w-full py-2 px-5 border border-gray-300 bg-[#e8e8e8] outline-none text-sm rounded-sm"
                     />
                 </label>
 
 
-                <div className="w-full flex flex-col gap-1 text-black">
-                    <span className="text-lg font-medium text-gray-700">Content</span>
+                <div className="w-full flex flex-col gap-1 text-gray-700">
+                    <span className="text-base  text-gray-700">Content</span>
                     <TiptapEditor
                         content={formValues.content}
                         onChange={handleTipTapChange}
@@ -160,10 +162,13 @@ export default function Page() {
                 </div>
 
 
+
+
+
                 <Button
-                    variant="outline"
+                    variant="default"
                     disabled={loading}
-                    className=" w-full max-w-xs rounded-sm hover:rounded-[100px]  "
+                    className=" w-fit !text-base !py-2 !font-semibold   "
                 >
                     {loading ? "Loading..." : "Submit"}
                 </Button>
@@ -173,18 +178,18 @@ export default function Page() {
 
 
             {/* right side  */}
-            <div className="w-full h-fit bg-gray-700 py-10 max-w-md flex flex-col items-start gap-6 text-white px-4 rounded-md  font-poppins font-medium text-lg "  >
+            <div className="w-full h-fit bg-white border border-gray-300 py-10 max-w-md flex flex-col items-start gap-6 text-gray-700 px-4 rounded-md  font-poppins font-medium text-lg "  >
 
                 {/* The tagline input */}
                 <label htmlFor="tagline" className="w-full flex flex-col items-start gap-1">
-                    <span>Tagline</span>
+                    <span className="text-base"  >Tagline</span>
                     <input
                         value={formValues.tagline}
                         type="text"
                         id="tagline"
                         name="tagline"
                         onChange={handleInputChange}
-                        className="w-full py-2 px-5 border border-white outline-none text-base rounded-sm"
+                        className="w-full py-2 px-5 border border-gray-300 bg-[#e8e8e8] outline-none text-sm rounded-sm"
                     />
                 </label>
 
@@ -192,33 +197,33 @@ export default function Page() {
 
                 {/* The author input  */}
                 <label htmlFor="author" className="w-full flex flex-col items-start gap-1">
-                    <span>Author</span>
+                    <span className="text-base" >Author</span>
                     <input
                         value={formValues.author}
                         type="text"
                         id="author"
                         name="author"
                         onChange={handleInputChange}
-                        className="w-full py-2 px-5 border border-white outline-none text-base rounded-sm"
+                        className="w-full py-2 px-5 border border-gray-300 bg-[#e8e8e8] outline-none text-sm rounded-sm"
                     />
                 </label>
 
 
                 {/* The publication date input */}
                 <label htmlFor="publicationDate" className="w-full flex flex-col items-start gap-1">
-                    <span>Publication Date</span>
+                    <span className="text-base" >Publication Date</span>
                     <input
                         value={formValues.publicationDate}
                         type="date"
                         id="publicationDate"
                         name="publicationDate"
                         onChange={handleInputChange}
-                        className="w-full py-2 px-5 border border-white outline-none text-base rounded-sm"
+                        className="w-full py-2 px-5 border border-gray-300 bg-[#e8e8e8] outline-none text-sm rounded-sm"
                     />
                 </label>
 
                 <div className="w-full flex flex-col gap-1">
-                    <span className="text-lg font-semibold text-white">Upload Image</span>
+                    <span className="text-base  text-gray-700">Upload Image</span>
                     <input
                         ref={fileInputRef}
                         type="file"
@@ -228,7 +233,9 @@ export default function Page() {
                                 setFile(e.target.files[0])
                             }
                         }}
-                        className="file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:text-gray-700 file:bg-white hover:file:bg-gray-300 file:cursor-pointer"
+                        className="file:mr-4 file:py-2 file:px-4 file:rounded-md file:border file:border-gray-300
+                        file:text-sm file:font-semibold file:text-gray-700 file:bg-white
+                         hover:file:bg-gray-300 file:cursor-pointer text-sm "
                     />
                 </div>
 

@@ -3,6 +3,7 @@ import UserAuthModal from "@/components/user/UserAuthModal";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
+import { Suspense } from "react";
 
 export const metadata: Metadata = {
     title: "Sign In | TheGreyIT",
@@ -75,7 +76,9 @@ export default function Page() {
                 </Link>
 
             </div>
-            <UserAuthModal />
+            <Suspense fallback={null}>
+                <UserAuthModal />
+            </Suspense>
         </main>
     );
 }
