@@ -10,15 +10,12 @@ import Link from "next/link";
 import { SetStateAction, useEffect, useState } from "react";
 
 
-
 export default function Page() {
     const [blogs, setBlogs] = useState<ResearchBlogType[] | null>(null)
     const [loading, setLoading] = useState(false)
     const [selectedIndex, setSelectedIndex] = useState<string>("")
     const [showDeleteModal, setShowDeleteModal] = useState(false)
     const [showEditModal, setShowEditModal] = useState(false)
-
-
 
     // Fetch blogs whenever page changes
     useEffect(() => {
@@ -35,8 +32,6 @@ export default function Page() {
                 setBlogs(data)
             }
         }
-
-
 
         fetchBlogs()
     }, [])
