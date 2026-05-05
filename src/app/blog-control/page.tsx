@@ -1,13 +1,14 @@
 "use client"
 
 import ConfirmDelete from "@/components/UI/ConfirmDelete";
+import Loading from "@/components/UI/Loading";
 import { Spinner } from "@/components/UI/Spinner";
 import UpdateBlog from "@/components/UI/UpdateBlog";
 import { supabase } from "@/lib/supabaseClient";
 import { ResearchBlogType } from "@/types/types";
 import Image from "next/image";
 import Link from "next/link";
-import { SetStateAction, useEffect, useState } from "react";
+import { SetStateAction, useEffect, useRef, useState } from "react";
 
 
 export default function Page() {
@@ -16,13 +17,18 @@ export default function Page() {
     const [selectedIndex, setSelectedIndex] = useState<string>("")
     const [showDeleteModal, setShowDeleteModal] = useState(false)
     const [showEditModal, setShowEditModal] = useState(false)
+    const [visibleCount, setVisibleCount] = useState(16);
+    const [isFetchingMore, setIsFetchingMore] = useState(false);
+    const loaderRef = useRef<HTMLDivElement | null>(null);
 
     // Fetch blogs whenever page changes
     useEffect(() => {
 
         const fetchBlogs = async () => {
 
-            const { data, error } = await supabase.from("blog").select("*").order("createdAt", { ascending: false })
+            const { data, error } = await supabase
+                .from("blog").select("*")
+                .order("createdAt", { ascending: false })
 
             if (error) {
                 setLoading(false)
@@ -40,7 +46,6 @@ export default function Page() {
     // Hide scroll when delete modal is open
     useEffect(() => {
         document.body.style.overflowY = showDeleteModal ? "hidden" : "auto"
-
 
         return () => {
             document.body.style.overflowY = "auto"
@@ -69,11 +74,49 @@ export default function Page() {
     }
 
 
+    const loadMore = () => {
+        if (isFetchingMore) return;
+
+        setIsFetchingMore(true);
+
+        setTimeout(() => {
+            setVisibleCount((prev) => prev + 16); // load 4 more each time
+            setIsFetchingMore(false);
+        }, 800); // simulate loading delay
+    };
+
+
+
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+            (entries) => {
+                if (entries[0].isIntersecting) {
+                    loadMore();
+                }
+            },
+            { threshold: 1 }
+        );
+
+        if (loaderRef.current) {
+            observer.observe(loaderRef.current);
+        }
+
+        return () => {
+            if (loaderRef.current) {
+                observer.unobserve(loaderRef.current);
+            }
+        };
+    }, [blogs]);
+
+
+
 
     return (
         <div className="relative w-full h-fit  flex flex-col items-start justify-start gap-10 font-poppins bg-white " >
 
-            <Link href={"/blog-control/add-blog"} className="bg-gray-700 text-white rounded-lg border border-gray-700 py-2 px-5 text-xs md:text-sm ml-auto hover:rounded-[100px] transition-all duration-200 ease-in-out  " >Add Blog</Link>
+            <Link href={"/blog-control/add-blog"} className="bg-gray-700 text-white
+             rounded-lg border border-gray-700 py-2 px-5 text-xs md:text-sm ml-auto
+             hover:rounded-[100px] transition-all duration-200 ease-in-out  " >Add Blog</Link>
 
 
 
@@ -113,6 +156,11 @@ export default function Page() {
                 updateBlogInUI={updateBlogInUI}
             />
             }
+
+
+            <div ref={loaderRef} className="w-full flex justify-center py-6">
+                {isFetchingMore && <Loading />}
+            </div>
 
         </div>
     )
