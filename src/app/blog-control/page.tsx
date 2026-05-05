@@ -8,12 +8,12 @@ import { supabase } from "@/lib/supabaseClient";
 import { ResearchBlogType } from "@/types/types";
 import Image from "next/image";
 import Link from "next/link";
-import { SetStateAction, useEffect, useRef, useState } from "react";
+import { SetStateAction, useCallback, useEffect, useRef, useState } from "react";
 
 
 export default function Page() {
     const [blogs, setBlogs] = useState<ResearchBlogType[] | null>(null)
-    const [loading, setLoading] = useState(false)
+    const [loading, setLoading] = useState(true)
     const [selectedIndex, setSelectedIndex] = useState<string>("")
     const [showDeleteModal, setShowDeleteModal] = useState(false)
     const [showEditModal, setShowEditModal] = useState(false)
@@ -37,6 +37,8 @@ export default function Page() {
             else if (data) {
                 setBlogs(data)
             }
+
+            setLoading(false)
         }
 
         fetchBlogs()
@@ -74,39 +76,41 @@ export default function Page() {
     }
 
 
-    const loadMore = () => {
-        if (isFetchingMore) return;
+    const loadMore = useCallback(() => {
+        if (!blogs || isFetchingMore || visibleCount >= blogs.length) return;
 
         setIsFetchingMore(true);
 
         setTimeout(() => {
-            setVisibleCount((prev) => prev + 16); // load 4 more each time
+            setVisibleCount((prev) => Math.min(prev + 16, blogs.length));
             setIsFetchingMore(false);
-        }, 800); // simulate loading delay
-    };
-
+        }, 800);
+    }, [blogs, isFetchingMore, visibleCount]);
 
 
     useEffect(() => {
+        if (!blogs || visibleCount >= blogs.length) return;
+
         const observer = new IntersectionObserver(
             (entries) => {
-                if (entries[0].isIntersecting) {
+                if (entries[0]?.isIntersecting) {
                     loadMore();
                 }
             },
-            { threshold: 1 }
+            { threshold: 0.1 }
         );
 
-        if (loaderRef.current) {
-            observer.observe(loaderRef.current);
+        const loaderElement = loaderRef.current;
+        if (loaderElement) {
+            observer.observe(loaderElement);
         }
 
         return () => {
-            if (loaderRef.current) {
-                observer.unobserve(loaderRef.current);
+            if (loaderElement) {
+                observer.unobserve(loaderElement);
             }
         };
-    }, [blogs]);
+    }, [blogs, loadMore, visibleCount]);
 
 
 
@@ -128,7 +132,7 @@ export default function Page() {
                 :
                 <div className="w-full h-fit grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4  gap-14 place-items-start justify-items-start">
 
-                    {blogs.map((blog, i) => (
+                    {blogs.slice(0, visibleCount).map((blog, i) => (
                         <AdminBlogCard
                             setShowEditModal={setShowEditModal}
                             setSelectedIndex={setSelectedIndex}
@@ -158,9 +162,11 @@ export default function Page() {
             }
 
 
-            <div ref={loaderRef} className="w-full flex justify-center py-6">
-                {isFetchingMore && <Loading />}
-            </div>
+            {blogs && visibleCount < blogs.length && (
+                <div ref={loaderRef} className="w-full flex justify-center py-6">
+                    {isFetchingMore && <Loading />}
+                </div>
+            )}
 
         </div>
     )
