@@ -167,8 +167,6 @@ export default function Page() {
 }
 
 
-
-
 interface AdminBlogCardProps {
     blog: ResearchBlogType;
     setShowDeleteModal: React.Dispatch<SetStateAction<boolean>>
