@@ -44,7 +44,6 @@ export default function Page() {
         fetchBlogs()
     }, [])
 
-
     // Hide scroll when delete modal is open
     useEffect(() => {
         document.body.style.overflowY = showDeleteModal ? "hidden" : "auto"
