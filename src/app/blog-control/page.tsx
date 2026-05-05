@@ -1,28 +1,34 @@
 "use client"
 
 import ConfirmDelete from "@/components/UI/ConfirmDelete";
+import Loading from "@/components/UI/Loading";
 import { Spinner } from "@/components/UI/Spinner";
 import UpdateBlog from "@/components/UI/UpdateBlog";
 import { supabase } from "@/lib/supabaseClient";
 import { ResearchBlogType } from "@/types/types";
 import Image from "next/image";
 import Link from "next/link";
-import { SetStateAction, useEffect, useState } from "react";
+import { SetStateAction, useCallback, useEffect, useRef, useState } from "react";
 
 
 export default function Page() {
     const [blogs, setBlogs] = useState<ResearchBlogType[] | null>(null)
-    const [loading, setLoading] = useState(false)
+    const [loading, setLoading] = useState(true)
     const [selectedIndex, setSelectedIndex] = useState<string>("")
     const [showDeleteModal, setShowDeleteModal] = useState(false)
     const [showEditModal, setShowEditModal] = useState(false)
+    const [visibleCount, setVisibleCount] = useState(16);
+    const [isFetchingMore, setIsFetchingMore] = useState(false);
+    const loaderRef = useRef<HTMLDivElement | null>(null);
 
     // Fetch blogs whenever page changes
     useEffect(() => {
 
         const fetchBlogs = async () => {
 
-            const { data, error } = await supabase.from("blog").select("*").order("createdAt", { ascending: false })
+            const { data, error } = await supabase
+                .from("blog").select("*")
+                .order("createdAt", { ascending: false })
 
             if (error) {
                 setLoading(false)
@@ -31,16 +37,16 @@ export default function Page() {
             else if (data) {
                 setBlogs(data)
             }
+
+            setLoading(false)
         }
 
         fetchBlogs()
     }, [])
 
-
     // Hide scroll when delete modal is open
     useEffect(() => {
         document.body.style.overflowY = showDeleteModal ? "hidden" : "auto"
-
 
         return () => {
             document.body.style.overflowY = "auto"
@@ -69,11 +75,51 @@ export default function Page() {
     }
 
 
+    const loadMore = useCallback(() => {
+        if (!blogs || isFetchingMore || visibleCount >= blogs.length) return;
+
+        setIsFetchingMore(true);
+
+        setTimeout(() => {
+            setVisibleCount((prev) => Math.min(prev + 16, blogs.length));
+            setIsFetchingMore(false);
+        }, 800);
+    }, [blogs, isFetchingMore, visibleCount]);
+
+
+    useEffect(() => {
+        if (!blogs || visibleCount >= blogs.length) return;
+
+        const observer = new IntersectionObserver(
+            (entries) => {
+                if (entries[0]?.isIntersecting) {
+                    loadMore();
+                }
+            },
+            { threshold: 0.1 }
+        );
+
+        const loaderElement = loaderRef.current;
+        if (loaderElement) {
+            observer.observe(loaderElement);
+        }
+
+        return () => {
+            if (loaderElement) {
+                observer.unobserve(loaderElement);
+            }
+        };
+    }, [blogs, loadMore, visibleCount]);
+
+
+
 
     return (
         <div className="relative w-full h-fit  flex flex-col items-start justify-start gap-10 font-poppins bg-white " >
 
-            <Link href={"/blog-control/add-blog"} className="bg-gray-700 text-white rounded-lg border border-gray-700 py-2 px-5 text-xs md:text-sm ml-auto hover:rounded-[100px] transition-all duration-200 ease-in-out  " >Add Blog</Link>
+            <Link href={"/blog-control/add-blog"} className="bg-gray-700 text-white
+             rounded-lg border border-gray-700 py-2 px-5 text-xs md:text-sm ml-auto
+             hover:rounded-[100px] transition-all duration-200 ease-in-out  " >Add Blog</Link>
 
 
 
@@ -85,7 +131,7 @@ export default function Page() {
                 :
                 <div className="w-full h-fit grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4  gap-14 place-items-start justify-items-start">
 
-                    {blogs.map((blog, i) => (
+                    {blogs.slice(0, visibleCount).map((blog, i) => (
                         <AdminBlogCard
                             setShowEditModal={setShowEditModal}
                             setSelectedIndex={setSelectedIndex}
@@ -114,11 +160,16 @@ export default function Page() {
             />
             }
 
+
+            {blogs && visibleCount < blogs.length && (
+                <div ref={loaderRef} className="w-full flex justify-center py-6">
+                    {isFetchingMore && <Loading />}
+                </div>
+            )}
+
         </div>
     )
 }
-
-
 
 
 interface AdminBlogCardProps {
