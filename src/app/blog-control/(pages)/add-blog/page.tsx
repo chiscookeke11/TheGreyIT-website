@@ -1,13 +1,12 @@
 "use client"
 
+import TiptapEditor from "@/components/admin/TipTapEditor";
 import Button from "@/components/UI/Button";
 import React, { useState, useRef } from "react";
 import { supabase } from "@/lib/supabaseClient"
 import toast from "react-hot-toast";
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
-import ReactQuill from "react-quill";
-import "react-quill/dist/quill.snow.css";
 
 export default function Page() {
     const [formValues, setFormValues] = useState({
@@ -156,18 +155,9 @@ export default function Page() {
 
                 <div className="w-full flex flex-col gap-1 text-gray-700">
                     <span className="text-base  text-gray-700">Content</span>
-
-                    <ReactQuill
-                        theme="snow"
-                        value={formValues.content}
-                        onChange={(content) =>
-                            setFormValues((prev) => ({
-                                ...prev,
-                                content,
-                            }))
-                        }
-                        placeholder="Start writing your article content here..."
-                        className="w-full h-full max-h-75 "
+                    <TiptapEditor
+                        content={formValues.content}
+                        onChange={handleTipTapChange}
                     />
                 </div>
 
