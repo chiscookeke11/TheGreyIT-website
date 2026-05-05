@@ -25,7 +25,7 @@ export default function Page() {
 
         const fetchBlogs = async () => {
 
-            const { data, error } = await supabase.from("blog").select("*").order("createdAt", {ascending: false})
+            const { data, error } = await supabase.from("blog").select("*").order("createdAt", { ascending: false })
 
             if (error) {
                 setLoading(false)
@@ -41,6 +41,16 @@ export default function Page() {
         fetchBlogs()
     }, [])
 
+
+    // Hide scroll when delete modal is open
+    useEffect(() => {
+        document.body.style.overflowY = showDeleteModal ? "hidden" : "auto"
+
+
+        return () => {
+            document.body.style.overflowY = "auto"
+        }
+    }, [showDeleteModal])
 
 
     // this  function updates the delete function on the UI
@@ -66,8 +76,7 @@ export default function Page() {
 
 
     return (
-        <div className="relative w-full h-fit  py-36 px-6 flex flex-col items-start justify-start gap-10 font-poppins bg-white " >
-            <h1 className=" font-syne font-semibold text-2xl   ">Blog Control Panel</h1>
+        <div className="relative w-full h-fit  flex flex-col items-start justify-start gap-10 font-poppins bg-white " >
 
             <Link href={"/blog-control/add-blog"} className="bg-gray-700 text-white rounded-lg border border-gray-700 py-2 px-5 text-xs md:text-sm ml-auto hover:rounded-[100px] transition-all duration-200 ease-in-out  " >Add Blog</Link>
 

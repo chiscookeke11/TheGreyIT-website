@@ -49,9 +49,9 @@ export default function ConfirmDelete({
 
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center bg-black/55 backdrop-blur-sm p-4 z-50">
+    <div className="fixed inset-0 flex items-center justify-center bg-black/75 backdrop-blur-sm p-4 z-50">
       <div className="w-full max-w-md flex flex-col items-center gap-10 bg-[#F7FCFE] shadow-md rounded-md px-8 py-14 ">
-        <h1 className="text-center font-merienda font-extrabold text-gray-500 text-sm md:text-xl">
+        <h1 className="text-center font-merienda font-extrabold text-gray-700 text-sm md:text-xl">
           Are you sure you want to delete this item?
         </h1>
 

@@ -23,9 +23,6 @@ export default function VerifyCertificatePage() {
     }
 
 
-
-
-
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
@@ -69,9 +66,7 @@ export default function VerifyCertificatePage() {
 
     return (
          <div className="w-full min-h-screen flex flex-col bg-white">
-            <header className=" h-[150px] md:h-[250px] bg-[#f2f5fc] flex flex-col items-start justify-end px-[4%] py-6 text-gray-700 font-semibold text-2xl md:text-3xl">
-                Students Certificate Authentication
-            </header>
+
 
             <div className="w-full h-full flex items-center justify-center px-[4%] py-40 ">
                 <form
