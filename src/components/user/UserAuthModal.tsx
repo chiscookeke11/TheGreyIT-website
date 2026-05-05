@@ -11,7 +11,9 @@ import toast from "react-hot-toast";
 
 const Spinner = () => {
     return (
-        <div className="h-10 w-10 rounded-full border-4 border-white border-t-transparent animate-spin duration-150 ease-in-out transition-all group-hover:border-gray-700 group-hover:border-t-transparent " />
+        <div className="h-10 w-10 rounded-full border-4 border-white border-t-transparent
+         animate-spin duration-150 ease-in-out transition-all group-hover:border-gray-700
+          group-hover:border-t-transparent " />
     )
 }
 
@@ -59,7 +61,10 @@ export default function UserAuthModal() {
 
         while (exists) {
             code = randomCode(8)
-            const { data, error } = await supabase.from("user_data").select("id").eq("referral_code", code);
+            const { data, error } = await supabase
+            .from("user_data")
+            .select("id")
+            .eq("referral_code", code);
 
             if (error) {
                 console.error("Error:", error)
@@ -102,7 +107,7 @@ export default function UserAuthModal() {
                         last_name: formValues.lastName,
                         phoneNumber: formValues.phoneNumber,
                     },
-                    emailRedirectTo: `${window.location.origin}/auth/callback?redirect=${encodeURIComponent(redirectTo)}`
+                    emailRedirectTo: `${window.location.origin}/auth/callback`
                 }
             });
 
