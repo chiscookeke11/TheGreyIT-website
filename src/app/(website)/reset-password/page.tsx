@@ -64,8 +64,10 @@ export default function Page() {
 
         setLoading(true)
 
+        const redirectBaseUrl = typeof window !== "undefined" ? window.location.origin : "https://www.thegreyit.org"
+
         const { error } = await supabase.auth.resetPasswordForEmail(email, {
-            redirectTo: "https://the-grey-it-website.vercel.app/update_password"
+            redirectTo: `${redirectBaseUrl}/update_password`
         })
 
         if (error) {
