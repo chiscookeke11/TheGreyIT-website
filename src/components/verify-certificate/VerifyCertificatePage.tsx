@@ -19,7 +19,7 @@ export default function VerifyCertificatePage() {
 
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-            setCertNumber(e.target.value)
+        setCertNumber(e.target.value)
     }
 
 
@@ -40,7 +40,6 @@ export default function VerifyCertificatePage() {
             .maybeSingle();
 
         if (error) {
-            console.error(error);
             setLoading(false)
             return;
         }
@@ -65,7 +64,7 @@ export default function VerifyCertificatePage() {
 
 
     return (
-         <div className="w-full min-h-screen flex flex-col bg-white">
+        <div className="w-full min-h-screen flex flex-col bg-white">
 
 
             <div className="w-full h-full flex items-center justify-center px-[4%] py-40 ">
@@ -88,7 +87,7 @@ export default function VerifyCertificatePage() {
                             placeholder="Enter Cert No."
                             className="w-[70%] flex-1 outline-none border border-gray-700 h-full py-4 px-4 rounded-sm"
                         />
-                        <Button variant="default">{loading ? <Loading/> : "Verify"}</Button>
+                        <Button variant="default">{loading ? <Loading /> : "Verify"}</Button>
                     </div>
 
                     {notFound && (

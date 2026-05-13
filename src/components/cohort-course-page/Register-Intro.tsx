@@ -34,7 +34,7 @@ export default function RegisterIntro({
 }: PageProps) {
 
     const [currentCourse, setCurrentCourse] = useState<QuickIntroClass | null>(null)
-  const [isSubmitting, setIsSubmitting] = useState(false)
+    const [isSubmitting, setIsSubmitting] = useState(false)
     const [showSuccessPopup, setShowSuccessPopup] = useState(false);
     const public_key = process.env.NEXT_PUBLIC_PAYSTACK_PUBLIC_KEY!
 
@@ -104,11 +104,10 @@ export default function RegisterIntro({
 
             if (!response.ok) {
                 toast.error("Failed to submit");
-                console.error("Error submitting", result.error)
+                console.error("Error submitting")
                 return;
             }
 
-            console.log("Payment timestamp from reference:", result.paymentTimestamp);
             setShowSuccessPopup(true);
 
             setFormValues({
@@ -125,7 +124,6 @@ export default function RegisterIntro({
             });
 
         } catch (error) {
-            console.error(error);
             toast.error("Something went wrong");
         }
         finally {
@@ -137,7 +135,7 @@ export default function RegisterIntro({
 
     // you can call this function anything
     const handlePaystackCloseAction = () => {
-        console.log("Payment concluded")
+
     }
 
 

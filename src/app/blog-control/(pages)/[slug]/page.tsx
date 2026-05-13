@@ -1,6 +1,6 @@
 "use client"
 
-import {Spinner} from "@/components/UI/Spinner"
+import { Spinner } from "@/components/UI/Spinner"
 import { supabase } from "@/lib/supabaseClient"
 import { ResearchBlogType } from "@/types/types"
 import React, { useEffect, useState } from "react"
@@ -28,12 +28,11 @@ export default function Page({ params }: PageProps) {
 
             const { data, error } = await supabase.from("blog").select("*").eq("slug", trimmedSlug).maybeSingle()
             if (error) {
-                console.error("Failed to fetch", error)
+                console.error("Failed to fetch")
                 return;
             }
 
             if (!data) {
-                console.log("No blog found for this slug");
                 return;
             }
             setCurrentBlog(data)

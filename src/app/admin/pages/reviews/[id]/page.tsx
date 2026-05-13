@@ -60,7 +60,7 @@ export default function Page() {
             const { data, error } = await supabase.from("userReviews").select("*").eq("courseId", currentCourse?.id)
 
             if (error) {
-                console.error(error)
+
             }
 
             setCourseReviews(data)

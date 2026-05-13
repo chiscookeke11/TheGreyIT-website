@@ -64,7 +64,6 @@ export default function NewsletterSection() {
 
         if (error) {
             toast.error("Failed to subscribe to our newsletter!");
-            console.error(error);
             setLoading(false)
         } else {
             toast.success("You have subscribed to our newsletter!");

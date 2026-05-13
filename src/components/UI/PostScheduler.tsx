@@ -87,7 +87,6 @@ export default function PostScheduler({ data, setShowSchedulerForm, showSchedule
 
         if (error) {
             toast.error("Failed to schedule post!")
-            console.error(error)
             setLoading(false)
             return
         }

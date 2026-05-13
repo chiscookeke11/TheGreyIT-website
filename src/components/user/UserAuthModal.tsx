@@ -62,12 +62,12 @@ export default function UserAuthModal() {
         while (exists) {
             code = randomCode(8)
             const { data, error } = await supabase
-            .from("user_data")
-            .select("id")
-            .eq("referral_code", code);
+                .from("user_data")
+                .select("id")
+                .eq("referral_code", code);
 
             if (error) {
-                console.error("Error:", error)
+                console.error("Error:")
             }
 
             exists = (data?.length ?? 0) > 0
@@ -177,7 +177,7 @@ export default function UserAuthModal() {
             router.push(`/verify_email?email=${normalizedEmail}`);
 
         } catch (err) {
-            console.error("Signup process failed:", err);
+            console.error("Signup process failed:");
             setLoading(false);
         }
     }

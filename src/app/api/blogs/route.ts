@@ -14,7 +14,6 @@ export const GET = async () => {
         return Response.json(blogs)
     }
     catch (err) {
-        console.error("Error Fetching blogs!", err)
         return new Response(JSON.stringify({ err: "Failed to fetch blogs" }), { status: 500 })
     }
 }
@@ -48,7 +47,6 @@ export const POST = async (req: Request) => {
         return NextResponse.json(newBlog, { status: 201 })
     }
     catch (err) {
-        console.error("Error creating blog", err)
         return NextResponse.json(
             { error: "Failed to create blog!" },
             { status: 500 }

@@ -22,12 +22,9 @@ export default function CertificatesPageComponent() {
         const { data, error } = await supabase.from("course").select("*").in("id", certifiedCourses ?? [])
 
         if (error) {
-            console.error(error)
+            console.error("Failed")
         }
 
-        else {
-            console.log("")
-        }
     }
 
 

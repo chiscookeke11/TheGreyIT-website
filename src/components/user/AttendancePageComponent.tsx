@@ -16,7 +16,7 @@ export default function AttendancePageComponent() {
             const data = await res.json();
             setAttendance(data);
         } catch (error) {
-            console.error("Failed to fetch attendance:", error);
+            console.error("Failed to fetch attendance:");
         }
     };
 

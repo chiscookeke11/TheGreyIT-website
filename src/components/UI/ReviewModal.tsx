@@ -134,7 +134,6 @@ export default function ReviewModal({ id, setShowReviewModal }: ReviewModalProps
         })
 
         if (error) {
-            console.error("Failed to submit", error)
             setLoading(false)
             return toast.error("Failed to submit review")
         }

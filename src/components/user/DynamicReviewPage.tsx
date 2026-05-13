@@ -4,7 +4,7 @@
 
 import Button from "@/components/UI/Button"
 import ReviewModal from "@/components/UI/ReviewModal"
-import {Spinner} from "@/components/UI/Spinner"
+import { Spinner } from "@/components/UI/Spinner"
 import ReviewCard from "@/components/user/ReviewCard"
 import RatingStars from "@/components/user/ReviewStarsComponent"
 import { useAppContext } from "@/context/AppContext"
@@ -12,17 +12,17 @@ import { supabase } from "@/lib/supabaseClient"
 import { CourseDataTypes, reviewDataType } from "@/types/types"
 import { ArrowLeft } from "lucide-react"
 import Image from "next/image"
-import {  useRouter } from "next/navigation"
+import { useRouter } from "next/navigation"
 import { useEffect, useState } from "react"
 
 
 
-interface ReviewDynamicPageProps{
+interface ReviewDynamicPageProps {
     id: string
 }
 
 
-export default function ReviewDynamicPage({id}: ReviewDynamicPageProps) {
+export default function ReviewDynamicPage({ id }: ReviewDynamicPageProps) {
     const router = useRouter()
     const { allCoursesData } = useAppContext()
     const [courseReviews, setCourseReviews] = useState<reviewDataType[] | null>(null)
@@ -71,7 +71,7 @@ export default function ReviewDynamicPage({id}: ReviewDynamicPageProps) {
             const { data, error } = await supabase.from("userReviews").select("*").eq("courseId", currentCourse?.id)
 
             if (error) {
-                console.error(error)
+                console.error("Failed")
             }
 
             setCourseReviews(data)

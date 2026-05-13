@@ -68,7 +68,6 @@ export default function ProfilePageComponent() {
 
 
             if (error) {
-                console.error("Upload error", error.message)
                 toast.error(`Upload failed: ${error.message}`)
                 return
             }
@@ -90,7 +89,7 @@ export default function ProfilePageComponent() {
 
             const { data, error } = await supabase.auth.getUser()
             if (error) {
-                console.error("Auth check failed:", error.message)
+                return
             }
 
 
@@ -189,7 +188,7 @@ export default function ProfilePageComponent() {
         if (error) {
             setLoading(false)
             toast.error("Failed to update profile")
-            console.error(error.message)
+            return
         }
         else {
 

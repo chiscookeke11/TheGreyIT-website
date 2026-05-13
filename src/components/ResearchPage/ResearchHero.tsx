@@ -20,13 +20,13 @@ export default function ResearchHero() {
         const fetchRecentBlogs = async () => {
 
             const { data, error } = await supabase
-            .from("blog")
-            .select("*")
-            .eq("status", "published")
-            .order("createdAt", { ascending: false }).limit(1)
+                .from("blog")
+                .select("*")
+                .eq("status", "published")
+                .order("createdAt", { ascending: false }).limit(1)
 
             if (error) {
-                console.error("Error fetching recent blogs:", error)
+                console.error("Error fetching recent blogs:")
             }
             else if (data) {
                 setTrendingBlog(data[0])

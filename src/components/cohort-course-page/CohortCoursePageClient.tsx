@@ -22,7 +22,6 @@ export default function CohortCoursePageClient() {
         const { data, error } = await supabase.from("cohort_2026_courses").select("*")
 
         if (error) {
-            console.log("Error fetching courses", error)
             toast.error("Failed to load courses! Please reload page")
             setLoading(false)
             return;
