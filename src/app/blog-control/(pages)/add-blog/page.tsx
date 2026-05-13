@@ -71,7 +71,7 @@ export default function Page() {
             .upload(filename, file)
 
         if (error) {
-            console.error("Upload error", error.message)
+            console.error("Upload error")
             toast.error("Upload failed")
             return
         }
@@ -115,7 +115,7 @@ export default function Page() {
         })
 
         if (error) {
-            console.error("Failed to upload blog", error)
+            console.error("Failed to upload blog")
             toast.error("Failed to upload blog")
             setLoading(false)
             return;

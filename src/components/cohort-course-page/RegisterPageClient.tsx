@@ -164,11 +164,9 @@ export default function RegisterPageClient({
 
             if (!response.ok) {
                 toast.error("Failed to submit");
-                console.error("Error submitting payment:", result.error);
                 return;
             }
 
-            console.log("Payment timestamp from reference:", result.paymentTimestamp);
             setShowSuccessPopup(true);
 
             setFormValues({
@@ -187,7 +185,6 @@ export default function RegisterPageClient({
             });
 
         } catch (error) {
-            console.error(error);
             toast.error("Something went wrong");
         }
         finally {
@@ -199,7 +196,7 @@ export default function RegisterPageClient({
 
     // you can call this function anything
     const handlePaystackCloseAction = () => {
-        console.log("Payment concluded")
+
     }
 
 

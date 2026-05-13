@@ -81,7 +81,6 @@ export default function CoursePageComponent() {
         const { data, error } = await supabase.from("course").select("*")
 
         if (error) {
-            console.log("Failed to fetch course:")
             return
         }
 

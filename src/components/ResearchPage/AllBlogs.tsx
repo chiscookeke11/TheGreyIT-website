@@ -61,7 +61,6 @@ export default function AllBlogs() {
 
     if (error) {
       toast.error("Failed to fetch blog!")
-      console.error(error)
       setLoading(false)
       return
     }

@@ -32,7 +32,7 @@ export default function Page() {
 
             if (error) {
                 setLoading(false)
-                console.error("Error fetching all blogs:", error)
+                console.error("Error fetching all blogs:")
             }
             else if (data) {
                 setBlogs(data)

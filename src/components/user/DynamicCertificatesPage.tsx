@@ -38,7 +38,7 @@ export default function DynamicCertificatesPage() {
             setLoading(true)
             const { data, error } = await supabase.auth.getUser()
             if (error) {
-                console.error("Auth check failed:", error.message)
+                console.error("Auth check failed:")
             }
 
             setUser(data.user ?? null)
@@ -90,7 +90,6 @@ export default function DynamicCertificatesPage() {
             const { data, error } = await supabase.from("certificates").select("hasDownloaded").eq("id", currentCertificate?.id).eq("user_id", currentCertificate?.user_id).single()
 
             if (error) {
-                console.error(error)
                 return;
             }
             setHasDownloaded(data?.hasDownloaded ?? false)
@@ -123,7 +122,7 @@ export default function DynamicCertificatesPage() {
         const { error, data } = await supabase.storage.from("course_outline_pdf").download(pdfName)
 
         if (error) {
-            console.error("Error downlaoding file:", error.message);
+            console.error("Error downlaoding file:");
             setIsDownloading(false)
         }
         else if (data) {
@@ -146,7 +145,6 @@ export default function DynamicCertificatesPage() {
                 .eq("user_id", currentCertificate?.user_id);
 
             if (statusError) {
-                console.error(statusError);
                 return;
             }
             setIsDownloading(false)
@@ -166,7 +164,7 @@ export default function DynamicCertificatesPage() {
                 url: currentUrl,
             });
         } catch (error) {
-            console.error("Failed to share certificate", error)
+            console.error("Failed to share certificate")
             toast.error("Failed to share certificate")
         }
     }

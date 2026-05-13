@@ -26,14 +26,14 @@ export default function ResearchSection() {
         const fetchRecentBlogs = async () => {
 
             const { data, error } = await supabase
-            .from("blog")
-            .select("*")
-            .eq("status", "published")
-            .order("createdAt", { ascending: false })
-            .limit(4)
+                .from("blog")
+                .select("*")
+                .eq("status", "published")
+                .order("createdAt", { ascending: false })
+                .limit(4)
 
             if (error) {
-                console.error("Error fetching recent blogs:", error)
+                console.error("Error fetching recent blogs:")
                 setRecentBlogsData([])
             }
             else if (data) {

@@ -77,7 +77,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
 
       const { data, error } = await supabase.auth.getUser()
       if (error && error.message !== "Auth session missing!") {
-        console.error("Auth check failed:", error.message)
+        console.error("Auth check failed:")
       }
 
       setUser(data.user ?? null)

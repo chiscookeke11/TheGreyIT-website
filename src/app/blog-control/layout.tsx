@@ -21,7 +21,7 @@ export default function BlogControlLayout({ children }: { children: React.ReactN
         const getUser = async () => {
             setLoading(true);
             const { data, error } = await supabase.auth.getUser();
-            if (error && error.message !== "Auth session missing!") console.error(error);
+            if (error && error.message !== "Auth session missing!") console.error("Failed");
             setUser(data.user ?? null);
             setLoading(false);
         };
@@ -72,7 +72,7 @@ export default function BlogControlLayout({ children }: { children: React.ReactN
                 <button
                     onClick={async () => {
                         const { error } = await supabase.auth.signOut()
-                        if (error) console.error("Sign-out error:", error.message)
+                        if (error) console.error("Sign-out error:")
                         else {
                             localStorage.removeItem("")
                         }

@@ -11,10 +11,10 @@ import { CustomCheckBox } from "./CustomCheckbox"
 
 
 
-  const statusOptions: ResearchBlogType["status"][] = [
-        "published",
-        "scheduled",
-    ]
+const statusOptions: ResearchBlogType["status"][] = [
+    "published",
+    "scheduled",
+]
 
 
 export default function UpdateBlog({
@@ -170,7 +170,6 @@ export default function UpdateBlog({
             toast.success("Blog updated successfully")
             setShowEditModal(false)
         } catch (err) {
-            console.error(err)
             toast.error("Failed to update blog")
         } finally {
             setLoading(false)
@@ -247,24 +246,27 @@ export default function UpdateBlog({
 
 
                 {/* STATUS */}
-                <div className=" flex items-center  gap-15 justify-items-stretch  "  >
-                                        {statusOptions.map((option) => {
-                                            const isChecked =  status === option
-                                            return (
-                                                <CustomCheckBox
-                                                    key={option}
-                                                    checked={isChecked}
-                                                    label={option ?? ""}
-                                                    id={option?.toLowerCase() ?? ""}
-                                                    onCheckedChange={(checked) => {
-                                                        if (checked) {
-                                                           setStatus(option)
-                                                        }
-                                                    }}
-                                                />
-                                            )
-                                        })}
-                                    </div>
+                <div className="flex flex-col gap-1">
+                    <span>Status</span>
+                    <div className=" flex items-center  gap-15 justify-items-stretch  "  >
+                        {statusOptions.map((option) => {
+                            const isChecked = status === option
+                            return (
+                                <CustomCheckBox
+                                    key={option}
+                                    checked={isChecked}
+                                    label={option ?? ""}
+                                    id={option?.toLowerCase() ?? ""}
+                                    onCheckedChange={(checked) => {
+                                        if (checked) {
+                                            setStatus(option)
+                                        }
+                                    }}
+                                />
+                            )
+                        })}
+                    </div>
+                </div>
 
                 {/* DATE */}
                 <label className="flex flex-col gap-1">

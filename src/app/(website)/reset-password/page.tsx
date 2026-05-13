@@ -69,7 +69,6 @@ export default function Page() {
 
         if (error) {
             toast.error(`Failed to send link: ${error.message}`)
-            console.error(error.message)
             setLoading(false)
             return
         }

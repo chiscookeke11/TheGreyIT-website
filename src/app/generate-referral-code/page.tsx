@@ -23,97 +23,97 @@ export default function Page() {
 
     // This is the submit function
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+        e.preventDefault();
 
-    if (!email.trim()) {
-        toast.error("Please enter your email");
-        return;
-    }
+        if (!email.trim()) {
+            toast.error("Please enter your email");
+            return;
+        }
 
-    setLoading(true);
+        setLoading(true);
 
-    const normalizedEmail = email.trim().toLowerCase();
+        const normalizedEmail = email.trim().toLowerCase();
 
-    //  STEP 1: Check if email exists in ambassadors_application
-    const { data: ambassador, error: ambassadorError } = await supabase
-        .from("ambassadors_application")
-        .select("id")
-        .eq("email", normalizedEmail)
-        .maybeSingle();
-
-    if (ambassadorError) {
-        console.error("Error checking ambassador table:", ambassadorError);
-        toast.error("Something went wrong. Please try again.");
-        setLoading(false);
-        return;
-    }
-
-    if (!ambassador) {
-        toast.error("You are not approved as an ambassador.");
-        setLoading(false);
-        return;
-    }
-
-    //  STEP 2: Check if referral already exists
-    const { data: existingUser, error } = await supabase
-        .from("user_data")
-        .select("referral_code")
-        .eq("email", normalizedEmail)
-        .maybeSingle();
-
-    if (error) {
-        console.error("Error fetching user_data:", error);
-        toast.error("Something went wrong.");
-        setLoading(false);
-        return;
-    }
-
-    if (existingUser?.referral_code) {
-        setReferralCode(existingUser.referral_code);
-        setLoading(false);
-        return;
-    }
-
-    //  STEP 3: Generate unique referral code
-    let generated_code;
-    let exists = true;
-
-    while (exists) {
-        generated_code = randomCode(8);
-
-        const { data: codeCheck } = await supabase
-            .from("user_data")
+        //  STEP 1: Check if email exists in ambassadors_application
+        const { data: ambassador, error: ambassadorError } = await supabase
+            .from("ambassadors_application")
             .select("id")
-            .eq("referral_code", generated_code);
+            .eq("email", normalizedEmail)
+            .maybeSingle();
 
-        exists = (codeCheck?.length ?? 0) > 0;
-    }
+        if (ambassadorError) {
+            console.error("Error checking ambassador table:");
+            toast.error("Something went wrong. Please try again.");
+            setLoading(false);
+            return;
+        }
 
-    //  STEP 4: Insert new referral
-    const { data: insertedData, error: insertError } = await supabase
-        .from("user_data")
-        .insert({
-            referral_code: generated_code,
-            user_id: null,
-            referred_by: null,
-            email: normalizedEmail,
-            first_name: null,
-            last_name: null
-        })
-        .select()
-        .single();
+        if (!ambassador) {
+            toast.error("You are not approved as an ambassador.");
+            setLoading(false);
+            return;
+        }
 
-    if (insertError) {
-        console.error("Insert error:", insertError);
-        toast.error("Failed to generate code");
+        //  STEP 2: Check if referral already exists
+        const { data: existingUser, error } = await supabase
+            .from("user_data")
+            .select("referral_code")
+            .eq("email", normalizedEmail)
+            .maybeSingle();
+
+        if (error) {
+            console.error("Error fetching user_data:");
+            toast.error("Something went wrong.");
+            setLoading(false);
+            return;
+        }
+
+        if (existingUser?.referral_code) {
+            setReferralCode(existingUser.referral_code);
+            setLoading(false);
+            return;
+        }
+
+        //  STEP 3: Generate unique referral code
+        let generated_code;
+        let exists = true;
+
+        while (exists) {
+            generated_code = randomCode(8);
+
+            const { data: codeCheck } = await supabase
+                .from("user_data")
+                .select("id")
+                .eq("referral_code", generated_code);
+
+            exists = (codeCheck?.length ?? 0) > 0;
+        }
+
+        //  STEP 4: Insert new referral
+        const { data: insertedData, error: insertError } = await supabase
+            .from("user_data")
+            .insert({
+                referral_code: generated_code,
+                user_id: null,
+                referred_by: null,
+                email: normalizedEmail,
+                first_name: null,
+                last_name: null
+            })
+            .select()
+            .single();
+
+        if (insertError) {
+            console.error("Insert error:");
+            toast.error("Failed to generate code");
+            setLoading(false);
+            return;
+        }
+
+        setReferralCode(insertedData.referral_code);
+        toast.success("Referral code generated!");
         setLoading(false);
-        return;
-    }
-
-    setReferralCode(insertedData.referral_code);
-    toast.success("Referral code generated!");
-    setLoading(false);
-};
+    };
 
 
 
@@ -126,7 +126,7 @@ export default function Page() {
             toast.success("Referral code copied!")
         }
         catch (err) {
-            console.error("Failed to copy:", err);
+            console.error("Failed to copy:");
             toast.error("Failed to copy referral code");
         }
     }

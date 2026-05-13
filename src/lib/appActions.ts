@@ -11,7 +11,7 @@ export const fetchAllCourses = async () => {
     const { data, error } = await supabase.from("course").select("*")
 
     if (error) {
-        console.error("Failed to fetch courses:", error)
+        console.error("Failed to fetch courses:")
         return null
     }
     return data
@@ -27,7 +27,7 @@ export const fetchUserData = async (userId: string) => {
     const { data, error } = await supabase.from("user_data").select("*").eq('user_id', userId)
 
     if (error) {
-        console.error("Error fetching user data:", error)
+        console.error("Error fetching user data:")
         return null;
     }
 
@@ -41,7 +41,7 @@ export const fetchUserTransactions = async (userId: string) => {
     const { data, error } = await supabase.from("transactions").select("*").eq('user_id', userId);
 
     if (error) {
-        console.error("Error fetching transactions:", error);
+        console.error("Error fetching transactions:");
         return null;
     }
 
@@ -58,7 +58,7 @@ export const fetchUserCertificates = async (certifiedCourses: number[], userId: 
         .in("course_id", certifiedCourses).eq("user_id", userId);
 
     if (error) {
-        console.error("Error fetching certificates:", error);
+        console.error("Error fetching certificates:");
         return null;
     }
 
@@ -76,7 +76,6 @@ export const toggleBookmark = async (userId: string, course_id: string) => {
 
 
     if (fetchError) {
-        console.error(fetchError)
         return;
     }
 
@@ -92,10 +91,12 @@ export const toggleBookmark = async (userId: string, course_id: string) => {
     }
 
     // update supabase array column
-    const { error: updateError } = await supabase.from("user_data").update({ bookmarks: bookmarks }).eq("user_id", userId)
+    const { error: updateError } = await supabase
+        .from("user_data")
+        .update({ bookmarks: bookmarks })
+        .eq("user_id", userId)
 
     if (updateError) {
-        console.error(updateError)
         return;
     }
 
@@ -106,35 +107,35 @@ export const toggleBookmark = async (userId: string, course_id: string) => {
 
 
 export const sendPaymentConfirmationEmail = (data: {
-  name: string;
-  email: string;
-  course_title: string;
-  reference: string;
-  status: string;
-  date: string;
-  dashboard_link: string;
+    name: string;
+    email: string;
+    course_title: string;
+    reference: string;
+    status: string;
+    date: string;
+    dashboard_link: string;
 }) => {
-  return emailjs.send(
-    process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
-    process.env.NEXT_PUBLIC_EMAILJS_PAYMENT_CONFIRMATION_TEMPLATE_ID!,
-    {
-      name: data.name,
-      email: data.email,
-      course_title: data.course_title,
-      reference: data.reference,
-      status: data.status,
-      date: data.date,
-      dashboard_link: data.dashboard_link,
-    },
-    process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!
-  );
+    return emailjs.send(
+        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
+        process.env.NEXT_PUBLIC_EMAILJS_PAYMENT_CONFIRMATION_TEMPLATE_ID!,
+        {
+            name: data.name,
+            email: data.email,
+            course_title: data.course_title,
+            reference: data.reference,
+            status: data.status,
+            date: data.date,
+            dashboard_link: data.dashboard_link,
+        },
+        process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!
+    );
 };
 
 
 
 // This function fetches the all the course enrollments
 export const fetchAllEnrollments = async () => {
-    const {data, error} = await supabase.from("course_enrollments").select("*")
+    const { data, error } = await supabase.from("course_enrollments").select("*")
 
     if (error) {
         console.error("Error fetching enrollments:", error.message)
