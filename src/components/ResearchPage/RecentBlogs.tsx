@@ -21,6 +21,7 @@ export default function RecentBlogs() {
             const { data, error } = await supabase
             .from("blog")
             .select("*")
+            .eq("status", "published")
             .order("createdAt", { ascending: false }).limit(4)
 
             if (error) {

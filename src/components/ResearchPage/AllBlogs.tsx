@@ -48,6 +48,7 @@ export default function AllBlogs() {
     let query = supabase
       .from("blog")
       .select("*", { count: "exact" })
+      .eq("status", "published")
       .order("publicationDate", { ascending: false })
 
     if (debouncedSearch.trim() !== "") {

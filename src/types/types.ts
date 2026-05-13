@@ -41,7 +41,10 @@ export interface ResearchBlogType {
   content: string
   publicationDate: Date;
   slug: string;
-  tagline?: string
+  tagline?: string,
+  scheduled_time?: string,
+  scheduled_date?: string,
+  status?: "scheduled" | "published" | ""
 };
 
 
@@ -295,3 +298,5 @@ export interface IntroCourseStudentRegistrationType {
   course: string;
   priceToPay: number;
 }
+
+

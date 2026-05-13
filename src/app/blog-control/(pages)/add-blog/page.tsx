@@ -2,28 +2,40 @@
 
 import TiptapEditor from "@/components/admin/TipTapEditor";
 import Button from "@/components/UI/Button";
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { supabase } from "@/lib/supabaseClient"
 import toast from "react-hot-toast";
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
+import Loading from "@/components/UI/Loading";
+import PostScheduler from "@/components/UI/PostScheduler";
+import { ResearchBlogType } from "@/types/types";
 
 export default function Page() {
-    const [formValues, setFormValues] = useState({
+    const [formValues, setFormValues] = useState<ResearchBlogType>({
         title: "",
         tagline: "",
         content: "",
         author: "",
         image: "",
-        publicationDate: ""
+        publicationDate: new Date(),
+        category: "",
+        createdAt: new Date(),
+        id: 0,
+        slug: "",
+        status: "published"
     })
 
     const [file, setFile] = useState<File | null>(null)
     const [loading, setLoading] = useState(false)
+    const [showSchedulerForm, setShowSchedulerForm] = useState(false)
+    const [image, setImage] = useState<string | null>(null)
 
     //  File input ref
     const fileInputRef = useRef<HTMLInputElement | null>(null)
 
+
+    // This function handles input change
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { value, name } = e.target;
 
@@ -33,6 +45,9 @@ export default function Page() {
         }))
     }
 
+
+
+    // This function handles change in the textarea
     const handleTipTapChange = (value: string) => {
         setFormValues((prev) => ({
             ...prev,
@@ -40,6 +55,9 @@ export default function Page() {
         }))
     }
 
+
+
+    // This function handles image upload to supabase storage
     const uploadImage = async () => {
         if (!file) {
             toast.error("Please select an image")
@@ -62,9 +80,14 @@ export default function Page() {
             .from("TheGreyITBucket")
             .getPublicUrl(filename)
 
+        setImage(publicUrl.publicUrl)
         return publicUrl.publicUrl
     }
 
+
+
+
+    // This function handles form submission
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
 
@@ -88,6 +111,7 @@ export default function Page() {
                 .toLowerCase()
                 .replace(/\s+/g, '-')
                 .replace(/[^\w-]/g, ''),
+            status: "published"
         })
 
         if (error) {
@@ -106,7 +130,12 @@ export default function Page() {
             content: "",
             image: "",
             author: "",
-            publicationDate: "",
+            publicationDate: new Date(),
+            category: "",
+            createdAt: new Date(),
+            id: 0,
+            slug: "",
+            status: "published"
         })
 
         setFile(null)
@@ -118,6 +147,17 @@ export default function Page() {
 
         setLoading(false)
     }
+
+
+
+    useEffect(() => {
+        document.body.style.overflowY = showSchedulerForm ? " hidden " : "auto"
+
+        return () => {
+            document.body.style.overflowY = "auto"
+        }
+
+    }, [showSchedulerForm])
 
     return (
         <form
@@ -165,13 +205,26 @@ export default function Page() {
 
 
 
-                <Button
-                    variant="default"
-                    disabled={loading}
-                    className=" w-fit !text-base !py-2 !font-semibold   "
-                >
-                    {loading ? "Loading..." : "Submit"}
-                </Button>
+                <div className="w-fit flex items-center gap-3 " >
+                    <Button
+                        variant="default"
+                        disabled={loading}
+                        className=" w-fit !text-base !py-2 !font-semibold   "
+                    >
+                        {loading ? <Loading /> : "Submit"}
+                    </Button>
+
+
+                    <Button
+                        onClick={() => setShowSchedulerForm(true)}
+                        variant="default"
+                        type="button"
+                        className=" w-fit !text-base !py-2 !font-semibold
+                     bg-gray-700 text-white  "
+                    >
+                        {loading ? <Loading /> : "Schedule post"}
+                    </Button>
+                </div>
 
 
             </div>
@@ -213,7 +266,7 @@ export default function Page() {
                 <label htmlFor="publicationDate" className="w-full flex flex-col items-start gap-1">
                     <span className="text-base" >Publication Date</span>
                     <input
-                        value={formValues.publicationDate}
+                        value={String(formValues.publicationDate)}
                         type="date"
                         id="publicationDate"
                         name="publicationDate"
@@ -242,6 +295,13 @@ export default function Page() {
             </div>
 
 
+            <PostScheduler
+                data={formValues}
+                setShowSchedulerForm={setShowSchedulerForm}
+                showSchedulerForm={showSchedulerForm}
+                imageUrl={uploadImage}
+                setFormValues={setFormValues}
+            />
 
         </form>
     )

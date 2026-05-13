@@ -182,7 +182,22 @@ interface AdminBlogCardProps {
 
 const AdminBlogCard = ({ blog, setShowDeleteModal, setSelectedIndex, setShowEditModal }: AdminBlogCardProps) => {
     return (
-        <div className="py-3 px-1 w-full h-full flex flex-col items-center justify-start gap-3">
+        <div className="py-3 px-1 w-full h-full flex flex-col items-center justify-start gap-3 relative ">
+
+            {blog.status === "scheduled" ? (
+                <span className="w-fit z-10 flex items-center justify-center text-center
+                text-xs absolute top-0 right-5 py-1.5 px-3 bg-blue-100 text-blue-600  " >
+                    Scheduled
+                </span>
+            )
+                : (
+                    <span className="w-fit z-10 flex items-center justify-center text-center
+                text-xs absolute top-0 right-5 py-1.5 px-3 text-green-700 bg-green-100 " >
+                        Published
+                    </span>
+                )
+
+            }
 
             {/* Only this part should navigate */}
             <Link
@@ -192,7 +207,7 @@ const AdminBlogCard = ({ blog, setShowDeleteModal, setSelectedIndex, setShowEdit
             >
                 <div className="w-full h-[200px] relative bg-gray-200">
                     <Image
-                        src={blog.image}
+                        src={blog.image || "/placeholder.jpg"}
                         fill
                         alt="image"
                         className="object-center object-cover"
