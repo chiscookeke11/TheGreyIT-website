@@ -7,11 +7,18 @@ import toast from "react-hot-toast"
 import { X } from "lucide-react"
 import TiptapEditor from "../admin/TipTapEditor"
 import { Spinner } from "./Spinner"
+import { CustomCheckBox } from "./CustomCheckbox"
+
+
+
+  const statusOptions: ResearchBlogType["status"][] = [
+        "published",
+        "scheduled",
+    ]
 
 
 export default function UpdateBlog({
     selectedIndex,
-    showEditModal,
     updateBlogInUI,
     setShowEditModal,
 }: UpdateBlogProps) {
@@ -29,6 +36,8 @@ export default function UpdateBlog({
         image: "",
         publicationDate: "",
     })
+
+    const [status, setStatus] = useState<ResearchBlogType["status"] | null>(null)
 
     const fileInputRef = useRef<HTMLInputElement | null>(null)
 
@@ -76,6 +85,8 @@ export default function UpdateBlog({
                     title: data.title,
                     tagline: data.tagline ?? ""
                 })
+
+                setStatus(data.status)
             }
 
             setLoading(false)
@@ -142,11 +153,11 @@ export default function UpdateBlog({
                     tagline: formValues.tagline,
                     publicationDate: formValues.publicationDate,
                     image: imageUrl,
+                    status: status
                 })
                 .eq("id", selectedIndex)
                 .select()
 
-                console.log("Update response:", data, error)
 
             if (error) {
                 toast.error(error.message)
@@ -211,7 +222,7 @@ export default function UpdateBlog({
                     />
                 </label>
 
-                  {/* TITLE */}
+                {/* TITLE */}
                 <label className="flex flex-col gap-1">
                     <span>Tagline *</span>
                     <input
@@ -233,6 +244,27 @@ export default function UpdateBlog({
                         className="border px-4 py-2 rounded-md"
                     />
                 </label>
+
+
+                {/* STATUS */}
+                <div className=" flex items-center  gap-15 justify-items-stretch  "  >
+                                        {statusOptions.map((option) => {
+                                            const isChecked =  status === option
+                                            return (
+                                                <CustomCheckBox
+                                                    key={option}
+                                                    checked={isChecked}
+                                                    label={option ?? ""}
+                                                    id={option?.toLowerCase() ?? ""}
+                                                    onCheckedChange={(checked) => {
+                                                        if (checked) {
+                                                           setStatus(option)
+                                                        }
+                                                    }}
+                                                />
+                                            )
+                                        })}
+                                    </div>
 
                 {/* DATE */}
                 <label className="flex flex-col gap-1">
