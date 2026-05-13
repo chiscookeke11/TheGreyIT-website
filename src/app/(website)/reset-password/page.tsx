@@ -13,10 +13,11 @@ const Spinner = () => {
 }
 
 export default function Page() {
+    const COOLDOWN_SECONDS = 180
     const [email, setEmail] = useState("")
     const [loading, setLoading] = useState(false)
     const [isCounting, setIsCounting] = useState(false)
-    const [countdown, setCountdown] = useState(90)
+    const [countdown, setCountdown] = useState(COOLDOWN_SECONDS)
     const router = useRouter()
 
 
@@ -48,7 +49,7 @@ export default function Page() {
                     clearInterval(timer)
                     setIsCounting(false)
                     localStorage.removeItem("resetCooldownEnd")
-                    return 90
+                    return COOLDOWN_SECONDS
                 }
                 return prev - 1
             })
@@ -70,6 +71,17 @@ export default function Page() {
         if (error) {
             toast.error(`Failed to send link: ${error.message}`)
             console.error(error.message)
+            const isRateLimitError = "status" in error && error.status === 429
+
+            if (isRateLimitError) {
+                const endTime = new Date().getTime() + COOLDOWN_SECONDS * 1000
+                localStorage.setItem("resetCooldownEnd", endTime.toString())
+                setCountdown(COOLDOWN_SECONDS)
+                setIsCounting(true)
+                toast.error(`Too many requests. Please wait ${COOLDOWN_SECONDS} seconds and try again.`)
+            } else {
+                toast.error(`Failed to send link: ${error.message}`)
+            }
             setLoading(false)
             return
         }
@@ -78,9 +90,9 @@ export default function Page() {
         setLoading(false)
 
         // Start cooldown
-        const endTime = new Date().getTime() + 180 * 1000 // 3 mins from now
+        const endTime = new Date().getTime() + COOLDOWN_SECONDS * 1000
         localStorage.setItem("resetCooldownEnd", endTime.toString())
-        setCountdown(180)
+        setCountdown(COOLDOWN_SECONDS)
         setIsCounting(true)
     }
 
