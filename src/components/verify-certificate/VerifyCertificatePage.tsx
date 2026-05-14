@@ -5,7 +5,7 @@ import Button from "@/components/UI/Button";
 import { supabase } from "@/lib/supabaseClient";
 import { CertificatesDataType } from "@/types/types";
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import toast from "react-hot-toast";
 import Loading from "../UI/Loading";
 import { CircleAlert, Mail, Phone } from "lucide-react";
@@ -17,6 +17,7 @@ export default function VerifyCertificatePage() {
     const [result, setResult] = useState<CertificatesDataType | null>(null);
     const [notFound, setNotFound] = useState(false);
     const [loading, setLoading] = useState(false)
+    const responseRef = useRef<HTMLDivElement | null>(null)
 
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -49,14 +50,28 @@ export default function VerifyCertificatePage() {
             setNotFound(true);
             setResult(null);
             setLoading(false)
+
+            setTimeout(() => {
+                responseRef.current?.scrollIntoView({
+                    behavior: "smooth",
+                    block: "start",
+                });
+            }, 100);
+
         } else {
             toast.success("Certificate found!")
             setNotFound(false);
             setResult(data);
             setLoading(false)
+
+            setTimeout(() => {
+                responseRef.current?.scrollIntoView({
+                    behavior: "smooth",
+                    block: "start",
+                });
+            }, 100);
         }
 
-        setCertNumber("");
         setLoading(false)
     };
 
@@ -72,7 +87,7 @@ export default function VerifyCertificatePage() {
             <div className="w-full min-h-screen flex flex-col md:flex-row items-stretch justify-between border border-[#E2E8F0]   " >
 
                 {/* the left side */}
-                <div className="  basis-[50%] flex items-center justify-center
+                <div className="  md:basis-[50%] flex items-center justify-center
                  border-t-0 border border-[#E2E8F0] py-18  px-[3%]  "  >
 
                     <div className="flex flex-col items-start gap-7 max-w-xl w-full h-fit" >
@@ -102,8 +117,8 @@ export default function VerifyCertificatePage() {
                                          py-2 px-4 rounded-sm rounded-r-none font-poppins text-sm  "
                                 />
 
-                                <Button variant="default" className="h-full rounded-l-none bg-[#1E3A8A] text-white text-sm! hover:brightness-90! hover:bg-[#1E3A8A]! " >
-                                    {loading ? <Loading /> : "Verify Certificate"}
+                                <Button variant="default" className="h-full rounded-l-none bg-gray-700 text-white text-sm! hover:brightness-90! hover:bg-gray-700! " >
+                                    {loading ? <Loading color="#ffffff" /> : "Verify Certificate"}
                                 </Button>
                             </form>
 
@@ -141,7 +156,9 @@ export default function VerifyCertificatePage() {
 
 
                 {/* the right side */}
-                <div className=" basis-[50%] bg-[#F1F5F9] flex items-center justify-center relative py-18 px-[3%] " >
+                <div
+                    ref={responseRef}
+                    className=" md:basis-[50%] bg-[#F1F5F9] flex items-center justify-center relative py-18 px-[3%] " >
 
                     {!result && !notFound && (
                         <div className="w-40 h-40 rounded-full shadow-[0px_1px_2px_-1px_#0000001A,0px_1px_3px_0px_#0000001A]" >
@@ -318,8 +335,6 @@ export default function VerifyCertificatePage() {
 
 
             </div>
-
-
         </div >
 
     )
