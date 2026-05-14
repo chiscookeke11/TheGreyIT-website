@@ -62,6 +62,11 @@ export default function Page() {
     const sendResetLink = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
 
+        if (isCounting) {
+            toast.error(`Please wait ${countdown}s before requesting another reset link.`)
+            return
+        }
+
         setLoading(true)
 
         const redirectBaseUrl = typeof window !== "undefined" ? window.location.origin : "https://www.thegreyit.org"
@@ -71,7 +76,10 @@ export default function Page() {
         })
 
         if (error) {
-            const isRateLimitError = "status" in error && error.status === 429
+            console.error(error.message)
+            const isRateLimitError =
+                ("status" in error && error.status === 429) ||
+                error.message.toLowerCase().includes("rate limit")
 
             if (isRateLimitError) {
                 const endTime = new Date().getTime() + COOLDOWN_SECONDS * 1000
