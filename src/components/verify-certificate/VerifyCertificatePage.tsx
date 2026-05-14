@@ -65,15 +65,15 @@ export default function VerifyCertificatePage() {
 
 
     return (
-        <div className="w-full min-h-screen flex flex-col bg-white pt-32 ">
+        <div className="w-full min-h-screen flex flex-col bg-white pt-20 md:pt-28 ">
 
 
 
-            <div className="w-full min-h-screen flex flex-row items-stretch justify-between border border-[#E2E8F0]   " >
+            <div className="w-full min-h-screen flex flex-col md:flex-row items-stretch justify-between border border-[#E2E8F0]   " >
 
                 {/* the left side */}
                 <div className="  basis-[50%] flex items-center justify-center
-                 border-t-0 border border-[#E2E8F0] py-18   "  >
+                 border-t-0 border border-[#E2E8F0] py-18  px-[3%]  "  >
 
                     <div className="flex flex-col items-start gap-7 max-w-xl w-full h-fit" >
 
@@ -84,7 +84,7 @@ export default function VerifyCertificatePage() {
                         </div>
 
 
-                        <div className=" w-full bg-white border border-[#E2E8F0]  p-8 rounded-[8px]
+                        <div className=" w-full bg-white border border-[#E2E8F0] p-4 md:p-8 rounded-[8px]
                              flex flex-col items-start gap-3 shadow-[0_1px_2px_-1px_rgba(0,0,0,0.10),0_1px_3px_0_rgba(0,0,0,0.10)] "  >
 
                             <h3 className="font-inter md:text-sm font-semibold text-[#0F172A] text-xs   " >Certificate Number</h3>
@@ -141,7 +141,7 @@ export default function VerifyCertificatePage() {
 
 
                 {/* the right side */}
-                <div className=" basis-[50%] bg-[#F1F5F9] flex items-center justify-center relative py-18" >
+                <div className=" basis-[50%] bg-[#F1F5F9] flex items-center justify-center relative py-18 px-[3%] " >
 
                     {!result && !notFound && (
                         <div className="w-40 h-40 rounded-full shadow-[0px_1px_2px_-1px_#0000001A,0px_1px_3px_0px_#0000001A]" >
@@ -151,7 +151,7 @@ export default function VerifyCertificatePage() {
 
                     {/* if a result is found */}
                     {result && (
-                        <div className="w-full max-w-2xl rounded-[12px] bg-white h-fit p-10
+                        <div className="w-full max-w-2xl rounded-[12px] bg-white h-fit p-5 md:p-10
                     border border-[#E2E8F0] flex flex-col items-center gap-8 font-poppins
                      shadow-[0px_1px_2px_-1px_#0000001A,0px_1px_3px_0px_#0000001A]" >
 
@@ -161,7 +161,7 @@ export default function VerifyCertificatePage() {
                             </span>
 
                             <div className="space-y-2" >
-                                <h2 className="font-semibold text-green-700 text-2xl mb-4 mx-auto text-center ">
+                                <h2 className="font-semibold text-green-700 text-xl md:text-2xl mb-4 mx-auto text-center ">
                                     Verification Successful
                                 </h2>
                                 <p className="text-sm font-normal text-start">Thank you for using the <b>The Grey IT &
@@ -256,7 +256,7 @@ export default function VerifyCertificatePage() {
                     {/* if no result was found  */}
 
                     {notFound && (
-                        <div className="w-full max-w-2xl rounded-[12px] bg-white h-fit p-10
+                        <div className="w-full max-w-2xl rounded-[12px] bg-white h-fit p-5 md:p-10
                     border border-[#E2E8F0] flex flex-col items-center gap-8 font-poppins
                      shadow-[0px_1px_2px_-1px_#0000001A,0px_1px_3px_0px_#0000001A]">
 
@@ -267,7 +267,7 @@ export default function VerifyCertificatePage() {
                             </span>
 
                             <div className="space-y-3 text-start">
-                                <h2 className="font-semibold text-red-600 text-2xl mb-4 mx-auto text-center ">
+                                <h2 className="font-semibold text-red-600 text-xl md:text-2xl mb-4 mx-auto text-center ">
                                     Verification Unsuccessful
                                 </h2>
 
