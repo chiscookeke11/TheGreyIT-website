@@ -158,7 +158,13 @@ export default function VerifyCertificatePage() {
                 {/* the right side */}
                 <div
                     ref={responseRef}
-                    className=" md:basis-[50%] bg-[#F1F5F9] flex items-center justify-center relative py-18 px-[3%] " >
+                    className=" md:basis-[50%] bg-[#F1F5F9] flex items-center justify-center relative py-18 px-[3%] overflow-hidden " >
+
+
+                    <div className="bg-[#1E3A8A] absolute size-[256px] rounded-full opacity-[3%] top-[-10%] right-[-10px]" >
+
+                    </div>
+
 
                     {!result && !notFound && (
                         <div className="w-40 h-40 rounded-full shadow-[0px_1px_2px_-1px_#0000001A,0px_1px_3px_0px_#0000001A]" >
@@ -170,7 +176,7 @@ export default function VerifyCertificatePage() {
                     {result && (
                         <div className="w-full max-w-2xl rounded-[12px] bg-white h-fit p-5 md:p-10
                     border border-[#E2E8F0] flex flex-col items-center gap-8 font-poppins
-                     shadow-[0px_1px_2px_-1px_#0000001A,0px_1px_3px_0px_#0000001A]" >
+                     shadow-[0px_1px_2px_-1px_#0000001A,0px_1px_3px_0px_#0000001A] z-10" >
 
                             <span className="block size-20 rounded-full p-2
                         shadow-[0px_1px_2px_-1px_#0000001A,0px_1px_3px_0px_#0000001A] " >
@@ -197,7 +203,7 @@ export default function VerifyCertificatePage() {
                                 <li className="w-full flex items-center justify-between text-sm text-[#64748B]
                                 font-inter  font-normal border-b border-[#E2E8F0] pb-2 " >
                                     Student Name:
-                                    <span className="font-semibold text-[#0F172A] " >{result.student_name}</span> </li>
+                                    <span className="font-semibold text-[#0F172A] " >{result.student_name.toUpperCase()}</span> </li>
 
 
                                 <li className="w-full flex items-center justify-between text-sm text-[#64748B]
@@ -274,7 +280,7 @@ export default function VerifyCertificatePage() {
 
                     {notFound && (
                         <div className="w-full max-w-2xl rounded-[12px] bg-white h-fit p-5 md:p-10
-                    border border-[#E2E8F0] flex flex-col items-center gap-8 font-poppins
+                    border border-[#E2E8F0] flex flex-col items-center gap-8 font-poppins z-10
                      shadow-[0px_1px_2px_-1px_#0000001A,0px_1px_3px_0px_#0000001A]">
 
 
