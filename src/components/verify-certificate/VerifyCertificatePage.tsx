@@ -72,7 +72,7 @@ export default function VerifyCertificatePage() {
             <div className="w-full min-h-screen flex flex-col md:flex-row items-stretch justify-between border border-[#E2E8F0]   " >
 
                 {/* the left side */}
-                <div className="  basis-[50%] flex items-center justify-center
+                <div className="  md:basis-[50%] flex items-center justify-center
                  border-t-0 border border-[#E2E8F0] py-18  px-[3%]  "  >
 
                     <div className="flex flex-col items-start gap-7 max-w-xl w-full h-fit" >
@@ -141,7 +141,7 @@ export default function VerifyCertificatePage() {
 
 
                 {/* the right side */}
-                <div className=" basis-[50%] bg-[#F1F5F9] flex items-center justify-center relative py-18 px-[3%] " >
+                <div className=" md:basis-[50%] bg-[#F1F5F9] flex items-center justify-center relative py-18 px-[3%] " >
 
                     {!result && !notFound && (
                         <div className="w-40 h-40 rounded-full shadow-[0px_1px_2px_-1px_#0000001A,0px_1px_3px_0px_#0000001A]" >
