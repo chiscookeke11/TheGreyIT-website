@@ -19,7 +19,7 @@ export const HeroCard = ({ data }: HeroCardProps) => {
 
             <div className="relative w-full h-[400px] rounded-xs overflow-hidden">
                 <Image
-                    src={data.image}
+                    src={data.image || "/placeholder.jpg"}
                     alt={`${data.title}-image`}
                     fill
                     className="object-cover object-center"
