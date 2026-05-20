@@ -29,7 +29,6 @@ export default function Page() {
     const [file, setFile] = useState<File | null>(null)
     const [loading, setLoading] = useState(false)
     const [showSchedulerForm, setShowSchedulerForm] = useState(false)
-    const [image, setImage] = useState<string | null>(null)
 
     //  File input ref
     const fileInputRef = useRef<HTMLInputElement | null>(null)
@@ -58,9 +57,11 @@ export default function Page() {
 
 
     // This function handles image upload to supabase storage
-    const uploadImage = async () => {
+    const uploadImage = async ({ requireImage = true }: { requireImage?: boolean } = {}) => {
         if (!file) {
-            toast.error("Please select an image")
+            if (requireImage) {
+                toast.error("Please select an image")
+            }
             return
         }
 
@@ -80,7 +81,6 @@ export default function Page() {
             .from("TheGreyITBucket")
             .getPublicUrl(filename)
 
-        setImage(publicUrl.publicUrl)
         return publicUrl.publicUrl
     }
 
@@ -91,8 +91,19 @@ export default function Page() {
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
 
-        if (!formValues.title || !formValues.publicationDate || !formValues.content || !formValues.author) {
+        if (
+            !formValues.title ||
+            !formValues.publicationDate ||
+            !formValues.content ||
+            !formValues.author
+        ) {
             toast.error("Please fill in the required fields")
+            return;
+        }
+
+        // ADD THIS
+        if (!file) {
+            toast.error("Please select an image")
             return;
         }
 
@@ -123,7 +134,6 @@ export default function Page() {
 
         toast.success("Blog added successfully!")
 
-        //  Reset form state
         setFormValues({
             title: "",
             tagline: "",
@@ -140,7 +150,6 @@ export default function Page() {
 
         setFile(null)
 
-        //  Reset file input manually
         if (fileInputRef.current) {
             fileInputRef.current.value = ""
         }
@@ -204,7 +213,6 @@ export default function Page() {
 
 
 
-
                 <div className="w-fit flex items-center gap-3 " >
                     <Button
                         variant="default"
@@ -222,7 +230,7 @@ export default function Page() {
                         className=" w-fit !text-base !py-2 !font-semibold
                      bg-gray-700 text-white  "
                     >
-                        {loading ? <Loading /> : "Schedule post"}
+                        Schedule post
                     </Button>
                 </div>
 
@@ -299,7 +307,7 @@ export default function Page() {
                 data={formValues}
                 setShowSchedulerForm={setShowSchedulerForm}
                 showSchedulerForm={showSchedulerForm}
-                imageUrl={uploadImage}
+                imageUrl={() => uploadImage({ requireImage: false })}
                 setFormValues={setFormValues}
             />
 
