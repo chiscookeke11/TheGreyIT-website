@@ -91,8 +91,19 @@ export default function Page() {
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
 
-        if (!formValues.title || !formValues.publicationDate || !formValues.content || !formValues.author) {
+        if (
+            !formValues.title ||
+            !formValues.publicationDate ||
+            !formValues.content ||
+            !formValues.author
+        ) {
             toast.error("Please fill in the required fields")
+            return;
+        }
+
+        // ADD THIS
+        if (!file) {
+            toast.error("Please select an image")
             return;
         }
 
@@ -123,7 +134,6 @@ export default function Page() {
 
         toast.success("Blog added successfully!")
 
-        //  Reset form state
         setFormValues({
             title: "",
             tagline: "",
@@ -140,7 +150,6 @@ export default function Page() {
 
         setFile(null)
 
-        //  Reset file input manually
         if (fileInputRef.current) {
             fileInputRef.current.value = ""
         }
