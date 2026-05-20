@@ -60,12 +60,6 @@ export default function PostScheduler({ data, setShowSchedulerForm, showSchedule
 
         const url = await imageUrl()
 
-        if (!url) {
-            toast.error("Image upload failed")
-            setLoading(false)
-            return
-        }
-
         const { error } = await supabase
             .from("blog")
             .insert({
@@ -73,7 +67,7 @@ export default function PostScheduler({ data, setShowSchedulerForm, showSchedule
                 tagline: data.tagline,
                 author: data.author,
                 content: data.content,
-                image: url,
+                image: url || data.image || "",
                 publicationDate: data.publicationDate,
                 slug: data.title
                     .toLowerCase()
@@ -96,6 +90,23 @@ export default function PostScheduler({ data, setShowSchedulerForm, showSchedule
         setScheduleFormValue({
             date: "",
             time: ""
+        });
+
+
+        setFormValues({
+            author: "",
+            category: "",
+            content: "",
+            createdAt: new Date,
+            id: 0,
+            image: "",
+            publicationDate: new Date,
+            slug: "",
+            title: "",
+            scheduled_date: "",
+            scheduled_time: "",
+            status: "",
+            tagline: ""
         })
 
         setShowSchedulerForm(false)
