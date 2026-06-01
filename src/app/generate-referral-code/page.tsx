@@ -144,7 +144,7 @@ export default function Page() {
 
                 <label htmlFor="email" className=" w-full flex flex-col items-start gap-1  " >
                     <span className="text-base font-medium " >Enter your email</span>
-                    <input type="email" id="email" name="email" onChange={handleChange} value={email} placeholder="chiscookeke11@gmail.com" className="w-full py-3 px-5 border border-gray-700 outline-none focus:outline-none text-base rounded-sm " />
+                    <input type="email" id="email" name="email" onChange={handleChange} value={email} placeholder="" className="w-full py-3 px-5 border border-gray-700 outline-none focus:outline-none text-base rounded-sm " />
                 </label>
 
 
