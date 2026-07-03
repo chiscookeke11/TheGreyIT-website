@@ -10,6 +10,8 @@ import Link from "next/link";
 import Loading from "@/components/UI/Loading";
 import PostScheduler from "@/components/UI/PostScheduler";
 import { ResearchBlogType } from "@/types/types";
+import imageCompression from "browser-image-compression"
+
 
 export default function Page() {
     const [formValues, setFormValues] = useState<ResearchBlogType>({
@@ -65,11 +67,28 @@ export default function Page() {
             return
         }
 
+
+        let fileToUpload = file;
+
+        try {
+            fileToUpload = await imageCompression(file, {
+                maxSizeMB: 1,
+                maxWidthOrHeight: 1920,
+                useWebWorker: true,
+                fileType: "image/webp"
+            });
+        } catch (err) {
+            console.error("Compression failed, uploading original", err)
+        }
+
+
         const filename = `${Date.now()}-${file.name}`
 
         const { error } = await supabase.storage
             .from("TheGreyITBucket")
-            .upload(filename, file)
+            .upload(filename, fileToUpload, {
+                contentType: "image/webp",
+            })
 
         if (error) {
             console.error("Upload error")
