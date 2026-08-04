@@ -126,6 +126,11 @@ export default function Page() {
             return;
         }
 
+        if (formValues.tagline && formValues.tagline.length > 200) {
+            toast.error("Tagline cannot be more than 200 characters.");
+            return;
+        }
+
         setLoading(true)
 
         const imageUrl = await uploadImage()
@@ -145,8 +150,14 @@ export default function Page() {
         })
 
         if (error) {
-            console.error("Failed to upload blog", error)
-            toast.error("Failed to upload blog")
+            console.error("Failed to upload blog");
+
+            if (error.code === "23514") {
+                toast.error("Tagline must not exceed 200 characters.")
+            }
+            else {
+                toast.error(error.message || "Failed to upload blog")
+            }
             setLoading(false)
             return;
         }
