@@ -145,7 +145,7 @@ export default function Page() {
         })
 
         if (error) {
-            console.error("Failed to upload blog")
+            console.error("Failed to upload blog", error)
             toast.error("Failed to upload blog")
             setLoading(false)
             return;
