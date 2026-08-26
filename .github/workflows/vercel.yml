@@ -21,10 +21,10 @@ jobs:
           node-version: "18"
 
       - name: Install pnpm
-        run: npm install -g pnpm
+        run: npm install -g pnpm@9
 
       - name: Install dependencies
-        run: pnpm install --no-frozen-lockfile
+        run: pnpm install
 
       - name: Set up environment variables
         run: |
