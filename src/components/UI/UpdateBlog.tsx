@@ -62,7 +62,7 @@ export default function UpdateBlog({
 
 
 
-    /* ---------------- FETCH BLOG ---------------- */
+    /* ---------------- FETCH BLOG -------------- */
     useEffect(() => {
         const fetchBlog = async () => {
             setLoading(true)
