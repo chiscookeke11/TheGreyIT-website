@@ -5,9 +5,10 @@ import { ResearchBlogType, UpdateBlogProps, updateBlogType } from "@/types/types
 import { supabase } from "@/lib/supabaseClient"
 import toast from "react-hot-toast"
 import { X } from "lucide-react"
-import TiptapEditor from "../admin/TipTapEditor"
 import { Spinner } from "./Spinner"
 import { CustomCheckBox } from "./CustomCheckbox"
+import ReactQuill from "react-quill-new"
+import "react-quill-new/dist/quill.snow.css";
 
 
 
@@ -283,9 +284,22 @@ export default function UpdateBlog({
                 {/* CONTENT */}
                 <div className="flex flex-col gap-2">
                     <span>Content *</span>
-                    <TiptapEditor
-                        content={formValues.content}
+                    <ReactQuill
+                        theme="snow"
+                        value={formValues.content}
                         onChange={handleTipTapChange}
+                        modules={{
+                            toolbar: [
+                                [{ header: [1, 2, 3, false] }],
+                                ["bold", "italic", "underline", "strike"],
+                                [{ list: "ordered" }, { list: "bullet" }],
+                                [{ align: [] }],
+                                ["link", "image"],
+                                ["clean"],
+                            ],
+                        }}
+                        placeholder="Write your content..."
+                        className="w-full  "
                     />
                 </div>
 
