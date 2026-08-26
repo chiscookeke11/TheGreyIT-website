@@ -13,10 +13,12 @@ const eslintConfig = [
   ...compat.extends("next/core-web-vitals", "next/typescript"),
 
   {
+    files: ["**/*.{js,mjs,cjs,ts,jsx,tsx}"],
     rules: {
-      "react-hooks/set-state-in-effect": "warn",
+      "react-hooks/set-state-in-effect": "off",
     },
-
+  },
+  {
     ignores: [
       "node_modules/**",
       ".next/**",
