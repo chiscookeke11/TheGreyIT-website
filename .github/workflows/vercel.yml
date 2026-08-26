@@ -24,7 +24,9 @@ jobs:
         run: npm install -g pnpm
 
       - name: Install dependencies
-        run: pnpm install
+        run: |
+          pnpm config set ignore-scripts false
+          pnpm install
 
       - name: Set up environment variables
         run: |
