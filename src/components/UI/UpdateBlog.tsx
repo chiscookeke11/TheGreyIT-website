@@ -43,7 +43,7 @@ export default function UpdateBlog({
     const fileInputRef = useRef<HTMLInputElement | null>(null)
 
 
-    //  this function closes the modal on click outside
+    //  this function closes the modal on click outsie
     useEffect(() => {
         const handleClickOutside = (e: MouseEvent) => {
             if (modalRef.current && !modalRef.current.contains(e.target as Node)) {
