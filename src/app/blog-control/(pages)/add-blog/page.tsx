@@ -1,6 +1,6 @@
 "use client"
 
-import TiptapEditor from "@/components/admin/TipTapEditor";
+
 import Button from "@/components/UI/Button";
 import React, { useState, useRef, useEffect } from "react";
 import { supabase } from "@/lib/supabaseClient"
@@ -10,6 +10,13 @@ import Link from "next/link";
 import Loading from "@/components/UI/Loading";
 import PostScheduler from "@/components/UI/PostScheduler";
 import { ResearchBlogType } from "@/types/types";
+import imageCompression from "browser-image-compression";
+import "react-quill-new/dist/quill.snow.css";
+import ReactQuill from "react-quill-new";
+
+
+
+
 
 export default function Page() {
     const [formValues, setFormValues] = useState<ResearchBlogType>({
@@ -28,7 +35,7 @@ export default function Page() {
 
     const [file, setFile] = useState<File | null>(null)
     const [loading, setLoading] = useState(false)
-    const [showSchedulerForm, setShowSchedulerForm] = useState(false)
+    const [showSchedulerForm, setShowSchedulerForm] = useState(false);
 
     //  File input ref
     const fileInputRef = useRef<HTMLInputElement | null>(null)
@@ -65,11 +72,28 @@ export default function Page() {
             return
         }
 
+
+        let fileToUpload = file;
+
+        try {
+            fileToUpload = await imageCompression(file, {
+                maxSizeMB: 1,
+                maxWidthOrHeight: 1920,
+                useWebWorker: true,
+                fileType: "image/webp"
+            });
+        } catch (err) {
+            console.error("Compression failed, uploading original", err)
+        }
+
+
         const filename = `${Date.now()}-${file.name}`
 
         const { error } = await supabase.storage
             .from("TheGreyITBucket")
-            .upload(filename, file)
+            .upload(filename, fileToUpload, {
+                contentType: "image/webp",
+            })
 
         if (error) {
             console.error("Upload error")
@@ -107,6 +131,11 @@ export default function Page() {
             return;
         }
 
+        if (formValues.tagline && formValues.tagline.length > 200) {
+            toast.error("Tagline cannot be more than 200 characters.");
+            return;
+        }
+
         setLoading(true)
 
         const imageUrl = await uploadImage()
@@ -126,8 +155,14 @@ export default function Page() {
         })
 
         if (error) {
-            console.error("Failed to upload blog")
-            toast.error("Failed to upload blog")
+            console.error("Failed to upload blog");
+
+            if (error.code === "23514") {
+                toast.error("Tagline must not exceed 200 characters.")
+            }
+            else {
+                toast.error(error.message || "Failed to upload blog")
+            }
             setLoading(false)
             return;
         }
@@ -202,14 +237,28 @@ export default function Page() {
                 </label>
 
 
+
                 <div className="w-full flex flex-col gap-1 text-gray-700">
                     <span className="text-base  text-gray-700">Content</span>
-                    <TiptapEditor
-                        content={formValues.content}
+
+                    <ReactQuill
+                        theme="snow"
+                        value={formValues.content}
                         onChange={handleTipTapChange}
+                        modules={{
+                            toolbar: [
+                                [{ header: [1, 2, 3, false] }],
+                                ["bold", "italic", "underline", "strike"],
+                                [{ list: "ordered" }, { list: "bullet" }],
+                                [{ align: [] }],
+                                ["link", "image"],
+                                ["clean"],
+                            ],
+                        }}
+                        placeholder="Write your content..."
+                        className="w-full  "
                     />
                 </div>
-
 
 
 

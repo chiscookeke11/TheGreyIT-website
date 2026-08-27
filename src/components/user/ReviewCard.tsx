@@ -2,7 +2,6 @@ import { reviewDataType } from "@/types/types";
 import Image from "next/image";
 import RatingStars from "./ReviewStarsComponent";
 import { supabase } from "@/lib/supabaseClient";
-import { useAppContext } from "@/context/AppContext";
 import { useEffect, useState } from "react";
 
 
@@ -13,7 +12,7 @@ interface ReviewCardProps {
 export default function ReviewCard({ data }: ReviewCardProps) {
     const [userImage, setUserImage] = useState<string | null>(null)
     const reviewDate = new Date(data.userReviewDate)
-    const now = Date.now()
+    const [now] = useState(() => Date.now())
     const user_id = data.user_id
 
 

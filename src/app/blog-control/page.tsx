@@ -210,7 +210,7 @@ const AdminBlogCard = ({ blog, setShowDeleteModal, setSelectedIndex, setShowEdit
                         src={blog.image || "/placeholder.jpg"}
                         fill
                         alt="image"
-                        className="object-center object-cover"
+                        className="object-center object-cover absolute inset-0 "
                     />
                 </div>
 
