@@ -10,7 +10,7 @@ import Image from "next/image";
 import RecentBlogCard from "./RecentBlogCard";
 import RecentBlogCardSkeleton from "./RecentBlogCardSkeleton";
 import { estimateReadTime, formatReadableDate } from "@/lib/utils";
-import PortableTextRenderer from '@/components/UI/PortableTextRenderer'
+
 
 
 interface BlogPageComponentProps {
@@ -82,7 +82,7 @@ export default function BlogPageComponent({ slug }: BlogPageComponentProps) {
 
 
     return (
-        <article className="bg-white text-black font-poppins flex flex-col items-center  gap-9 ">
+        <article className="w-full min-w-0 overflow-x-hidden bg-white text-black font-poppins flex flex-col items-center gap-9">
             <div className="w-full  flex flex-col items-center gap-3 pt-24 md:pt-36 pb-16 px-[3%]  bg-[#f2f5fc]" >
                 <div className="w-full max-w-2xl lg:max-w-4xl flex flex-col items-start gap-3 ">
                     <p className="text-xs flex items-center gap-4 " > {formatReadableDate(new Date(currentBlog.publicationDate))}
@@ -105,8 +105,50 @@ export default function BlogPageComponent({ slug }: BlogPageComponentProps) {
 
             </div>
 
-            <div className="px-[2%] lg:px-[15%] py-16 bg-white">
-                <PortableTextRenderer value={currentBlog.content} />
+            <div className="w-full min-w-0 mb-10 px-4 md:px-6 overflow-hidden">
+                <div
+                    className="
+            w-full
+            max-w-5xl
+            mx-auto
+            text-base
+            md:text-lg
+            font-normal
+            font-raleway
+            text-black
+            break-words
+            [overflow-wrap:anywhere]
+
+            [&_p]:mb-6
+            [&_h1]:text-3xl
+            [&_h1]:font-bold
+            [&_h1]:mb-6
+
+            [&_h2]:text-2xl
+            [&_h2]:font-bold
+            [&_h2]:mb-4
+
+            [&_h3]:text-xl
+            [&_h3]:font-bold
+            [&_h3]:mb-3
+
+            [&_img]:max-w-full
+            [&_img]:h-auto
+
+            [&_video]:max-w-full
+            [&_iframe]:max-w-full
+
+            [&_table]:w-full
+            [&_table]:max-w-full
+            [&_table]:overflow-x-auto
+            [&_table]:block
+
+            [&_pre]:max-w-full
+            [&_pre]:overflow-x-auto
+            [&_code]:break-words
+        "
+                    dangerouslySetInnerHTML={{ __html: currentBlog.content }}
+                />
             </div>
 
 
