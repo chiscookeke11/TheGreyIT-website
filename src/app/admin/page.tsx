@@ -39,12 +39,12 @@ export default function Page() {
                 .eq("is_ambassador", true)
         ])
 
-        if (usersRes.error) console.error(usersRes.error)
-        if (coursesRes.error) console.error(coursesRes.error)
-        if (reviewsRes.error) console.error(reviewsRes.error)
-        if (blogsRes.error) console.error(blogsRes.error)
-        if (transactionsRes.error) console.error(transactionsRes.error)
-        if (ambassadorsRes.error) console.error(ambassadorsRes.error)
+        // if (usersRes.error) console.error(usersRes.error)
+        // if (coursesRes.error) console.error(coursesRes.error)
+        // if (reviewsRes.error) console.error(reviewsRes.error)
+        // if (blogsRes.error) console.error(blogsRes.error)
+        // if (transactionsRes.error) console.error(transactionsRes.error)
+        // if (ambassadorsRes.error) console.error(ambassadorsRes.error)
 
         setUserDataLength(usersRes.count ?? 0)
         setCoursesLength(coursesRes.count ?? 0)

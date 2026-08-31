@@ -81,7 +81,6 @@ export default function CoursePageComponent() {
         const { data, error } = await supabase.from("course").select("*")
 
         if (error) {
-            console.log("Failed to fetch course:")
             return
         }
 
@@ -114,7 +113,7 @@ export default function CoursePageComponent() {
     }, [search, allCourses])
 
     return (
-        <div className="h-full w-full text-black bg-white relative " >
+        <div className="h-full w-full text-black bg-white relative pb-24 " >
 
 
             {/* Courses page hero section  */}
@@ -238,6 +237,31 @@ export default function CoursePageComponent() {
                         </section>
                     )
             }
+
+            <section className="relative w-full max-w-4xl mx-auto flex flex-col items-center justify-center overflow-hidden rounded-2xl py-28 px-[4%] text-center mt-40 font-poppins ">
+
+                {/* Background video */}
+                <video
+                    src="/intro-courses-images/Far_4K_Motion_Background_Loop.mp4"
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    className="absolute inset-0 w-full h-full object-cover z-0"
+                />
+
+                {/* Dark overlay (optional but recommended) */}
+                <div className="absolute inset-0 bg-black/40 z-10"></div>
+
+                {/* Content */}
+                <div className="relative z-20 text-white space-y-3 ">
+                    <h2 className="text-3xl font-bold">See our 2026 cohort courses</h2>
+                    <Link
+                        className="mt-6 inline-flex w-full max-w-[200px] items-center justify-center rounded-lg bg-white px-4 py-3 text-base font-medium text-gray-900  transition hover:scale-90 "
+                        href={"/cohort2026"} >View cohort courses </Link>
+                </div>
+
+            </section>
 
         </div>
     )

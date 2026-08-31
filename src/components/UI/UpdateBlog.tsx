@@ -5,13 +5,21 @@ import { ResearchBlogType, UpdateBlogProps, updateBlogType } from "@/types/types
 import { supabase } from "@/lib/supabaseClient"
 import toast from "react-hot-toast"
 import { X } from "lucide-react"
-import TiptapEditor from "../admin/TipTapEditor"
 import { Spinner } from "./Spinner"
+import { CustomCheckBox } from "./CustomCheckbox"
+import ReactQuill from "react-quill-new"
+import "react-quill-new/dist/quill.snow.css";
+
+
+
+const statusOptions: ResearchBlogType["status"][] = [
+    "published",
+    "scheduled",
+]
 
 
 export default function UpdateBlog({
     selectedIndex,
-    showEditModal,
     updateBlogInUI,
     setShowEditModal,
 }: UpdateBlogProps) {
@@ -30,10 +38,12 @@ export default function UpdateBlog({
         publicationDate: "",
     })
 
+    const [status, setStatus] = useState<ResearchBlogType["status"] | null>(null)
+
     const fileInputRef = useRef<HTMLInputElement | null>(null)
 
 
-    //  this function closes the modal on click outside
+    //  this function closes the modal on click outsie
     useEffect(() => {
         const handleClickOutside = (e: MouseEvent) => {
             if (modalRef.current && !modalRef.current.contains(e.target as Node)) {
@@ -52,7 +62,7 @@ export default function UpdateBlog({
 
 
 
-    /* ---------------- FETCH BLOG ---------------- */
+    /* ---------------- FETCH BLOG -------------- */
     useEffect(() => {
         const fetchBlog = async () => {
             setLoading(true)
@@ -76,6 +86,8 @@ export default function UpdateBlog({
                     title: data.title,
                     tagline: data.tagline ?? ""
                 })
+
+                setStatus(data.status)
             }
 
             setLoading(false)
@@ -142,11 +154,11 @@ export default function UpdateBlog({
                     tagline: formValues.tagline,
                     publicationDate: formValues.publicationDate,
                     image: imageUrl,
+                    status: status
                 })
                 .eq("id", selectedIndex)
                 .select()
 
-                console.log("Update response:", data, error)
 
             if (error) {
                 toast.error(error.message)
@@ -159,7 +171,6 @@ export default function UpdateBlog({
             toast.success("Blog updated successfully")
             setShowEditModal(false)
         } catch (err) {
-            console.error(err)
             toast.error("Failed to update blog")
         } finally {
             setLoading(false)
@@ -211,7 +222,7 @@ export default function UpdateBlog({
                     />
                 </label>
 
-                  {/* TITLE */}
+                {/* TITLE */}
                 <label className="flex flex-col gap-1">
                     <span>Tagline *</span>
                     <input
@@ -234,6 +245,30 @@ export default function UpdateBlog({
                     />
                 </label>
 
+
+                {/* STATUS */}
+                <div className="flex flex-col gap-1">
+                    <span>Status</span>
+                    <div className=" flex items-center  gap-15 justify-items-stretch  "  >
+                        {statusOptions.map((option) => {
+                            const isChecked = status === option
+                            return (
+                                <CustomCheckBox
+                                    key={option}
+                                    checked={isChecked}
+                                    label={option ?? ""}
+                                    id={option?.toLowerCase() ?? ""}
+                                    onCheckedChange={(checked) => {
+                                        if (checked) {
+                                            setStatus(option)
+                                        }
+                                    }}
+                                />
+                            )
+                        })}
+                    </div>
+                </div>
+
                 {/* DATE */}
                 <label className="flex flex-col gap-1">
                     <span>Publication Date</span>
@@ -249,9 +284,22 @@ export default function UpdateBlog({
                 {/* CONTENT */}
                 <div className="flex flex-col gap-2">
                     <span>Content *</span>
-                    <TiptapEditor
-                        content={formValues.content}
+                    <ReactQuill
+                        theme="snow"
+                        value={formValues.content}
                         onChange={handleTipTapChange}
+                        modules={{
+                            toolbar: [
+                                [{ header: [1, 2, 3, false] }],
+                                ["bold", "italic", "underline", "strike"],
+                                [{ list: "ordered" }, { list: "bullet" }],
+                                [{ align: [] }],
+                                ["link", "image"],
+                                ["clean"],
+                            ],
+                        }}
+                        placeholder="Write your content..."
+                        className="w-full  "
                     />
                 </div>
 

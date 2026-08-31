@@ -7,7 +7,7 @@ export interface CourseDataTypes {
   shorter_Description?: string,
   imageUrl: string,
   bgColor: string,
-  duration?: string[],
+  duration?: string[] | string,
   price: number,
   rating: number,
   id?: string,
@@ -41,7 +41,10 @@ export interface ResearchBlogType {
   content: string
   publicationDate: Date;
   slug: string;
-  tagline?: string
+  tagline?: string,
+  scheduled_time?: string,
+  scheduled_date?: string,
+  status?: "scheduled" | "published" | ""
 };
 
 
@@ -215,17 +218,85 @@ export interface courseEnrollmentsDataType {
 
 
 export interface UpdateBlogProps {
-    showEditModal: boolean;
-    setShowEditModal: React.Dispatch<React.SetStateAction<boolean>>;
-    selectedIndex: string
-    updateBlogInUI: (blog: ResearchBlogType) => void
+  showEditModal: boolean;
+  setShowEditModal: React.Dispatch<React.SetStateAction<boolean>>;
+  selectedIndex: string
+  updateBlogInUI: (blog: ResearchBlogType) => void
 }
 
 export interface updateBlogType {
-    title: string,
-    content: string,
-    author: string,
-    image: string,
-    tagline: string,
-    publicationDate: string
+  title: string,
+  content: string,
+  author: string,
+  image: string,
+  tagline: string,
+  publicationDate: string
 }
+
+
+export interface CohortCourseTypes {
+  title: string;
+  id: string;
+  online_fee: number;
+  inhouse_fee: number;
+  imageUrl: string;
+  slug?: string;
+  duration: string | string[];
+  description: string;
+  bgColor: string;
+  rating: number;
+  price: number
+}
+
+
+
+export interface CohortStudentRegistrationTypes {
+  fullname: string;
+  email: string;
+  gender: "male" | "female" | "";
+  phone_number: string;
+  whatsapp_number: string;
+  city: string;
+  state: string;
+  country: string;
+  learning_mode: "Online" | "Inhouse",
+  course: string;
+  priceToPay: number;
+  payment_plan: "full" | "part" | ""
+}
+
+
+export interface CountryDataType {
+  label: string;
+  value: string;
+  iso: string
+}
+
+
+
+export type QuickIntroClass = {
+  slug: string;
+  title: string
+  subtitle: string
+  about: string
+  covers: string[]
+  whoShouldCome: string[]
+  format: string
+}
+
+
+
+export interface IntroCourseStudentRegistrationType {
+  fullname: string;
+  email: string;
+  gender: "male" | "female" | "";
+  phone_number: string;
+  whatsapp_number: string;
+  city: string;
+  state: string;
+  country: string;
+  course: string;
+  priceToPay: number;
+}
+
+

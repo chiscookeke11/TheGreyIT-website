@@ -15,7 +15,7 @@ export default function RecentBlogCard({ data }: RecentBlogCardProps) {
 
 
             <div className="  bg-gray-300 size-[100px] shrink-0 rounded-xs overflow-hidden" >
-                <Image src={data.image} alt="image" height={500} width={500} className="object-cover object-center h-full w-full " />
+                <Image src={data.image || "/placeholder.jpg"} alt="image" height={500} width={500} className="object-cover object-center h-full w-full " />
             </div>
 
             <div className=" w-full flex flex-col items-start gap-1   py-2 text-start" >

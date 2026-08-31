@@ -119,13 +119,13 @@ export default function ContactForm({ showForm, setShowForm, subject }: ContactF
 
                 <label htmlFor="firstName" className=" flex flex-col gap-1 items-start font-medium text-sm text-[#8D8D8D]  " >
                     <span>First Name</span>
-                    <input name="firstName" id="firstName" onChange={handleChange} value={formValues.firstName} placeholder="Chinedu" type="text" className=" w-full py-2 px-3 border-b-2 border-b-gray-600 text-base font-medium text-black focus:outline-none" />
+                    <input name="firstName" id="firstName" onChange={handleChange} value={formValues.firstName} placeholder="" type="text" className=" w-full py-2 px-3 border-b-2 border-b-gray-600 text-base font-medium text-black focus:outline-none" />
                 </label>
 
 
                 <label htmlFor="lastName" className=" flex flex-col gap-1 items-start font-medium text-sm text-black ">
                     <span>Last Name</span>
-                    <input name="lastName" id="lastName" value={formValues.lastName} onChange={handleChange} placeholder="Okeke" type="text" className=" w-full py-2 px-3 border-b-2 border-b-gray-600 text-base font-medium text-black focus:outline-none" />
+                    <input name="lastName" id="lastName" value={formValues.lastName} onChange={handleChange} placeholder="" type="text" className=" w-full py-2 px-3 border-b-2 border-b-gray-600 text-base font-medium text-black focus:outline-none" />
                 </label>
 
 
@@ -133,14 +133,14 @@ export default function ContactForm({ showForm, setShowForm, subject }: ContactF
 
                 <label htmlFor="email" className=" flex flex-col gap-1 items-start font-medium text-sm text-[#8D8D8D]">
                     <span>Email</span>
-                    <input name="email" id="email" value={formValues.email} onChange={handleChange} placeholder="chiscookeke@gmail.com" type="email" className=" w-full py-2 px-3 border-b-2 border-b-gray-600 text-base font-medium text-black focus:outline-none" />
+                    <input name="email" id="email" value={formValues.email} onChange={handleChange} placeholder="" type="email" className=" w-full py-2 px-3 border-b-2 border-b-gray-600 text-base font-medium text-black focus:outline-none" />
                 </label>
 
 
 
                 <label htmlFor="phoneNumber" className=" flex flex-col gap-1 items-start font-medium text-sm text-black">
                     <span>Phone Number</span>
-                    <input name="phoneNumber" id="phoneNumber" value={formValues.phoneNumber} onChange={handleChange} placeholder="+234 903 6745 8789" className=" w-full py-2 px-3 border-b-2 border-b-gray-600 text-base font-medium text-black focus:outline-none " />
+                    <input name="phoneNumber" id="phoneNumber" value={formValues.phoneNumber} onChange={handleChange} placeholder="" className=" w-full py-2 px-3 border-b-2 border-b-gray-600 text-base font-medium text-black focus:outline-none " />
                 </label>
             </div>
 
@@ -151,7 +151,7 @@ export default function ContactForm({ showForm, setShowForm, subject }: ContactF
             </label>
 
             <label htmlFor="phoneNumber" className=" flex flex-col gap-1 items-start font-medium text-sm text-black w-full">
-                <span>Wrte your message</span>
+                <span>Write your message</span>
                 <textarea name="message" id="message" value={formValues.message} onChange={handleTextareaChange} placeholder="Your Message" rows={1} className=" w-full py-2 px-3 border-b-2 border-b-gray-600 text-base font-medium text-black  outline-none " ></textarea>
             </label>
 

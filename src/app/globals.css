@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import "./styles/article.css";
 
 :root {
   --background: #ffffff;
@@ -12,6 +13,9 @@
   --font-mono: var(--font-geist-mono);
   --font-poppins: var(--font-poppins);
   --font-syne: var(--font-poppins);
+  --font-dm: var(--font-dm);
+  --font-lora: var(--font-lora);
+  --font-inter: var(--font-inter);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -72,4 +76,17 @@ body {
 .scrollbar-hide {
   -ms-overflow-style: none;
   scrollbar-width: none;
+}
+
+.blog-content img {
+  display: block;
+  max-width: 70%;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  margin: 2rem auto;
+}
+
+.blog-content p {
+  margin-bottom: 1.25rem;
 }

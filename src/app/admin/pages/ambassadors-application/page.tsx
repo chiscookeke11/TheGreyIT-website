@@ -23,7 +23,7 @@ export default function Page() {
             .select("*")
 
         if (error) {
-            console.error("Error fetching applications:", error)
+            console.error("Error fetching applications:")
         }
 
         setApplications(data)

@@ -1,9 +1,8 @@
 import type { Metadata, Viewport } from "next";
-import { Geist, Geist_Mono, Poppins, Syne } from "next/font/google";
+import { DM_Sans, Geist, Geist_Mono, Inter, Lora, Poppins, Syne } from "next/font/google";
 import "./globals.css";
 import { AppProvider } from "@/context/AppContext";
 import { Toaster } from "react-hot-toast";
-import Image from "next/image";
 import { seoKeywords } from "@/data/SEOKeywords";
 import ScrollToTopBtn from "@/components/UI/ScrollToTopBtn";
 
@@ -31,7 +30,21 @@ const syne = Syne({
   weight: ["600", "700", "400"],
 })
 
+const lora = Lora({
+  subsets: ['latin'],
+  variable: '--font-lora'
+})
 
+const dm = DM_Sans({
+  subsets: ['latin'],
+  variable: '--font-dm'
+})
+
+
+const inter = Inter({
+  variable: "--font-inter",
+  subsets: ['latin'],
+})
 
 
 export const metadata: Metadata = {
@@ -96,17 +109,12 @@ export default function RootLayout({
         <meta name="google-site-verification" content="Nv5M-GPzypWQTbwEYS96n1qQAIEElpScWowb-gpM-j0" />
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${poppins.variable} ${syne.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} ${poppins.variable} ${syne.variable} ${lora.variable} ${dm.variable} ${inter.variable} antialiased`}
       >
 
         <AppProvider>
           {children}
           <Toaster position="bottom-right" reverseOrder={false} />
-
-          {/* <a href="https://wa.me/2349066895390" target="_blank" className="fixed z-50 text-black bottom-6 right-6  bg-[#62A200] p-2 rounded-md flex flex-col gap-[0.5px] whitespace-nowrap text-center items-center justify-center hover:scale-105 duration-300 ease-in-out " >
-          <Image src={"/logos/whatsapp-svgrepo-com.svg"} alt="whatsapp logo" height={1000} width={1000} className=" h-8 w-8 " />
-       <span className=" font-semibold text-base " >   Chat us!</span>
-            </a> */}
 
           <ScrollToTopBtn />
         </AppProvider>

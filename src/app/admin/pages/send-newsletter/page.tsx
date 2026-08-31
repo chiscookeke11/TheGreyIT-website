@@ -12,13 +12,13 @@ export default function Page() {
 
     // function to fetch all emails
     const fetchAllEmails = async () => {
-        const {data, error} = await supabase.from("newsletter").select("email")
+        const { data, error } = await supabase.from("newsletter").select("email")
 
         if (error) {
-            console.error("Error fetching emails:",  error)
+            console.error("Error fetching emails:", error)
         }
 
-        const emails = data?.map((row: {email: string}) => row.email) || []
+        const emails = data?.map((row: { email: string }) => row.email) || []
 
         setEmailsList(emails)
     }
@@ -48,10 +48,10 @@ export default function Page() {
                 "-AXyifNYWMRF-f1jt"       // EmailJS public key
             )
                 .then((response) => {
-                    console.log(`Email sent to ${email}:`, response.status, response.text);
+                    console.log(`Email sent to  sent`);
                 })
                 .catch((err) => {
-                    console.error(`Failed to send to ${email}:`, err);
+                    console.error(`Failed to send to ${email}:`);
                 });
         });
         setSending(false)
@@ -63,7 +63,7 @@ export default function Page() {
 
 
     return (
-      <div className="w-full h-fit  py-7 px-6 flex flex-col items-start justify-start gap-10 font-poppins" >
+        <div className="w-full h-fit  py-7 px-6 flex flex-col items-start justify-start gap-10 font-poppins" >
             <h1 className=" font-syne font-semibold text-2xl   ">Send Newsletter</h1>
 
 
@@ -75,7 +75,7 @@ export default function Page() {
             >{sending ? "Send Email" : "send"}</button> */}
 
 
-<form action=""></form>
+            <form action=""></form>
 
         </div>
     )

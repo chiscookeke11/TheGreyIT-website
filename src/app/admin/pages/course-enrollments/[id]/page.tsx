@@ -23,12 +23,11 @@ export default function Page() {
             .contains("list_enrolled_courses", [courseId])
 
         if (error) {
-            console.error("Error fetching data", error)
+            console.error("Error fetching data")
             return
         }
 
         setEnrolledUsers(data)
-        console.log(data)
     }
 
     useEffect(() => {
@@ -77,7 +76,7 @@ export default function Page() {
         return txn ? txn.learning_Mode : "-";
     }
 
-        // This function gets the date the course was registered by the student
+    // This function gets the date the course was registered by the student
     const getRegDate = (user_id: string) => {
         const txn = transactions?.find((t) => t.user_id === user_id);
         return txn ? new Date(txn.created_at).toDateString() : "-";
@@ -125,7 +124,7 @@ export default function Page() {
                                 Learning Mode
                             </th>
 
-                               <th className="min-w-[80px] w-[120px] h-[72px] text-center bg-gray-700 p-[10px] text-xs md:text-base font-bold text-[#E1E1E1]">
+                            <th className="min-w-[80px] w-[120px] h-[72px] text-center bg-gray-700 p-[10px] text-xs md:text-base font-bold text-[#E1E1E1]">
                                 Date
                             </th>
                         </tr>

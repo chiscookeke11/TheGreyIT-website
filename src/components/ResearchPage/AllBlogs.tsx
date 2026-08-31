@@ -48,6 +48,7 @@ export default function AllBlogs() {
     let query = supabase
       .from("blog")
       .select("*", { count: "exact" })
+      .eq("status", "published")
       .order("publicationDate", { ascending: false })
 
     if (debouncedSearch.trim() !== "") {
@@ -60,7 +61,6 @@ export default function AllBlogs() {
 
     if (error) {
       toast.error("Failed to fetch blog!")
-      console.error(error)
       setLoading(false)
       return
     }

@@ -10,20 +10,19 @@ import Image from "next/image";
 import RecentBlogCard from "./RecentBlogCard";
 import RecentBlogCardSkeleton from "./RecentBlogCardSkeleton";
 import { estimateReadTime, formatReadableDate } from "@/lib/utils";
+import PortableTextRenderer from '@/components/UI/PortableTextRenderer'
+
+
 
 
 interface BlogPageComponentProps {
     slug: string
 }
 
-
-
 export default function BlogPageComponent({ slug }: BlogPageComponentProps) {
     const [currentBlog, setCurrentBlog] = useState<ResearchBlogType | null>(null)
     const [loading, setLoading] = useState(true);
     const [recentBlogsData, setRecentBlogsData] = useState<null | ResearchBlogType[]>(null)
-
-
 
 
     useEffect(() => {
@@ -84,60 +83,35 @@ export default function BlogPageComponent({ slug }: BlogPageComponentProps) {
     }
 
 
-
-    const structuredData = {
-        "@context": "https://schema.org",
-        "@type": "BlogPosting",
-        "headline": currentBlog.title,
-        "description": currentBlog.content || currentBlog.title,
-        "image": currentBlog.image,
-        "author": {
-            "@type": "Person",
-            "name": currentBlog.author
-        },
-        "publisher": {
-            "@type": "Organization",
-            "name": "TheGreyIT",
-            "logo": {
-                "@type": "ImageObject",
-                "url": "https://www.thegreyit.com/logo.png"
-            }
-        },
-        "datePublished": currentBlog.createdAt,
-        "dateModified": currentBlog.createdAt,
-        "mainEntityOfPage": {
-            "@type": "WebPage",
-            "@id": `https://www.thegreyit.com/blog/${currentBlog.slug}`
-        }
-    };
-
-
-
     return (
-        <article className="bg-white text-black font-poppins flex flex-col items-center  gap-9 ">
+        <article className="w-full min-w-0 overflow-x-hidden bg-white text-black font-poppins flex flex-col items-center gap-9">
             <div className="w-full  flex flex-col items-center gap-3 pt-24 md:pt-36 pb-16 px-[3%]  bg-[#f2f5fc]" >
                 <div className="w-full max-w-2xl lg:max-w-4xl flex flex-col items-start gap-3 ">
                     <p className="text-xs flex items-center gap-4 " > {formatReadableDate(new Date(currentBlog.publicationDate))}
                         <span>| </span>
                         <span>{estimateReadTime(currentBlog.content)}</span></p>
                     <h1 className=" text-xl md:text-3xl font-bold font-sans">{currentBlog.title}</h1>
-                    <p className="text-base font-medium ">{currentBlog.tagline} </p>
-                    <p className="text-sm " >BY <Link href={"https://www.linkedin.com/company/thegreyit/"} target="_blank" className="text-gray-600 " >{currentBlog.author.toUpperCase()}</Link></p>
+                    <p className="text-base font-medium font-lora ">{currentBlog.tagline} </p>
+                    <p className="text-sm font-lora " >BY <Link href={"https://www.linkedin.com/company/thegreyit/"} target="_blank" className="text-gray-600 " >{currentBlog.author.toUpperCase()}</Link></p>
                 </div>
 
 
-                <div className="w-full max-w-5xl h-[40vh] md:h-[65vh] bg-gray-300 flex items-center justify-center overflow-hidden relative mt-5 " >
-                    <Image src={currentBlog.image} alt={`${currentBlog.title}-image`} fill className="object-center object-cover " />
+                <div className="w-full max-w-5xl h-[40vh] md:h-[65vh] bg-black p-4 flex items-center justify-center mt-5 "  >
 
+                    <div className="w-full h-full  bg-gray-300 flex items-center justify-center overflow-hidden relative border-[40px] border-white " >
+                        <Image src={currentBlog.image} alt={`${currentBlog.title}-image`} fill className="object-center object-cover  " />
+
+                    </div>
                 </div>
 
 
             </div>
 
-            <div
-                className="px-[7%] lg:px-[15%] py-16 bg-white"
-                dangerouslySetInnerHTML={{ __html: currentBlog.content }}
-            />
+            <div className="w-full px-[5%] lg:px-[15%] py-16 bg-white">
+                <div className="w-full max-w-4xl mx-auto blog-content">
+                    <PortableTextRenderer value={currentBlog.content} />
+                </div>
+            </div>
 
 
             {/* The recent section  */}

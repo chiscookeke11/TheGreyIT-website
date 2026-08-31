@@ -77,7 +77,6 @@ export default function AuthModal() {
 
         if (error) {
             toast.error(`Failed to sign up: ${error.message} `,)
-            console.error(error)
             setLoading(false)
         }
         else {

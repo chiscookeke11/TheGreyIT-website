@@ -21,7 +21,7 @@ export default function Page() {
         const { data, error } = await supabase.from("ambassadors_application").select("*").eq("id", id).maybeSingle()
 
         if (error) {
-            console.error("Error fetching applications:", error)
+            console.error("Error fetching applications:")
             setLoading(false)
         }
         setUserApplication(data)

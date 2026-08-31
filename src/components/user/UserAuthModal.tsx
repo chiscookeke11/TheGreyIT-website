@@ -4,16 +4,16 @@ import { supabase } from "@/lib/supabaseClient";
 import { randomCode } from "@/lib/utils";
 import { Eye, EyeOff } from "lucide-react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import React, { useState } from "react";
 import toast from "react-hot-toast";
 
 
-
-
 const Spinner = () => {
     return (
-        <div className="h-10 w-10 rounded-full border-4 border-white border-t-transparent animate-spin duration-150 ease-in-out transition-all group-hover:border-gray-700 group-hover:border-t-transparent " />
+        <div className="h-10 w-10 rounded-full border-4 border-white border-t-transparent
+         animate-spin duration-150 ease-in-out transition-all group-hover:border-gray-700
+          group-hover:border-t-transparent " />
     )
 }
 
@@ -21,6 +21,8 @@ const Spinner = () => {
 export default function UserAuthModal() {
     const [authState, setAuthState] = useState<"Sign In" | "Sign Up">("Sign In")
     const [showPassword, setShowPassword] = useState(false)
+    const searchParams = useSearchParams()
+    const redirectTo = searchParams.get("redirect") || "/user"
     const [loading, setLoading] = useState(false)
     const router = useRouter()
     const [formValues, setFormValues] = useState({
@@ -59,10 +61,13 @@ export default function UserAuthModal() {
 
         while (exists) {
             code = randomCode(8)
-            const { data, error } = await supabase.from("user_data").select("id").eq("referral_code", code);
+            const { data, error } = await supabase
+                .from("user_data")
+                .select("id")
+                .eq("referral_code", code);
 
             if (error) {
-                console.error("Error:", error)
+                console.error("Error:")
             }
 
             exists = (data?.length ?? 0) > 0
@@ -73,109 +78,109 @@ export default function UserAuthModal() {
 
 
     // SIGN UP FUNCTION
-const handleSignup = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+    const handleSignup = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
 
-    // 1. Capture email immediately for the redirect and queries
-    const normalizedEmail = formValues.email.trim();
+        // 1. Capture email immediately for the redirect and queries
+        const normalizedEmail = formValues.email.trim();
 
-    // Validation
-    if (!formValues.firstName || !formValues.lastName || !normalizedEmail || !formValues.password || !formValues.confirmPassword) {
-        toast.error("Please provide the necessary credentials");
-        return;
-    }
-    if (formValues.password !== formValues.confirmPassword) {
-        toast.error("Passwords do not match");
-        return;
-    }
-
-    setLoading(true);
-
-    try {
-        // 2. Step One: Sign up with Supabase Auth
-        const { error: authError, data: signupData } = await supabase.auth.signUp({
-            email: normalizedEmail,
-            password: formValues.password,
-            options: {
-                data: {
-                    first_name: formValues.firstName,
-                    last_name: formValues.lastName,
-                    phoneNumber: formValues.phoneNumber,
-                },
-                emailRedirectTo: `${window.location.origin}/user`
-            }
-        });
-
-        if (authError) throw authError;
-
-        // 3. Step Two: Handle user_data (The "Claiming" Logic)
-        // We look for any existing row created by the "Generate Code" page
-        const { data: existingUserData, error: fetchError } = await supabase
-            .from("user_data")
-            .select("id, referral_code, referred_by")
-            .eq("email", normalizedEmail)
-            .maybeSingle();
-
-        if (fetchError) throw fetchError;
-
-        const userId = signupData.user?.id;
-
-        if (existingUserData) {
-            // SCENARIO A: User already has a code from the ambassador page.
-            // We UPDATE their profile to include their real names and new Auth ID.
-            const { error: updateError } = await supabase
-                .from("user_data")
-                .update({
-                    user_id: userId,
-                    first_name: formValues.firstName,
-                    last_name: formValues.lastName,
-                    phoneNumber: formValues.phoneNumber,
-                    // Only update referred_by if the existing one is empty
-                    referred_by: existingUserData.referred_by || formValues.referredBy || null,
-                })
-                .eq("email", normalizedEmail);
-
-            if (updateError) throw updateError;
-        } else {
-            // SCENARIO B: Brand new user with no existing code.
-            const referralCode = await generateUniqueReferral();
-
-            const { error: insertError } = await supabase
-                .from("user_data")
-                .insert({
-                    user_id: userId,
-                    email: normalizedEmail,
-                    referral_code: referralCode,
-                    referred_by: formValues.referredBy || null,
-                    first_name: formValues.firstName,
-                    last_name: formValues.lastName,
-                    phoneNumber: formValues.phoneNumber,
-                });
-
-            if (insertError) throw insertError;
+        // Validation
+        if (!formValues.firstName || !formValues.lastName || !normalizedEmail || !formValues.password || !formValues.confirmPassword) {
+            toast.error("Please provide the necessary credentials");
+            return;
+        }
+        if (formValues.password !== formValues.confirmPassword) {
+            toast.error("Passwords do not match");
+            return;
         }
 
-        // 4. Finalizing State
-        toast.success("Registration successful! Check your email.");
+        setLoading(true);
 
-        setFormValues({
-            email: "",
-            confirmPassword: "",
-            firstName: "",
-            lastName: "",
-            password: "",
-            phoneNumber: "",
-            referredBy: "",
-        });
+        try {
+            // 2. Step One: Sign up with Supabase Auth
+            const { error: authError, data: signupData } = await supabase.auth.signUp({
+                email: normalizedEmail,
+                password: formValues.password,
+                options: {
+                    data: {
+                        first_name: formValues.firstName,
+                        last_name: formValues.lastName,
+                        phoneNumber: formValues.phoneNumber,
+                    },
+                    emailRedirectTo: `${window.location.origin}/auth/callback`
+                }
+            });
 
-        setLoading(false);
-        router.push(`/verify_email?email=${normalizedEmail}`);
+            if (authError) throw authError;
 
-    } catch (err) {
-        console.error("Signup process failed:", err);
-        setLoading(false);
+            // 3. Step Two: Handle user_data (The "Claiming" Logic)
+            // We look for any existing row created by the "Generate Code" page
+            const { data: existingUserData, error: fetchError } = await supabase
+                .from("user_data")
+                .select("id, referral_code, referred_by")
+                .eq("email", normalizedEmail)
+                .maybeSingle();
+
+            if (fetchError) throw fetchError;
+
+            const userId = signupData.user?.id;
+
+            if (existingUserData) {
+                // SCENARIO A: User already has a code from the ambassador page.
+                // We UPDATE their profile to include their real names and new Auth ID.
+                const { error: updateError } = await supabase
+                    .from("user_data")
+                    .update({
+                        user_id: userId,
+                        first_name: formValues.firstName,
+                        last_name: formValues.lastName,
+                        phoneNumber: formValues.phoneNumber,
+                        // Only update referred_by if the existing one is empty
+                        referred_by: existingUserData.referred_by || formValues.referredBy || null,
+                    })
+                    .eq("email", normalizedEmail);
+
+                if (updateError) throw updateError;
+            } else {
+                // SCENARIO B: Brand new user with no existing code.
+                const referralCode = await generateUniqueReferral();
+
+                const { error: insertError } = await supabase
+                    .from("user_data")
+                    .insert({
+                        user_id: userId,
+                        email: normalizedEmail,
+                        referral_code: referralCode,
+                        referred_by: formValues.referredBy || null,
+                        first_name: formValues.firstName,
+                        last_name: formValues.lastName,
+                        phoneNumber: formValues.phoneNumber,
+                    });
+
+                if (insertError) throw insertError;
+            }
+
+            // 4. Finalizing State
+            toast.success("Registration successful! Check your email.");
+
+            setFormValues({
+                email: "",
+                confirmPassword: "",
+                firstName: "",
+                lastName: "",
+                password: "",
+                phoneNumber: "",
+                referredBy: "",
+            });
+
+            setLoading(false);
+            router.push(`/verify_email?email=${normalizedEmail}`);
+
+        } catch (err) {
+            console.error("Signup process failed:");
+            setLoading(false);
+        }
     }
-}
 
 
 
@@ -205,7 +210,7 @@ const handleSignup = async (e: React.FormEvent<HTMLFormElement>) => {
 
         else {
             toast.success("Success! You are now signed in")
-            router.push("/user")
+            router.push(redirectTo)
             setLoading(false)
             setFormValues({
                 email: "",
