@@ -13,7 +13,7 @@ interface ReviewCardProps {
 export default function ReviewCard({ data }: ReviewCardProps) {
     const [userImage, setUserImage] = useState<string | null>(null)
     const reviewDate = new Date(data.userReviewDate)
-    const now = Date.now()
+    const [now] = useState(() => Date.now())
     const user_id = data.user_id
 
 

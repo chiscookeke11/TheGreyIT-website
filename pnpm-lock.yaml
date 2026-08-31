@@ -68,6 +68,9 @@ importers:
       '@tailwindcss/typography':
         specifier: ^0.5.19
         version: 0.5.19(tailwindcss@4.1.13)
+      '@tiptap/extension-image':
+        specifier: ^3.6.5
+        version: 3.6.5(@tiptap/core@3.6.5(@tiptap/pm@3.6.5))
       '@tiptap/react':
         specifier: ^3.6.5
         version: 3.6.5(@floating-ui/dom@1.7.5)(@tiptap/core@3.6.5(@tiptap/pm@3.6.5))(@tiptap/pm@3.6.5)(@types/react-dom@19.1.9(@types/react@19.1.15))(@types/react@19.1.15)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
@@ -3286,6 +3289,11 @@ packages:
     peerDependencies:
       '@tiptap/core': ^3.6.5
       '@tiptap/pm': ^3.6.5
+
+  '@tiptap/extension-image@3.6.5':
+    resolution: {integrity: sha512-Tzej5vSjiIPmr+3zeFYIGOdZ7T+tnOMMuFuduiitynTsVY2oG34Y/oBnwBfD+jLq8v3SBFF55J972Ga6+vBvrA==}
+    peerDependencies:
+      '@tiptap/core': ^3.6.5
 
   '@tiptap/extension-italic@3.6.5':
     resolution: {integrity: sha512-2EtO2uffw5YnTQ1cieLPv9t7OKCfJFbgHRJPXf7Nnfh8XFh5AEyzw0qBNXZyLtlB28+HHSWLc/OHS6xMfwUy0A==}
@@ -10968,6 +10976,10 @@ snapshots:
     dependencies:
       '@tiptap/core': 3.6.5(@tiptap/pm@3.6.5)
       '@tiptap/pm': 3.6.5
+
+  '@tiptap/extension-image@3.6.5(@tiptap/core@3.6.5(@tiptap/pm@3.6.5))':
+    dependencies:
+      '@tiptap/core': 3.6.5(@tiptap/pm@3.6.5)
 
   '@tiptap/extension-italic@3.6.5(@tiptap/core@3.6.5(@tiptap/pm@3.6.5))':
     dependencies:
