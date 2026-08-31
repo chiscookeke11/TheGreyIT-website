@@ -13,8 +13,6 @@ import { estimateReadTime, formatReadableDate } from "@/lib/utils";
 import PortableTextRenderer from '@/components/UI/PortableTextRenderer'
 
 
-
-
 interface BlogPageComponentProps {
     slug: string
 }
@@ -84,7 +82,7 @@ export default function BlogPageComponent({ slug }: BlogPageComponentProps) {
 
 
     return (
-        <article className="w-full min-w-0 overflow-x-hidden bg-white text-black font-poppins flex flex-col items-center gap-9">
+        <article className="bg-white text-black font-poppins flex flex-col items-center  gap-9 ">
             <div className="w-full  flex flex-col items-center gap-3 pt-24 md:pt-36 pb-16 px-[3%]  bg-[#f2f5fc]" >
                 <div className="w-full max-w-2xl lg:max-w-4xl flex flex-col items-start gap-3 ">
                     <p className="text-xs flex items-center gap-4 " > {formatReadableDate(new Date(currentBlog.publicationDate))}
