@@ -136,4 +136,3 @@ const TiptapEditor: React.FC<TiptapEditorProps> = ({
 }
 
 export default TiptapEditor
-
