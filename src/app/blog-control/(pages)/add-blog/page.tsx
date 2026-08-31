@@ -1,6 +1,6 @@
 "use client"
 
-
+import TiptapEditor from "@/components/admin/TipTapEditor";
 import Button from "@/components/UI/Button";
 import React, { useState, useRef, useEffect } from "react";
 import { supabase } from "@/lib/supabaseClient"
@@ -10,12 +10,7 @@ import Link from "next/link";
 import Loading from "@/components/UI/Loading";
 import PostScheduler from "@/components/UI/PostScheduler";
 import { ResearchBlogType } from "@/types/types";
-import imageCompression from "browser-image-compression";
-import "react-quill-new/dist/quill.snow.css";
-import ReactQuill from "react-quill-new";
-
-
-
+import imageCompression from "browser-image-compression"
 
 
 export default function Page() {
@@ -35,7 +30,7 @@ export default function Page() {
 
     const [file, setFile] = useState<File | null>(null)
     const [loading, setLoading] = useState(false)
-    const [showSchedulerForm, setShowSchedulerForm] = useState(false);
+    const [showSchedulerForm, setShowSchedulerForm] = useState(false)
 
     //  File input ref
     const fileInputRef = useRef<HTMLInputElement | null>(null)
@@ -237,28 +232,14 @@ export default function Page() {
                 </label>
 
 
-
                 <div className="w-full flex flex-col gap-1 text-gray-700">
                     <span className="text-base  text-gray-700">Content</span>
-
-                    <ReactQuill
-                        theme="snow"
-                        value={formValues.content}
+                    <TiptapEditor
+                        content={formValues.content}
                         onChange={handleTipTapChange}
-                        modules={{
-                            toolbar: [
-                                [{ header: [1, 2, 3, false] }],
-                                ["bold", "italic", "underline", "strike"],
-                                [{ list: "ordered" }, { list: "bullet" }],
-                                [{ align: [] }],
-                                ["link", "image"],
-                                ["clean"],
-                            ],
-                        }}
-                        placeholder="Write your content..."
-                        className="w-full  "
                     />
                 </div>
+
 
 
 
