@@ -10,6 +10,8 @@ import Image from "next/image";
 import RecentBlogCard from "./RecentBlogCard";
 import RecentBlogCardSkeleton from "./RecentBlogCardSkeleton";
 import { estimateReadTime, formatReadableDate } from "@/lib/utils";
+import PortableTextRenderer from '@/components/UI/PortableTextRenderer'
+
 
 
 
@@ -105,50 +107,10 @@ export default function BlogPageComponent({ slug }: BlogPageComponentProps) {
 
             </div>
 
-            <div className="w-full min-w-0 mb-10 px-4 md:px-6 overflow-hidden">
-                <div
-                    className="
-            w-full
-            max-w-5xl
-            mx-auto
-            text-base
-            md:text-lg
-            font-normal
-            font-raleway
-            text-black
-            break-words
-            [overflow-wrap:anywhere]
-
-            [&_p]:mb-6
-            [&_h1]:text-3xl
-            [&_h1]:font-bold
-            [&_h1]:mb-6
-
-            [&_h2]:text-2xl
-            [&_h2]:font-bold
-            [&_h2]:mb-4
-
-            [&_h3]:text-xl
-            [&_h3]:font-bold
-            [&_h3]:mb-3
-
-            [&_img]:max-w-full
-            [&_img]:h-auto
-
-            [&_video]:max-w-full
-            [&_iframe]:max-w-full
-
-            [&_table]:w-full
-            [&_table]:max-w-full
-            [&_table]:overflow-x-auto
-            [&_table]:block
-
-            [&_pre]:max-w-full
-            [&_pre]:overflow-x-auto
-            [&_code]:break-words
-        "
-                    dangerouslySetInnerHTML={{ __html: currentBlog.content }}
-                />
+            <div className="w-full px-[5%] lg:px-[15%] py-16 bg-white">
+                <div className="w-full max-w-4xl mx-auto blog-content">
+                    <PortableTextRenderer value={currentBlog.content} />
+                </div>
             </div>
 
 
