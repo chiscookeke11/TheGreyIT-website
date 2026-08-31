@@ -2,7 +2,6 @@ import { reviewDataType } from "@/types/types";
 import Image from "next/image";
 import RatingStars from "./ReviewStarsComponent";
 import { supabase } from "@/lib/supabaseClient";
-import { useAppContext } from "@/context/AppContext";
 import { useEffect, useState } from "react";
 
 
