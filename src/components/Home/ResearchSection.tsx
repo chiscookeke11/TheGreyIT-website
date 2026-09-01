@@ -1,16 +1,22 @@
 "use client"
 
-import { useEffect, useRef, useState } from "react";
+import { useRef } from "react";
 import ResearchCard from "../UI/ResearchCard";
 import { useScroll, useTransform, motion } from "framer-motion";
-import { ResearchBlogType } from "@/types/types";
+import { BlogPreview } from "@/types/types";
 import { Spinner } from "../UI/Spinner";
-import { supabase } from "@/lib/supabaseClient";
 
 
 
-export default function ResearchSection() {
-    const [recentBlogsData, setRecentBlogsData] = useState<null | ResearchBlogType[]>(null)
+
+interface ResearchSectionProps {
+    recentBlogsData: BlogPreview[];
+}
+
+
+export default function ResearchSection({
+    recentBlogsData
+}: ResearchSectionProps) {
 
     const targetRef = useRef(null)
     const { scrollYProgress } = useScroll({
@@ -18,33 +24,6 @@ export default function ResearchSection() {
     })
 
     const x = useTransform(scrollYProgress, [0, 1], ["10%", "-50%"])
-
-
-
-    useEffect(() => {
-
-        const fetchRecentBlogs = async () => {
-
-            const { data, error } = await supabase
-                .from("blog")
-                .select("*")
-                .eq("status", "published")
-                .order("createdAt", { ascending: false })
-                .limit(4)
-
-            if (error) {
-                console.error("Error fetching recent blogs:")
-                setRecentBlogsData([])
-            }
-            else if (data) {
-                setRecentBlogsData(data)
-            }
-
-        }
-
-        fetchRecentBlogs()
-
-    }, [])
 
 
 

@@ -105,7 +105,7 @@ export default function BlogPageComponent({ slug }: BlogPageComponentProps) {
 
             </div>
 
-            <div className="w-full px-[5%] lg:px-[15%] py-16 bg-white">
+            <div className="w-full px-[1%] lg:px-[15%] py-8 md:py-16 bg-white">
                 <div className="w-full max-w-4xl mx-auto blog-content">
                     <PortableTextRenderer value={currentBlog.content} />
                 </div>

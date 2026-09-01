@@ -31,8 +31,6 @@ export default function Leadership() {
           </Link>
 
 
-
-
         ))}
       </div>
     </section>
