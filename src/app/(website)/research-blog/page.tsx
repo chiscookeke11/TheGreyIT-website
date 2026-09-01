@@ -60,7 +60,7 @@ export default function Page() {
 
 
       {/* The main news section  */}
-      <div className=" w-full lg:basis-3/4  h-full flex flex-col gap-7 lg:gap-16 py-4 " >
+      <div className=" w-full lg:basis-4/6  h-full flex flex-col gap-7 lg:gap-16 py-4 " >
         <ErrorBoundary>
           <ResearchHero />
         </ErrorBoundary>

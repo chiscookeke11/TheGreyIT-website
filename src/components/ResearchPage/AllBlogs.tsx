@@ -1,17 +1,16 @@
 "use client"
 
 import RecentBlogCard from "./RecentBlogCard"
-import { useEffect, useState } from "react"
-import { ResearchBlogType } from "@/types/types"
-import { supabase } from "@/lib/supabaseClient"
+import { useEffect, useState, useCallback } from "react"
+import { BlogPreview } from "@/types/types"
 import RecentBlogCardSkeleton from "./RecentBlogCardSkeleton"
 import toast from "react-hot-toast"
 import { ChevronLeft, ChevronRight } from "lucide-react"
 
 export default function AllBlogs() {
-  const [blogs, setBlogs] = useState<ResearchBlogType[] | null>(null)
+  const [blogs, setBlogs] = useState<BlogPreview[] | null>(null)
   const [loading, setLoading] = useState(false)
-  const [range, setRange] = useState(6)
+  const [range, setRange] = useState(5)
   const [page, setPage] = useState(1)
   const [totalCount, setTotalCount] = useState(0)
   const totalPages = Math.max(1, Math.ceil(totalCount / range))
@@ -39,41 +38,38 @@ export default function AllBlogs() {
   }
 
   //  Fetch blogs
-  const fetchBlogs = async () => {
-    setLoading(true)
+  const fetchBlogs = useCallback(async () => {
+    setLoading(true);
 
-    const from = (page - 1) * range
-    const to = from + range - 1
+    try {
+      const params = new URLSearchParams({
+        page: String(page),
+        range: String(range),
+        search: debouncedSearch,
+      });
 
-    let query = supabase
-      .from("blog")
-      .select("*", { count: "exact" })
-      .eq("status", "published")
-      .order("publicationDate", { ascending: false })
+      const response = await fetch(`/api/blogs?${params.toString()}`);
 
-    if (debouncedSearch.trim() !== "") {
-      query = query.or(
-        `title.ilike.%${debouncedSearch}%,content.ilike.%${debouncedSearch}%,tagline.ilike.%${debouncedSearch}%`
-      )
+      if (!response.ok) {
+        throw new Error("Failed to fetch blogs");
+      }
+
+      const result = await response.json();
+
+      setBlogs(result.data);
+      setTotalCount(result.count);
+    } catch (error) {
+      console.error("Error fetching blogs:", error);
+      toast.error("Failed to fetch blog!");
+    } finally {
+      setLoading(false);
     }
-
-    const { data, error, count } = await query.range(from, to)
-
-    if (error) {
-      toast.error("Failed to fetch blog!")
-      setLoading(false)
-      return
-    }
-
-    setBlogs(data)
-    setTotalCount(count || 0)
-    setLoading(false)
-  }
+  }, [page, range, debouncedSearch]);
 
   // Fetch trigger
   useEffect(() => {
     fetchBlogs()
-  }, [range, page, debouncedSearch])
+  }, [fetchBlogs])
 
   //  Debounce search
   useEffect(() => {
@@ -114,7 +110,7 @@ export default function AllBlogs() {
           ))}
         </div>
       ) : (
-        <p className="text-2xl font-semibold  " >No blogs available</p>
+        <p className=" text-sm  md:text-2xl font-semibold mx-auto font-poppins opacity-75  " >No blogs available</p>
       )}
 
       {/* Pagination */}

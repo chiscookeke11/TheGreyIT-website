@@ -7,11 +7,16 @@ import Profile from "@/components/Home/Profile";
 import ResearchSection from "@/components/Home/ResearchSection";
 import WhyUs from "@/components/Home/WhyUs";
 import NewsletterSection from "@/components/UI/NewsletterSection";
+import { getRecentBlogs } from "@/lib/blogs";
 
 
 
 
-export default function Home() {
+export default async function Home() {
+
+  const recentBlogs = await getRecentBlogs();
+
+
   return (
     <>
 
@@ -21,7 +26,7 @@ export default function Home() {
       <GetSkilled />
       <Profile />
       <ErrorBoundary>
-        <ResearchSection />
+        <ResearchSection recentBlogsData={recentBlogs} />
       </ErrorBoundary>
       <ContactUsSection />
       <NewsletterSection />

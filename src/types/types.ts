@@ -48,6 +48,16 @@ export interface ResearchBlogType {
 };
 
 
+export interface BlogPreview {
+  slug: string;
+  image: string | null;
+  title: string;
+  tagline?: string;
+  author: string;
+  publicationDate: Date;
+}
+
+
 export interface ProfileDataType {
   id: number,
   name: string,

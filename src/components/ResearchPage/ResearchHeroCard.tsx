@@ -1,12 +1,12 @@
 import { formatReadableDate } from "@/lib/utils"
-import { ResearchBlogType } from "@/types/types"
+import { BlogPreview } from "@/types/types"
 import Image from "next/image"
 import Link from "next/link"
 
 
 
 interface HeroCardProps {
-    data: ResearchBlogType
+    data: BlogPreview
 }
 
 
@@ -17,7 +17,7 @@ export const HeroCard = ({ data }: HeroCardProps) => {
     return (
         <Link href={`/research-blog/${data.slug}`} className=" w-full h-fit  text-gray-700 font-poppins flex flex-col items-start gap-4 overflow-hidden " >
 
-            <div className="relative w-full h-[400px] rounded-xs overflow-hidden">
+            <div className="relative w-full h-[300px] md:h-[500px] rounded-xs overflow-hidden">
                 <Image
                     src={data.image || "/placeholder.jpg"}
                     alt={`${data.title}-image`}
