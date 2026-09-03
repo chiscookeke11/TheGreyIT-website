@@ -1,7 +1,7 @@
 
 import { unstable_cache } from "next/cache";
 import { supabaseServer } from "./supabaseServer";
-import { BlogPreview } from "@/types/types";
+import { BlogPreview, ResearchBlogType } from "@/types/types";
 
 
 
@@ -101,3 +101,24 @@ export const getAllBlogs = (
             tags: ["blogs"],
         }
     )();
+
+
+
+
+export async function getBlogBySlug(
+    slug: string
+): Promise<ResearchBlogType | null> {
+    const { data, error } = await supabaseServer
+        .from("blog")
+        .select("*")
+        .eq("slug", slug)
+        .eq("status", "published")
+        .maybeSingle();
+
+    if (error) {
+        console.error("Error fetching blog:", error);
+        return null;
+    }
+
+    return data as ResearchBlogType;
+}
