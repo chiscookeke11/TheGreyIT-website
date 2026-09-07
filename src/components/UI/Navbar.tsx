@@ -22,8 +22,21 @@ export default function Navbar() {
     const { activeNav, setActiveNav } = useAppContext()
     const pathName = usePathname()
     const mobileNavRef = useRef<HTMLDivElement | null>(null)
-    const isLightBackground = pathName === "/" || pathName === "/courses" || pathName === "/our-services" || pathName === "/about-us" || pathName === "/verify_email" || pathName === "/forget-password" || pathName === "/intro";
     const [user, setUser] = useState<User | null>(null)
+    const lightNavbarRoutes = [
+        "/",
+        "/courses",
+        "/our-services",
+        "/about-us",
+        "/verify_email",
+        "/forget-password",
+        "/intro",
+    ];
+
+    const isLightBackground = lightNavbarRoutes.includes(pathName);
+
+    console.log("Navbar pathname:", pathName);
+    console.log("isLightBackground:", isLightBackground);
 
 
 
