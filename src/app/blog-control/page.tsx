@@ -4,7 +4,6 @@ import ConfirmDelete from "@/components/UI/ConfirmDelete";
 import Loading from "@/components/UI/Loading";
 import { Spinner } from "@/components/UI/Spinner";
 import UpdateBlog from "@/components/UI/UpdateBlog";
-import { supabase } from "@/lib/supabaseClient";
 import { ResearchBlogType } from "@/types/types";
 import Image from "next/image";
 import Link from "next/link";
@@ -12,37 +11,55 @@ import { SetStateAction, useCallback, useEffect, useRef, useState } from "react"
 
 
 export default function Page() {
-    const [blogs, setBlogs] = useState<ResearchBlogType[] | null>(null)
-    const [loading, setLoading] = useState(true)
-    const [selectedIndex, setSelectedIndex] = useState<string>("")
-    const [showDeleteModal, setShowDeleteModal] = useState(false)
-    const [showEditModal, setShowEditModal] = useState(false)
-    const [visibleCount, setVisibleCount] = useState(16);
+    const [blogs, setBlogs] = useState<ResearchBlogType[]>([]);
+    const [loading, setLoading] = useState(true);
+    const [selectedIndex, setSelectedIndex] = useState("");
+    const [showDeleteModal, setShowDeleteModal] = useState(false);
+    const [showEditModal, setShowEditModal] = useState(false);
+
     const [isFetchingMore, setIsFetchingMore] = useState(false);
+    const [hasMore, setHasMore] = useState(true);
+    const [page, setPage] = useState(1);
+
     const loaderRef = useRef<HTMLDivElement | null>(null);
 
+    const RANGE = 16;
+
     // Fetch blogs whenever page changes
-    useEffect(() => {
+    const fetchBlogs = useCallback(async (pageNumber: number) => {
+        if (isFetchingMore || !hasMore) return;
 
-        const fetchBlogs = async () => {
+        setIsFetchingMore(true);
 
-            const { data, error } = await supabase
-                .from("blog").select("*")
-                .order("createdAt", { ascending: false })
+        try {
+            const response = await fetch(
+                `/api/admin/blogs?page=${pageNumber}&range=${RANGE}`
+            );
 
-            if (error) {
-                setLoading(false)
-                console.error("Error fetching all blogs:")
-            }
-            else if (data) {
-                setBlogs(data)
+            if (!response.ok) {
+                throw new Error("Failed to fetch blogs");
             }
 
-            setLoading(false)
+            const result = await response.json();
+
+            setBlogs((prev) => [...prev, ...result.data]);
+
+            // If fewer than 16 were returned,
+            // we've reached the end.
+            if (result.data.length < RANGE) {
+                setHasMore(false);
+            }
+        } catch (error) {
+            console.error("Error fetching blogs:", error);
+        } finally {
+            setLoading(false);
+            setIsFetchingMore(false);
         }
+    }, [isFetchingMore, hasMore]);
 
-        fetchBlogs()
-    }, [])
+    useEffect(() => {
+        fetchBlogs(page);
+    }, [page]);
 
     // Hide scroll when delete modal is open
     useEffect(() => {
@@ -56,7 +73,7 @@ export default function Page() {
 
     // this  function updates the delete function on the UI
     const removeBlogFromUI = (id: string) => {
-        setBlogs(prev => (prev ? prev.filter(blog => String(blog.id) !== id) : null))
+        setBlogs(prev => (prev.filter(blog => String(blog.id) !== id)))
     }
 
 
@@ -75,42 +92,32 @@ export default function Page() {
     }
 
 
-    const loadMore = useCallback(() => {
-        if (!blogs || isFetchingMore || visibleCount >= blogs.length) return;
-
-        setIsFetchingMore(true);
-
-        setTimeout(() => {
-            setVisibleCount((prev) => Math.min(prev + 16, blogs.length));
-            setIsFetchingMore(false);
-        }, 800);
-    }, [blogs, isFetchingMore, visibleCount]);
 
 
+
+    //  Intersection observer for fetching more
     useEffect(() => {
-        if (!blogs || visibleCount >= blogs.length) return;
+        const loaderElement = loaderRef.current;
+
+        if (!loaderElement || !hasMore || isFetchingMore) return;
 
         const observer = new IntersectionObserver(
             (entries) => {
                 if (entries[0]?.isIntersecting) {
-                    loadMore();
+                    setPage((prev) => prev + 1);
                 }
             },
-            { threshold: 0.1 }
+            {
+                threshold: 0.1,
+            }
         );
 
-        const loaderElement = loaderRef.current;
-        if (loaderElement) {
-            observer.observe(loaderElement);
-        }
+        observer.observe(loaderElement);
 
         return () => {
-            if (loaderElement) {
-                observer.unobserve(loaderElement);
-            }
+            observer.unobserve(loaderElement);
         };
-    }, [blogs, loadMore, visibleCount]);
-
+    }, [hasMore, isFetchingMore]);
 
 
 
@@ -131,7 +138,7 @@ export default function Page() {
                 :
                 <div className="w-full h-fit grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4  gap-14 place-items-start justify-items-start">
 
-                    {blogs.slice(0, visibleCount).map((blog, i) => (
+                    {blogs.map((blog, i) => (
                         <AdminBlogCard
                             setShowEditModal={setShowEditModal}
                             setSelectedIndex={setSelectedIndex}
@@ -161,7 +168,7 @@ export default function Page() {
             }
 
 
-            {blogs && visibleCount < blogs.length && (
+            {hasMore && (
                 <div ref={loaderRef} className="w-full flex justify-center py-6">
                     {isFetchingMore && <Loading />}
                 </div>
