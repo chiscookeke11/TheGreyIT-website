@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import ConfirmDelete from "@/components/UI/ConfirmDelete";
 import Loading from "@/components/UI/Loading";
@@ -9,31 +9,36 @@ import Image from "next/image";
 import Link from "next/link";
 import { SetStateAction, useCallback, useEffect, useRef, useState } from "react";
 
+type AdminBlogPreview = Pick<ResearchBlogType, "id" | "image" | "title" | "slug" | "status">;
+
+const RANGE = 16;
 
 export default function Page() {
-    const [blogs, setBlogs] = useState<ResearchBlogType[]>([]);
+    const [blogs, setBlogs] = useState<AdminBlogPreview[]>([]);
     const [loading, setLoading] = useState(true);
+    const [error, setError] = useState<string | null>(null);
     const [selectedIndex, setSelectedIndex] = useState("");
     const [showDeleteModal, setShowDeleteModal] = useState(false);
     const [showEditModal, setShowEditModal] = useState(false);
-
     const [isFetchingMore, setIsFetchingMore] = useState(false);
     const [hasMore, setHasMore] = useState(true);
-    const [page, setPage] = useState(1);
 
     const loaderRef = useRef<HTMLDivElement | null>(null);
+    const nextPageRef = useRef(1);
+    const isFetchingRef = useRef(false);
+    const hasMoreRef = useRef(true);
 
-    const RANGE = 16;
-
-    // Fetch blogs whenever page changes
-    const fetchBlogs = useCallback(async (pageNumber: number) => {
-        if (isFetchingMore || !hasMore) return;
+    const fetchBlogs = useCallback(async () => {
+        if (isFetchingRef.current || !hasMoreRef.current) return;
 
         setIsFetchingMore(true);
+        setError(null);
+        isFetchingRef.current = true;
 
         try {
             const response = await fetch(
-                `/api/admin/blogs?page=${pageNumber}&range=${RANGE}`
+                `/api/admin/blogs?page=${nextPageRef.current}&range=${RANGE}`,
+                { cache: "no-store" }
             );
 
             if (!response.ok) {
@@ -41,61 +46,52 @@ export default function Page() {
             }
 
             const result = await response.json();
+            const fetchedBlogs = result.data as AdminBlogPreview[];
 
-            setBlogs((prev) => [...prev, ...result.data]);
+            setBlogs((previousBlogs) => [...previousBlogs, ...fetchedBlogs]);
+            nextPageRef.current += 1;
 
-            // If fewer than 16 were returned,
-            // we've reached the end.
-            if (result.data.length < RANGE) {
+            // A short page means there are no more records to request.
+            if (fetchedBlogs.length < RANGE) {
+                hasMoreRef.current = false;
                 setHasMore(false);
             }
         } catch (error) {
             console.error("Error fetching blogs:", error);
+            setError("Unable to load blogs. Please try again.");
+            hasMoreRef.current = false;
+            setHasMore(false);
         } finally {
             setLoading(false);
             setIsFetchingMore(false);
+            isFetchingRef.current = false;
         }
-    }, [isFetchingMore, hasMore]);
+    }, []);
 
     useEffect(() => {
-        fetchBlogs(page);
-    }, [page]);
+        fetchBlogs();
+    }, [fetchBlogs]);
 
-    // Hide scroll when delete modal is open
     useEffect(() => {
-        document.body.style.overflowY = showDeleteModal ? "hidden" : "auto"
+        document.body.style.overflowY = showDeleteModal ? "hidden" : "auto";
 
         return () => {
-            document.body.style.overflowY = "auto"
-        }
-    }, [showDeleteModal])
+            document.body.style.overflowY = "auto";
+        };
+    }, [showDeleteModal]);
 
-
-    // this  function updates the delete function on the UI
     const removeBlogFromUI = (id: string) => {
-        setBlogs(prev => (prev.filter(blog => String(blog.id) !== id)))
-    }
-
+        setBlogs((previousBlogs) => previousBlogs.filter((blog) => String(blog.id) !== id));
+    };
 
     const updateBlogInUI = (updatedBlog: ResearchBlogType) => {
-        if (!updatedBlog) return;
+        setBlogs((previousBlogs) =>
+            previousBlogs.map((blog) =>
+                blog.id === updatedBlog.id ? updatedBlog : blog
+            )
+        );
+    };
 
-
-        setBlogs((prevBlogs) =>
-            prevBlogs ?
-                prevBlogs.map((blog) =>
-                    blog.id === updatedBlog.id ? updatedBlog : blog
-                )
-                : [updatedBlog]
-        )
-
-    }
-
-
-
-
-
-    //  Intersection observer for fetching more
     useEffect(() => {
         const loaderElement = loaderRef.current;
 
@@ -104,11 +100,12 @@ export default function Page() {
         const observer = new IntersectionObserver(
             (entries) => {
                 if (entries[0]?.isIntersecting) {
-                    setPage((prev) => prev + 1);
+                    fetchBlogs();
                 }
             },
             {
                 threshold: 0.1,
+                rootMargin: "400px 0px",
             }
         );
 
@@ -117,39 +114,37 @@ export default function Page() {
         return () => {
             observer.unobserve(loaderElement);
         };
-    }, [hasMore, isFetchingMore]);
+    }, [fetchBlogs, hasMore, isFetchingMore]);
 
-
+    const retryFetch = () => {
+        hasMoreRef.current = true;
+        setHasMore(true);
+        fetchBlogs();
+    };
 
     return (
-        <div className="relative w-full h-fit  flex flex-col items-start justify-start gap-10 font-poppins bg-white " >
+        <div className="relative flex h-fit w-full flex-col items-start justify-start gap-10 bg-white font-poppins">
+            <Link href="/blog-control/add-blog" className="ml-auto rounded-lg border border-gray-700 bg-gray-700 px-5 py-2 text-xs text-white transition-all duration-200 ease-in-out hover:rounded-[100px] md:text-sm">
+                Add Blog
+            </Link>
 
-            <Link href={"/blog-control/add-blog"} className="bg-gray-700 text-white
-             rounded-lg border border-gray-700 py-2 px-5 text-xs md:text-sm ml-auto
-             hover:rounded-[100px] transition-all duration-200 ease-in-out  " >Add Blog</Link>
-
-
-
-            {!blogs || loading ? (
-                <div className=" w-full h-[80vh] flex items-center justify-center " >
+            {loading ? (
+                <div className="flex h-[80vh] w-full items-center justify-center">
                     <Spinner />
                 </div>
-            )
-                :
-                <div className="w-full h-fit grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4  gap-14 place-items-start justify-items-start">
-
-                    {blogs.map((blog, i) => (
+            ) : (
+                <div className="grid h-fit w-full grid-cols-1 place-items-start justify-items-start gap-14 md:grid-cols-2 lg:grid-cols-4">
+                    {blogs.map((blog) => (
                         <AdminBlogCard
+                            key={blog.id}
                             setShowEditModal={setShowEditModal}
                             setSelectedIndex={setSelectedIndex}
                             setShowDeleteModal={setShowDeleteModal}
-                            key={i}
-                            blog={blog} />
+                            blog={blog}
+                        />
                     ))}
-
                 </div>
-            }
-
+            )}
 
             {showDeleteModal && <ConfirmDelete
                 selectedIndex={selectedIndex}
@@ -158,96 +153,90 @@ export default function Page() {
                 setConfirmDeleteModal={setShowDeleteModal}
             />}
 
-
             {showEditModal && <UpdateBlog
                 selectedIndex={selectedIndex}
                 showEditModal={showEditModal}
                 setShowEditModal={setShowEditModal}
                 updateBlogInUI={updateBlogInUI}
-            />
-            }
-
+            />}
 
             {hasMore && (
-                <div ref={loaderRef} className="w-full flex justify-center py-6">
+                <div ref={loaderRef} className="flex w-full justify-center py-6">
                     {isFetchingMore && <Loading />}
                 </div>
             )}
 
+            {error && (
+                <div className="flex w-full flex-col items-center gap-3 py-6 text-sm text-red-600">
+                    <p>{error}</p>
+                    <button
+                        className="rounded-lg bg-gray-700 px-5 py-2 text-xs text-white"
+                        onClick={retryFetch}
+                    >
+                        Retry
+                    </button>
+                </div>
+            )}
         </div>
-    )
+    );
 }
-
 
 interface AdminBlogCardProps {
-    blog: ResearchBlogType;
-    setShowDeleteModal: React.Dispatch<SetStateAction<boolean>>
-    setSelectedIndex: React.Dispatch<SetStateAction<string>>
-    setShowEditModal: React.Dispatch<SetStateAction<boolean>>
+    blog: AdminBlogPreview;
+    setShowDeleteModal: React.Dispatch<SetStateAction<boolean>>;
+    setSelectedIndex: React.Dispatch<SetStateAction<string>>;
+    setShowEditModal: React.Dispatch<SetStateAction<boolean>>;
 }
-
 
 const AdminBlogCard = ({ blog, setShowDeleteModal, setSelectedIndex, setShowEditModal }: AdminBlogCardProps) => {
     return (
-        <div className="py-3 px-1 w-full h-full flex flex-col items-center justify-start gap-3 relative ">
-
+        <div className="relative flex h-full w-full flex-col items-center justify-start gap-3 px-1 py-3">
             {blog.status === "scheduled" ? (
-                <span className="w-fit z-10 flex items-center justify-center text-center
-                text-xs absolute top-0 right-5 py-1.5 px-3 bg-blue-100 text-blue-600  " >
+                <span className="absolute right-5 top-0 z-10 flex w-fit items-center justify-center bg-blue-100 px-3 py-1.5 text-center text-xs text-blue-600">
                     Scheduled
                 </span>
-            )
-                : (
-                    <span className="w-fit z-10 flex items-center justify-center text-center
-                text-xs absolute top-0 right-5 py-1.5 px-3 text-green-700 bg-green-100 " >
-                        Published
-                    </span>
-                )
+            ) : (
+                <span className="absolute right-5 top-0 z-10 flex w-fit items-center justify-center bg-green-100 px-3 py-1.5 text-center text-xs text-green-700">
+                    Published
+                </span>
+            )}
 
-            }
-
-            {/* Only this part should navigate */}
-            <Link
-                href={`/research-blog/${encodeURIComponent(blog.slug)}`}
-                target="_blank"
-                className="w-full"
-            >
-                <div className="w-full h-[200px] relative bg-gray-200">
+            <Link href={`/research-blog/${encodeURIComponent(blog.slug)}`} target="_blank" className="w-full">
+                <div className="relative h-[200px] w-full bg-gray-200">
                     <Image
                         src={blog.image || "/placeholder.jpg"}
                         fill
-                        alt="image"
-                        className="object-center object-cover absolute inset-0 "
+                        alt=""
+                        className="absolute inset-0 object-cover object-center"
                     />
                 </div>
 
-                <div className="w-full flex flex-col items-start gap-2 mt-3">
-                    <h1 className="text-gray-700 font-medium text-sm">
-                        {blog.title}
-                    </h1>
+                <div className="mt-3 flex w-full flex-col items-start gap-2">
+                    <h1 className="text-sm font-medium text-gray-700">{blog.title}</h1>
                 </div>
             </Link>
 
-            {/* Buttons OUTSIDE Link */}
-            <div className="w-full flex items-center gap-4 mt-4">
+            <div className="mt-4 flex w-full items-center gap-4">
                 <button
                     onClick={() => {
-                        setShowDeleteModal(true)
-                        setSelectedIndex(String(blog.id))
+                        setShowDeleteModal(true);
+                        setSelectedIndex(String(blog.id));
                     }}
-                    className="bg-red-600 text-white rounded-lg py-2 px-5 text-[8px] md:text-xs cursor-pointer hover:rounded-[100px] transition-all duration-300 ease-in-out ">
+                    className="cursor-pointer rounded-lg bg-red-600 px-5 py-2 text-[8px] text-white transition-all duration-300 ease-in-out hover:rounded-[100px] md:text-xs"
+                >
                     Delete
                 </button>
 
                 <button
                     onClick={() => {
-                        setShowEditModal(true)
-                        setSelectedIndex(String(blog.id))
+                        setShowEditModal(true);
+                        setSelectedIndex(String(blog.id));
                     }}
-                    className="bg-gray-700 text-white rounded-lg py-2 px-5 text-[8px] md:text-xs cursor-pointer hover:rounded-[100px] transition-all duration-300 ease-in-out">
+                    className="cursor-pointer rounded-lg bg-gray-700 px-5 py-2 text-[8px] text-white transition-all duration-300 ease-in-out hover:rounded-[100px] md:text-xs"
+                >
                     Update
                 </button>
             </div>
         </div>
-    )
-}
+    );
+};
