@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getAdminBlogs } from "@/lib/blogs";
+import { BlogPreview } from "@/types/types";
 
 export async function GET(request: NextRequest) {
     const { searchParams } = new URL(request.url);
@@ -11,7 +12,7 @@ export async function GET(request: NextRequest) {
         : 16;
 
     try {
-        const data = await getAdminBlogs(page, range);
+        const data: BlogPreview[] = await getAdminBlogs(page, range);
 
         return NextResponse.json({ data }, {
             headers: {
