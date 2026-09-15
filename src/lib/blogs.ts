@@ -122,3 +122,43 @@ export async function getBlogBySlug(
 
     return data as ResearchBlogType;
 }
+
+
+
+
+
+
+
+// This function fetches admin blogs
+export async function getAdminBlogs(
+    page: number,
+    range: number
+) {
+    const from = (page - 1) * range;
+    const to = from + range - 1;
+
+    const { data, error } = await supabaseServer
+        .from("blog")
+        .select("*")
+        .order("createdAt", { ascending: false })
+        .range(from, to);
+
+    if (error) {
+        console.error("Error fetching admin blogs:", error);
+        throw new Error("Failed to fetch blogs");
+    }
+
+    return data;
+}
+
+
+
+
+
+
+
+
+
+
+
+
