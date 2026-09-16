@@ -34,7 +34,7 @@ export default function Footer() {
                         {navLinksData.map((navlink, index) => (
                             <li key={index} className=" text-sm   text-gray-400 hover:text-gray-200 transition-all duration-150" ><CustomLink href={navlink.url} > {navlink.label}</CustomLink> </li>
                         ))}
-                          {/* <li className=" text-sm   text-gray-400 hover:text-gray-200 transition-all duration-150" ><CustomLink href={"/admin"} >Admin </CustomLink> </li> */}
+                        {/* <li className=" text-sm   text-gray-400 hover:text-gray-200 transition-all duration-150" ><CustomLink href={"/admin"} >Admin </CustomLink> </li> */}
                     </ul>
                 </div>
 
@@ -57,7 +57,7 @@ export default function Footer() {
             <hr className="bg-white/10 w-full h-0.5 border-none " />
 
 
-            <small className="text-xs text-gray-400 font-medium " >© 2025 TheGrey IT. All rights reserved.</small>
+            <small className="text-xs text-gray-400 font-medium " >© {new Date().getFullYear()} TheGrey IT. All rights reserved.</small>
 
         </footer>
     )
