@@ -12,6 +12,14 @@ import { usePathname } from "next/navigation";
 import { User } from "@supabase/supabase-js";
 import { supabase } from "@/lib/supabaseClient";
 
+const darkNavbarBackgroundRoutes = new Set([
+    "/",
+    "/about-us",
+    "/our-services",
+    "/courses",
+    "/intro",
+]);
+
 
 
 
@@ -23,20 +31,12 @@ export default function Navbar() {
     const pathName = usePathname()
     const mobileNavRef = useRef<HTMLDivElement | null>(null)
     const [user, setUser] = useState<User | null>(null)
-    const lightNavbarRoutes = [
-        "/",
-        "/courses",
-        "/our-services",
-        "/about-us",
-        "/verify_email",
-        "/forget-password",
-        "/intro",
-    ];
-
-    const isLightBackground = lightNavbarRoutes.includes(pathName);
-
-    console.log("Navbar pathname:", pathName);
-    console.log("isLightBackground:", isLightBackground);
+    // These pages place the navbar over a dark hero image. All other pages
+    // begin with a light surface, so their navbar content uses the dark theme.
+    const hasDarkNavbarBackground = darkNavbarBackgroundRoutes.has(pathName);
+    const navbarContentClass = hasDarkNavbarBackground
+        ? "text-white before:bg-white"
+        : "text-[#171717] before:bg-[#171717]";
 
 
 
@@ -103,7 +103,7 @@ export default function Navbar() {
         <nav className="absolute text-white z-50 top-0 left-0 w-full  flex items-center justify-between py-[4%] pt-[5%] md:pt-[3%] px-[6%] " >
 
             <Link href={"/"} onClick={() => setActiveNav(0)}>
-                {isLightBackground ?
+                {hasDarkNavbarBackground ?
                     (<Image src={"/logos/thegreyitlogo.png"} width={180} height={180} alt="TheGreyIT-logo" className="object-center w-[100px] " />)
                     :
                     (<Image src={"/logos/THEGREYAElogoBlack.png"} width={180} height={180} alt="TheGreyIT-logo" className="object-center w-[100px] " />)
@@ -118,7 +118,7 @@ export default function Navbar() {
                 {navLinksData.map((navlink, index) => (
                     <li onClick={() => {
                         setActiveNav(index)
-                    }} key={index} className={`text-sm font-semibold font-poppins ${isLightBackground ? "text-white before:bg-white" : "text-[#171717] before:bg-[#171717] "} relative before:absolute  before:bottom-[-5px] before:left-[50%] before:translate-x-[-50%]  before:w-0 before:h-[3px] hover:before:w-full before:transition-all before:duration-300 before:ease-in-out ${activeNav === index ? "before:w-full" : "before:w-0"} `} >
+                    }} key={index} className={`text-sm font-semibold font-poppins ${navbarContentClass} relative before:absolute  before:bottom-[-5px] before:left-[50%] before:translate-x-[-50%]  before:w-0 before:h-[3px] hover:before:w-full before:transition-all before:duration-300 before:ease-in-out ${activeNav === index ? "before:w-full" : "before:w-0"} `} >
                         <CustomLink href={navlink.url}>{navlink.label}</CustomLink>
                     </li>
                 ))}
@@ -128,7 +128,7 @@ export default function Navbar() {
             </ul>
 
 
-            <button onClick={() => setShowMenu(true)} className={` flex items-center justify-center lg:hidden cursor-pointer border-none outline-none  ${isLightBackground ? "text-white " : "text-[#171717]  "}  `} >
+            <button onClick={() => setShowMenu(true)} className={`flex items-center justify-center lg:hidden cursor-pointer border-none outline-none ${navbarContentClass}`} >
                 <Menu size={27} />
             </button>
 
