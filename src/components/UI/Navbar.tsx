@@ -23,6 +23,8 @@ export default function Navbar() {
     const [user, setUser] = useState<User | null>(null);
 
     const pathName = usePathname();
+
+    console.log("Navbar pathname:", pathName);
     const mobileNavRef = useRef<HTMLDivElement | null>(null);
 
     /*
