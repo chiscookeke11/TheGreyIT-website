@@ -12,12 +12,11 @@ interface ResearchCardProps {
 }
 
 export default function ResearchCard({ blog }: ResearchCardProps) {
-  const { setActiveNav } = useAppContext()
 
 
   return (
     <>
-      <div onClick={() => setActiveNav(5)} className=" w-full h-full min-w-xs flex flex-col items-start    bg-white rounded-md overflow-hidden relative shadow-lg " >
+      <div className=" w-full h-full min-w-xs flex flex-col items-start    bg-white rounded-md overflow-hidden relative shadow-lg " >
         <div className="  w-full h-[250px] " >
           <Image src={blog.image ?? "/placeholder.jpg"} alt={`${blog.title}-image `} width={500} height={500} className="h-full w-full object-cover object-center " />
         </div>
@@ -33,7 +32,7 @@ export default function ResearchCard({ blog }: ResearchCardProps) {
             </Button>
           </CustomLink>
         </div>
-      </div>
+      </div >
     </>
 
   )

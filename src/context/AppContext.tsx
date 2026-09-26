@@ -11,8 +11,6 @@ import React, { createContext, useContext, useState, ReactNode, useEffect } from
 // 1. Define the shape of the context
 type AppContextType = {
 
-  activeNav: number | null;
-  setActiveNav: React.Dispatch<React.SetStateAction<number | null>>;
 
   userData: UserData | null
   setUserData: React.Dispatch<React.SetStateAction<UserData | null>>
@@ -60,7 +58,6 @@ const AppContext = createContext<AppContextType | undefined>(undefined);
 // 3. Provider component
 export function AppProvider({ children }: { children: ReactNode }) {
   const [userData, setUserData] = useState<UserData | null>(null)
-  const [activeNav, setActiveNav] = useState<number | null>(0);
   const [transactionData, setTransactionData] = useState<TransactionType[] | null>(null)
   const [certificatesData, setCertificatesData] = useState<CertificatesDataType[] | null>(null)
   const [allCoursesData, setAllCoursesData] = useState<CourseDataTypes[] | null>(null)
@@ -149,8 +146,6 @@ export function AppProvider({ children }: { children: ReactNode }) {
   return (
     <AppContext.Provider
       value={{
-        activeNav,
-        setActiveNav,
         userData,
         setUserData,
         transactionData,
