@@ -21,6 +21,7 @@ const darkNavbarBackgroundRoutes = new Set([
 export default function Navbar() {
     const [showMenu, setShowMenu] = useState(false);
     const [user, setUser] = useState<User | null>(null);
+    let hasDarkNavbarBackground = true
 
     const pathName = usePathname();
 
@@ -30,7 +31,7 @@ export default function Navbar() {
     /*
      * Pages where the navbar sits on top of a dark hero/background.
      */
-    const hasDarkNavbarBackground =
+    hasDarkNavbarBackground =
         darkNavbarBackgroundRoutes.has(pathName);
 
     const navbarContentClass = hasDarkNavbarBackground
