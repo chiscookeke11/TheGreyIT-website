@@ -1,22 +1,19 @@
 "use client"
 
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import ResearchCard from "../UI/ResearchCard";
 import { useScroll, useTransform, motion } from "framer-motion";
-import { BlogPreview } from "@/types/types";
 import { Spinner } from "../UI/Spinner";
+import { BlogPreview } from "@/types/types";
 
 
 
 
-interface ResearchSectionProps {
-    recentBlogsData: BlogPreview[];
-}
+export default function ResearchSection() {
+    const [recentBlogsData, setRecentBlogsData] = useState<BlogPreview[] | null>(null);
+    const [loading, setLoading] = useState(true);
 
 
-export default function ResearchSection({
-    recentBlogsData
-}: ResearchSectionProps) {
 
     const targetRef = useRef(null)
     const { scrollYProgress } = useScroll({
@@ -24,6 +21,30 @@ export default function ResearchSection({
     })
 
     const x = useTransform(scrollYProgress, [0, 1], ["10%", "-50%"])
+
+
+
+    useEffect(() => {
+        async function fetchBlogs() {
+            try {
+                const response = await fetch("/api/blogs/recent");
+
+                if (!response.ok) {
+                    throw new Error("Failed to fetch blogs");
+                }
+
+                const data = await response.json();
+
+                setRecentBlogsData(data);
+            } catch (error) {
+                console.error("Failed to fetch blogs:", error);
+            } finally {
+                setLoading(false);
+            }
+        }
+
+        fetchBlogs();
+    }, []);
 
 
 
@@ -68,9 +89,9 @@ export default function ResearchSection({
                 <div className="w-full overflow-x-auto flex items-center" >
 
                     {
-                        !recentBlogsData ? <div className="w-full  flex items-center justify-center py-32" ><Spinner /></div>
+                        loading ? <div className="w-full  flex items-center justify-center py-32" ><Spinner /></div>
                             :
-                            recentBlogsData.length < 1 ? <div className="w-full  flex items-center justify-center py-32" >No blogs found</div>
+                            recentBlogsData && recentBlogsData.length < 1 ? <div className="w-full  flex items-center justify-center py-32" >No blogs found</div>
                                 :
                                 recentBlogsData?.slice(0, 3).map((blog, index) => (
                                     <div key={index} className=" w-fit flex items-center justify-center gap-10 px-6 py-3 " >
