@@ -4,17 +4,17 @@ import GetSkilled from "@/components/Home/GetSkilled";
 import Hero from "@/components/Home/Hero";
 import OurLabs from "@/components/Home/OurLabs";
 import Profile from "@/components/Home/Profile";
-import ResearchSection from "@/components/Home/ResearchSection";
+// import ResearchSection from "@/components/Home/ResearchSection";
 import WhyUs from "@/components/Home/WhyUs";
 import NewsletterSection from "@/components/UI/NewsletterSection";
-import { getRecentBlogs } from "@/lib/blogs";
+// import { getRecentBlogs } from "@/lib/blogs";
 
 
 
 
 export default async function Home() {
 
-  const recentBlogs = await getRecentBlogs();
+  // const recentBlogs = await getRecentBlogs();
 
 
   return (
@@ -25,9 +25,9 @@ export default async function Home() {
       <OurLabs />
       <GetSkilled />
       <Profile />
-      <ErrorBoundary>
+      {/* <ErrorBoundary>
         <ResearchSection recentBlogsData={recentBlogs} />
-      </ErrorBoundary>
+      </ErrorBoundary> */}
       <ContactUsSection />
       <NewsletterSection />
     </>
