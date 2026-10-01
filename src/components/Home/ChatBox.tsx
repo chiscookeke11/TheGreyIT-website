@@ -17,6 +17,7 @@ export default function Chatbox() {
     const [input, setInput] = useState("");
     const [loading, setLoading] = useState(false);
     const messagesEndRef = useRef<HTMLDivElement>(null);
+    const api_url = process.env.NEXT_PUBLIC_API_URL!;
 
 
     // This scrolls the chat to the bottom whenever a user sends a new message
@@ -47,7 +48,7 @@ export default function Chatbox() {
 
         try {
             const response = await fetch(
-                "http://127.0.0.1:8000/chat",
+                api_url,
                 {
                     method: "POST",
                     headers: {
