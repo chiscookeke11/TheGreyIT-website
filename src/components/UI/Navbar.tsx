@@ -25,7 +25,6 @@ export default function Navbar() {
 
     const pathName = usePathname();
 
-    console.log("Navbar pathname:", pathName);
     const mobileNavRef = useRef<HTMLDivElement | null>(null);
 
     /*
