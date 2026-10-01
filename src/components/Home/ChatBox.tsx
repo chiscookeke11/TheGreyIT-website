@@ -48,7 +48,7 @@ export default function Chatbox() {
 
         try {
             const response = await fetch(
-                api_url,
+                `${api_url}/chat`,
                 {
                     method: "POST",
                     headers: {
