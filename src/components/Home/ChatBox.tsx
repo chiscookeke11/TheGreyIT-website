@@ -56,6 +56,7 @@ export default function Chatbox() {
                     },
                     body: JSON.stringify({
                         question,
+                        messages,
                     }),
                 }
             );
