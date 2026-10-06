@@ -22,8 +22,6 @@ export default function CoursesPageComponent() {
     const [bookmarks, setbookmarks] = useState<number[] | null>(null)
     const [search, setSearch] = useState("")
     const [filteredCourses, setFilteredCourses] = useState<CourseDataTypes[] | null>(null)
-    const KEY = "COURSE_KEY"
-    const CACHE_DURATION = 10 * 60 * 1000
 
 
 
@@ -116,7 +114,7 @@ export default function CoursesPageComponent() {
 
 
     return (
-        <div className="w-full h-full flex flex-col gap-7 items-center justify-center font-poppins" >
+        <div className="w-full h-full flex flex-col gap-7 items-center justify-center font-poppins " >
             {/* Courses Tab */}
             <div className="w-full flex flex-col items-start gap-10 rounded-xl bg-[#f2f5fc] py-7 px-6 " >
                 <h1 className=" text-xl md:text-2xl font-semibold text-black   " >Courses</h1>

@@ -148,14 +148,14 @@ export default function CoursePageComponent() {
             </div>
 
 
-            <label className="w-full max-w-xs flex gap-1 rounded-sm  py-2 px-3 border border-gray-700 text-gray-800  mt-8 mb-3 ml-auto mr-10 " htmlFor="search" >
+            <label className="w-full  max-w-[250px]  md:max-w-xs flex gap-1 rounded-sm  py-2 px-3 border border-gray-700 text-gray-800  mt-8 mb-3 ml-auto mr-3 md:mr-10 " htmlFor="search" >
                 <input
                     type="search"
                     name="search"
                     id="search"
                     value={search}
                     onChange={(e) => setSearch(e.target.value)}
-                    className="w-full  outline-none focus:outline-none text-xs  "
+                    className="w-full   outline-none focus:outline-none text-xs  "
                     placeholder="Search"
                 />
                 <button type="button" className="cursor-pointer" > <Search size={15} /> </button>
@@ -191,8 +191,8 @@ export default function CoursePageComponent() {
                                     }}
                                     className=" w-full bg-[#f2f5fc] h-full py-6 px-5 flex flex-col items-start gap-4 rounded-lg shadow-sm relative cursor-pointer" >
                                     <span className=" h-10 w-10 md:h-14 md:w-14 flex items-center justify-center bg-gray-700 text-white rounded-sm font-medium text-lg md:text-xl text-left shadow-xl " >{index + 1} </span>
-                                    <h3 className=" font-syne font-bold text-xl mt-3  " > {track.title} </h3>
-                                    <p className=" font-normal text-base   md:mt-1 " >{track.shorter_Description} </p>
+                                    <h3 className=" font-syne font-bold text-lg md:text-xl mt-3  " > {track.title} </h3>
+                                    <p className=" font-normal text-sm md:text-base md:mt-1 " >{track.shorter_Description} </p>
 
 
                                     <div className="w-full flex flex-col md:flex-row items-center gap-4  mt-auto " >
