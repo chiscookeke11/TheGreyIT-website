@@ -159,7 +159,11 @@ export default function ContactForm({ showForm, setShowForm, subject }: ContactF
 
 
 
-            <Button variant="default" className="font-syne !bg-gray-700 !text-white ml-auto" >{loading ? "Loading.." : "Send Message"} </Button>
+            <Button
+                variant="default"
+                className="text-sm md:text-base font-syne !bg-gray-700 !text-white ml-auto" >
+                {loading ? "Loading.." : "Send Message"}
+            </Button>
         </form>
     )
 }
