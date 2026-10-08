@@ -26,18 +26,11 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
-      - name: Set up environment variables
-        run: |
-          echo "DATABASE_URL=${{ secrets.DATABASE_URL }}" >> .env
-
       - name: Run Linter
         run: npm run lint --if-present
 
       - name: Run Tests
         run: npm test --if-present
-
-      - name: Generate Prisma client
-        run: npx prisma generate
 
       - name: Build Project
         run: pnpm run build

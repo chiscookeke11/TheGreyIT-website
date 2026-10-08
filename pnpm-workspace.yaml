@@ -2,12 +2,9 @@ packages:
   - "."
 
 onlyBuiltDependencies:
-  - "@prisma/client"
-  - "@prisma/engines"
   - "@tailwindcss/oxide"
   - cpu-features
   - esbuild
-  - prisma
   - protobufjs
   - sharp
   - ssh2

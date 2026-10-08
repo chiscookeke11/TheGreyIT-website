@@ -85,7 +85,7 @@ export default function CoursePageComponent() {
 
             } catch (error) {
                 console.error("Error fetching courses:", error);
-                toast.error("Failed to fetch course!")
+                toast.error("Failed to fetch courses!")
             }
         }
 

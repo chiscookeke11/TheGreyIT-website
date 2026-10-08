@@ -267,6 +267,16 @@ export interface CohortCourseTypes {
   price: number
 }
 
+export interface CohortCoursePreview {
+  title: string,
+  imageUrl: string,
+  duration: string | string[];
+  online_fee: number;
+  inhouse_fee: number;
+  id: string;
+  slug: string
+}
+
 
 
 export interface CohortStudentRegistrationTypes {

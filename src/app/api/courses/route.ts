@@ -14,7 +14,7 @@ export async function GET(request: Request) {
 
     return NextResponse.json(
       {
-        error: "Failed to fetch blogs",
+        error: "Failed to fetch courses",
       },
       {
         status: 500
