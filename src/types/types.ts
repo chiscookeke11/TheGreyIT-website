@@ -28,6 +28,15 @@ export interface CourseDataTypes {
 }
 
 
+export interface CoursePreview {
+  title: string,
+  shorter_Description?: string,
+  onlineFee?: number,
+  inhouseFee?: number,
+  is_active?: boolean,
+  pdfName?: string,
+}
+
 
 
 

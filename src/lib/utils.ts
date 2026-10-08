@@ -78,37 +78,6 @@ export const handleCheckboxChange = <
 
 
 
-// Function to get course from cache
-export const getCoursesFromCache = (KEY: string) => {
-  const cached = localStorage.getItem(KEY)
-  if (!cached) return null
-
-  try {
-    return JSON.parse(cached) as {
-      data: CourseDataTypes[],
-      timeStamp: number
-    }
-  }
-  catch {
-    return null
-  }
-}
-
-
-
-
-
-// this function saves course data to local storage
-export const saveCoursesToCache = (courses: CourseDataTypes[], KEY: string) => {
-  const payload = {
-    data: courses,
-    timeStamp: Date.now()
-  }
-
-  localStorage.setItem(KEY, JSON.stringify(payload))
-}
-
-
 
 
 // This function scrolls the page to the top
@@ -127,7 +96,7 @@ export const randomCode = (length: number): string => {
   let result = '';
 
   for (let i = 0; i < length; i++) {
-  result += chars.charAt(Math.floor(Math.random() * chars.length))
+    result += chars.charAt(Math.floor(Math.random() * chars.length))
   }
   return result;
 }

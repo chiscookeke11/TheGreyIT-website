@@ -4,7 +4,6 @@
 import Button from "@/components/UI/Button"
 import { Spinner } from "@/components/UI/Spinner"
 import { supabase } from "@/lib/supabaseClient"
-import { getCoursesFromCache, saveCoursesToCache } from "@/lib/utils"
 import { CourseDataTypes } from "@/types/types"
 import { Download, Search, } from "lucide-react"
 import Link from "next/link"
@@ -24,12 +23,11 @@ const highlights = [
 ]
 
 export default function CoursePageComponent() {
-    const [allCourses, setAllCourses] = useState<CourseDataTypes[]>([])
+    const [allCourses, setAllCourses] = useState<CourseDataTypes[] | null>(null)
     const [coursesData, setCoursesData] = useState<CourseDataTypes[] | null>(null)
     const [downloadingPdf, setDownloadingPdf] = useState<string | null>(null)
     const [search, setSearch] = useState("")
-    const KEY = "COURSE_KEY"
-    const CACHE_DURATION = 10 * 60 * 1000
+
 
 
 
@@ -39,7 +37,10 @@ export default function CoursePageComponent() {
         setDownloadingPdf(pdfName)
 
 
-        const { error, data } = await supabase.storage.from("course_outline_pdf").download(pdfName)
+        const { error, data } = await supabase
+            .storage
+            .from("course_outline_pdf")
+            .download(pdfName)
 
         if (error) {
             console.error("Error downlaoding file:")
@@ -66,34 +67,31 @@ export default function CoursePageComponent() {
 
 
 
-    // Function to fetch all Courses from the db
-    const supabaseFetch = async () => {
-        const cached = getCoursesFromCache(KEY)
-
-        if (cached && Date.now() - cached.timeStamp < CACHE_DURATION) {
-            setAllCourses(cached.data)
-            setCoursesData(cached.data)
-            return;
-        }
-
-
-
-        const { data, error } = await supabase.from("course").select("*")
-
-        if (error) {
-            return
-        }
-
-        setAllCourses(data)
-        setCoursesData(data)
-        saveCoursesToCache(data, KEY)
-    }
-
-
-
+    // fetch all Courses from the db
     useEffect(() => {
-        supabaseFetch()
+
+        const fetchCourses = async () => {
+            try {
+                const response = await fetch("/api/courses")
+
+                if (!response.ok) {
+                    throw new Error("Failed to fetch courses")
+                }
+
+
+                const result = await response.json()
+                setAllCourses(result)
+                setCoursesData(result)
+
+            } catch (error) {
+                console.error("Error fetching courses:", error);
+                toast.error("Failed to fetch course!")
+            }
+        }
+
+        fetchCourses()
     }, [])
+
 
 
     // function to filter courses based on search query
@@ -105,12 +103,15 @@ export default function CoursePageComponent() {
             return
         }
 
-        const filtered = allCourses.filter(course =>
+        const filtered = allCourses && allCourses.filter(course =>
             course.title.toLowerCase().includes(query)
         )
 
         setCoursesData(filtered)
     }, [search, allCourses])
+
+
+
 
     return (
         <div className="h-full w-full text-black bg-white relative pb-24 " >

@@ -1,10 +1,29 @@
-import { prisma } from '@/lib/prisma'
+import { getCourses } from "@/lib/courses";
+import { NextResponse } from "next/server";
 
-export async function GET() {
+
+export async function GET(request: Request) {
+
+
   try {
-    const courses = await prisma.course.findMany()
-    return Response.json(courses)
+    const result = await getCourses()
+
+    return NextResponse.json(result)
   } catch (error) {
-    return new Response(JSON.stringify({ error: "Failed to fetch courses" }), { status: 500 })
+    console.error(error)
+
+    return NextResponse.json(
+      {
+        error: "Failed to fetch blogs",
+      },
+      {
+        status: 500
+      }
+    )
+
   }
+
 }
+
+
+
