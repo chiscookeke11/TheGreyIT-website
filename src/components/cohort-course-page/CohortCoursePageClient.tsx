@@ -2,7 +2,7 @@
 
 import CohortCourseCard from "@/components/UI/CohortCourseCard";
 import { supabase } from "@/lib/supabaseClient";
-import { CohortCourseTypes } from "@/types/types";
+import { CohortCoursePreview, CohortCourseTypes } from "@/types/types";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
@@ -12,30 +12,28 @@ import IntroCourseCTASection from "./IntroCourseCTASection";
 
 
 export default function CohortCoursePageClient() {
-    const [courses, setCourses] = useState<CohortCourseTypes[] | null>(null)
+    const [courses, setCourses] = useState<CohortCoursePreview[] | null>(null)
     const [loading, setLoading] = useState(true)
 
     // This function fetches data from the cohort course table
     const fetchCourses = async () => {
-        setLoading(true)
+        try {
+            const response = await fetch("/api/cohort/courses");
 
-        const { data, error } = await supabase.from("cohort_2026_courses").select("*")
+            if (!response.ok) {
+                throw new Error("Failed to fetch cohort courses");
+            }
 
-        if (error) {
-            toast.error("Failed to load courses! Please reload page")
-            setLoading(false)
-            return;
+            const result = await response.json();
+
+            setCourses(result);
+        } catch (error) {
+            console.error("Error fetching cohort courses:", error);
+            toast.error("Failed to fetch cohort courses!");
+        } finally {
+            setLoading(false);
         }
-
-        if (!data) {
-            toast.error("No courses found");
-            setLoading(false)
-            return;
-        }
-
-        setCourses(data)
-        setLoading(false)
-    }
+    };
 
     useEffect(() => {
         fetchCourses()
@@ -48,7 +46,7 @@ export default function CohortCoursePageClient() {
                 <p className="text-gray-600 font-medium text-sm md:text-lg   ">Available courses for this cohort</p>
             </div>
 
-            <section className=" w-full h-full flex-1 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-5 gap-y-10 place-items-start justify-items-start  py-4 px-3 ">
+            <section className=" w-fit h-full flex-1 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-5 gap-y-10 place-items-start justify-items-start  py-4 px-3 ">
                 {loading ? (
                     <div className="w-full h-full min-h-36 flex items-center justify-center md:col-span-3 lg:col-span-5">
                         <Spinner />

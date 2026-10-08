@@ -1,18 +1,22 @@
-import { CohortCourseTypes } from "@/types/types"
+import { CohortCoursePreview, CohortCourseTypes } from "@/types/types"
 import { Clock, Radio } from "lucide-react"
 import Image from "next/image"
 
 
 interface CohortCourseCardProps {
-    data: CohortCourseTypes
+    data: CohortCoursePreview
 }
 
 
 
 export default function CohortCourseCard({ data }: CohortCourseCardProps) {
     return (
-        <div className="w-full h-full flex flex-col items-start justify-start gap-4  overflow-hidden font-lora text-gray-700 bg-white "  >
-            <Image src={data.imageUrl} alt="the image " height={1000} width={1000} className=" w-full h-[260px] object-center object-cover " />
+        <div className="w-full  h-full flex flex-col items-start justify-start gap-4
+         overflow-hidden font-lora text-gray-700 bg-white
+          hover:scale-105 duration-200 ease-in-out transition-all rounded-xl
+          shadow-sm
+          "  >
+            <Image src={data.imageUrl} alt="the image " height={1500} width={1500} className=" w-full h-[260px] object-center object-cover " />
 
 
 

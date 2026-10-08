@@ -28,6 +28,15 @@ export interface CourseDataTypes {
 }
 
 
+export interface CoursePreview {
+  title: string,
+  shorter_Description?: string,
+  onlineFee?: number,
+  inhouseFee?: number,
+  is_active?: boolean,
+  pdfName?: string,
+}
+
 
 
 
@@ -256,6 +265,16 @@ export interface CohortCourseTypes {
   bgColor: string;
   rating: number;
   price: number
+}
+
+export interface CohortCoursePreview {
+  title: string,
+  imageUrl: string,
+  duration: string | string[];
+  online_fee: number;
+  inhouse_fee: number;
+  id: string;
+  slug: string
 }
 
 
