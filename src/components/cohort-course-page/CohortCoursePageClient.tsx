@@ -46,19 +46,23 @@ export default function CohortCoursePageClient() {
                 <p className="text-gray-600 font-medium text-sm md:text-lg   ">Available courses for this cohort</p>
             </div>
 
-            <section className=" w-fit h-full flex-1 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-5 gap-y-10 place-items-start justify-items-start  py-4 px-3 ">
-                {loading ? (
-                    <div className="w-full h-full min-h-36 flex items-center justify-center md:col-span-3 lg:col-span-5">
-                        <Spinner />
-                    </div>
-                ) : (
-                    courses?.map((course, index) => (
+
+            {loading ? (
+                <div className="w-full h-full min-h-36 flex items-center justify-center md:col-span-3 lg:col-span-5">
+                    <Spinner />
+                </div>
+            ) : (
+
+                <section className=" w-fit h-full flex-1 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-5 gap-y-10 place-items-start justify-items-start  py-4 px-3 ">
+                    {courses?.map((course, index) => (
                         <Link key={index} href={`/cohort2026/${course.slug}`} className=" w-full h-full max-w-[350px] ">
                             <CohortCourseCard data={course} />
                         </Link>
-                    ))
-                )}
-            </section>
+
+                    ))}
+                </section>
+            )}
+
 
 
             <IntroCourseCTASection />
