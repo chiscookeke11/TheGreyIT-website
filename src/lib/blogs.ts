@@ -139,12 +139,16 @@ export async function getAdminBlogs(
 
     const { data, error } = await supabaseServer
         .from("blog")
-        .select(`slug,
+        .select(`
+            id,
+            slug,
 image,
 title,
 tagline,
 author,
-publicationDate`)
+publicationDate,
+status
+`)
         .order("createdAt", { ascending: false })
         .range(from, to);
 

@@ -5,12 +5,12 @@ import toast from "react-hot-toast";
 
 interface ConfirmDeleteProps {
   setConfirmDeleteModal?: React.Dispatch<SetStateAction<boolean>>;
-  onDelete?: (id: string) => void;
-  selectedIndex: string;
+  onDelete?: (id: number) => void;
+  selectedIndex: number | null;
   collectionName: string
 }
 
-const deleteItem = async (id: string, collectionName: string) => {
+const deleteItem = async (id: number, collectionName: string) => {
   const { error } = await supabase
     .from(collectionName)
     .delete()
@@ -28,21 +28,30 @@ export default function ConfirmDelete({
   collectionName
 }: ConfirmDeleteProps) {
 
-  const handleDelete = async (id: string) => {
+  const handleDelete = async () => {
+
+    if (selectedIndex === null || !Number(selectedIndex)) {
+      console.error("Invalid blog ID:", selectedIndex);
+      toast.error("Cannot delete blog: Invalid ID")
+      return;
+    }
+
+
     const toastId = toast.loading("Deleting...");
 
 
     try {
-      await deleteItem(id, collectionName);
+      await deleteItem(selectedIndex, collectionName);
 
       toast.dismiss(toastId);
       toast.success("Blog deleted successfully");
 
-      onDelete?.(id);
+      onDelete?.(selectedIndex);
       setConfirmDeleteModal?.(false);
     } catch (err) {
       toast.dismiss(toastId);
       toast.error("Failed to delete blog!");
+      console.error("Failed to delete blog:", err)
     }
   };
 
@@ -64,7 +73,7 @@ export default function ConfirmDelete({
           </button>
 
           <button
-            onClick={() => handleDelete(selectedIndex)}
+            onClick={() => handleDelete()}
             type="button"
             className="bg-red-600 py-3 px-7 text-xs md:text-sm font-medium text-white rounded-xl cursor-pointer hover:bg-red-700 transition-all"
           >

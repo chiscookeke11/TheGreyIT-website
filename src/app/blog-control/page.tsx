@@ -17,7 +17,7 @@ export default function Page() {
     const [blogs, setBlogs] = useState<AdminBlogPreview[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
-    const [selectedIndex, setSelectedIndex] = useState("");
+    const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
     const [showDeleteModal, setShowDeleteModal] = useState(false);
     const [showEditModal, setShowEditModal] = useState(false);
     const [isFetchingMore, setIsFetchingMore] = useState(false);
@@ -80,8 +80,8 @@ export default function Page() {
         };
     }, [showDeleteModal]);
 
-    const removeBlogFromUI = (id: string) => {
-        setBlogs((previousBlogs) => previousBlogs.filter((blog) => String(blog.id) !== id));
+    const removeBlogFromUI = (id: number) => {
+        setBlogs((previousBlogs) => previousBlogs.filter((blog) => blog.id !== id));
     };
 
     const updateBlogInUI = (updatedBlog: ResearchBlogType) => {
@@ -184,7 +184,7 @@ export default function Page() {
 interface AdminBlogCardProps {
     blog: AdminBlogPreview;
     setShowDeleteModal: React.Dispatch<SetStateAction<boolean>>;
-    setSelectedIndex: React.Dispatch<SetStateAction<string>>;
+    setSelectedIndex: React.Dispatch<SetStateAction<number | null>>;
     setShowEditModal: React.Dispatch<SetStateAction<boolean>>;
 }
 
@@ -220,7 +220,7 @@ const AdminBlogCard = ({ blog, setShowDeleteModal, setSelectedIndex, setShowEdit
                 <button
                     onClick={() => {
                         setShowDeleteModal(true);
-                        setSelectedIndex(String(blog.id));
+                        setSelectedIndex(blog.id);
                     }}
                     className="cursor-pointer rounded-lg bg-red-600 px-5 py-2 text-[8px] text-white transition-all duration-300 ease-in-out hover:rounded-[100px] md:text-xs"
                 >
@@ -230,7 +230,7 @@ const AdminBlogCard = ({ blog, setShowDeleteModal, setSelectedIndex, setShowEdit
                 <button
                     onClick={() => {
                         setShowEditModal(true);
-                        setSelectedIndex(String(blog.id));
+                        setSelectedIndex(blog.id);
                     }}
                     className="cursor-pointer rounded-lg bg-gray-700 px-5 py-2 text-[8px] text-white transition-all duration-300 ease-in-out hover:rounded-[100px] md:text-xs"
                 >

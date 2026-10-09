@@ -64,6 +64,8 @@ export interface BlogPreview {
   tagline?: string;
   author: string;
   publicationDate: Date;
+  id: number,
+  status?: string
 }
 
 
@@ -239,7 +241,7 @@ export interface courseEnrollmentsDataType {
 export interface UpdateBlogProps {
   showEditModal: boolean;
   setShowEditModal: React.Dispatch<React.SetStateAction<boolean>>;
-  selectedIndex: string
+  selectedIndex: number | null
   updateBlogInUI: (blog: ResearchBlogType) => void
 }
 
