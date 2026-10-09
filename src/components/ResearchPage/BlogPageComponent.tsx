@@ -63,6 +63,7 @@ export default async function BlogPageComponent({
                             alt={`${currentBlog.title}-image`}
                             fill
                             className="object-center object-cover"
+                            unoptimized
                         />
                     </div>
                 </div>

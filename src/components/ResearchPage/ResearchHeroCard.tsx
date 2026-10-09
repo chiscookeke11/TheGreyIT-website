@@ -23,6 +23,7 @@ export const HeroCard = ({ data }: HeroCardProps) => {
                     alt={`${data.title}-image`}
                     fill
                     className="object-cover object-center"
+                    unoptimized
                 />
                 <div className="absolute inset-0 bg-black/10" />
             </div>
